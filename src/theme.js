@@ -5,7 +5,7 @@ import { red } from '@material-ui/core/colors';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#556cd6',
+      main: '#254e58',
     },
     secondary: {
       main: '#19857b',
@@ -16,7 +16,23 @@ const theme = createMuiTheme({
     background: {
       default: '#fff',
     },
+    appColor1: {
+      main: '#88bcbd'
+    }
   },
+  sidebarWidth: {
+    main: {
+      marginLeft: '17em',
+      
+    
+    }
+  },
+  sidebarWidthMobile: {
+    main: {
+      marginLeft: 0
+    }
+
+  }
 });
 
 export default theme;

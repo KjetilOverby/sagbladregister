@@ -117,14 +117,18 @@ function ResponsiveDrawer(props) {
             </ListItem>
             <Collapse in={openCollapse} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
+            <Link href='/kanefusa/k2.2-3.6'>
               <ListItem button className={classes.nested}>
                 
                 <ListItemText inset primary="2.2 - 3.6" />
               </ListItem>
+              </Link>
+              <Link href='/kanefusa/k2.4-3.8'>
               <ListItem button className={classes.nested}>
                
                 <ListItemText inset primary="2.4 - 3.8" />
               </ListItem>
+              </Link>
               <ListItem button className={classes.nested}>
                
                 <ListItemText inset primary="2.6 - 4.0" />
@@ -218,7 +222,7 @@ function ResponsiveDrawer(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Responsive drawer
+            Sagbladregister
           </Typography>
         </Toolbar>
       </AppBar>

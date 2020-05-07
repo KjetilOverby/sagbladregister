@@ -1,0 +1,4 @@
+sidebarWidth: theme.sidebarWidth.main,
+     [theme.breakpoints.down('xs')]: {
+      sidebarWidth: theme.sidebarWidthMobile.main
+     },
