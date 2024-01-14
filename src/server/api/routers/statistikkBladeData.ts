@@ -5,7 +5,7 @@ import { z } from "zod";
 
 import {
   createTRPCRouter,
-  protectedProcedure,
+  protectedProcedure
 } from "~/server/api/trpc";
 export const statistikkBladeDataRouter = createTRPCRouter({
  
@@ -34,7 +34,7 @@ export const statistikkBladeDataRouter = createTRPCRouter({
                lte: new Date(input.date),
                gte: new Date(input.date2),
               },
-              bladeRelationId: { startsWith: input.init},
+              bladeRelationId: { startsWith: 'MØ'},
             }]
           },
          })

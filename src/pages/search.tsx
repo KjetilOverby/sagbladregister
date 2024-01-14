@@ -1,12 +1,17 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import React, { useState } from "react";
+import { useState } from "react";
 import DatepickerComponent from "~/components/reusable/Datepicker";
 import HeaderComponent from "~/components/reusable/HeaderComponent";
 import SearchMain from "~/components/search/SearchMain";
 import { api } from "~/utils/api";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 const Search = () => {
+  const { data: sessionData } = useSession();
   const [dateValue, setDateValue] = useState({
     endDate: "2040-01-14",
     startDate: "2023-12-01",
@@ -24,6 +29,28 @@ const Search = () => {
     date2: `${dateValue.startDate}T00:00:00.000Z`,
     IdNummer: idValue,
   });
+
+  const { data: sawbladesOsterdal } = api.sawblades.getCustomer.useQuery({
+    date: `${dateValue.endDate}T23:59:59.000Z`,
+    date2: `${dateValue.startDate}T00:00:00.000Z`,
+    IdNummer: idValue,
+    init: "MØ",
+  });
+  const { data: sawbladesOsterdalDeleted } =
+    api.sawblades.getCustomerAllDeleted.useQuery({
+      date: `${dateValue.endDate}T23:59:59.000Z`,
+      date2: `${dateValue.startDate}T00:00:00.000Z`,
+      IdNummer: idValue,
+      init: "MØ",
+    });
+  const { data: sawbladesOsterdalActive } =
+    api.sawblades.getCustomerActive.useQuery({
+      date: `${dateValue.endDate}T23:59:59.000Z`,
+      date2: `${dateValue.startDate}T00:00:00.000Z`,
+      IdNummer: idValue,
+      init: "MØ",
+    });
+
   return (
     <div data-theme="darkmode">
       <HeaderComponent />
@@ -43,7 +70,19 @@ const Search = () => {
             />
           </div>
         </div>
-        <SearchMain sawblades={sawblades} deletedSawblades={deletedSawblades} />
+        {sessionData?.user.role === "ADMIN" && (
+          <SearchMain
+            sawblades={sawblades}
+            deletedSawblades={deletedSawblades}
+          />
+        )}
+        {sessionData?.user.role === "MO_ADMIN" && (
+          <SearchMain
+            sawblades={sawbladesOsterdal}
+            deletedSawblades={sawbladesOsterdalDeleted}
+            activeBlades={sawbladesOsterdalActive}
+          />
+        )}
       </div>
     </div>
   );

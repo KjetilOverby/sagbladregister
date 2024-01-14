@@ -21,12 +21,29 @@ const statistikk = () => {
       date2: `${dateValue.startDate}T00:00:00.000Z`,
     });
 
+  const { data: statistikkDataMO } =
+    api.statistikkBladeData.getAllCustomerHistorikk.useQuery({
+      date: `${dateValue.endDate}T23:59:59.000Z`,
+      date2: `${dateValue.startDate}T00:00:00.000Z`,
+      bladeRelationId: "MØ",
+      init: "MØ",
+    });
+
+  console.log(statistikkDataMO);
+
   return (
     <div data-theme="darkmode">
       <HeaderComponent />
       {sessionData?.user.role === "ADMIN" && (
         <StatistikkMain
           historikkData={statistikkData}
+          setDateValue={setDateValue}
+          dateValue={dateValue}
+        />
+      )}
+      {sessionData?.user.role === "MO_ADMIN" && (
+        <StatistikkMain
+          historikkData={statistikkDataMO}
           setDateValue={setDateValue}
           dateValue={dateValue}
         />

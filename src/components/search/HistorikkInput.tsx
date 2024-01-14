@@ -84,7 +84,7 @@ const HistorikkInput = ({
               creatorImg: "",
               bladType: bladType,
               activePost: false,
-              bladeRelationId: "bladID",
+              bladeRelationId: bladID,
               alt: "",
               creator: "",
               ampere: 0,
