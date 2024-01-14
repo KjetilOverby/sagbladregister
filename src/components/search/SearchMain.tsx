@@ -14,6 +14,7 @@ import { api } from "~/utils/api";
 import ActivateBlade from "./ActivateBlade";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { BsClipboardData } from "react-icons/bs";
+import { DeleteComponent } from "./DeleteComponent";
 
 interface Blade {
   creatorImg: string | undefined;
@@ -325,7 +326,7 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
                                 </option>
                               </select>
 
-                              {/* {wasteReasonInput && (
+                              {wasteReasonInput && (
                                 <th>
                                   <button className="btn btn-xs bg-red-600">
                                     <DeleteComponent
@@ -334,7 +335,7 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
                                     />
                                   </button>
                                 </th>
-                              )} */}
+                              )}
                             </div>
                             <div className="card-actions my-5 justify-end">
                               <button
@@ -432,33 +433,6 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
             })}
           </tbody>
         </table>
-        {/* <div className="flex">
-          <BiSolidLeftArrowSquare
-            className="text-2xl"
-            onClick={() => {
-              router.push(
-                `/search/?date=${date}&date2=${date2}&serial=&page=${
-                  Number(page) - 1
-                }&per_page=${per_page}`,
-              );
-            }}
-          />
-
-          <div>
-            {page} / {Math.ceil(sawblades.length / Number(per_page))}
-          </div>
-
-          <BiSolidRightArrowSquare
-            className="text-2xl"
-            onClick={() => {
-              router.push(
-                `/search/?date=${date}&date2=${date2}&serial=&page=${
-                  Number(page) + 1
-                }&per_page=${per_page}`,
-              );
-            }}
-          />
-        </div> */}
       </div>
       <button
         className="btn btn-xs my-5"
@@ -469,7 +443,7 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
       {showDeletedBlades && (
         <div>
           <h1 className="text-xl text-orange-300">
-            Slettede blad ({deletedSawblades.length})
+            Slettede blad ({deletedSawblades?.length})
           </h1>
           <table className="table-xs bg-neutral table">
             <thead>
@@ -485,7 +459,7 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
               </tr>
             </thead>
             <tbody>
-              {deletedSawblades.map((blade) => {
+              {deletedSawblades?.map((blade) => {
                 return (
                   <>
                     {blade.deleted && (
@@ -540,11 +514,11 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
                           </div>
                         </td>
                         <td>{blade.deleteReason}</td>
-                        {/* <td>
+                        <td>
                           <th className="text-neutral">
                             <RestoreComponent id={blade.id} />
                           </th>
-                        </td> */}
+                        </td>
                       </tr>
                     )}
                   </>

@@ -386,12 +386,12 @@ const BandDetails = ({
                     <td className="text-neutral">
                       {dateFormat(post.datoSrv, "dd.mm.yyyy")}
                     </td>
-                    {/* <td className="text-neutral">
+                    <td className="text-neutral">
                       <Deletehistorikkpost
                         post={post.id}
                         setOpenBandhistorikkData={setOpenBandhistorikkData}
                       />
-                    </td> */}
+                    </td>
                   </tr>
                 </>
               );

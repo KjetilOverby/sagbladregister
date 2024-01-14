@@ -13,7 +13,13 @@ const Search = () => {
   });
   const [idValue, setIdValue] = useState("");
 
-  const { data } = api.sawblades.getAll.useQuery({
+  const { data: sawblades } = api.sawblades.getAll.useQuery({
+    date: `${dateValue.endDate}T23:59:59.000Z`,
+    date2: `${dateValue.startDate}T00:00:00.000Z`,
+    IdNummer: idValue,
+  });
+
+  const { data: deletedSawblades } = api.sawblades.getAllDeleted.useQuery({
     date: `${dateValue.endDate}T23:59:59.000Z`,
     date2: `${dateValue.startDate}T00:00:00.000Z`,
     IdNummer: idValue,
@@ -37,7 +43,7 @@ const Search = () => {
             />
           </div>
         </div>
-        <SearchMain sawblades={data} />
+        <SearchMain sawblades={sawblades} deletedSawblades={deletedSawblades} />
       </div>
     </div>
   );
