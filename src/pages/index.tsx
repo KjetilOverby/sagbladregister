@@ -11,8 +11,6 @@ import { api } from "~/utils/api";
 export default function Home() {
   const { data: sessionData } = useSession();
 
-  console.log(sessionData?.user.name);
-
   return (
     <div>
       {!sessionData && <NotLoggedInPage />}
