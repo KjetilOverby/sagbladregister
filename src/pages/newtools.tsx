@@ -7,6 +7,7 @@ import dateFormat from "dateformat";
 import CreatePost from "~/components/newtools/CreatePost";
 import HeaderComponent from "~/components/reusable/HeaderComponent";
 import DatepickerComponent from "~/components/reusable/Datepicker";
+import Deleteblades from "~/components/newtools/deleteblades";
 const Newtools = () => {
   // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
   const [dateValue, setDateValue] = useState({
@@ -111,7 +112,7 @@ const Newtools = () => {
 
                       <td>
                         <th className="text-red-400">
-                          {/* <Deleteblades blade={blade.id} /> */}
+                          <Deleteblades blade={blade.id} />
                         </th>
                       </td>
                     </tr>

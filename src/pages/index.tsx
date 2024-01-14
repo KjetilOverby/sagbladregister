@@ -4,6 +4,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 
 import AdminStartpage from "~/components/startpage/AdminStartpage";
 import FrontpageSessionless from "~/components/startpage/FrontpageSessionless";
+import CustomerStartpage from "../components/startpage/CustomerStartpage";
 import NotLoggedInPage from "~/components/startpage/NotLoggedInPage";
 
 import { api } from "~/utils/api";
@@ -18,6 +19,9 @@ export default function Home() {
         <FrontpageSessionless session={sessionData} />
       )}
       {sessionData && sessionData.user.role === "ADMIN" && <AdminStartpage />}
+      {sessionData && sessionData.user.role === "MO_ADMIN" && (
+        <CustomerStartpage />
+      )}
     </div>
   );
 }

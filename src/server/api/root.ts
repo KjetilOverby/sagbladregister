@@ -3,6 +3,7 @@ import { createTRPCRouter } from "~/server/api/trpc";
 import { sawbladesRouter } from "~/server/api/routers/sawblades";
 import { bandhistorikkRouter } from "~/server/api/routers/bandhistorikk";
 import { statistikkBladeDataRouter } from "~/server/api/routers/statistikkBladeData";
+import { userRouter } from "~/server/api/routers/users";
 
 /**
  * This is the primary router for your server.
@@ -14,6 +15,7 @@ export const appRouter = createTRPCRouter({
   sawblades: sawbladesRouter,
   bandhistorikk: bandhistorikkRouter,
   statistikkBladeData: statistikkBladeDataRouter,
+  users: userRouter,
   
 });
 
