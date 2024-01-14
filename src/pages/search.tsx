@@ -63,6 +63,7 @@ const Search = () => {
           <div className="flex flex-col">
             <label>Søk</label>
             <input
+              value={idValue}
               onChange={(e) => setIdValue(e.currentTarget.value)}
               type="text"
               placeholder="Skriv id nummer"
