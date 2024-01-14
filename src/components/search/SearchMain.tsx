@@ -120,7 +120,7 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
   }, [sawblades]);
 
   return (
-    <div className="m-5">
+    <div>
       <div>
         {!closeSearchComponent ? (
           <div>
@@ -269,7 +269,7 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
 
                       <td>
                         <div className="flex items-center">
-                          {/* <p className="w-5">{blade._count.bandhistorikk}</p> */}
+                          <p className="w-5">{blade._count.bandhistorikk}</p>
                           <BsClipboardData
                             style={{
                               marginLeft: ".5rem",
@@ -410,14 +410,14 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
                           </table>
                         </div>
                       </div>
-                      {/* <BandDetails
+                      <BandDetails
                         bandhistorikkData={blade}
                         setOpenBandhistorikkData={setOpenBandhistorikkData}
                         blade={blade}
-                        updatePost={updatePost}
+                        // updatePost={updatePost}
                         updateStatusHandler={updateStatusHandler}
                         handleCloseModal={handleCloseModal}
-                      /> */}
+                      />
 
                       <button
                         onClick={handleCloseHistorikk}

@@ -41,7 +41,7 @@ const CreatePost = () => {
     }
   }, [bladeData]);
   return (
-    <div>
+    <div className="bg-accent rounded-xl p-5">
       <form
         onSubmit={async (e) => {
           e.preventDefault();

@@ -1,24 +1,49 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import React from "react";
+import React, { useState } from "react";
 import { api } from "~/utils/api";
 import dateFormat from "dateformat";
 import CreatePost from "~/components/newtools/CreatePost";
 import HeaderComponent from "~/components/reusable/HeaderComponent";
-const newtools = () => {
-  const { data } = api.sawblades.getAll.useQuery({});
-
+import DatepickerComponent from "~/components/reusable/Datepicker";
+const Newtools = () => {
   // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
+  const [dateValue, setDateValue] = useState({
+    endDate: "2024-01-14",
+    startDate: "2024-01-14",
+  });
+
+  const [idValue, setIdValue] = useState("");
+
+  const { data } = api.sawblades.getAll.useQuery({
+    date: `${dateValue.endDate}T23:59:59.000Z`,
+    date2: `${dateValue.startDate}T00:00:00.000Z`,
+    IdNummer: idValue,
+  });
   return (
     <div data-theme="darkmode">
       <HeaderComponent />
+
       <div className="bg-base-100 h-screen p-5">
         <div className="overflow-x-auto px-5 pt-5">
           <div className="flex h-96 flex-row py-5">
             <CreatePost />
-            {/*
-                <SearchByDate /> */}
+            <div className="bg-accent ml-5 rounded-xl p-5">
+              <DatepickerComponent
+                setDateValue={setDateValue}
+                dateValue={dateValue}
+              />
+              <div className="flex flex-col">
+                <label>ID nummer</label>
+                <input
+                  onChange={(e) => setIdValue(e.currentTarget.value)}
+                  type="text"
+                  placeholder="Type here"
+                  className="input input-bordered input-xs bg-primary w-full max-w-xs"
+                />
+              </div>
+            </div>
           </div>
           <h1 className="mb-3 text-orange-400">
             Registrerte blad i perioden: {data?.length}
@@ -101,4 +126,4 @@ const newtools = () => {
   );
 };
 
-export default newtools;
+export default Newtools;
