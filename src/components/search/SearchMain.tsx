@@ -101,17 +101,17 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
     },
   });
 
-  //   const updateStatus = api.sawblades.updateStatus.useMutation({
-  //     onSuccess: () => {
-  //       router.refresh();
-  //     },
-  //   });
+  const updateStatus = api.sawblades.updateStatus.useMutation({
+    onSuccess: () => {
+      router.refresh();
+    },
+  });
 
-  //   const updatePost = api.bandhistorikk.update.useMutation({
-  //     onSuccess: () => {
-  //       router.refresh();
-  //     },
-  //   });
+  const updatePost = api.bandhistorikk.update.useMutation({
+    onSuccess: () => {
+      router.refresh();
+    },
+  });
 
   useEffect(() => {
     setCountBlades(sawblades?.filter((item) => item.deleted === false).length);
@@ -255,14 +255,14 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
                               blade.active ? "bg-emerald-400" : "bg-primary"
                             }`}
                           >
-                            {/* {openStatus === blade.id && !blade.active && (
+                            {openStatus === blade.id && !blade.active && (
                               <ActivateBlade
                                 blade={blade}
                                 createPost={createPost}
                                 updateStatusHandler={updateStatusHandler}
                                 handleCloseModal={handleCloseModal}
                               />
-                            )} */}
+                            )}
                           </div>
                         </div>
                       </th>
@@ -414,7 +414,7 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
                         bandhistorikkData={blade}
                         setOpenBandhistorikkData={setOpenBandhistorikkData}
                         blade={blade}
-                        // updatePost={updatePost}
+                        updatePost={updatePost}
                         updateStatusHandler={updateStatusHandler}
                         handleCloseModal={handleCloseModal}
                       />

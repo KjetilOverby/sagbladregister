@@ -68,10 +68,10 @@ interface bandProps {
 const BandDetails = ({
   bandhistorikkData,
   setOpenBandhistorikkData,
-  // blade,
-  // updatePost,
-  // deactivateStatusHandler,
-  // handleCloseModal,
+  blade,
+  updatePost,
+  deactivateStatusHandler,
+  handleCloseModal,
 }: bandProps) => {
   const [openInput, setOpenInput] = useState(false);
   const [openMessage, setOpenMessage] = useState<string | null>(null);
@@ -130,7 +130,7 @@ const BandDetails = ({
           bladID={bandhistorikkData.IdNummer}
         />
       )}
-      {/*
+
       {openInputKS && (
         <HistorikkInputKS
           setOpenBandhistorikkData={setOpenBandhistorikkData}
@@ -140,7 +140,7 @@ const BandDetails = ({
           setHistorikkKs={setHistorikkKs}
         />
       )}
-
+      {/*
       {openEditBandDetails && (
         <EditBandDetails
           setOpenEditBandDetails={setOpenEditBandDetails}
@@ -302,7 +302,7 @@ const BandDetails = ({
                         </>
                       )}
                     </td>
-                    {/* 
+
                     <td className="text-primary">
                       {post.activePost && (
                         <div
@@ -321,7 +321,7 @@ const BandDetails = ({
                           )}
                         </div>
                       )}
-                    </td> */}
+                    </td>
                     <td className="text-neutral">
                       <button
                         onClick={editHistorikkPostHandler}
