@@ -13,10 +13,45 @@ export const sawbladesRouter = createTRPCRouter({
   // return ctx.db.sawblades.findMany({});
 
    
+    // getAll: protectedProcedure.input(z.object({ IdNummer: z.string()}))
+    //     .query(({ ctx, input }) => {
+    //      // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+    //      return ctx.db.sawblades.findMany({
+    //       where:{ 
+    //         IdNummer: input.IdNummer
+    //       }
+    //      })
+    //   }),
+
     getAll: protectedProcedure
+    .input(z.object({date: z.string(), date2: z.string(), IdNummer: z.string()}))
         .query(({ ctx, input }) => {
-         // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-         return ctx.db.sawblades.findMany({})
+         return ctx.db.sawblades.findMany({
+          where: {
+            AND: [{
+              createdAt: {
+               lte: new Date(input.date),
+               gte: new Date(input.date2),
+              },
+              IdNummer: {contains: input.IdNummer ? input.IdNummer : undefined},
+            }]
+          },
+          orderBy: {
+            IdNummer: 'asc'
+                          },
+            include: {
+              _count: {
+                select: {
+                  bandhistorikk: true,
+                },
+              },
+              bandhistorikk: {
+                orderBy: {
+                  createdAt: 'asc'
+                }
+              },
+            },
+         })
       }),
 
 
