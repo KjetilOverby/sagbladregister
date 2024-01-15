@@ -14,6 +14,7 @@ export const DeleteComponent = ({ id, wasteReasonInput }: AnyProps) => {
   const updateBlade = api.sawblades.update.useMutation({
     onSuccess: () => {
       void ctx.sawblades.getAll.invalidate();
+      void ctx.sawblades.getCustomer.invalidate();
     },
   });
   return (

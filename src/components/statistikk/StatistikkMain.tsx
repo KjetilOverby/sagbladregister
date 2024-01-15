@@ -25,7 +25,7 @@ const StatistikkMain = ({
     "Tannbrudd",
     "Sponpåliming",
     "Sløv",
-    "River",
+    "Riper",
     "Ytre faktorer",
     "Reklamasjon",
     "Havari",
@@ -78,13 +78,13 @@ const StatistikkMain = ({
             setDateValue={setDateValue}
             dateValue={dateValue}
           />
-          <table className="table-xs bg-neutral mt-20 table">
+          <table className="table table-xs mt-20 bg-neutral">
             <thead>
               <tr>
-                <th className="text-accent text-sm">Sag</th>
-                <th className="text-accent text-sm">Antall</th>
+                <th className="text-sm text-accent">Sag</th>
+                <th className="text-sm text-accent">Antall</th>
                 {feilkoder.map((feilkode) => (
-                  <th key={feilkode} className="text-accent text-sm">
+                  <th key={feilkode} className="text-sm text-accent">
                     {feilkode}
                   </th>
                 ))}
@@ -93,17 +93,17 @@ const StatistikkMain = ({
             <tbody>
               {Object.entries(tableData).map(([sagNr, data]) => (
                 <tr className="bg-accent" key={sagNr}>
-                  <td className="border-primary border bg-teal-700 px-4 py-2">
+                  <td className="border border-primary bg-teal-700 px-4 py-2">
                     {sagNr}
                   </td>
-                  <td className="border-primary border px-4 py-2">
+                  <td className="border border-primary px-4 py-2">
                     {data.total}
                   </td>
 
                   {feilkoder.map((feilkode) => (
                     <td
                       key={feilkode}
-                      className={`border-primary border px-4 py-2 ${
+                      className={`border border-primary px-4 py-2 ${
                         data[feilkode] ? "bg-secondary" : ""
                       }`}
                     >
@@ -116,13 +116,13 @@ const StatistikkMain = ({
           </table>
         </div>
         <div className="">
-          <table className="table-xs bg-neutral mt-20 table">
+          <table className="table table-xs mt-20 bg-neutral">
             <thead>
               <tr>
-                <th className="text-accent text-sm">Sag</th>
-                <th className="text-accent text-sm">Antall</th>
+                <th className="text-sm text-accent">Sag</th>
+                <th className="text-sm text-accent">Antall</th>
                 {feilkoder.map((feilkode) => (
-                  <th key={feilkode} className="text-accent text-sm">
+                  <th key={feilkode} className="text-sm text-accent">
                     {feilkode}
                   </th>
                 ))}
@@ -131,16 +131,16 @@ const StatistikkMain = ({
             <tbody>
               {Object.entries(tableData).map(([sagNr, data]) => (
                 <tr className="bg-accent" key={sagNr}>
-                  <td className="border-primary border bg-teal-700 px-4 py-2">
+                  <td className="border border-primary bg-teal-700 px-4 py-2">
                     {sagNr}
                   </td>
-                  <td className="border-primary border px-4 py-2">
+                  <td className="border border-primary px-4 py-2">
                     {data.total}
                   </td>
                   {feilkoder.map((feilkode) => (
                     <td
                       key={feilkode}
-                      className={`border-primary border px-4 py-2 ${
+                      className={`border border-primary px-4 py-2 ${
                         data[feilkode] ? "bg-secondary" : ""
                       }`}
                     >

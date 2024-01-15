@@ -29,6 +29,12 @@ const Search = () => {
     date2: `${dateValue.startDate}T00:00:00.000Z`,
     IdNummer: idValue,
   });
+  const { data: sawbladeslActive } = api.sawblades.getActive.useQuery({
+    date: `${dateValue.endDate}T23:59:59.000Z`,
+    date2: `${dateValue.startDate}T00:00:00.000Z`,
+    IdNummer: idValue,
+    init: "MØ",
+  });
 
   const { data: sawbladesOsterdal } = api.sawblades.getCustomer.useQuery({
     date: `${dateValue.endDate}T23:59:59.000Z`,
@@ -55,7 +61,7 @@ const Search = () => {
     <div data-theme="darkmode">
       <HeaderComponent />
       <div className="m-5">
-        <div className="bg-accent mb-5 w-96 rounded-xl p-5">
+        <div className="mb-5 w-96 rounded-xl bg-accent p-5">
           <DatepickerComponent
             setDateValue={setDateValue}
             dateValue={dateValue}
@@ -67,7 +73,7 @@ const Search = () => {
               onChange={(e) => setIdValue(e.currentTarget.value)}
               type="text"
               placeholder="Skriv id nummer"
-              className="input input-bordered input-xs bg-accent w-full max-w-xs"
+              className="input input-bordered input-xs w-full max-w-xs bg-accent"
             />
           </div>
         </div>
@@ -75,6 +81,7 @@ const Search = () => {
           <SearchMain
             sawblades={sawblades}
             deletedSawblades={deletedSawblades}
+            activeBlades={sawbladeslActive}
           />
         )}
         {sessionData?.user.role === "MO_ADMIN" && (

@@ -14,6 +14,7 @@ import ActivateBlade from "./ActivateBlade";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { BsClipboardData } from "react-icons/bs";
 import { DeleteComponent } from "./DeleteComponent";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 interface Blade {
   creatorImg: string | undefined;
@@ -71,6 +72,7 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
   // const start = (Number(page) - 1) * Number(per_page);
   // const end = start + Number(per_page);
   // const entries = sawblades.slice(start, end);
+  const { data: sessionData } = useSession();
 
   const [showDeletedBlades, setShowDeletedBlades] = useState(false);
 
@@ -154,7 +156,9 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
               <th className="text-sm text-accent">Type</th>
               <th className="text-sm text-accent">Dato opprettet</th>
               <th className="text-sm text-accent">Opprettet av</th>
-              <th className="text-sm text-accent">Aktiv</th>
+              {sessionData?.user.role === "ADMIN" && (
+                <th className="text-sm text-accent">Aktiv</th>
+              )}
 
               <th className="text-sm text-accent">Historikk</th>
               <th className="text-sm text-accent">Slett</th>
@@ -252,25 +256,28 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
                         </div>
                         {blade.creator}
                       </td>
-                      <th>
-                        <div>
-                          <div
-                            onClick={() => statusHandler(blade.id)}
-                            className={`h-3 w-3 rounded-full ${
-                              blade.active ? "bg-emerald-400" : "bg-primary"
-                            }`}
-                          >
-                            {openStatus === blade.id && !blade.active && (
-                              <ActivateBlade
-                                blade={blade}
-                                createPost={createPost}
-                                updateStatusHandler={updateStatusHandler}
-                                handleCloseModal={handleCloseModal}
-                              />
-                            )}
+
+                      {sessionData?.user.role === "ADMIN" && (
+                        <th>
+                          <div>
+                            <div
+                              onClick={() => statusHandler(blade.id)}
+                              className={`h-3 w-3 rounded-full ${
+                                blade.active ? "bg-emerald-400" : "bg-primary"
+                              }`}
+                            >
+                              {openStatus === blade.id && !blade.active && (
+                                <ActivateBlade
+                                  blade={blade}
+                                  createPost={createPost}
+                                  updateStatusHandler={updateStatusHandler}
+                                  handleCloseModal={handleCloseModal}
+                                />
+                              )}
+                            </div>
                           </div>
-                        </div>
-                      </th>
+                        </th>
+                      )}
 
                       <td>
                         <div className="flex items-center">

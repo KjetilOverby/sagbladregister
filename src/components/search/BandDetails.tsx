@@ -119,7 +119,7 @@ const BandDetails = ({
   });
 
   return (
-    <div className="from-base-100 via-accent to-base-100 z-50 w-full bg-gradient-to-r">
+    <div className="z-50 w-full bg-gradient-to-r from-base-100 via-accent to-base-100">
       {openInput && (
         <HistorikkInput
           setOpenInput={setOpenInput}
@@ -140,7 +140,7 @@ const BandDetails = ({
           setHistorikkKs={setHistorikkKs}
         />
       )}
-      {/*
+
       {openEditBandDetails && (
         <EditBandDetails
           setOpenEditBandDetails={setOpenEditBandDetails}
@@ -148,34 +148,34 @@ const BandDetails = ({
           historikkData={historikkData}
           setHistorikkData={setHistorikkData}
         />
-      )} */}
+      )}
 
       <div className="">
         <div>
           <button
             onClick={() => setOpenInput(true)}
-            className="btn btn-xs bg-primary mb-5 mt-5"
+            className="btn btn-xs mb-5 mt-5 bg-primary"
           >
             Ny post
           </button>
         </div>
       </div>
       <div>
-        <table className="table-xs bg-neutral table w-full">
+        <table className="table table-xs w-full bg-neutral">
           <thead>
             <tr>
-              <th className="text-accent text-sm">Sag</th>
-              <th className="text-accent text-sm">Innpostet</th>
-              <th className="text-accent text-sm">Signatur</th>
-              <th className="text-accent text-sm">Utpostet</th>
-              <th className="text-accent text-sm">Signatur</th>
+              <th className="text-sm text-accent">Sag</th>
+              <th className="text-sm text-accent">Innpostet</th>
+              <th className="text-sm text-accent">Signatur</th>
+              <th className="text-sm text-accent">Utpostet</th>
+              <th className="text-sm text-accent">Signatur</th>
 
-              <th className="text-accent text-sm">T</th>
+              <th className="text-sm text-accent">T</th>
 
-              <th className="text-accent text-sm">Temp</th>
-              <th className="text-accent text-sm">Ampere</th>
-              <th className="text-accent text-sm">Feilkode</th>
-              <th className="text-accent text-sm">Anm</th>
+              <th className="text-sm text-accent">Temp</th>
+              <th className="text-sm text-accent">Ampere</th>
+              <th className="text-sm text-accent">Feilkode</th>
+              <th className="text-sm text-accent">Anm</th>
               <th className="text-sm text-blue-500"></th>
               <th className="text-sm text-blue-500"></th>
               <th className="text-sm text-blue-500">Service</th>
@@ -223,10 +223,10 @@ const BandDetails = ({
                     className={post.activePost ? "bg-primary" : "bg-secondary"}
                   >
                     <td>
-                      <div className="text-neutral text-xs">{post.sagNr}</div>
+                      <div className="text-xs text-neutral">{post.sagNr}</div>
                     </td>
                     <td>
-                      <div className="text-neutral text-xs ">
+                      <div className="text-xs text-neutral ">
                         {dateFormat(post.datoInn, "dd.mm.yyyy")},{" "}
                         {dateFormat(post.klInn, "HH:MM")}
                       </div>
@@ -246,7 +246,7 @@ const BandDetails = ({
                     </td>
                     <td>
                       {!post.activePost ? (
-                        <div className="text-neutral text-xs">
+                        <div className="text-xs text-neutral">
                           {dateFormat(post.datoUt, "dd.mm.yyyy")},{" "}
                           {dateFormat(post.klUt, "HH:MM")}
                         </div>
@@ -267,13 +267,13 @@ const BandDetails = ({
                         {post.sgSag ? post.sgSag : post.creator2}
                       </div>
                     </td>
-                    <td className="text-neutral font-bold">{post.sagtid}</td>
+                    <td className="font-bold text-neutral">{post.sagtid}</td>
 
                     <td className="text-neutral">{post.temperatur}</td>
                     <td className="text-neutral">-</td>
                     <td className="text-neutral">{post.feilkode}</td>
 
-                    <td className="text-neutral  relative max-w-56">
+                    <td className="relative  max-w-56 text-neutral">
                       {post.anmSag && (
                         <button
                           onClick={() => messageHander(post.id)}
@@ -285,7 +285,7 @@ const BandDetails = ({
                       {openMessage === post.id && (
                         <>
                           {openMessage && <p></p>}
-                          <div className="card bg-neutral text-accent absolute top-0 z-50 w-96">
+                          <div className="card absolute top-0 z-50 w-96 bg-neutral text-accent">
                             <div className="card-body">
                               <h2 className="card-title">Melding fra sag</h2>
                               <p>{post.anmSag}</p>
@@ -325,7 +325,7 @@ const BandDetails = ({
                     <td className="text-neutral">
                       <button
                         onClick={editHistorikkPostHandler}
-                        className="btn btn-xs bg-base-100 mr-5"
+                        className="btn btn-xs mr-5 bg-base-100"
                       >
                         <CiEdit
                           style={{ color: "orange", fontSize: ".8rem" }}
@@ -340,7 +340,7 @@ const BandDetails = ({
                     </td>
                     <td className="text-neutral">{post.handling}</td>
                     <td className="text-neutral">{post.sideklaring}</td>
-                    <td className="text-neutral relative max-w-56">
+                    <td className="relative max-w-56 text-neutral">
                       {post.anmKS && (
                         <>
                           <button
@@ -350,7 +350,7 @@ const BandDetails = ({
                             Vis
                           </button>
                           {openMessageKS === post.id && (
-                            <div className="card bg-neutral text-accent absolute right-0 top-0 z-50 w-96">
+                            <div className="card absolute right-0 top-0 z-50 w-96 bg-neutral text-accent">
                               <div className="card-body">
                                 <h2 className="card-title">
                                   Melding fra Stridsbergs

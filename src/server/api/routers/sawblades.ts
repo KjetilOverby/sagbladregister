@@ -88,6 +88,36 @@ export const sawbladesRouter = createTRPCRouter({
          })
       }),
 
+      getActive: protectedProcedure
+      .input(z.object({date: z.string(), date2: z.string(), IdNummer: z.string(), init: z.string()}))
+          .query(({ ctx, input }) => {
+           // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+           return ctx.db.sawblades.findMany({
+            where: {
+              AND: [{
+               
+                active: true,
+                 IdNummer: {startsWith: input.init},
+              }]
+            },
+            orderBy: {
+              IdNummer: 'asc'
+                            },
+                            include: {
+                              _count: {
+                                select: {
+                                  bandhistorikk: true,
+                                },
+                              },
+                              bandhistorikk: {
+                                orderBy: {
+                                  createdAt: 'asc'
+                                }
+                              },
+                            },
+           })
+        }),
+
     getCustomerAllDeleted: protectedProcedure
     .input(z.object({date: z.string(), date2: z.string(), IdNummer: z.string(), init: z.string()}))
         .query(({ ctx, input }) => {

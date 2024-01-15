@@ -1,108 +1,87 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import React, { useState } from "react";
+import React from "react";
 import { api } from "~/utils/api";
 
-interface historikkInputProps {
-  setOpenInput: React.Dispatch<React.SetStateAction<boolean>>;
-  bandId: string;
-  setOpenBandhistorikkData: React.Dispatch<React.SetStateAction<boolean>>;
-  side: string;
-  bladType: string;
-  bladID: string;
+interface detailProps {
+  historikkData: {
+    sagNr: string;
+    datoInn: Date;
+    klInn: Date;
+    datoUt: Date;
+    klUt: Date;
+    sagtid: number;
+    feilkode: string;
+    anmSag: string;
+    temperatur: number;
+    sgSag: string;
+    activatePost: boolean;
+    id: string;
+  };
+  setHistorikkData: React.Dispatch<
+    React.SetStateAction<{
+      datoInn: Date;
+      klInn: Date;
+      datoUt: Date;
+      klUt: Date;
+      sagtid: number;
+      feilkode: string;
+      bladedata: string;
+      anmSag: string;
+      anTimer: number;
+      temperatur: number;
+      sgSag: string;
+      activePost: boolean;
+      sagNr: string;
+    }>
+  >;
+  postId: string;
 }
 
-const HistorikkInput = ({
-  setOpenInput,
-  bandId,
-  side,
-  bladType,
-  bladID,
-}: historikkInputProps) => {
+const EditBandDetails = ({
+  setOpenEditBandDetails,
+  postId,
+  setHistorikkData,
+  historikkData,
+}: detailProps) => {
   const ctx = api.useContext();
-
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const createPost = api.bandhistorikk.create.useMutation({
+  const updateBandhistorikk = api.bandhistorikk.update.useMutation({
     onSuccess: () => {
       void ctx.sawblades.getAll.invalidate();
       void ctx.sawblades.getCustomer.invalidate();
-      setOpenInput(false);
+      setOpenEditBandDetails(false);
     },
   });
 
-  const [historikkData, setHistorikkData] = useState({
-    sagNr: "4",
-    datoInn: new Date(),
-    klInn: new Date(),
-    datoUt: new Date(),
-    klUt: new Date(),
-    sagtid: 0,
-    feilkode: "Ingen anmerkning",
-    handling: "Ingen handling",
-    sideklaring: 0,
-    creator: "",
-    bladedata: "",
-    anmSag: "",
-    temperatur: 0,
-    sgSag: "",
-    sgKS: "",
-    alt: "",
-    bladType: "",
-    side: side,
-    bladeRelationId: "",
-  });
   return (
     <div className="absolute z-40">
       <form
         onSubmit={(e) => {
           e.preventDefault();
-
-          try {
+          updateBandhistorikk.mutate({
+            id: postId,
+            sagNr: historikkData.sagNr,
+            datoInn: historikkData.datoInn,
+            klInn: historikkData.klInn,
+            datoUt: historikkData.datoUt,
+            klUt: historikkData.klUt,
+            sagtid: historikkData.sagtid,
+            feilkode: historikkData.feilkode,
+            anmSag: historikkData.anmSag,
+            temperatur: historikkData.temperatur,
+            sgSag: historikkData.sgSag,
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            const response = createPost.mutateAsync({
-              sagNr: historikkData.sagNr,
-              datoInn: historikkData.datoInn,
-              klInn: historikkData.klInn,
-              datoUt: historikkData.datoUt,
-              klUt: historikkData.klUt,
-              sagtid: historikkData.sagtid,
-              feilkode: historikkData.feilkode,
-              handling: historikkData.handling,
-              sideklaring: historikkData.sideklaring,
-              createdById: "",
-              bladedata: bandId,
-              anmSag: historikkData.anmSag,
-              anmKS: "",
-              datoSrv: new Date(),
-              temperatur: historikkData.temperatur,
-              userId: "",
-              sgSag: "",
-              sgKS: "",
-              createdBy: "",
-              side: side,
-              creatorImg: "",
-              bladType: bladType,
-              activePost: false,
-              bladeRelationId: bladID,
-              alt: "",
-              creator: "",
-              ampere: 0,
-              creator2: "",
-              creatorImg2: "",
-              creator3: "",
-              creatorImg3: "",
-            });
-            console.log(response);
-          } catch (error) {
-            console.log(error);
-          }
+            activePost: historikkData.activePost,
+            creator2: "",
+            creatorImg2: "",
+          });
         }}
         className="card w-96 bg-slate-500 text-neutral-content"
       >
         <div className="card-body">
-          <h2 className="card-title">Legg til data</h2>
+          <h2 className="card-title">Rediger data</h2>
           <div>
             <p>Sag nr:</p>
             <select
@@ -136,6 +115,7 @@ const HistorikkInput = ({
               }
               type="date"
               className="input input-bordered input-xs w-full max-w-xs bg-white"
+              value={historikkData.datoInn}
             />
           </div>
           <div>
@@ -154,6 +134,7 @@ const HistorikkInput = ({
               }}
               type="time"
               className="input input-bordered input-xs w-full max-w-xs bg-white"
+              value={historikkData.klInn}
             />
           </div>
           <div>
@@ -167,6 +148,7 @@ const HistorikkInput = ({
               }
               type="date"
               className="input input-bordered input-xs w-full max-w-xs bg-white"
+              value={historikkData.datoUt}
             />
           </div>
           <div>
@@ -185,6 +167,7 @@ const HistorikkInput = ({
               }}
               type="time"
               className="input input-bordered input-xs w-full max-w-xs bg-white"
+              value={historikkData.klUt}
             />
           </div>
           <div>
@@ -198,6 +181,7 @@ const HistorikkInput = ({
               }
               type="number"
               className="input input-bordered input-xs w-full max-w-xs bg-white"
+              value={historikkData.sagtid}
             />
           </div>
           <div>
@@ -211,6 +195,7 @@ const HistorikkInput = ({
               }
               type="number"
               className="input input-bordered input-xs w-full max-w-xs bg-white"
+              value={historikkData.temperatur}
             />
           </div>
           <div>
@@ -231,6 +216,7 @@ const HistorikkInput = ({
               }
               type="text"
               className="input input-bordered input-xs w-full max-w-xs bg-white"
+              value={historikkData.anmSag}
             />
           </div>
           <div>
@@ -243,6 +229,7 @@ const HistorikkInput = ({
                 })
               }
               className="select select-bordered select-xs w-full max-w-xs bg-white"
+              value={historikkData.feilkode}
             >
               <option value="Ingen anmerkning">Ingen anmerkning</option>
               <option value="Bølger">Bølger</option>
@@ -264,10 +251,27 @@ const HistorikkInput = ({
               <option value="Ikjøring/riper">Ikjøring/riper</option>
             </select>
           </div>
+          <div>
+            <p>Signatur:</p>
+            <input
+              value={historikkData.sgSag}
+              onChange={(e) =>
+                setHistorikkData({
+                  ...historikkData,
+                  sgSag: e.currentTarget.value,
+                })
+              }
+              type="text"
+              className="input input-bordered input-xs w-full max-w-xs bg-white"
+            />
+          </div>
 
           <div className="card-actions">
             <button className="btn btn-primary btn-xs">Lagre</button>
-            <button onClick={() => setOpenInput(false)} className="btn btn-xs">
+            <button
+              onClick={() => setOpenEditBandDetails(false)}
+              className="btn btn-xs"
+            >
               Avbryt
             </button>
           </div>
@@ -277,4 +281,4 @@ const HistorikkInput = ({
   );
 };
 
-export default HistorikkInput;
+export default EditBandDetails;
