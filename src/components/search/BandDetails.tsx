@@ -152,7 +152,7 @@ const BandDetails = ({
         />
       )}
 
-      <div className="">
+      <div>
         <div>
           <button
             onClick={() => setOpenInput(true)}

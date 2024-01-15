@@ -7,8 +7,6 @@ import FrontpageSessionless from "~/components/startpage/FrontpageSessionless";
 import CustomerStartpage from "../components/startpage/CustomerStartpage";
 import NotLoggedInPage from "~/components/startpage/NotLoggedInPage";
 
-import { api } from "~/utils/api";
-
 export default function Home() {
   const { data: sessionData } = useSession();
 

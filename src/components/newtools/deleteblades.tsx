@@ -2,23 +2,27 @@
 // @ts-nocheck
 import React from "react";
 import { api } from "~/utils/api";
-import { useRouter } from "next/navigation";
 
 interface bladeProps {
   blade: string;
 }
 
 const Deleteblades = ({ blade }: bladeProps) => {
-  const router = useRouter();
+  const ctx = api.useContext();
 
   const deleteBladeApi = api.sawblades.delete.useMutation({
     onSuccess: () => {
-      router.refresh();
+      void ctx.sawblades.getAll.invalidate();
+      void ctx.sawblades.getCustomer.invalidate();
     },
   });
 
   const deleteBlade = () => {
-    deleteBladeApi.mutate({ id: blade });
+    try {
+      deleteBladeApi.mutate({ id: blade });
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <>

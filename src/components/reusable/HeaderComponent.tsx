@@ -23,7 +23,7 @@ const HeaderComponent = () => {
   const { data: sessionData } = useSession();
   return (
     <header>
-      <nav className="border-b-primary bg-base-100 border border-x-0 border-t-0 border-gray-200 px-4 py-2.5  lg:px-6">
+      <nav className="border border-x-0 border-t-0 border-gray-200 border-b-primary bg-base-100 px-4 py-2.5  lg:px-6">
         <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between">
           <div className="flex">
             <div>
@@ -41,60 +41,56 @@ const HeaderComponent = () => {
           </div>
           <div className="flex">
             <ul className="mt-4 flex flex-col font-medium lg:mt-0 lg:flex-row lg:space-x-8">
-              <li>
-                <a
-                  href="/search"
-                  className="lg:hover:text-primary-700  text-neutral block border-b border-gray-100 py-2 pl-3 pr-4 text-sm hover:bg-gray-50 lg:border-0 lg:p-0 lg:hover:bg-transparent dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent lg:dark:hover:text-white"
-                >
-                  Søk
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/statistikk"
-                  className="lg:hover:text-primary-700  text-neutral block border-b border-gray-100 py-2 pl-3 pr-4 text-sm hover:bg-gray-50 lg:border-0 lg:p-0 lg:hover:bg-transparent dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent lg:dark:hover:text-white"
-                >
-                  Statistikk
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="lg:hover:text-primary-700 text-neutral block border-b border-gray-100 py-2 pl-3 pr-4 text-sm hover:bg-gray-50 lg:border-0 lg:p-0 lg:hover:bg-transparent dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent lg:dark:hover:text-white"
-                >
-                  Oversikt
-                </a>
-              </li>
-              {sessionData?.user.role === "ADMIN" && (
+              <Link href="/search">
                 <li>
-                  <a
-                    href="/newtools"
-                    className="bg-primary-700 lg:text-primary-700 text-neutral block rounded py-2 pl-3 pr-4 text-sm lg:bg-transparent lg:p-0"
-                    aria-current="page"
-                  >
-                    Opprett
-                  </a>
+                  <p className="lg:hover:text-primary-700  block border-b border-gray-100 py-2 pl-3 pr-4 text-sm text-neutral hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:border-0 lg:p-0 lg:hover:bg-transparent lg:dark:hover:bg-transparent lg:dark:hover:text-white">
+                    Søk
+                  </p>
                 </li>
+              </Link>
+              <Link href="/statistikk">
+                <li>
+                  <p className="lg:hover:text-primary-700  block border-b border-gray-100 py-2 pl-3 pr-4 text-sm text-neutral hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:border-0 lg:p-0 lg:hover:bg-transparent lg:dark:hover:bg-transparent lg:dark:hover:text-white">
+                    Statistikk
+                  </p>
+                </li>
+              </Link>
+              <Link href="#">
+                <li>
+                  <p className="lg:hover:text-primary-700 block border-b border-gray-100 py-2 pl-3 pr-4 text-sm text-neutral hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:border-0 lg:p-0 lg:hover:bg-transparent lg:dark:hover:bg-transparent lg:dark:hover:text-white">
+                    Oversikt
+                  </p>
+                </li>
+              </Link>
+              {sessionData?.user.role === "ADMIN" && (
+                <Link href="/newtools">
+                  <li>
+                    <p
+                      className="bg-primary-700 lg:text-primary-700 block rounded py-2 pl-3 pr-4 text-sm text-neutral lg:bg-transparent lg:p-0"
+                      aria-current="page"
+                    >
+                      Opprett
+                    </p>
+                  </li>
+                </Link>
               )}
               {sessionData?.user.email === "kailundquist@gmail.com" && (
-                <li>
-                  <a
-                    href="#"
-                    className="lg:hover:text-primary-700 text-neutral block border-b border-gray-100 py-2 pl-3 pr-4 text-sm hover:bg-gray-50 lg:border-0 lg:p-0 lg:hover:bg-transparent dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent lg:dark:hover:text-white"
-                  >
-                    <RoleChange />
-                  </a>
-                </li>
+                <Link href="#">
+                  <li>
+                    <p className="lg:hover:text-primary-700 block border-b border-gray-100 py-2 pl-3 pr-4 text-sm text-neutral hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:border-0 lg:p-0 lg:hover:bg-transparent lg:dark:hover:bg-transparent lg:dark:hover:text-white">
+                      <RoleChange />
+                    </p>
+                  </li>
+                </Link>
               )}
               {sessionData?.user.email === "ktldesign80@gmail.com" && (
-                <li>
-                  <a
-                    href="#"
-                    className="lg:hover:text-primary-700 text-neutral block border-b border-gray-100 py-2 pl-3 pr-4 text-sm hover:bg-gray-50 lg:border-0 lg:p-0 lg:hover:bg-transparent dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent lg:dark:hover:text-white"
-                  >
-                    <RoleChange />
-                  </a>
-                </li>
+                <Link href="#">
+                  <li>
+                    <p className="lg:hover:text-primary-700 block border-b border-gray-100 py-2 pl-3 pr-4 text-sm text-neutral hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:border-0 lg:p-0 lg:hover:bg-transparent lg:dark:hover:bg-transparent lg:dark:hover:text-white">
+                      <RoleChange />
+                    </p>
+                  </li>
+                </Link>
               )}
             </ul>
             {/*   <div>
@@ -252,7 +248,7 @@ const HeaderComponent = () => {
             <button
               data-collapse-toggle="mobile-menu-2"
               type="button"
-              className="ml-1 inline-flex items-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 lg:hidden dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              className="ml-1 inline-flex items-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 lg:hidden"
               aria-controls="mobile-menu-2"
               aria-expanded="false"
             >

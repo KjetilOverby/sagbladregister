@@ -8,9 +8,14 @@ import { api } from "~/utils/api";
 
 const RoleChange = () => {
   const router = useRouter();
+
+  // const ctx = api.useContext();
   const updateRoles = api.users.updateRole.useMutation({
     onSuccess: () => {
       router.refresh();
+
+      // void ctx.sawblades.getAll.invalidate();
+      // void ctx.sawblades.getCustomer.invalidate();
     },
   });
 
@@ -20,7 +25,7 @@ const RoleChange = () => {
         onChange={(e) => {
           e.preventDefault();
           void updateRoles.mutate({
-            id: "clqt4w9mk000ff286j60a7fzi",
+            id: "",
             role: e.currentTarget.value as
               | "ADMIN"
               | "USER"

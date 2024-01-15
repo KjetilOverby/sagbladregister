@@ -66,7 +66,12 @@ interface BladeProps {
   deletedSawblades: Blade[];
 }
 
-const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
+const SearchMain = ({
+  sawblades,
+  deletedSawblades,
+  setCloseSearchComponent,
+  closeSearchComponent,
+}: BladeProps) => {
   // const page = params["page"] ?? "1";
   // const per_page = params["per_page"] ?? "10";
   // const start = (Number(page) - 1) * Number(per_page);
@@ -84,7 +89,6 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
   const [openHistorikk, setopenHistorikk] = useState<string | null>(null);
   const [wasteReasonInput, setWasteReasonInput] = useState("");
   const [openDeleteID, setOpenDeleteID] = useState<string | null>(null);
-  const [closeSearchComponent, setCloseSearchComponent] = useState(false);
 
   const [countBlades, setCountBlades] = useState();
 
@@ -131,16 +135,6 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
       <div>
         {!closeSearchComponent ? (
           <div>
-            {/* <div className=" rounded-xl py-5">
-              <div className="flex ">
-                <DatepickerComponent
-                  idSearch={true}
-                  searchSerial={searchSerial}
-                  link="/search"
-                  setSearchSerial={setSearchSerial}
-                />
-              </div>
-            </div> */}
             <h1 className="text-xl text-orange-300">
               Blad i bruk ({countBlades})
             </h1>

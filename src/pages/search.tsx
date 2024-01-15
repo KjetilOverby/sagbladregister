@@ -11,6 +11,7 @@ import { api } from "~/utils/api";
 import { signIn, signOut, useSession } from "next-auth/react";
 
 const Search = () => {
+  const [closeSearchComponent, setCloseSearchComponent] = useState(false);
   const { data: sessionData } = useSession();
   const [dateValue, setDateValue] = useState({
     endDate: "2040-01-14",
@@ -61,27 +62,33 @@ const Search = () => {
     <div data-theme="darkmode">
       <HeaderComponent />
       <div className="m-5">
-        <div className="mb-5 w-96 rounded-xl bg-accent p-5">
-          <DatepickerComponent
-            setDateValue={setDateValue}
-            dateValue={dateValue}
-          />
-          <div className="flex flex-col">
-            <label>Søk</label>
-            <input
-              value={idValue}
-              onChange={(e) => setIdValue(e.currentTarget.value)}
-              type="text"
-              placeholder="Skriv id nummer"
-              className="input input-bordered input-xs w-full max-w-xs bg-accent"
+        {!closeSearchComponent ? (
+          <div className="mb-5 w-96 rounded-xl bg-accent p-5">
+            <DatepickerComponent
+              setDateValue={setDateValue}
+              dateValue={dateValue}
             />
+            <div className="flex flex-col">
+              <label>Søk</label>
+              <input
+                value={idValue}
+                onChange={(e) => setIdValue(e.currentTarget.value)}
+                type="text"
+                placeholder="Skriv id nummer"
+                className="input input-bordered input-xs w-full max-w-xs bg-accent"
+              />
+            </div>
           </div>
-        </div>
+        ) : (
+          ""
+        )}
         {sessionData?.user.role === "ADMIN" && (
           <SearchMain
             sawblades={sawblades}
             deletedSawblades={deletedSawblades}
             activeBlades={sawbladeslActive}
+            closeSearchComponent={closeSearchComponent}
+            setCloseSearchComponent={setCloseSearchComponent}
           />
         )}
         {sessionData?.user.role === "MO_ADMIN" && (
@@ -89,6 +96,8 @@ const Search = () => {
             sawblades={sawbladesOsterdal}
             deletedSawblades={sawbladesOsterdalDeleted}
             activeBlades={sawbladesOsterdalActive}
+            closeSearchComponent={closeSearchComponent}
+            setCloseSearchComponent={setCloseSearchComponent}
           />
         )}
       </div>
