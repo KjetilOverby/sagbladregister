@@ -109,7 +109,7 @@ const ActivateBlade = ({
     feilkode: "Ingen anmerkning",
     antTimer: 40,
     sgSag: "",
-    ampere: "",
+    ampere: 0,
   });
 
   return (
@@ -129,7 +129,7 @@ const ActivateBlade = ({
                 anmSag: inputValues.anmSag,
                 feilkode: inputValues.feilkode,
                 antTimer: inputValues.antTimer,
-                ampere: "",
+                ampere: inputValues.ampere,
                 datoUt: new Date(),
                 klUt: new Date(),
                 id: post.id,
@@ -190,6 +190,12 @@ const ActivateBlade = ({
                 <div>
                   <p>Ampere:</p>
                   <input
+                    onChange={(e) =>
+                      setInputValues({
+                        ...inputValues,
+                        ampere: Number(e.currentTarget.value),
+                      })
+                    }
                     type="text"
                     className="input input-bordered input-xs w-full max-w-xs bg-white"
                   />

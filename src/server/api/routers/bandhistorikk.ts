@@ -67,7 +67,7 @@ export const bandhistorikkRouter = createTRPCRouter({
           },
       });
   }),
-  update: protectedProcedure.input(z.object({ id: z.string(), activePost: z.boolean(), datoInn: z.date(), klInn: z.date(), klUt: z.date(), datoUt: z.date(), feilkode: z.string(), temperatur: z.number(), anmSag: z.string(), sgSag: z.string(), sagtid: z.number(), sagNr: z.string(), creator2: z.string(), creatorImg2: z.string()}))
+  update: protectedProcedure.input(z.object({ id: z.string(), activePost: z.boolean(), datoInn: z.date(), klInn: z.date(), klUt: z.date(), datoUt: z.date(), feilkode: z.string(), temperatur: z.number(), anmSag: z.string(), sgSag: z.string(), sagtid: z.number(), sagNr: z.string(), creator2: z.string(), creatorImg2: z.string(), ampere: z.number()}))
   .mutation(async ({ctx, input}) => {
     const creatorName: string = ctx.session.user.name ?? "DefaultCreator";
     const creatorImg: string = ctx.session.user.image ?? "DefaultCreator";
@@ -90,6 +90,7 @@ export const bandhistorikkRouter = createTRPCRouter({
               sagNr: input.sagNr,
               creator2: creatorName,
               creatorImg2: creatorImg,
+              ampere: input.ampere
             
             
           

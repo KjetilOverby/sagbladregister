@@ -19,6 +19,7 @@ interface detailProps {
     sgSag: string;
     activatePost: boolean;
     id: string;
+    ampere: number;
   };
   setHistorikkData: React.Dispatch<
     React.SetStateAction<{
@@ -35,6 +36,7 @@ interface detailProps {
       sgSag: string;
       activePost: boolean;
       sagNr: string;
+      ampere: number;
     }>
   >;
   postId: string;
@@ -74,6 +76,7 @@ const EditBandDetails = ({
             sgSag: historikkData.sgSag,
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             activePost: historikkData.activePost,
+            ampere: historikkData.ampere,
             creator2: "",
             creatorImg2: "",
           });
@@ -201,8 +204,15 @@ const EditBandDetails = ({
           <div>
             <p>Ampere:</p>
             <input
+              onChange={(e) =>
+                setHistorikkData({
+                  ...historikkData,
+                  ampere: Number(e.currentTarget.value),
+                })
+              }
               type="text"
               className="input input-bordered input-xs w-full max-w-xs bg-white"
+              value={historikkData.ampere}
             />
           </div>
           <div>

@@ -15,6 +15,7 @@ const Deletehistorikkpost = ({ post, setOpenBandhistorikkData }: PostProps) => {
   const deleteBladeApi = api.bandhistorikk.delete.useMutation({
     onSuccess: () => {
       void ctx.sawblades.getAll.invalidate();
+      void ctx.sawblades.getCustomer.invalidate();
     },
   });
 

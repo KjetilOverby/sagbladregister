@@ -342,6 +342,7 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
                                   <button className="btn btn-xs bg-red-600">
                                     <DeleteComponent
                                       wasteReasonInput={wasteReasonInput}
+                                      setWasteReasonInput={setWasteReasonInput}
                                       id={blade.id}
                                     />
                                   </button>

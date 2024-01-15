@@ -9,10 +9,18 @@ import HeaderComponent from "~/components/reusable/HeaderComponent";
 import DatepickerComponent from "~/components/reusable/Datepicker";
 import Deleteblades from "~/components/newtools/deleteblades";
 const Newtools = () => {
+  // eslint-disable-next-line @typescript-eslint/unbound-method
+  const year = new Date().getFullYear();
+  const month = new Date().getMonth() + 1;
+  const date = new Date().getDate();
+
+  // endDate: `${year}-${month}-${date}`,
+  // startDate: `${year}-${month}-${date}`,
+
   // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
   const [dateValue, setDateValue] = useState({
-    endDate: "2024-01-14",
-    startDate: "2024-01-14",
+    endDate: `2024-01-15`,
+    startDate: `2024-01-15`,
   });
 
   const [idValue, setIdValue] = useState("");
@@ -26,11 +34,11 @@ const Newtools = () => {
     <div data-theme="darkmode">
       <HeaderComponent />
 
-      <div className="bg-base-100 h-screen p-5">
+      <div className="h-screen bg-base-100 p-5">
         <div className="overflow-x-auto px-5 pt-5">
           <div className="flex h-96 flex-row py-5">
             <CreatePost />
-            <div className="bg-accent ml-5 rounded-xl p-5">
+            <div className="ml-5 rounded-xl bg-accent p-5">
               <DatepickerComponent
                 setDateValue={setDateValue}
                 dateValue={dateValue}
@@ -41,7 +49,7 @@ const Newtools = () => {
                   onChange={(e) => setIdValue(e.currentTarget.value)}
                   type="text"
                   placeholder="Type here"
-                  className="input input-bordered input-xs bg-primary w-full max-w-xs"
+                  className="input input-bordered input-xs w-full max-w-xs bg-primary"
                 />
               </div>
             </div>
@@ -49,15 +57,15 @@ const Newtools = () => {
           <h1 className="mb-3 text-orange-400">
             Registrerte blad i perioden: {data?.length}
           </h1>
-          <table className="table-xs bg-primary table">
+          <table className="table table-xs bg-primary">
             <thead>
               <tr>
-                <th className="text-accent text-sm">Serienummer</th>
-                <th className="text-accent text-sm">Type</th>
-                <th className="text-accent text-sm">Dato</th>
+                <th className="text-sm text-accent">Serienummer</th>
+                <th className="text-sm text-accent">Type</th>
+                <th className="text-sm text-accent">Dato</th>
 
-                <th className="text-accent text-sm">Opprettet av</th>
-                <th className="text-accent text-sm"></th>
+                <th className="text-sm text-accent">Opprettet av</th>
+                <th className="text-sm text-accent"></th>
               </tr>
             </thead>
             <tbody>
@@ -65,7 +73,7 @@ const Newtools = () => {
                 return (
                   <>
                     <tr className="bg-accent">
-                      <td className="text-neutral font-bold">
+                      <td className="font-bold text-neutral">
                         {blade.IdNummer}{" "}
                         {blade.note && (
                           <span className="text-xs font-normal text-orange-200">
@@ -77,7 +85,7 @@ const Newtools = () => {
                         <div className="flex items-center space-x-3">
                           <div className="avatar"></div>
                           <div>
-                            <div className="text-neutral text-xs">
+                            <div className="text-xs text-neutral">
                               {blade.type} {blade.side}
                             </div>
                           </div>
@@ -87,7 +95,7 @@ const Newtools = () => {
                         <div className="flex items-center space-x-3">
                           <div className="avatar"></div>
                           <div>
-                            <div className="text-neutral text-xs">
+                            <div className="text-xs text-neutral">
                               {dateFormat(
                                 blade.updatedAt,
                                 "dd.mm.yyyy , HH:MM",

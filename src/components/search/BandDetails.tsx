@@ -55,6 +55,7 @@ interface bandProps {
       sgSag: string;
       datoSrv: Date;
       temperatur: number;
+      ampere: number;
       activePost: boolean;
     }[];
   };
@@ -113,6 +114,7 @@ const BandDetails = ({
     anmSag: "",
     anTimer: 0,
     temperatur: 0,
+    ampere: 0,
     sgSag: "",
     activePost: false,
     sagNr: "",
@@ -214,6 +216,7 @@ const BandDetails = ({
                   sgSag: post.sgSag,
                   sagtid: post.sagtid,
                   sagNr: post.sagNr,
+                  ampere: post.ampere,
                 });
               };
 
@@ -270,7 +273,7 @@ const BandDetails = ({
                     <td className="font-bold text-neutral">{post.sagtid}</td>
 
                     <td className="text-neutral">{post.temperatur}</td>
-                    <td className="text-neutral">-</td>
+                    <td className="text-neutral">{post.ampere}</td>
                     <td className="text-neutral">{post.feilkode}</td>
 
                     <td className="relative  max-w-56 text-neutral">
