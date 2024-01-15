@@ -37,6 +37,7 @@ const HistorikkInputKS = ({
   const updatePost = api.bandhistorikk.updateKS.useMutation({
     onSuccess: () => {
       void ctx.sawblades.getAll.invalidate();
+      void ctx.sawblades.getCustomer.invalidate();
       setOpenInputKS(false);
     },
   });

@@ -98,6 +98,8 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
   const createPost = api.bandhistorikk.create.useMutation({
     onSuccess: () => {
       void ctx.sawblades.getAll.invalidate();
+      void ctx.sawblades.getCustomer.invalidate();
+
       setOpenStatus(null);
     },
   });
@@ -105,12 +107,14 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
   const updateStatus = api.sawblades.updateStatus.useMutation({
     onSuccess: () => {
       void ctx.sawblades.getAll.invalidate();
+      void ctx.sawblades.getCustomer.invalidate();
     },
   });
 
   const updatePost = api.bandhistorikk.update.useMutation({
     onSuccess: () => {
       void ctx.sawblades.getAll.invalidate();
+      void ctx.sawblades.getCustomer.invalidate();
     },
   });
 

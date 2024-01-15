@@ -97,6 +97,7 @@ const ActivateBlade = ({
   const updateBladeStatus = api.sawblades.updateStatus.useMutation({
     onSuccess: () => {
       void ctx.sawblades.getAll.invalidate();
+      void ctx.sawblades.getCustomer.invalidate();
       setLoading(true);
     },
   });

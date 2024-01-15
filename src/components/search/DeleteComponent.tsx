@@ -2,7 +2,6 @@
 // @ts-nocheck
 import React from "react";
 import { api } from "~/utils/api";
-import { useRouter } from "next/navigation";
 
 interface AnyProps {
   id: string;
@@ -11,10 +10,10 @@ interface AnyProps {
 }
 
 export const DeleteComponent = ({ id, wasteReasonInput }: AnyProps) => {
-  const router = useRouter();
+  const ctx = api.useContext();
   const updateBlade = api.sawblades.update.useMutation({
     onSuccess: () => {
-      router.refresh();
+      void ctx.sawblades.getAll.invalidate();
     },
   });
   return (

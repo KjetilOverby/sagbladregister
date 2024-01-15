@@ -27,6 +27,7 @@ const HistorikkInput = ({
   const createPost = api.bandhistorikk.create.useMutation({
     onSuccess: () => {
       void ctx.sawblades.getAll.invalidate();
+      void ctx.sawblades.getCustomer.invalidate();
       setOpenInput(false);
     },
   });
