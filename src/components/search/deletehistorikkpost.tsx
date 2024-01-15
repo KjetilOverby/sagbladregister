@@ -2,7 +2,6 @@
 // @ts-nocheck
 import React from "react";
 import { api } from "~/utils/api";
-import { useRouter } from "next/navigation";
 import { RiDeleteBinFill } from "react-icons/ri";
 
 interface PostProps {
@@ -11,11 +10,11 @@ interface PostProps {
 }
 
 const Deletehistorikkpost = ({ post, setOpenBandhistorikkData }: PostProps) => {
-  const router = useRouter();
+  const ctx = api.useContext();
 
   const deleteBladeApi = api.bandhistorikk.delete.useMutation({
     onSuccess: () => {
-      router.refresh();
+      void ctx.sawblades.getAll.invalidate();
     },
   });
 

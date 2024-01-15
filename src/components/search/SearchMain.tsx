@@ -9,7 +9,6 @@ import dateFormat from "dateformat";
 import { RestoreComponent } from "./RestoreComponent";
 import BandDetails from "./BandDetails";
 // import DatepickerComponent from "../reusable/Datepicker";
-import { useRouter } from "next/navigation";
 import { api } from "~/utils/api";
 import ActivateBlade from "./ActivateBlade";
 import { RiDeleteBinLine } from "react-icons/ri";
@@ -67,7 +66,6 @@ interface BladeProps {
 }
 
 const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
-  const router = useRouter();
   // const page = params["page"] ?? "1";
   // const per_page = params["per_page"] ?? "10";
   // const start = (Number(page) - 1) * Number(per_page);
@@ -94,23 +92,25 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
     setOpenDeleteID(postID);
   };
 
+  const ctx = api.useContext();
+
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
   const createPost = api.bandhistorikk.create.useMutation({
     onSuccess: () => {
-      router.refresh();
+      void ctx.sawblades.getAll.invalidate();
       setOpenStatus(null);
     },
   });
 
   const updateStatus = api.sawblades.updateStatus.useMutation({
     onSuccess: () => {
-      router.refresh();
+      void ctx.sawblades.getAll.invalidate();
     },
   });
 
   const updatePost = api.bandhistorikk.update.useMutation({
     onSuccess: () => {
-      router.refresh();
+      void ctx.sawblades.getAll.invalidate();
     },
   });
 
@@ -143,17 +143,17 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
         ) : (
           ""
         )}
-        <table className="table-xs bg-neutral table">
+        <table className="table table-xs bg-neutral">
           <thead>
             <tr>
-              <th className="text-accent text-sm">ID</th>
-              <th className="text-accent text-sm">Type</th>
-              <th className="text-accent text-sm">Dato opprettet</th>
-              <th className="text-accent text-sm">Opprettet av</th>
-              <th className="text-accent text-sm">Aktiv</th>
+              <th className="text-sm text-accent">ID</th>
+              <th className="text-sm text-accent">Type</th>
+              <th className="text-sm text-accent">Dato opprettet</th>
+              <th className="text-sm text-accent">Opprettet av</th>
+              <th className="text-sm text-accent">Aktiv</th>
 
-              <th className="text-accent text-sm">Historikk</th>
-              <th className="text-accent text-sm">Slett</th>
+              <th className="text-sm text-accent">Historikk</th>
+              <th className="text-sm text-accent">Slett</th>
             </tr>
           </thead>
           <tbody>
@@ -205,7 +205,7 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
                 <>
                   {!blade.deleted && (
                     <tr key={blade.id} className="bg-accent even:bg-secondary">
-                      <td className="text-neutral font-bold">
+                      <td className="font-bold text-neutral">
                         {blade.IdNummer}{" "}
                         {blade.note && (
                           <span className="text-xs font-normal text-orange-200">
@@ -217,7 +217,7 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
                         <div className="flex items-center space-x-3">
                           <div className="avatar"></div>
                           <div>
-                            <div className="text-neutral text-xs">
+                            <div className="text-xs text-neutral">
                               {blade.type} {blade.side}
                             </div>
                           </div>
@@ -228,7 +228,7 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
                           <div className="avatar"></div>
 
                           <div>
-                            <div className="text-neutral text-xs">
+                            <div className="text-xs text-neutral">
                               {dateFormat(
                                 blade.createdAt,
                                 "dd.mm.yyyy , HH:MM",
@@ -291,7 +291,7 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
                           onClick={() => deleteHandler(blade.id)}
                         />
                         {openDeleteID === blade.id && (
-                          <div className="card bg-primary text-primary-content absolute right-24 z-40 flex w-96 flex-col items-center">
+                          <div className="card absolute right-24 z-40 flex w-96 flex-col items-center bg-primary text-primary-content">
                             <div className="card-body">
                               <h2 className="card-title">
                                 Slett blad: {blade.IdNummer}
@@ -351,7 +351,7 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
                     </tr>
                   )}
                   {openHistorikk === blade.id && (
-                    <div className="border-primary from-base-100 via-accent to-base-100 absolute top-0  z-50 h-screen w-full rounded-2xl border bg-gradient-to-r p-5">
+                    <div className="absolute top-0 z-50 h-screen w-full rounded-2xl  border border-primary bg-gradient-to-r from-base-100 via-accent to-base-100 p-5">
                       <div className="mr-5 flex justify-between">
                         <div>
                           <h1 className=" text-lg text-orange-400">
@@ -372,7 +372,7 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
                           </p>
                         </div>
                         <div>
-                          <table className="table-xs bg-accent ml-5 table w-full">
+                          <table className="table table-xs ml-5 w-full bg-accent">
                             <thead>
                               <tr>
                                 <th>Kode</th>
@@ -445,17 +445,17 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
           <h1 className="text-xl text-orange-300">
             Slettede blad ({deletedSawblades?.length})
           </h1>
-          <table className="table-xs bg-neutral table">
+          <table className="table table-xs bg-neutral">
             <thead>
               <tr>
-                <th className="text-accent text-sm">ID</th>
-                <th className="text-accent text-sm">Type</th>
+                <th className="text-sm text-accent">ID</th>
+                <th className="text-sm text-accent">Type</th>
 
                 {/* <th className="text-sm text-accent">Opprettet av</th> */}
-                <th className="text-accent text-sm">Slettet av</th>
-                <th className="text-accent text-sm">Dato slettet</th>
-                <th className="text-accent text-sm">Årsak</th>
-                <th className="text-accent text-sm"></th>
+                <th className="text-sm text-accent">Slettet av</th>
+                <th className="text-sm text-accent">Dato slettet</th>
+                <th className="text-sm text-accent">Årsak</th>
+                <th className="text-sm text-accent"></th>
               </tr>
             </thead>
             <tbody>
@@ -464,7 +464,7 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
                   <>
                     {blade.deleted && (
                       <tr className="bg-primary">
-                        <td className="text-neutral font-bold">
+                        <td className="font-bold text-neutral">
                           {blade.IdNummer}{" "}
                           {blade.note && (
                             <span className="text-xs font-normal text-orange-200">
@@ -476,7 +476,7 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
                           <div className="flex items-center space-x-3">
                             <div className="avatar"></div>
                             <div>
-                              <div className="text-neutral text-xs">
+                              <div className="text-xs text-neutral">
                                 {blade.type} {blade.side}
                               </div>
                             </div>
@@ -505,7 +505,7 @@ const SearchMain = ({ sawblades, deletedSawblades }: BladeProps) => {
                         </td>
                         <td>
                           <div className="flex items-center space-x-3">
-                            <div className="text-neutral text-xs">
+                            <div className="text-xs text-neutral">
                               {dateFormat(
                                 blade.updatedAt,
                                 "dd.mm.yyyy , HH:MM",

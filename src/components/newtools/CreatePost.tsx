@@ -4,7 +4,6 @@
 import React, { useState, useEffect } from "react";
 import { api } from "~/utils/api";
 import { Prisma } from "@prisma/client";
-import { useRouter } from "next/navigation";
 import { KundeSelector } from "./KundeSelector";
 import { NewInputComponent } from "./NewInputComponent";
 
@@ -25,10 +24,12 @@ const CreatePost = () => {
   });
   const [inputID, setInputID] = useState("");
   const [kundeID, setKundeID] = useState("");
-  const router = useRouter();
+
+  const ctx = api.useContext();
+
   const createPost = api.sawblades.create.useMutation({
     onSuccess: () => {
-      router.refresh();
+      void ctx.sawblades.getAll.invalidate();
     },
   });
   useEffect(() => {
@@ -41,7 +42,7 @@ const CreatePost = () => {
     }
   }, [bladeData]);
   return (
-    <div className="bg-accent rounded-xl p-5">
+    <div className="rounded-xl bg-accent p-5">
       <form
         onSubmit={async (e) => {
           e.preventDefault();
@@ -96,7 +97,7 @@ const CreatePost = () => {
           onChange={(e) =>
             setBladeData({ ...bladeData, side: e.currentTarget.value })
           }
-          className="select select-info select-sm bg-accent text-neutral text-lg"
+          className="select select-info select-sm bg-accent text-lg text-neutral"
         >
           <option disabled selected>
             Velg side
@@ -113,7 +114,7 @@ const CreatePost = () => {
           onChange={(e) =>
             setBladeData({ ...bladeData, note: e.currentTarget.value })
           }
-          className="text-neutral w-full rounded-xl bg-gray-800 px-4 py-2 text-sm"
+          className="w-full rounded-xl bg-gray-800 px-4 py-2 text-sm text-neutral"
         />
         <div className="flex">
           <div className="flex items-center justify-center">{kundeID}-</div>
@@ -123,12 +124,12 @@ const CreatePost = () => {
             placeholder={"ID nummer"}
             value={inputID}
             onChange={(e) => setInputID(e.currentTarget.value)}
-            className="bg-secondary text-neutral w-full rounded-xl px-4 py-2 text-sm"
+            className="w-full rounded-xl bg-secondary px-4 py-2 text-sm text-neutral"
           />
         </div>
         <button
           type="submit"
-          className="btn-xl bg-secondary rounded-xl px-10 py-3 text-xs font-semibold transition hover:bg-white/20"
+          className="btn-xl rounded-xl bg-secondary px-10 py-3 text-xs font-semibold transition hover:bg-white/20"
           disabled={createPost.isLoading}
         >
           {createPost.isLoading ? "Lagrer..." : "Lagre"}

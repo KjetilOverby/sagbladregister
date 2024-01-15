@@ -1,8 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { api } from "~/utils/api";
-import { useRouter } from "next/navigation";
 
 interface historikkInputProps {
   postId: string;
@@ -33,10 +32,11 @@ const HistorikkInputKS = ({
   setHistorikkKs,
   setOpenInputKS,
 }: historikkInputProps) => {
-  const router = useRouter();
+  const ctx = api.useContext();
+
   const updatePost = api.bandhistorikk.updateKS.useMutation({
     onSuccess: () => {
-      router.refresh();
+      void ctx.sawblades.getAll.invalidate();
       setOpenInputKS(false);
     },
   });
@@ -71,7 +71,7 @@ const HistorikkInputKS = ({
             creatorImg3: "",
           });
         }}
-        className="card text-neutral-content w-96 bg-slate-500"
+        className="card w-96 bg-slate-500 text-neutral-content"
       >
         <div className="card-body">
           <h2 className="card-title">Oppdater post</h2>

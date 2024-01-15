@@ -4,7 +4,6 @@
 // @ts-nocheck
 import React, { useState } from "react";
 import { api } from "~/utils/api";
-import { useRouter } from "next/navigation";
 
 interface historikkInputProps {
   setOpenInput: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,11 +21,12 @@ const HistorikkInput = ({
   bladType,
   bladID,
 }: historikkInputProps) => {
-  const router = useRouter();
+  const ctx = api.useContext();
+
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const createPost = api.bandhistorikk.create.useMutation({
     onSuccess: () => {
-      router.refresh();
+      void ctx.sawblades.getAll.invalidate();
       setOpenInput(false);
     },
   });
@@ -98,7 +98,7 @@ const HistorikkInput = ({
             console.log(error);
           }
         }}
-        className="card text-neutral-content w-96 bg-slate-500"
+        className="card w-96 bg-slate-500 text-neutral-content"
       >
         <div className="card-body">
           <h2 className="card-title">Legg til data</h2>

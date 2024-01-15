@@ -2,7 +2,6 @@
 // @ts-nocheck
 import React, { useState } from "react";
 import { api } from "~/utils/api";
-import { useRouter } from "next/navigation";
 
 interface Blade {
   id: string;
@@ -94,10 +93,10 @@ const ActivateBlade = ({
   setOpenDeactivateModal,
 }: BladeProps) => {
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
+  const ctx = api.useContext();
   const updateBladeStatus = api.sawblades.updateStatus.useMutation({
     onSuccess: () => {
-      router.refresh();
+      void ctx.sawblades.getAll.invalidate();
       setLoading(true);
     },
   });
@@ -114,7 +113,7 @@ const ActivateBlade = ({
 
   return (
     <div>
-      <div className="card bg-neutral text-neutral-content z-40 flex  w-96 items-center">
+      <div className="card z-40 flex w-96 items-center  bg-neutral text-neutral-content">
         <div>
           <form
             className="flex flex-col"
