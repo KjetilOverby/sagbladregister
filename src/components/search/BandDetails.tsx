@@ -196,7 +196,7 @@ const BandDetails = ({
                   anmKS: post.anmKS,
                   handling: post.handling,
                   sgKS: post.sgKS,
-                  datoSrv: post.datoSrv,
+                  datoSrv: new Date(),
                   sideklaring: post.sideklaring,
                 });
               };
