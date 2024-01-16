@@ -31,7 +31,7 @@ const Newtools = () => {
     IdNummer: idValue,
   });
   return (
-    <div data-theme="darkmode">
+    <div data-theme="lightmode">
       <HeaderComponent />
 
       <div className="h-screen bg-base-100 p-5">
@@ -54,25 +54,25 @@ const Newtools = () => {
               </div>
             </div>
           </div>
-          <h1 className="mb-3 text-orange-400">
+          <h1 className="mb-3 text-neutral">
             Registrerte blad i perioden: {data?.length}
           </h1>
-          <table className="table table-xs bg-primary">
+          <table className="table table-xs bg-primary ">
             <thead>
               <tr>
-                <th className="text-sm text-accent">Serienummer</th>
-                <th className="text-sm text-accent">Type</th>
-                <th className="text-sm text-accent">Dato</th>
+                <th className="text-sm text-neutral">Serienummer</th>
+                <th className="text-sm text-neutral">Type</th>
+                <th className="text-sm text-neutral">Dato</th>
 
-                <th className="text-sm text-accent">Opprettet av</th>
-                <th className="text-sm text-accent"></th>
+                <th className="text-sm text-neutral">Opprettet av</th>
+                <th className="text-sm text-neutral"></th>
               </tr>
             </thead>
             <tbody>
               {data?.map((blade) => {
                 return (
                   <>
-                    <tr className="bg-accent">
+                    <tr className="border border-primary bg-accent">
                       <td className="font-bold text-neutral">
                         {blade.IdNummer}{" "}
                         {blade.note && (
@@ -119,7 +119,7 @@ const Newtools = () => {
                       </td>
 
                       <td>
-                        <th className="text-red-400">
+                        <th className="text-red-600">
                           <Deleteblades blade={blade.id} />
                         </th>
                       </td>

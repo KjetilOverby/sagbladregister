@@ -29,7 +29,7 @@ const HeaderComponent = () => {
     statistikk: "",
   });
 
-  const classText = "text-orange-400";
+  const classText = "font-bold underline";
 
   useEffect(() => {
     if (router.pathname === "/search") {
@@ -72,12 +72,12 @@ const HeaderComponent = () => {
             <Link href="/">
               <div>
                 <p className="flex items-center">
-                  <img
-                    src="https://cdn-icons-png.flaticon.com/512/9615/9615380.png"
+                  {/* <img
+                    src="https://static.wixstatic.com/media/ea9f2f_dff85b2ff00146c9ae8fe2884c5bcc49~mv2.png/v1/fill/w_560,h_424,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/imageedit_1_4852502502.png"
                     className="mr-3 h-6 sm:h-9"
                     alt="Flowbite Logo"
-                  />
-                  <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+                  /> */}
+                  <span className="self-center whitespace-nowrap text-xl font-semibold text-neutral">
                     KS-TOOLS
                   </span>
                 </p>
@@ -287,10 +287,10 @@ const HeaderComponent = () => {
               </div>
             </Link>
             <div className="ml-5">
-              <p>{sessionData?.user.name}</p>
+              <p className="text-neutral">{sessionData?.user.name}</p>
               <div>
                 {sessionData?.user.role === "MO_ADMIN" && (
-                  <p>Østerdalsbruket</p>
+                  <p className="text-neutral">Østerdalsbruket</p>
                 )}
                 {sessionData?.user.role === "MM_ADMIN" && <p>Mjøsbruket</p>}
               </div>

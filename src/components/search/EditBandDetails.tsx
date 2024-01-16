@@ -81,7 +81,7 @@ const EditBandDetails = ({
             creatorImg2: "",
           });
         }}
-        className="card w-96 bg-slate-500 text-neutral-content"
+        className="card w-96  border border-neutral bg-primary text-neutral"
       >
         <div className="card-body">
           <h2 className="card-title">Rediger data</h2>

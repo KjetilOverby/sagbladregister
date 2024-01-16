@@ -59,9 +59,9 @@ const Search = () => {
     });
 
   return (
-    <div data-theme="darkmode">
+    <div data-theme="lightmode">
       <HeaderComponent />
-      <div className="m-5">
+      <div className="m-5 min-h-screen">
         {!closeSearchComponent ? (
           <div className="mb-5 w-96 rounded-xl bg-accent p-5">
             <DatepickerComponent

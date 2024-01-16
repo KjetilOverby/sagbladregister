@@ -135,10 +135,12 @@ const SearchMain = ({
       <div>
         {!closeSearchComponent ? (
           <div>
-            <h1 className="text-xl text-orange-300">
+            <h1 className="text-xl text-neutral">
               Blad i bruk ({countBlades})
             </h1>
-            <p>Nye registrerte blad denne perioden: {newBladesCount}</p>
+            <p className="text-neutral">
+              Nye registrerte blad denne perioden: {newBladesCount}
+            </p>
           </div>
         ) : (
           ""
@@ -210,7 +212,7 @@ const SearchMain = ({
                       <td className="font-bold text-neutral">
                         {blade.IdNummer}{" "}
                         {blade.note && (
-                          <span className="text-xs font-normal text-orange-200">
+                          <span className="text-xs font-normal text-neutral">
                             ({blade.note})
                           </span>
                         )}
@@ -257,7 +259,7 @@ const SearchMain = ({
                             <div
                               onClick={() => statusHandler(blade.id)}
                               className={`h-3 w-3 rounded-full ${
-                                blade.active ? "bg-emerald-400" : "bg-primary"
+                                blade.active ? "bg-green-400" : "bg-primary"
                               }`}
                             >
                               {openStatus === blade.id && !blade.active && (
@@ -279,10 +281,10 @@ const SearchMain = ({
                           <BsClipboardData
                             style={{
                               marginLeft: ".5rem",
-                              color: "orange",
                               fontSize: ".9rem",
                             }}
                             onClick={openHistorikkDataHandler}
+                            className="text-neutral"
                           />
                         </div>
                       </td>
@@ -357,32 +359,34 @@ const SearchMain = ({
                     </tr>
                   )}
                   {openHistorikk === blade.id && (
-                    <div className="absolute top-0 z-50 h-screen w-full rounded-2xl  border border-primary bg-gradient-to-r from-base-100 via-accent to-base-100 p-5">
+                    <div className="absolute top-0 z-50 h-screen w-full rounded-2xl  border border-primary bg-gradient-to-r from-primary via-secondary to-primary p-5">
                       <div className="mr-5 flex justify-between">
                         <div>
-                          <h1 className=" text-lg text-orange-400">
-                            Historikk
-                          </h1>
-                          <h1 className="text-2xl font-semibold text-orange-600">
+                          <h1 className=" text-lg text-neutral">Historikk</h1>
+                          <h1 className="text-2xl font-semibold text-neutral">
                             ID: {blade.IdNummer}
                           </h1>
-                          <p className="text-xl">
+                          <p className="text-xl text-neutral">
                             Type: {blade.type} {blade.side}
                           </p>
-                          <p className="italic">
+                          <p className="italic text-neutral">
                             Registrert:
                             {dateFormat(blade.createdAt, "dd.mm.yyyy")}
                           </p>
-                          <p className="italic">
+                          <p className="italic text-neutral">
                             Registrert av: {blade.creator}
                           </p>
                         </div>
                         <div>
-                          <table className="table table-xs ml-5 w-full bg-accent">
+                          <table className="table table-xs ml-5 w-full bg-accent text-neutral">
                             <thead>
                               <tr>
-                                <th>Kode</th>
-                                <th>Beskrivelse</th>
+                                <th className="text-lg italic text-neutral">
+                                  Kode
+                                </th>
+                                <th className="text-lg italic text-neutral">
+                                  Beskrivelse
+                                </th>
                               </tr>
                             </thead>
                             <tbody>
@@ -448,7 +452,7 @@ const SearchMain = ({
       </button>
       {showDeletedBlades && (
         <div>
-          <h1 className="text-xl text-orange-300">
+          <h1 className="text-xl text-neutral">
             Slettede blad ({deletedSawblades?.length})
           </h1>
           <table className="table table-xs bg-neutral">

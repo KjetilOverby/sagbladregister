@@ -35,6 +35,13 @@ export default {
           "neutral": "#92b0ab",
           "base-100": "#1b2928",
         },
+        lightmode: {
+          "primary": "#e3e3e3",
+          "secondary": "#adadad",
+          "accent": "#c2c0c0",
+          "neutral": "#5c522b",
+          "base-100": "#d6d6d6",
+        },
         // futurisk: {
         //   "primary": "#7d7d7d",
         //   "secondary": "#474646",

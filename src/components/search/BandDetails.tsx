@@ -121,7 +121,7 @@ const BandDetails = ({
   });
 
   return (
-    <div className="z-50 w-full bg-gradient-to-r from-base-100 via-accent to-base-100">
+    <div className="z-50 w-full bg-gradient-to-r from-primary via-secondary to-primary">
       {openInput && (
         <HistorikkInput
           setOpenInput={setOpenInput}
@@ -166,25 +166,25 @@ const BandDetails = ({
         <table className="table table-xs w-full bg-neutral">
           <thead>
             <tr>
-              <th className="text-sm text-accent">Sag</th>
-              <th className="text-sm text-accent">Innpostet</th>
-              <th className="text-sm text-accent">Signatur</th>
-              <th className="text-sm text-accent">Utpostet</th>
-              <th className="text-sm text-accent">Signatur</th>
+              <th className="text-sm font-thin text-accent">Sag</th>
+              <th className="text-sm font-thin text-accent">Innpostet</th>
+              <th className="text-sm font-thin text-accent">Signatur</th>
+              <th className="text-sm font-thin text-accent">Utpostet</th>
+              <th className="text-sm font-thin text-accent">Signatur</th>
 
-              <th className="text-sm text-accent">T</th>
+              <th className="text-sm font-thin text-accent">T</th>
 
-              <th className="text-sm text-accent">Temp</th>
-              <th className="text-sm text-accent">Ampere</th>
-              <th className="text-sm text-accent">Feilkode</th>
-              <th className="text-sm text-accent">Anm</th>
-              <th className="text-sm text-blue-500"></th>
-              <th className="text-sm text-blue-500"></th>
-              <th className="text-sm text-blue-500">Service</th>
-              <th className="text-sm text-blue-500">SK</th>
-              <th className="text-sm text-blue-500">Anm KS</th>
-              <th className="text-sm text-blue-500">Signatur</th>
-              <th className="text-sm text-blue-500">Dato srv</th>
+              <th className="text-sm font-thin text-accent">Temp</th>
+              <th className="text-sm font-thin text-accent">Ampere</th>
+              <th className="text-sm font-thin text-accent">Feilkode</th>
+              <th className="text-sm font-thin text-accent">Anm</th>
+              <th className="text-sm font-bold text-primary"></th>
+              <th className="text-sm font-bold text-primary"></th>
+              <th className="text-sm font-bold text-primary">Service</th>
+              <th className="text-sm font-bold text-primary">SK</th>
+              <th className="text-sm font-bold text-primary">Anm KS</th>
+              <th className="text-sm font-bold text-primary">Signatur</th>
+              <th className="text-sm font-bold text-primary">Dato srv</th>
             </tr>
           </thead>
           <tbody>
@@ -331,12 +331,16 @@ const BandDetails = ({
                         className="btn btn-xs mr-5 bg-base-100"
                       >
                         <CiEdit
-                          style={{ color: "orange", fontSize: ".8rem" }}
+                          style={{ fontSize: ".8rem" }}
+                          className="text-neutral"
                         />
                       </button>
 
                       {!post.activePost && (
-                        <button onClick={openKSinput} className="btn btn-xs">
+                        <button
+                          onClick={openKSinput}
+                          className="btn btn-xs text-neutral"
+                        >
                           KS
                         </button>
                       )}

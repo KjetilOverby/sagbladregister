@@ -32,7 +32,7 @@ const statistikk = () => {
   console.log(statistikkDataMO);
 
   return (
-    <div data-theme="darkmode">
+    <div data-theme="lightmode" className="min-h-screen">
       <HeaderComponent />
       {sessionData?.user.role === "ADMIN" && (
         <StatistikkMain

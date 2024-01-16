@@ -4,7 +4,7 @@ import CustomerContent from "./CustomerContent";
 
 const CustomerStartpage = () => {
   return (
-    <div data-theme="darkmode" className="bg-base-100 min-h-screen">
+    <div data-theme="lightmode" className="min-h-screen bg-base-100">
       <HeaderComponent />
       <CustomerContent />
     </div>

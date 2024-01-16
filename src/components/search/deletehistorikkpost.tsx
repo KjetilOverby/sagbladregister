@@ -27,7 +27,10 @@ const Deletehistorikkpost = ({ post, setOpenBandhistorikkData }: PostProps) => {
     <>
       <div>
         <button onClick={deletePost}>
-          <RiDeleteBinFill style={{ fontSize: "1rem", color: "indianred" }} />
+          <RiDeleteBinFill
+            style={{ fontSize: "1rem" }}
+            className="text-primary"
+          />
         </button>
       </div>
       <div></div>

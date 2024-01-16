@@ -105,7 +105,7 @@ const HistorikkInput = ({
             console.log(error);
           }
         }}
-        className="card w-96 bg-slate-500 text-neutral-content"
+        className="card w-96 border border-neutral bg-primary text-neutral"
       >
         <div className="card-body">
           <h2 className="card-title">Legg til data</h2>

@@ -90,14 +90,14 @@ const CreatePost = () => {
         }}
         className="flex flex-col gap-2"
       >
-        <p>Legg til nye</p>
+        <p className="text-neutral">Legg til nye</p>
         <KundeSelector bladeData={bladeData} setBladeData={setBladeData} />
         <NewInputComponent bladeData={bladeData} setBladeData={setBladeData} />
         <select
           onChange={(e) =>
             setBladeData({ ...bladeData, side: e.currentTarget.value })
           }
-          className="select select-info select-sm bg-accent text-lg text-neutral"
+          className="select  select-sm border-neutral bg-accent text-lg text-neutral"
         >
           <option disabled selected>
             Velg side
@@ -124,7 +124,7 @@ const CreatePost = () => {
             placeholder={"ID nummer"}
             value={inputID}
             onChange={(e) => setInputID(e.currentTarget.value)}
-            className="w-full rounded-xl bg-secondary px-4 py-2 text-sm text-neutral"
+            className="w-full rounded-xl bg-primary  px-4 py-2 text-sm text-neutral"
           />
         </div>
         <button

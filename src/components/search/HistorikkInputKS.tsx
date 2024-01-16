@@ -72,7 +72,7 @@ const HistorikkInputKS = ({
             creatorImg3: "",
           });
         }}
-        className="card w-96 bg-slate-500 text-neutral-content"
+        className="card w-96 border border-neutral bg-primary text-neutral"
       >
         <div className="card-body">
           <h2 className="card-title">Oppdater post</h2>
@@ -126,7 +126,7 @@ const HistorikkInputKS = ({
             </select>
           </div>
           <p>BFS koder</p>
-          <div className="rounded-xl border p-1">
+          <div className="rounded-xl border border-neutral p-1">
             <label className="label cursor-pointer">
               <span className="label-text">BFS423</span>
               <input
