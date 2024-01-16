@@ -16,10 +16,53 @@
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import RoleChange from "../users/RoleChange";
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 // import { getServerAuthSession } from "~/server/auth";
 // import RoleChange from "./users/RoleChange";
 
 const HeaderComponent = () => {
+  const router = useRouter();
+
+  const [actualPage, setActualPage] = useState({
+    search: "",
+    statistikk: "",
+  });
+
+  const classText = "text-orange-400";
+
+  useEffect(() => {
+    if (router.pathname === "/search") {
+      setActualPage({
+        search: classText,
+        statistikk: "",
+        oversikt: "",
+        opprett: "",
+      });
+    } else if (router.pathname === "/statistikk") {
+      setActualPage({
+        search: "",
+        statistikk: classText,
+        oversikt: "",
+        opprett: "",
+      });
+    } else if (router.pathname === "/oversikt") {
+      setActualPage({
+        search: "",
+        statistikk: "",
+        oversikt: classText,
+        opprett: "",
+      });
+    } else if (router.pathname === "/newtools") {
+      setActualPage({
+        search: "",
+        statistikk: "",
+        oversikt: "",
+        opprett: classText,
+      });
+    }
+  }, [router]);
+
   const { data: sessionData } = useSession();
   return (
     <header>
@@ -45,21 +88,27 @@ const HeaderComponent = () => {
             <ul className="mt-4 flex flex-col font-medium lg:mt-0 lg:flex-row lg:space-x-8">
               <Link href="/search">
                 <li>
-                  <p className="lg:hover:text-primary-700  block border-b border-gray-100 py-2 pl-3 pr-4 text-sm text-neutral hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:border-0 lg:p-0 lg:hover:bg-transparent lg:dark:hover:bg-transparent lg:dark:hover:text-white">
+                  <p
+                    className={`lg:hover:text-primary-700  block border-b border-gray-100 py-2 pl-3 pr-4 text-sm text-neutral  hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:border-0 lg:p-0 lg:hover:bg-transparent lg:dark:hover:bg-transparent lg:dark:hover:text-white ${actualPage.search}`}
+                  >
                     Søk
                   </p>
                 </li>
               </Link>
               <Link href="/statistikk">
                 <li>
-                  <p className="lg:hover:text-primary-700  block border-b border-gray-100 py-2 pl-3 pr-4 text-sm text-neutral hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:border-0 lg:p-0 lg:hover:bg-transparent lg:dark:hover:bg-transparent lg:dark:hover:text-white">
+                  <p
+                    className={`lg:hover:text-primary-700  block border-b border-gray-100 py-2 pl-3 pr-4 text-sm text-neutral hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:border-0 lg:p-0 lg:hover:bg-transparent lg:dark:hover:bg-transparent lg:dark:hover:text-white ${actualPage.statistikk}`}
+                  >
                     Statistikk
                   </p>
                 </li>
               </Link>
               <Link href="#">
                 <li>
-                  <p className="lg:hover:text-primary-700 block border-b border-gray-100 py-2 pl-3 pr-4 text-sm text-neutral hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:border-0 lg:p-0 lg:hover:bg-transparent lg:dark:hover:bg-transparent lg:dark:hover:text-white">
+                  <p
+                    className={`lg:hover:text-primary-700  block border-b border-gray-100 py-2 pl-3 pr-4 text-sm text-neutral hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:border-0 lg:p-0 lg:hover:bg-transparent lg:dark:hover:bg-transparent lg:dark:hover:text-white ${actualPage.oversikt}`}
+                  >
                     Oversikt
                   </p>
                 </li>
@@ -68,7 +117,7 @@ const HeaderComponent = () => {
                 <Link href="/newtools">
                   <li>
                     <p
-                      className="bg-primary-700 lg:text-primary-700 block rounded py-2 pl-3 pr-4 text-sm text-neutral lg:bg-transparent lg:p-0"
+                      className={`bg-primary-700 lg:text-primary-700 block rounded py-2 pl-3 pr-4 text-sm text-neutral lg:bg-transparent lg:p-0 ${actualPage.opprett}`}
                       aria-current="page"
                     >
                       Opprett
