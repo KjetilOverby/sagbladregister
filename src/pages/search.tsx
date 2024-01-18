@@ -10,7 +10,7 @@ import SearchMain from "~/components/search/SearchMain";
 import { api } from "~/utils/api";
 import { signIn, signOut, useSession } from "next-auth/react";
 
-const Search = () => {
+const Search = ({ theme }) => {
   const [closeSearchComponent, setCloseSearchComponent] = useState(false);
   const { data: sessionData } = useSession();
   const [dateValue, setDateValue] = useState({
@@ -59,7 +59,7 @@ const Search = () => {
     });
 
   return (
-    <div data-theme="lightmode">
+    <div data-theme={theme}>
       <HeaderComponent />
       <div className="m-5 min-h-screen">
         {!closeSearchComponent ? (

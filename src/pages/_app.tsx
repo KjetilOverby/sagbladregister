@@ -7,14 +7,16 @@ import { type AppType } from "next/app";
 import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
+import { useState } from "react";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
+  const [theme, setTheme] = useState("darkmode");
   return (
     <SessionProvider session={session}>
-      <Component {...pageProps} />
+      <Component {...pageProps} theme={theme} setTheme={setTheme} />
     </SessionProvider>
   );
 };

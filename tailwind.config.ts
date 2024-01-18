@@ -30,10 +30,10 @@ export default {
         },
         darkmode: {
           "primary": "#616161",
-          "secondary": "#3c5957",
-          "accent": "#304745",
-          "neutral": "#92b0ab",
-          "base-100": "#1b2928",
+          "secondary": "#474646",
+          "accent": "rgb(51, 51, 51)",
+          "neutral": "#adadad",
+          "base-100": "#292929",
         },
         lightmode: {
           "primary": "#e3e3e3",

@@ -8,7 +8,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import StatistikkMain from "~/components/statistikk/StatistikkMain";
 import HeaderComponent from "~/components/reusable/HeaderComponent";
 
-const statistikk = () => {
+const statistikk = ({ theme }) => {
   const { data: sessionData } = useSession();
   const [dateValue, setDateValue] = useState({
     endDate: "2040-01-14",
@@ -32,7 +32,7 @@ const statistikk = () => {
   console.log(statistikkDataMO);
 
   return (
-    <div data-theme="lightmode" className="min-h-screen">
+    <div data-theme={theme} className="min-h-screen">
       <HeaderComponent />
       {sessionData?.user.role === "ADMIN" && (
         <StatistikkMain

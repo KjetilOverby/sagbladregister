@@ -8,7 +8,7 @@ import CreatePost from "~/components/newtools/CreatePost";
 import HeaderComponent from "~/components/reusable/HeaderComponent";
 import DatepickerComponent from "~/components/reusable/Datepicker";
 import Deleteblades from "~/components/newtools/deleteblades";
-const Newtools = () => {
+const Newtools = ({ theme, setTheme }) => {
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const year = new Date().getFullYear();
   const month = new Date().getMonth() + 1;
@@ -31,8 +31,8 @@ const Newtools = () => {
     IdNummer: idValue,
   });
   return (
-    <div data-theme="lightmode">
-      <HeaderComponent />
+    <div data-theme={theme}>
+      <HeaderComponent setTheme={setTheme} />
 
       <div className="h-screen bg-base-100 p-5">
         <div className="overflow-x-auto px-5 pt-5">
