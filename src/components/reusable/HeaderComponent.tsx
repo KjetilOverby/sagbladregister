@@ -1,28 +1,24 @@
-/* eslint-disable @next/next/no-html-link-for-pages */
-/* eslint-disable @next/next/no-img-element */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-// interface sessionProps {
-//   session: {
-//     user: {
-//       name: string;
-//       image: string;
-//       email: string;
-//       id: string;
-//       role: string;
-//     };
-//   };
-// }
+
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import RoleChange from "../users/RoleChange";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { AppDataContext } from "~/context";
+import { MdLightMode } from "react-icons/md";
+import { MdDarkMode } from "react-icons/md";
 // import { getServerAuthSession } from "~/server/auth";
 // import RoleChange from "./users/RoleChange";
+interface headerProps {
+  setTheme: Dispatch<SetStateAction<string>>;
+}
 
 const HeaderComponent = () => {
   const router = useRouter();
+  const { setTheme, theme } = useContext(AppDataContext);
 
   const [actualPage, setActualPage] = useState({
     search: "",
@@ -142,6 +138,22 @@ const HeaderComponent = () => {
                     </p>
                   </li>
                 </Link>
+              )}
+              {theme === "darkmode" && (
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+                <li onClick={() => setTheme("lightmode")}>
+                  <p className="lg:hover:text-primary-700 block border-b border-gray-100 py-2 pl-3 pr-4 text-sm text-neutral hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:border-0 lg:p-0 lg:hover:bg-transparent lg:dark:hover:bg-transparent lg:dark:hover:text-white">
+                    <MdLightMode className="text-xl" />
+                  </p>
+                </li>
+              )}
+              {theme === "lightmode" && (
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+                <li onClick={() => setTheme("darkmode")}>
+                  <p className="lg:hover:text-primary-700 block border-b border-gray-100 py-2 pl-3 pr-4 text-sm text-neutral hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:border-0 lg:p-0 lg:hover:bg-transparent lg:dark:hover:bg-transparent lg:dark:hover:text-white">
+                    <MdDarkMode className="text-xl" />
+                  </p>
+                </li>
               )}
             </ul>
             {/*   <div>
