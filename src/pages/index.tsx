@@ -7,7 +7,11 @@ import FrontpageSessionless from "~/components/startpage/FrontpageSessionless";
 import CustomerStartpage from "../components/startpage/CustomerStartpage";
 import NotLoggedInPage from "~/components/startpage/NotLoggedInPage";
 
-export default function Home() {
+interface adminProps {
+  theme: string;
+}
+
+export default function Home({ theme }: adminProps) {
   const { data: sessionData } = useSession();
 
   return (
@@ -16,7 +20,9 @@ export default function Home() {
       {sessionData && sessionData.user.role === "LOGIN" && (
         <FrontpageSessionless session={sessionData} />
       )}
-      {sessionData && sessionData.user.role === "ADMIN" && <AdminStartpage />}
+      {sessionData && sessionData.user.role === "ADMIN" && (
+        <AdminStartpage theme={theme} />
+      )}
       {sessionData && sessionData.user.role === "MO_ADMIN" && (
         <CustomerStartpage />
       )}

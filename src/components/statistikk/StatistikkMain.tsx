@@ -94,7 +94,7 @@ const StatistikkMain = ({
               {Object.entries(tableData).map(([sagNr, data]) => (
                 <tr className="bg-accent" key={sagNr}>
                   <td className="border border-primary bg-neutral px-4 py-2 text-primary">
-                    {sagNr}
+                    {sagNr} {sagNr % "2" == "0" ? "H" : "V"}
                   </td>
                   <td className="border border-primary px-4 py-2">
                     {data.total}
@@ -132,7 +132,7 @@ const StatistikkMain = ({
               {Object.entries(tableData).map(([sagNr, data]) => (
                 <tr className="bg-accent" key={sagNr}>
                   <td className="border border-primary bg-neutral px-4 py-2 text-primary">
-                    {sagNr}
+                    {sagNr} {sagNr % "2" == "0" ? "H" : "V"}
                   </td>
                   <td className="border border-primary px-4 py-2">
                     {data.total}

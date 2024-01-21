@@ -148,6 +148,7 @@ model bandhistorikk {
     temperatur      Int
     sideklaring     Float
     ampere          Float
+    stokkAnt        Int
     anmSag          String
     createdById     String
     creator         String

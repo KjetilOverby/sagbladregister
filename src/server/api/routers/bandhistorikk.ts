@@ -48,6 +48,7 @@ export const bandhistorikkRouter = createTRPCRouter({
               creatorImg2: '',
              creator3: '',
               creatorImg3: '',
+              stokkAnt: 0
 
              
 

@@ -9,6 +9,7 @@ import HeaderComponent from "~/components/reusable/HeaderComponent";
 import SearchMain from "~/components/search/SearchMain";
 import { api } from "~/utils/api";
 import { signIn, signOut, useSession } from "next-auth/react";
+import NotAuthorized from "~/components/reusable/NotAuthorized";
 
 const Search = ({ theme }) => {
   const [closeSearchComponent, setCloseSearchComponent] = useState(false);
@@ -60,47 +61,54 @@ const Search = ({ theme }) => {
 
   return (
     <div data-theme={theme}>
-      <HeaderComponent />
-      <div className="m-5 min-h-screen">
-        {!closeSearchComponent ? (
-          <div className="mb-5 w-96 rounded-xl bg-accent p-5">
-            <DatepickerComponent
-              setDateValue={setDateValue}
-              dateValue={dateValue}
-            />
-            <div className="flex flex-col">
-              <label>Søk</label>
-              <input
-                value={idValue}
-                onChange={(e) => setIdValue(e.currentTarget.value)}
-                type="text"
-                placeholder="Skriv id nummer"
-                className="input input-bordered input-xs w-full max-w-xs bg-accent"
+      {sessionData?.user.role === "ADMIN" ||
+      sessionData?.user.role === "MO_ADMIN" ? (
+        <>
+          <HeaderComponent />
+          <div className="m-5 min-h-screen">
+            {!closeSearchComponent ? (
+              <div className="mb-5 w-96 rounded-xl bg-accent p-5">
+                <DatepickerComponent
+                  setDateValue={setDateValue}
+                  dateValue={dateValue}
+                />
+                <div className="flex flex-col">
+                  <label>Søk</label>
+                  <input
+                    value={idValue}
+                    onChange={(e) => setIdValue(e.currentTarget.value)}
+                    type="text"
+                    placeholder="Skriv id nummer"
+                    className="input input-bordered input-xs w-full max-w-xs bg-accent"
+                  />
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
+            {sessionData?.user.role === "ADMIN" && (
+              <SearchMain
+                sawblades={sawblades}
+                deletedSawblades={deletedSawblades}
+                activeBlades={sawbladeslActive}
+                closeSearchComponent={closeSearchComponent}
+                setCloseSearchComponent={setCloseSearchComponent}
               />
-            </div>
+            )}
+            {sessionData?.user.role === "MO_ADMIN" && (
+              <SearchMain
+                sawblades={sawbladesOsterdal}
+                deletedSawblades={sawbladesOsterdalDeleted}
+                activeBlades={sawbladesOsterdalActive}
+                closeSearchComponent={closeSearchComponent}
+                setCloseSearchComponent={setCloseSearchComponent}
+              />
+            )}
           </div>
-        ) : (
-          ""
-        )}
-        {sessionData?.user.role === "ADMIN" && (
-          <SearchMain
-            sawblades={sawblades}
-            deletedSawblades={deletedSawblades}
-            activeBlades={sawbladeslActive}
-            closeSearchComponent={closeSearchComponent}
-            setCloseSearchComponent={setCloseSearchComponent}
-          />
-        )}
-        {sessionData?.user.role === "MO_ADMIN" && (
-          <SearchMain
-            sawblades={sawbladesOsterdal}
-            deletedSawblades={sawbladesOsterdalDeleted}
-            activeBlades={sawbladesOsterdalActive}
-            closeSearchComponent={closeSearchComponent}
-            setCloseSearchComponent={setCloseSearchComponent}
-          />
-        )}
-      </div>
+        </>
+      ) : (
+        <NotAuthorized />
+      )}
     </div>
   );
 };

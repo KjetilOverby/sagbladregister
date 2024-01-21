@@ -226,7 +226,9 @@ const BandDetails = ({
                     className={post.activePost ? "bg-primary" : "bg-secondary"}
                   >
                     <td>
-                      <div className="text-xs text-neutral">{post.sagNr}</div>
+                      <div className="text-xs text-neutral">
+                        {post.sagNr} {post.sagNr % "2" == "0" ? "H" : "V"}
+                      </div>
                     </td>
                     <td>
                       <div className="text-xs text-neutral ">
