@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { api } from "~/utils/api";
 import { getServerAuthSession } from "~/server/auth";
 import { signIn, signOut, useSession } from "next-auth/react";
@@ -30,7 +30,18 @@ const statistikk = ({ theme }) => {
       init: "MØ",
     });
 
-  console.log(statistikkDataMO);
+  const { data: deletedSawblades } = api.sawblades.getAllDeleted.useQuery({
+    date: `${dateValue.endDate}T23:59:59.000Z`,
+    date2: `${dateValue.startDate}T00:00:00.000Z`,
+    IdNummer: "",
+  });
+  const { data: deletedSawbladesMo } =
+    api.sawblades.getCustomerAllDeleted.useQuery({
+      date: `${dateValue.endDate}T23:59:59.000Z`,
+      date2: `${dateValue.startDate}T00:00:00.000Z`,
+      IdNummer: "",
+      init: "MØ",
+    });
 
   return (
     <div data-theme={theme} className="min-h-screen">
@@ -40,6 +51,7 @@ const statistikk = ({ theme }) => {
           historikkData={statistikkData}
           setDateValue={setDateValue}
           dateValue={dateValue}
+          deletedSawblades={deletedSawblades}
         />
       )}
       {sessionData?.user.role === "MO_ADMIN" && (
@@ -47,6 +59,7 @@ const statistikk = ({ theme }) => {
           historikkData={statistikkDataMO}
           setDateValue={setDateValue}
           dateValue={dateValue}
+          deletedSawblades={deletedSawbladesMo}
         />
       )}
     </div>

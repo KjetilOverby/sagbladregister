@@ -36,7 +36,8 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.js",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "src/components/statistikk/BarCharts.jsx"
   ],
   "exclude": ["node_modules"]
 }
