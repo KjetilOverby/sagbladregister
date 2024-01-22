@@ -9,7 +9,7 @@ import { api } from "~/utils/api";
 const RoleChange = () => {
   const router = useRouter();
 
-  // const ctx = api.useContext();
+  const ctx = api.useContext();
   const updateRoles = api.users.updateRole.useMutation({
     onSuccess: () => {
       router.refresh();

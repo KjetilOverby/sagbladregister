@@ -359,7 +359,7 @@ const SearchMain = ({
                     </tr>
                   )}
                   {openHistorikk === blade.id && (
-                    <div className="absolute top-0 z-50 h-screen w-full rounded-2xl  border border-primary bg-gradient-to-r from-primary via-secondary to-primary p-5">
+                    <div className="absolute top-0 z-50 h-screen w-full rounded-2xl  border border-primary bg-accent p-5">
                       <div className="mr-5 flex justify-between">
                         <div>
                           <h1 className=" text-lg text-neutral">Historikk</h1>
@@ -378,9 +378,9 @@ const SearchMain = ({
                           </p>
                         </div>
                         <div>
-                          <table className="table table-xs ml-5 w-full bg-accent text-neutral">
+                          <table className="table table-xs ml-5 w-full border border-primary bg-accent text-neutral">
                             <thead>
-                              <tr>
+                              <tr className="border border-primary">
                                 <th className="text-lg italic text-neutral">
                                   Kode
                                 </th>
@@ -390,26 +390,26 @@ const SearchMain = ({
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
+                              <tr className="border border-primary">
                                 <th>BFS423</th>
                                 <th>EKSTRA RETTING BÅND</th>
                               </tr>
-                              <tr>
+                              <tr className="border border-primary">
                                 <th>BFS426</th>
                                 <th>BUNNSTUK BÅND</th>
                               </tr>
-                              <tr>
+                              <tr className="border border-primary">
                                 <th>BFS427</th>
                                 <th>RETTING-STREKKING-SLIPING METER</th>
                               </tr>
-                              <tr>
+                              <tr className="border border-primary">
                                 <th>BFS429</th>
                                 <th>
                                   STELL.FERDIG SLIP OG RETT f.o.m 100mm bredde
                                   TANN
                                 </th>
                               </tr>
-                              <tr>
+                              <tr className="border border-primary">
                                 <th>BSF438</th>
                                 <th>REP.SVEIST STELLIT TANN</th>
                               </tr>

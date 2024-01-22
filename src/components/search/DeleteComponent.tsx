@@ -20,6 +20,8 @@ export const DeleteComponent = ({
     onSuccess: () => {
       void ctx.sawblades.getAll.invalidate();
       void ctx.sawblades.getCustomer.invalidate();
+      void ctx.sawblades.getAllDeleted.invalidate();
+      void ctx.sawblades.getCustomerAllDeleted.invalidate();
       setWasteReasonInput("");
     },
   });

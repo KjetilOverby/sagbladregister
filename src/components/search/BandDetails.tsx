@@ -121,7 +121,7 @@ const BandDetails = ({
   });
 
   return (
-    <div className="z-50 w-full bg-gradient-to-r from-primary via-secondary to-primary">
+    <div className="z-50 w-full bg-accent">
       {openInput && (
         <HistorikkInput
           setOpenInput={setOpenInput}
