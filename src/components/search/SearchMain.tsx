@@ -131,7 +131,7 @@ const SearchMain = ({
   }, [sawblades]);
 
   return (
-    <div>
+    <div className="max-lg:overflow-scroll">
       <div>
         {!closeSearchComponent ? (
           <div>
@@ -145,7 +145,7 @@ const SearchMain = ({
         ) : (
           ""
         )}
-        <table className="table table-xs bg-neutral">
+        <table className="table table-xs whitespace-nowrap bg-neutral">
           <thead>
             <tr>
               <th className="text-sm text-accent">ID</th>
@@ -359,7 +359,7 @@ const SearchMain = ({
                     </tr>
                   )}
                   {openHistorikk === blade.id && (
-                    <div className="absolute top-0 z-50 h-screen w-full rounded-2xl  border border-primary bg-accent p-5">
+                    <div className="absolute top-0 z-50 h-screen w-full rounded-2xl  border border-primary bg-accent p-5 max-lg:relative">
                       <div className="mr-5 flex justify-between">
                         <div>
                           <h1 className=" text-lg text-neutral">Historikk</h1>
@@ -455,7 +455,7 @@ const SearchMain = ({
           <h1 className="text-xl text-neutral">
             Slettede blad ({deletedSawblades?.length})
           </h1>
-          <table className="table table-xs bg-neutral">
+          <table className="table table-xs whitespace-nowrap bg-neutral">
             <thead>
               <tr>
                 <th className="text-sm text-accent">ID</th>

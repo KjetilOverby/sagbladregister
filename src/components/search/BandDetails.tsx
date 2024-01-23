@@ -121,7 +121,7 @@ const BandDetails = ({
   });
 
   return (
-    <div className="z-50 w-full bg-accent">
+    <div className="z-50 w-full">
       {openInput && (
         <HistorikkInput
           setOpenInput={setOpenInput}
@@ -162,7 +162,7 @@ const BandDetails = ({
           </button>
         </div>
       </div>
-      <div>
+      <div className="max-xl:overflow-scroll">
         <table className="table table-xs w-full bg-neutral">
           <thead>
             <tr>

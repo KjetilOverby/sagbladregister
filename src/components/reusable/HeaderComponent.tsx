@@ -68,7 +68,7 @@ const HeaderComponent = () => {
         <button
           data-collapse-toggle="mobile-menu-2"
           type="button"
-          className="absolute right-10 top-10 ml-1 inline-flex items-center rounded-lg bg-primary p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 lg:hidden"
+          className="absolute right-10 top-10 z-50 ml-1 inline-flex items-center rounded-lg bg-primary p-2 text-sm text-gray-500 lg:hidden"
           aria-controls="mobile-menu-2"
           aria-expanded="false"
           onClick={() => setToggleMenu(!toggleMenu)}

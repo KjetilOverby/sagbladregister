@@ -40,11 +40,11 @@ const Newtools = ({ theme, setTheme }) => {
         <>
           <HeaderComponent setTheme={setTheme} />
 
-          <div className="h-screen bg-base-100 p-5">
+          <div className="h-screen bg-base-100 p-5 max-lg:p-0">
             <div className="overflow-x-auto px-5 pt-5">
-              <div className="flex h-96 flex-row py-5">
+              <div className="flex h-96 flex-row py-5 max-lg:grid max-lg:h-5/6">
                 <CreatePost />
-                <div className="ml-5 rounded-xl bg-accent p-5">
+                <div className="ml-5 rounded-xl bg-accent p-5 max-lg:ml-0">
                   <DatepickerComponent
                     setDateValue={setDateValue}
                     dateValue={dateValue}
@@ -63,7 +63,7 @@ const Newtools = ({ theme, setTheme }) => {
               <h1 className="mb-3 text-neutral">
                 Registrerte blad i perioden: {data?.length}
               </h1>
-              <table className="table table-xs bg-primary ">
+              <table className="table table-xs whitespace-nowrap bg-primary">
                 <thead>
                   <tr>
                     <th className="text-sm text-neutral">Serienummer</th>
