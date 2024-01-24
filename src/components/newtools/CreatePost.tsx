@@ -16,11 +16,11 @@ const CreatePost = () => {
     kunde: "",
     side: "",
     active: false,
-    deleteReason: "",
+    deleteReason: "-",
     produsent: "",
-    creatorImg: "",
-    deleter: "",
-    deleterImg: "",
+    creatorImg: "-",
+    deleter: "-",
+    deleterImg: "-",
   });
   const [inputID, setInputID] = useState("");
   const [kundeID, setKundeID] = useState("");
@@ -60,16 +60,16 @@ const CreatePost = () => {
               const response = await createPost.mutateAsync({
                 IdNummer: `${kundeID}-${inputID}`,
                 type: bladeData.type,
-                note: bladeData.note,
+                note: bladeData.note === "" ? "-" : bladeData.note,
                 deleted: false,
                 kunde: bladeData.kunde,
                 side: bladeData.side,
                 active: false,
-                deleteReason: "",
+                deleteReason: "-",
                 produsent: "Munkfors",
-                creatorImg: "",
-                deleter: "",
-                deleterImg: "",
+                creatorImg: "-",
+                deleter: "-",
+                deleterImg: "-",
               });
               console.log(response);
             }
@@ -115,6 +115,7 @@ const CreatePost = () => {
             setBladeData({ ...bladeData, note: e.currentTarget.value })
           }
           className="w-full rounded-xl bg-gray-800 px-4 py-2 text-sm text-neutral"
+          value={bladeData.note}
         />
         <div className="flex">
           <div className="flex items-center justify-center">{kundeID}-</div>

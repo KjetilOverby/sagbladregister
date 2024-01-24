@@ -211,7 +211,7 @@ const SearchMain = ({
                     <tr key={blade.id} className="bg-accent even:bg-secondary">
                       <td className="font-bold text-neutral">
                         {blade.IdNummer}{" "}
-                        {blade.note && (
+                        {blade.note !== "-" && (
                           <span className="text-xs font-normal text-neutral">
                             ({blade.note})
                           </span>
@@ -476,7 +476,7 @@ const SearchMain = ({
                       <tr className="bg-primary">
                         <td className="font-bold text-neutral">
                           {blade.IdNummer}{" "}
-                          {blade.note && (
+                          {blade.note !== "-" && (
                             <span className="text-xs font-normal text-orange-200">
                               ({blade.note})
                             </span>
