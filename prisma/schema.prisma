@@ -95,6 +95,8 @@ model personal {
     img       String
     name      String
     title     String
+    color     String
+    font      String
     user      User      @relation(fields: [userId], references: [id])
     userId    String
     userBlade sawblades @relation(fields: [id], references: [id])

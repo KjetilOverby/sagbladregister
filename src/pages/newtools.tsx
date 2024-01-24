@@ -23,7 +23,7 @@ const Newtools = ({ theme, setTheme }) => {
 
   // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
   const [dateValue, setDateValue] = useState({
-    endDate: `2024-01-15`,
+    endDate: `2040-01-15`,
     startDate: `2024-01-15`,
   });
 
