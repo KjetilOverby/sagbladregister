@@ -34,7 +34,7 @@ export const KundeSelector = ({ bladeData, setBladeData }: bladeDataProps) => {
         onChange={(e) =>
           setBladeData({ ...bladeData, kunde: e.currentTarget.value })
         }
-        className="select select-info select-sm bg-accent text-neutral text-lg"
+        className="select select-info select-sm bg-accent text-lg text-neutral"
       >
         <option disabled selected>
           Velg kunde

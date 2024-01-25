@@ -66,26 +66,28 @@ const Search = ({ theme }) => {
         <>
           <HeaderComponent />
           <div className="m-5 min-h-screen max-lg:m-0">
-            {!closeSearchComponent ? (
-              <div className="mb-5 w-96 rounded-xl bg-accent p-5">
-                <DatepickerComponent
-                  setDateValue={setDateValue}
-                  dateValue={dateValue}
-                />
-                <div className="flex flex-col">
-                  <label>Søk</label>
-                  <input
-                    value={idValue}
-                    onChange={(e) => setIdValue(e.currentTarget.value)}
-                    type="text"
-                    placeholder="Skriv id nummer"
-                    className="input input-bordered input-xs w-full max-w-xs bg-accent"
+            <div className="rounded-xl bg-accent">
+              {!closeSearchComponent ? (
+                <div className="mb-5 w-96 rounded-xl bg-accent p-5">
+                  <DatepickerComponent
+                    setDateValue={setDateValue}
+                    dateValue={dateValue}
                   />
+                  <div className="flex flex-col">
+                    <label>Søk</label>
+                    <input
+                      value={idValue}
+                      onChange={(e) => setIdValue(e.currentTarget.value)}
+                      type="text"
+                      placeholder="Skriv id nummer"
+                      className="input input-bordered input-xs w-full max-w-xs bg-accent"
+                    />
+                  </div>
                 </div>
-              </div>
-            ) : (
-              ""
-            )}
+              ) : (
+                ""
+              )}
+            </div>
             {sessionData?.user.role === "ADMIN" && (
               <SearchMain
                 sawblades={sawblades}

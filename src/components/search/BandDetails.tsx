@@ -260,17 +260,23 @@ const BandDetails = ({
                       )}
                     </td>
                     <td className="text-neutral">
-                      <div className="flex items-center">
-                        <div className="mr-2 h-5 w-5">
-                          <img
-                            className="w-full rounded-full"
-                            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                            src={post.creatorImg2}
-                            alt=""
-                          />
+                      {post.creatorImg2 === "-" ? (
+                        ""
+                      ) : (
+                        <div className="flex items-center">
+                          <div className="mr-2 h-5 w-5">
+                            <img
+                              className="w-full rounded-full"
+                              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                              src={post.creatorImg2}
+                              alt=""
+                            />
+                          </div>
+                          {post.sgSag && post.sgSag !== "-"
+                            ? post.sgSag
+                            : post.creator2}
                         </div>
-                        {post.sgSag ? post.sgSag : post.creator2}
-                      </div>
+                      )}
                     </td>
                     <td className="font-bold text-neutral">{post.sagtid}</td>
 
@@ -279,7 +285,9 @@ const BandDetails = ({
                     <td className="text-neutral">{post.feilkode}</td>
 
                     <td className="relative  max-w-56 text-neutral">
-                      {post.anmSag && (
+                      {post.anmSag === "-" ? (
+                        ""
+                      ) : (
                         <button
                           onClick={() => messageHander(post.id)}
                           className="btn btn-xs bg-accent"
@@ -350,7 +358,9 @@ const BandDetails = ({
                     <td className="text-neutral">{post.handling}</td>
                     <td className="text-neutral">{post.sideklaring}</td>
                     <td className="relative max-w-56 text-neutral">
-                      {post.anmKS && (
+                      {post.anmKS === "-" ? (
+                        ""
+                      ) : (
                         <>
                           <button
                             onClick={() => messageKShandler(post.id)}
@@ -380,17 +390,21 @@ const BandDetails = ({
                       )}
                     </td>
                     <td className="text-neutral">
-                      <div className="flex items-center">
-                        <div className="mr-2 h-5 w-5">
-                          <img
-                            className="w-full rounded-full"
-                            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                            src={post.creatorImg3}
-                            alt=""
-                          />
+                      {post.creator3 === "-" ? (
+                        ""
+                      ) : (
+                        <div className="flex items-center">
+                          <div className="mr-2 h-5 w-5">
+                            <img
+                              className="w-full rounded-full"
+                              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                              src={post.creatorImg3}
+                              alt=""
+                            />
+                          </div>
+                          {post.creator3}
                         </div>
-                        {post.creator3}
-                      </div>
+                      )}
                     </td>
                     <td className="text-neutral">
                       {dateFormat(post.datoSrv, "dd.mm.yyyy")}

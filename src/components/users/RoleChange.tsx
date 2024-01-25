@@ -41,8 +41,8 @@ const RoleChange = () => {
         <option value="">Velg kunde</option>
         <option value="ADMIN">Alle</option>
         <option value="MO_ADMIN">Østerdalsbruket</option>
-        <option value="MM_ADMIN">Mjøsbruket</option>
-        <option value="MS_ADMIN">Soknabruket</option>
+        {/* <option value="MM_ADMIN">Mjøsbruket</option>
+        <option value="MS_ADMIN">Soknabruket</option> */}
       </select>
     </div>
   );
