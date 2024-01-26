@@ -43,27 +43,6 @@ const StatistikkMain = ({
     }
   });
 
-  const feilkoder: string[] = [
-    "Ingen anmerkning",
-    "Bølger",
-    "Vandrer på hjul",
-    "Sprekk",
-    "Tannbrudd",
-    "Sponpåliming",
-    "Sløv",
-    "Riper",
-    "Ytre faktorer",
-    "Reklamasjon",
-    "Havari",
-    "Ikjøring",
-    "Riper/bølger",
-    "Riper/sprekk",
-    "Riper/vandrer",
-    "Bølger/sprekk",
-    "Bølger/vandrer",
-    "Ikjøring/riper",
-  ];
-
   const [tableData, setTableData] = useState<
     Record<string, { total: number; [key: string]: number }>
   >({});
@@ -106,90 +85,8 @@ const StatistikkMain = ({
               dateValue={dateValue}
             />
           </div>
-          <h1 className="mt-10">Bytteårsaker</h1>
-          <div className="max-lg:overflow-scroll">
-            <table className="table table-xs whitespace-nowrap bg-neutral">
-              <thead>
-                <tr>
-                  <th className="text-sm text-accent">Sag</th>
-                  <th className="text-sm text-accent">Antall</th>
-                  {feilkoder.map((feilkode) => (
-                    <th key={feilkode} className="text-sm text-accent">
-                      {feilkode}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {Object.entries(tableData).map(([sagNr, data]) => (
-                  <tr className="bg-accent" key={sagNr}>
-                    <td className="border border-primary bg-neutral px-4 py-2 text-primary">
-                      {sagNr} {sagNr % "2" == "0" ? "H" : "V"}
-                    </td>
-                    <td className="border border-primary px-4 py-2">
-                      {data.total}
-                    </td>
+        </div>
 
-                    {feilkoder.map((feilkode) => (
-                      <td
-                        key={feilkode}
-                        className={`border border-primary px-4 py-2 ${
-                          data[feilkode] ? "bg-secondary" : ""
-                        }`}
-                      >
-                        {data[feilkode] ?? 0}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div className="">
-          <h1 className="mt-10">Bytteårsaker i prosent</h1>
-          <div className="max-lg:overflow-scroll">
-            <table className="table table-xs whitespace-nowrap bg-neutral">
-              <thead>
-                <tr>
-                  <th className="text-sm text-accent">Sag</th>
-                  <th className="text-sm text-accent">Antall</th>
-                  {feilkoder.map((feilkode) => (
-                    <th key={feilkode} className="text-sm text-accent">
-                      {feilkode}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {Object.entries(tableData).map(([sagNr, data]) => (
-                  <tr className="bg-accent" key={sagNr}>
-                    <td className="border border-primary bg-neutral px-4 py-2 text-primary">
-                      {sagNr} {sagNr % "2" == "0" ? "H" : "V"}
-                    </td>
-                    <td className="border border-primary px-4 py-2">
-                      {data.total}
-                    </td>
-                    {feilkoder.map((feilkode) => (
-                      <td
-                        key={feilkode}
-                        className={`border border-primary px-4 py-2 ${
-                          data[feilkode] ? "bg-secondary" : ""
-                        }`}
-                      >
-                        {data?.total
-                          ? (
-                              ((data[feilkode] ?? 0) / data.total) * 100 || 0
-                            ).toFixed(1) + "%"
-                          : "0%"}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
         <div className="mt-20 flex w-full rounded-xl border border-secondary p-5 max-lg:grid">
           <div className="w-2/5 max-lg:w-full">
             <h1 className="text-2xl text-neutral">Årsak til vrak</h1>

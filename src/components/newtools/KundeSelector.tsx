@@ -39,7 +39,7 @@ export const KundeSelector = ({ bladeData, setBladeData }: bladeDataProps) => {
         <option disabled selected>
           Velg kunde
         </option>
-        <option value="Moelven Østerdalsbruket">Moelven Østerdalsbruket</option>
+        <option value="Moelven Våler">Moelven Våler</option>
         {/* <option value="Moelven Soknabruket">Moelven Soknabruket</option>
         <option value="Moelven Mjøsbruket">Moelven Mjøsbruket</option> */}
       </select>

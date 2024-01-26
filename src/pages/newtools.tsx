@@ -36,7 +36,6 @@ const Newtools = ({ theme, setTheme }) => {
   });
   return (
     <div data-theme={theme}>
-      test
       {sessionData?.user.role === "ADMIN" ? (
         <>
           <HeaderComponent setTheme={setTheme} />
@@ -68,6 +67,7 @@ const Newtools = ({ theme, setTheme }) => {
                 <thead>
                   <tr>
                     <th className="text-sm text-neutral">Serienummer</th>
+                    <th className="text-sm text-neutral">Produsent</th>
                     <th className="text-sm text-neutral">Type</th>
                     <th className="text-sm text-neutral">Dato</th>
 
@@ -93,11 +93,22 @@ const Newtools = ({ theme, setTheme }) => {
                               <div className="avatar"></div>
                               <div>
                                 <div className="text-xs text-neutral">
+                                  {blade.produsent}
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <div className="flex items-center space-x-3">
+                              <div className="avatar"></div>
+                              <div>
+                                <div className="text-xs text-neutral">
                                   {blade.type} {blade.side}
                                 </div>
                               </div>
                             </div>
                           </td>
+
                           <td>
                             <div className="flex items-center space-x-3">
                               <div className="avatar"></div>

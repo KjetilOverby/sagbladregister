@@ -112,7 +112,7 @@ const HeaderComponent = () => {
                     alt="Flowbite Logo"
                   /> */}
                   <span className="self-center whitespace-nowrap text-xl font-semibold text-neutral">
-                    KS-TOOLS
+                    Sagbladregister
                   </span>
                 </p>
               </div>

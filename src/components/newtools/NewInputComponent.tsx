@@ -45,25 +45,25 @@ export const NewInputComponent = ({
           Velg bladtype
         </option>
 
-        <option value="1600. 180x1,47-STB45–Lengde 9855mm. (Z219)">
-          1600. 180x1,47-STB45–Lengde 9855mm. (Z219)
+        <option value="MKV 2.2-3.3 445 36z">MKV 2.2-3.3 445 36z</option>
+        <option value="MKV 2.4-3.8 445 36z">MKV 2.4-3.8 445 36z</option>
+        <option value="MKV 2.6-4.0 445 36z">MKV 2.6-4.0 445 36z</option>
+        <option value="MKV 2.8-4.2 445 36z">MKV 2.8-4.2 445 36z</option>
+        <option value="MKV 3.0-4.4 445 36z">MKV 3.0-4.4 445 36z</option>
+        <option value="MKV 3.2-4.6 510 36z">MKV 3.2-4.6 445 36z</option>
+        <option value="VS66 N 3,2-4,8 475">VS66 N 3,2-4,8 475</option>
+        <option value="VS66 3,6-5,0 475 24z">VS66 3,6-5,0 475 24z</option>
+        <option value="VS66 3,6-5,0 475 Flens">VS66 N 3,2-4,8 475 Flens</option>
+        <option value="Trimmer JV 4,0/2,8 500 96z">
+          Trimmer JV 4,0/2,8 500 96z
         </option>
-
-        <option value="1670. 180x1,47-T45–Lengde 9855mm. (Z219)">
-          1670. 180x1,47-T45–Lengde 9855mm. (Z219)
+        <option value="Eksakt JV 3.5/2,5 400 80z">
+          Eksakt JV 3.5/2,5 400 80z
         </option>
-
-        <option value="1600. 180x1,25-STB40–Lengde 9840mm. (Z246)">
-          1600. 180x1,25-STB40–Lengde 9840mm. (Z246)
+        <option value="Endekapp JV 4.4/3.3 610 96z">
+          Endekapp JV 4.4/3.3 610 96z
         </option>
-
-        <option value="1450. 180x1,25-STB40-Lengde 9840mm. (Z246)">
-          1450. 180x1,25-STB40-Lengde 9840mm. (Z246)
-        </option>
-
-        <option value="LX60. 180x1,47–T45–lengde 9855mm. (Z219)">
-          LX60. 180x1,47–T45–lengde 9855mm. (Z219)
-        </option>
+        <option value="Trimmer RS 4.0-2.8 450">Trimmer RS 4.0-2.8 450</option>
       </select>
     </div>
   );

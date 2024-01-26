@@ -21,6 +21,7 @@ const CreatePost = () => {
     creatorImg: "-",
     deleter: "-",
     deleterImg: "-",
+    produsent: "",
   });
   const [inputID, setInputID] = useState("");
   const [kundeID, setKundeID] = useState("");
@@ -33,8 +34,8 @@ const CreatePost = () => {
     },
   });
   useEffect(() => {
-    if (bladeData.kunde === "Moelven Soknabruket") {
-      setKundeID("MS");
+    if (bladeData.kunde === "Moelven Våler") {
+      setKundeID("MV");
     } else if (bladeData.kunde === "Moelven Østerdalsbruket") {
       setKundeID("MØ");
     } else if (bladeData.kunde === "Moelven Mjøsbruket") {
@@ -56,6 +57,8 @@ const CreatePost = () => {
               alert("Du må legge inn ID nummer.");
             } else if (bladeData.side === "") {
               alert("Side er påkrevd");
+            } else if (bladeData.produsent === "") {
+              alert("Produsent påkrevd");
             } else {
               const response = await createPost.mutateAsync({
                 IdNummer: `${kundeID}-${inputID}`,
@@ -66,7 +69,7 @@ const CreatePost = () => {
                 side: bladeData.side,
                 active: false,
                 deleteReason: "-",
-                produsent: "Munkfors",
+                produsent: bladeData.produsent,
                 creatorImg: "-",
                 deleter: "-",
                 deleterImg: "-",
@@ -93,6 +96,23 @@ const CreatePost = () => {
         <p className="text-neutral">Legg til nye</p>
         <KundeSelector bladeData={bladeData} setBladeData={setBladeData} />
         <NewInputComponent bladeData={bladeData} setBladeData={setBladeData} />
+        <select
+          onChange={(e) =>
+            setBladeData({ ...bladeData, produsent: e.currentTarget.value })
+          }
+          className="select  select-sm border-neutral bg-accent text-lg text-neutral"
+        >
+          <option disabled selected>
+            Velg produsent
+          </option>
+
+          <option value="Kanefusa">Kanefusa</option>
+
+          <option value="Swedex">Swedex</option>
+          <option value="Nässjö">Nässjö</option>
+          <option value="Frezite">Frezite</option>
+          <option value="Ukjent">Ukjent</option>
+        </select>
         <select
           onChange={(e) =>
             setBladeData({ ...bladeData, side: e.currentTarget.value })

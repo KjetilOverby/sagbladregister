@@ -23,7 +23,7 @@ export default function Home({ theme }: adminProps) {
       {sessionData && sessionData.user.role === "ADMIN" && (
         <AdminStartpage theme={theme} />
       )}
-      {sessionData && sessionData.user.role === "MO_ADMIN" && (
+      {sessionData && sessionData.user.role === "MV_ADMIN" && (
         <CustomerStartpage />
       )}
     </div>
