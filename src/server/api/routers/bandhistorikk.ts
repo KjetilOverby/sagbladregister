@@ -11,14 +11,14 @@ export const bandhistorikkRouter = createTRPCRouter({
 
     
       create: protectedProcedure
-      .input(z.object({ sagNr: z.string(), datoInn: z.date(), klInn: z.date(), klUt: z.date(), datoUt: z.date(),ampere: z.number(), feilkode: z.string(), anmSag: z.string(), temperatur: z.number(), userId: z.string(),  handling: z.string(), sideklaring: z.number(), sgSag: z.string(), datoSrv: z.date(),createdById: z.string(), bladedata: z.string(), anmKS: z.string(), createdBy: z.string(), sagtid:z.number(), sgKS: z.string(), creatorImg: z.string(), side: z.string(), bladType: z.string(), activePost: z.boolean(), bladeRelationId: z.string(), alt: z.string(), creator: z.string(), creator2: z.string(), creatorImg2: z.string(), creator3: z.string(), creatorImg3: z.string() }))
+      .input(z.object({ service: z.string(), datoInn: z.date(), klInn: z.date(), klUt: z.date(), datoUt: z.date(),ampere: z.number(), feilkode: z.string(), anmSag: z.string(), temperatur: z.number(), userId: z.string(),  handling: z.string(), sideklaring: z.number(), sgSag: z.string(), datoSrv: z.date(),createdById: z.string(), bladedata: z.string(), anmKS: z.string(), createdBy: z.string(), sagtid:z.number(), sgKS: z.string(), creatorImg: z.string(), side: z.string(), bladType: z.string(), activePost: z.boolean(), bladeRelationId: z.string(), alt: z.string(), creator: z.string(), creator2: z.string(), creatorImg2: z.string(), creator3: z.string(), creatorImg3: z.string() }))
       .mutation(({ ctx, input }) => {
         const creatorName: string = ctx.session.user.name ?? "DefaultCreator";
         const creatorImg: string = ctx.session.user.image ?? "DefaultCreator";
     
      return ctx.db.bandhistorikk.create({
          data: {
-             sagNr: input.sagNr,
+             service: input.service,
              datoInn: input.datoInn,
              datoUt: input.datoUt,
              klInn: input.klInn,
@@ -68,7 +68,7 @@ export const bandhistorikkRouter = createTRPCRouter({
           },
       });
   }),
-  update: protectedProcedure.input(z.object({ id: z.string(), activePost: z.boolean(), datoInn: z.date(), klInn: z.date(), klUt: z.date(), datoUt: z.date(), feilkode: z.string(), temperatur: z.number(), anmSag: z.string(), sgSag: z.string(), sagtid: z.number(), sagNr: z.string(), creator2: z.string(), creatorImg2: z.string(), ampere: z.number()}))
+  update: protectedProcedure.input(z.object({ id: z.string(), activePost: z.boolean(), datoInn: z.date(), klInn: z.date(), klUt: z.date(), datoUt: z.date(), feilkode: z.string(), temperatur: z.number(), anmSag: z.string(), sgSag: z.string(), sagtid: z.number(), service: z.string(), creator2: z.string(), creatorImg2: z.string(), ampere: z.number()}))
   .mutation(async ({ctx, input}) => {
     const creatorName: string = ctx.session.user.name ?? "DefaultCreator";
     const creatorImg: string = ctx.session.user.image ?? "DefaultCreator";
@@ -88,7 +88,7 @@ export const bandhistorikkRouter = createTRPCRouter({
               anmSag: input.anmSag,
               sgSag: input.sgSag,
               sagtid: input.sagtid,
-              sagNr: input.sagNr,
+              service: input.service,
               creator2: creatorName,
               creatorImg2: creatorImg,
               ampere: input.ampere

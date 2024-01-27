@@ -29,7 +29,7 @@ interface Blade {
     klInn: Date;
     datoUt: Date;
     klUt: Date;
-    sagNr: string;
+    service: string;
     sagtid: number;
     sideklaring: number;
     anmSag: string;
@@ -77,7 +77,7 @@ interface BladeProps {
     klInn: Date;
     datoUt: Date;
     klUt: Date;
-    sagNr: string;
+    service: string;
     sagtid: number;
     sideklaring: number;
     anmSag: string;
@@ -99,7 +99,7 @@ const ActivateBlade = ({
   updateStatusHandler,
   handleCloseModal,
 }: BladeProps) => {
-  const [sagNrInput, setsagNrInput] = useState("");
+  const [serviceInput, setserviceInput] = useState("");
 
   return (
     <div>
@@ -110,12 +110,12 @@ const ActivateBlade = ({
             onSubmit={(e) => {
               e.preventDefault();
 
-              if (sagNrInput === "") {
-                alert("Sagnummer er påkrevd");
+              if (serviceInput === "") {
+                alert("Servicetype er påkrevd");
               } else {
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
                 createPost.mutate({
-                  sagNr: sagNrInput,
+                  service: serviceInput,
                   activePost: true,
                   bladeRelationId: blade.IdNummer,
                   bladType: blade.type,
@@ -155,22 +155,24 @@ const ActivateBlade = ({
               <h2 className="card-title">
                 <span className="text-accent">{blade.IdNummer}</span>
               </h2>
-              <p className="text-accent">Aktiver blad</p>
+              <p className="text-accent">Aktiver service</p>
 
               <select
-                onChange={(e) => setsagNrInput(e.currentTarget.value)}
+                onChange={(e) => setserviceInput(e.currentTarget.value)}
                 className="rounded-xl bg-white p-1"
                 name=""
                 id=""
               >
-                <option value="">Velg sag</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
+                <option value="">Velg service</option>
+                <option value="Omlodding">Omlodding</option>
+                <option value="Rep tannskader">Rep tannskader</option>
+                <option value="Reklamasjon tannslipp">
+                  Reklamasjon tannslipp
+                </option>
+                <option value="Reklamasjon dårlig lodd">
+                  Reklamasjon dårlig lodd
+                </option>
+                <option value="Reklamasjon feil">Reklamasjon feil</option>
               </select>
             </div>
             <button className="btn btn-primary btn-xs w-1/4 bg-accent">

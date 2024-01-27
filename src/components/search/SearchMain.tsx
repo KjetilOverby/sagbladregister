@@ -47,7 +47,7 @@ interface Blade {
     klInn: Date;
     datoUt: Date;
     klUt: Date;
-    sagNr: string;
+    service: string;
     sagtid: number;
     sideklaring: number;
     anmSag: string;
@@ -153,7 +153,7 @@ const SearchMain = ({
               <th className="text-sm text-accent">Dato opprettet</th>
               <th className="text-sm text-accent">Opprettet av</th>
               {sessionData?.user.role === "ADMIN" && (
-                <th className="text-sm text-accent">Aktiv</th>
+                <th className="text-sm text-accent">Service</th>
               )}
 
               <th className="text-sm text-accent">Historikk</th>
@@ -317,8 +317,7 @@ const SearchMain = ({
                                   Normal slitasje
                                 </option>
                                 <option value="Ikjøring">Ikjøring</option>
-                                <option className="Røk av">Røk av</option>
-                                <option className="Sprekk">Sprekk</option>
+                                <option className="Havari">Havari</option>
                                 <option className="Dårlig stamme">
                                   Dårlig stamme
                                 </option>
@@ -327,9 +326,6 @@ const SearchMain = ({
                                 </option>
                                 <option className="Store tannskader">
                                   Store tannskader
-                                </option>
-                                <option className="Oppspenningsfeil i sag">
-                                  Oppspenningsfeil i sag
                                 </option>
                               </select>
 

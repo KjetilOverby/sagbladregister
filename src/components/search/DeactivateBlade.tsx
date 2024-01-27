@@ -30,7 +30,7 @@ interface Blade {
     klInn: Date;
     datoUt: Date;
     klUt: Date;
-    sagNr: string;
+    service: string;
     sagtid: number;
     sideklaring: number;
     anmSag: string;
@@ -138,7 +138,7 @@ const ActivateBlade = ({
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 klInn: post.klInn,
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                sagNr: post.sagNr,
+                service: post.service,
                 creator2: "",
                 creatorImg2: "",
               });
@@ -159,111 +159,11 @@ const ActivateBlade = ({
                   ""
                 )}
               </h2>
-              <p>Deaktiver blad</p>
-              <div>
-                <div>
-                  <p>Antall timer:</p>
-                  <input
-                    onChange={(e) =>
-                      setInputValues({
-                        ...inputValues,
-                        sagtid: Number(e.currentTarget.value),
-                      })
-                    }
-                    type="number"
-                    className="input input-bordered input-xs w-full max-w-xs bg-white"
-                  />
-                </div>
-                <div>
-                  <p>Temperatur:</p>
-                  <input
-                    onChange={(e) =>
-                      setInputValues({
-                        ...inputValues,
-                        temperatur: Number(e.currentTarget.value),
-                      })
-                    }
-                    type="number"
-                    className="input input-bordered input-xs w-full max-w-xs bg-white"
-                  />
-                </div>
-                <div>
-                  <p>Ampere:</p>
-                  <input
-                    onChange={(e) =>
-                      setInputValues({
-                        ...inputValues,
-                        ampere: Number(e.currentTarget.value),
-                      })
-                    }
-                    type="text"
-                    className="input input-bordered input-xs w-full max-w-xs bg-white"
-                  />
-                </div>
-                <div>
-                  <p>Anm sag:</p>
-
-                  <input
-                    onChange={(e) =>
-                      setInputValues({
-                        ...inputValues,
-                        anmSag: e.currentTarget.value,
-                      })
-                    }
-                    type="text"
-                    className="input input-bordered input-xs w-full max-w-xs bg-white"
-                  />
-                </div>
-                <div>
-                  <p>Feilkode:</p>
-                  <select
-                    onChange={(e) =>
-                      setInputValues({
-                        ...inputValues,
-                        feilkode: e.currentTarget.value,
-                      })
-                    }
-                    className="select select-bordered select-xs w-full max-w-xs bg-white"
-                  >
-                    <option value="">Ingen anmerkning</option>
-                    <option value="Bølger">Bølger</option>
-                    <option value="Vandrer på hjul">Vandrer på hjul</option>
-                    <option value="Sprekk">Sprekk</option>
-                    <option value="Tannbrudd">Tannbrudd</option>
-                    <option value="Sponpåliming">Sponpåliming</option>
-                    <option value="Sløv">Sløv</option>
-                    <option value="River">Riper</option>
-                    <option value="Ytre faktorer">Ytre faktorer</option>
-                    <option value="Reklamasjon">Reklamasjon</option>
-                    <option value="Havari">Havari</option>
-                    <option value="Ikjøring">Ikjøring</option>
-                    <option value="Riper/bølger">Riper/bølger</option>
-                    <option value="Riper/sprekk">Riper/sprekk</option>
-                    <option value="Riper/vandrer">Riper/vandrer</option>
-                    <option value="Bølger/sprekk">Bølger/sprekk</option>
-                    <option value="Bølger/vandrer">Bølger/vandrer</option>
-                    <option value="Ikjøring/riper">Ikjøring/riper</option>
-                  </select>
-                </div>
-                <div>
-                  <p>Signatur:</p>
-
-                  <input
-                    onChange={(e) =>
-                      setInputValues({
-                        ...inputValues,
-                        sgSag: e.currentTarget.value,
-                      })
-                    }
-                    type="text"
-                    className="input input-bordered input-xs w-full max-w-xs bg-white"
-                  />
-                </div>
-              </div>
+              <p>Legg til service</p>
             </div>
 
             <button className="btn btn-primary btn-xs bg-accent">
-              Deaktiver
+              Legg til
             </button>
           </form>
         </div>

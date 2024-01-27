@@ -33,7 +33,7 @@ const HistorikkInput = ({
   });
 
   const [historikkData, setHistorikkData] = useState({
-    sagNr: "",
+    service: "",
     datoInn: new Date(),
     klInn: new Date(),
     datoUt: new Date(),
@@ -63,11 +63,11 @@ const HistorikkInput = ({
           try {
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 
-            if (historikkData.sagNr === "") {
+            if (historikkData.service === "") {
               alert("Sagnummer påkrevd");
             } else {
               const response = createPost.mutateAsync({
-                sagNr: historikkData.sagNr,
+                service: historikkData.service,
                 datoInn: historikkData.datoInn,
                 klInn: historikkData.klInn,
                 datoUt: historikkData.datoUt,
@@ -110,28 +110,30 @@ const HistorikkInput = ({
         <div className="card-body">
           <h2 className="card-title">Legg til data</h2>
           <div>
-            <p>Sag nr:</p>
+            <p>service:</p>
             <select
               onChange={(e) =>
                 setHistorikkData({
                   ...historikkData,
-                  sagNr: e.currentTarget.value,
+                  service: e.currentTarget.value,
                 })
               }
-              value={historikkData.sagNr}
+              value={historikkData.service}
               className="select select-bordered select-xs w-full max-w-xs bg-white"
             >
-              <option value="">Velg</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
+              <option value="">Velg service</option>
+              <option value="Omlodding">Omlodding</option>
+              <option value="Rep tannskader">Rep tannskader</option>
+              <option value="Reklamasjon tannslipp">
+                Reklamasjon tannslipp
+              </option>
+              <option value="Reklamasjon dårlig lodd">
+                Reklamasjon dårlig lodd
+              </option>
+              <option value="Reklamasjon feil">Reklamasjon feil</option>
             </select>
           </div>
-          <div>
+          {/* <div>
             <p>Innpostningsdato:</p>
             <input
               onChange={(e) =>
@@ -143,25 +145,8 @@ const HistorikkInput = ({
               type="date"
               className="input input-bordered input-xs w-full max-w-xs bg-white"
             />
-          </div>
-          <div>
-            <p>Klokkeslett inn:</p>
-            <input
-              onChange={(e) => {
-                const [hours, minutes] = e.currentTarget.value.split(":");
-                const updatedDate = new Date(historikkData.klInn);
-                updatedDate.setHours(Number(hours));
-                updatedDate.setMinutes(Number(minutes));
-                updatedDate.setSeconds(0); // Optionally, set seconds to 0
-                setHistorikkData({
-                  ...historikkData,
-                  klInn: updatedDate,
-                });
-              }}
-              type="time"
-              className="input input-bordered input-xs w-full max-w-xs bg-white"
-            />
-          </div>
+          </div> */}
+          {/*        
           <div>
             <p>Utpostningsdato:</p>
             <input
@@ -174,64 +159,8 @@ const HistorikkInput = ({
               type="date"
               className="input input-bordered input-xs w-full max-w-xs bg-white"
             />
-          </div>
-          <div>
-            <p>Klokkeslett ut:</p>
-            <input
-              onChange={(e) => {
-                const [hours, minutes] = e.currentTarget.value.split(":");
-                const updatedDate = new Date(historikkData.klInn);
-                updatedDate.setHours(Number(hours));
-                updatedDate.setMinutes(Number(minutes));
-                updatedDate.setSeconds(0); // Optionally, set seconds to 0
-                setHistorikkData({
-                  ...historikkData,
-                  klUt: updatedDate,
-                });
-              }}
-              type="time"
-              className="input input-bordered input-xs w-full max-w-xs bg-white"
-            />
-          </div>
-          <div>
-            <p>Antall timer:</p>
-            <input
-              onChange={(e) =>
-                setHistorikkData({
-                  ...historikkData,
-                  sagtid: Number(e.currentTarget.value),
-                })
-              }
-              type="number"
-              className="input input-bordered input-xs w-full max-w-xs bg-white"
-            />
-          </div>
-          <div>
-            <p>Temperatur:</p>
-            <input
-              onChange={(e) =>
-                setHistorikkData({
-                  ...historikkData,
-                  temperatur: Number(e.currentTarget.value),
-                })
-              }
-              type="number"
-              className="input input-bordered input-xs w-full max-w-xs bg-white"
-            />
-          </div>
-          <div>
-            <p>Ampere:</p>
-            <input
-              onChange={(e) =>
-                setHistorikkData({
-                  ...historikkData,
-                  ampere: Number(e.currentTarget.value),
-                })
-              }
-              type="text"
-              className="input input-bordered input-xs w-full max-w-xs bg-white"
-            />
-          </div>
+          </div> */}
+
           <div>
             <p>Anm sag:</p>
             <input

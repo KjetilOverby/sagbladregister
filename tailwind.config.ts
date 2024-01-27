@@ -31,15 +31,15 @@ export default {
         darkmode: {
           "primary": "#616161",
           "secondary": "#474646",
-          "accent": "rgb(51, 51, 51)",
+          "accent": "#474646",
           "neutral": "#adadad",
           "base-100": "#292929",
         },
         lightmode: {
           "primary": "#e3e3e3",
-          "secondary": "#adadad",
+          "secondary": "#c2c0c0",
           "accent": "#c2c0c0",
-          "neutral": "#1b3c5c",
+          "neutral": "#5c1c1c",
           "base-100": "#f0f0f0",
         },
         // futurisk: {

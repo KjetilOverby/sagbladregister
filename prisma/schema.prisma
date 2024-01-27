@@ -142,7 +142,7 @@ model bandhistorikk {
     updatedAt       DateTime @updatedAt
     userId          String
     createdBy       User     @relation(fields: [createdById], references: [id])
-    sagNr           String
+    service         String
     datoInn         DateTime
     klInn           DateTime @db.Time()
     datoUt          DateTime

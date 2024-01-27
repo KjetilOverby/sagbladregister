@@ -43,7 +43,7 @@ interface bandProps {
       id: string;
       datoInn: Date;
       datoUt: Date;
-      sagNr: string;
+      service: string;
       sideklaring: number;
       updatedAt: Date;
       sagtid: number;
@@ -117,7 +117,7 @@ const BandDetails = ({
     ampere: 0,
     sgSag: "",
     activePost: false,
-    sagNr: "",
+    service: "",
   });
 
   return (
@@ -166,16 +166,10 @@ const BandDetails = ({
         <table className="table table-xs w-full bg-neutral">
           <thead>
             <tr>
-              <th className="text-sm font-thin text-accent">Sag</th>
-              <th className="text-sm font-thin text-accent">Innpostet</th>
-              <th className="text-sm font-thin text-accent">Signatur</th>
-              <th className="text-sm font-thin text-accent">Utpostet</th>
+              <th className="text-sm font-thin text-accent">Service</th>
+              <th className="text-sm font-thin text-accent">Til service</th>
               <th className="text-sm font-thin text-accent">Signatur</th>
 
-              <th className="text-sm font-thin text-accent">T</th>
-
-              <th className="text-sm font-thin text-accent">Temp</th>
-              <th className="text-sm font-thin text-accent">Ampere</th>
               <th className="text-sm font-thin text-accent">Feilkode</th>
               <th className="text-sm font-thin text-accent">Anm</th>
               <th className="text-sm font-bold text-primary"></th>
@@ -215,7 +209,7 @@ const BandDetails = ({
                   anmSag: post.anmSag,
                   sgSag: post.sgSag,
                   sagtid: post.sagtid,
-                  sagNr: post.sagNr,
+                  service: post.service,
                   ampere: post.ampere,
                 });
               };
@@ -226,9 +220,7 @@ const BandDetails = ({
                     className={post.activePost ? "bg-primary" : "bg-secondary"}
                   >
                     <td>
-                      <div className="text-xs text-neutral">
-                        {post.sagNr} {post.sagNr % "2" == "0" ? "H" : "V"}
-                      </div>
+                      <div className="text-xs text-neutral">{post.service}</div>
                     </td>
                     <td>
                       <div className="text-xs text-neutral ">
@@ -249,39 +241,7 @@ const BandDetails = ({
                         {post.creator}
                       </div>
                     </td>
-                    <td>
-                      {!post.activePost ? (
-                        <div className="text-xs text-neutral">
-                          {dateFormat(post.datoUt, "dd.mm.yyyy")},{" "}
-                          {dateFormat(post.klUt, "HH:MM")}
-                        </div>
-                      ) : (
-                        "Aktiv"
-                      )}
-                    </td>
-                    <td className="text-neutral">
-                      {post.creatorImg2 === "-" ? (
-                        ""
-                      ) : (
-                        <div className="flex items-center">
-                          <div className="mr-2 h-5 w-5">
-                            <img
-                              className="w-full rounded-full"
-                              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                              src={post.creatorImg2}
-                              alt=""
-                            />
-                          </div>
-                          {post.sgSag && post.sgSag !== "-"
-                            ? post.sgSag
-                            : post.creator2}
-                        </div>
-                      )}
-                    </td>
-                    <td className="font-bold text-neutral">{post.sagtid}</td>
 
-                    <td className="text-neutral">{post.temperatur}</td>
-                    <td className="text-neutral">{post.ampere}</td>
                     <td className="text-neutral">{post.feilkode}</td>
 
                     <td className="relative  max-w-56 text-neutral">

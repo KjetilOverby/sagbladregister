@@ -11,7 +11,7 @@ import BarCharts from "../statistikk/BarCharts";
 interface statistikkProps {
   historikkData: {
     feilkode: string;
-    sagNr: string;
+    service: string;
   };
 }
 
@@ -24,12 +24,10 @@ const StatistikkMain = ({
   const deleteReasons: string[] = [
     "Normal slitasje",
     "Ikjøring",
-    "Røk av",
-    "Sprekk",
+    "Havari",
     "Dårlig stamme",
     "Varmekjørt",
     "Store tannskader",
-    "Oppspenningsfeil i sag",
   ];
   const deleteReasonCount = deleteReasons.reduce((countObj, reason) => {
     countObj[reason] = 0;
@@ -56,19 +54,19 @@ const StatistikkMain = ({
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     historikkData?.forEach((item) => {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      const { sagNr, feilkode } = item;
+      const { service, feilkode } = item;
 
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      if (!updatedTableData[sagNr]) {
+      if (!updatedTableData[service]) {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        updatedTableData[sagNr] = { total: 1, [feilkode]: 1 };
+        updatedTableData[service] = { total: 1, [feilkode]: 1 };
       } else {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        updatedTableData[sagNr].total += 1;
+        updatedTableData[service].total += 1;
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        updatedTableData[sagNr][feilkode] =
+        updatedTableData[service][feilkode] =
           // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-          (updatedTableData[sagNr][feilkode] ?? 0) + 1;
+          (updatedTableData[service][feilkode] ?? 0) + 1;
       }
     });
 
