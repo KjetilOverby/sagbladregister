@@ -35,6 +35,7 @@ const statistikk = ({ theme }) => {
     date2: `${dateValue.startDate}T00:00:00.000Z`,
     IdNummer: "",
   });
+
   const { data: deletedSawbladesMo } =
     api.sawblades.getCustomerAllDeleted.useQuery({
       date: `${dateValue.endDate}T23:59:59.000Z`,

@@ -29,7 +29,18 @@ const StatistikkMain = ({
     "Varmekjørt",
     "Store tannskader",
   ];
+  const serviceReasons: string[] = [
+    "Omlodding",
+    "Rep tannskader",
+    "Reklamasjon tannslipp",
+    "Reklamasjon dårlig lodd",
+    "Reklamasjon feil",
+  ];
   const deleteReasonCount = deleteReasons.reduce((countObj, reason) => {
+    countObj[reason] = 0;
+    return countObj;
+  }, {});
+  const serviceReasonCount = serviceReasons.reduce((countObj, reason) => {
     countObj[reason] = 0;
     return countObj;
   }, {});
@@ -38,6 +49,12 @@ const StatistikkMain = ({
     const reason = blade.deleteReason;
     if (reason in deleteReasonCount) {
       deleteReasonCount[reason]++;
+    }
+  });
+  historikkData?.forEach((blade) => {
+    const reason = blade.service;
+    if (reason in serviceReasonCount) {
+      serviceReasonCount[reason]++;
     }
   });
 
@@ -73,6 +90,34 @@ const StatistikkMain = ({
     setTableData(updatedTableData);
   }, [historikkData]);
 
+  useEffect(() => {
+    const updatedServiceTableData: Record<
+      string,
+      { total: number; [key: string]: number }
+    > = {};
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    historikkData?.forEach((item) => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      const { service, feilkode } = item;
+
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      if (!updatedServiceTableData[service]) {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        updatedServiceTableData[service] = { total: 1, [feilkode]: 1 };
+      } else {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        updatedServiceTableData[service].total += 1;
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        updatedServiceTableData[service][feilkode] =
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+          (updatedServiceTableData[service][feilkode] ?? 0) + 1;
+      }
+    });
+
+    setTableData(updatedServiceTableData);
+  }, [historikkData]);
+
   return (
     <div className="pb-10">
       <div className="mx-5 mt-5 max-lg:mx-0">
@@ -85,6 +130,27 @@ const StatistikkMain = ({
           </div>
         </div>
 
+        <div className="mt-20 flex w-full rounded-xl border border-secondary p-5 max-lg:grid">
+          <div className="w-2/5 max-lg:w-full">
+            <h1 className="text-2xl text-neutral">Service</h1>
+            <p className="text-neutral">Antall: {historikkData?.length}</p>
+            <BarCharts deleteReasonCount={serviceReasonCount} />
+          </div>
+          <div className="ml-16 w-3/5 rounded-xl bg-accent p-5 max-lg:ml-0 max-lg:w-full">
+            {
+              <>
+                <h1 className="text-neutral">Service:</h1>
+                <ul className=" italic text-neutral">
+                  {Object.entries(serviceReasonCount).map(([reason, count]) => (
+                    <li key={reason}>
+                      {reason}: {count}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            }
+          </div>
+        </div>
         <div className="mt-20 flex w-full rounded-xl border border-secondary p-5 max-lg:grid">
           <div className="w-2/5 max-lg:w-full">
             <h1 className="text-2xl text-neutral">Årsak til vrak</h1>
