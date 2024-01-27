@@ -92,16 +92,17 @@ model VerificationToken {
 }
 
 model personal {
-    id        String    @id @default(cuid())
-    createdAt DateTime  @default(now())
-    img       String
-    name      String
-    title     String
-    color     String
-    font      String
-    user      User      @relation(fields: [userId], references: [id])
-    userId    String
-    userBlade sawblades @relation(fields: [id], references: [id])
+    id         String    @id @default(cuid())
+    createdAt  DateTime  @default(now())
+    img        String
+    name       String
+    title      String
+    color      String
+    font       String
+    beholdning Boolean
+    user       User      @relation(fields: [userId], references: [id])
+    userId     String
+    userBlade  sawblades @relation(fields: [id], references: [id])
 
     @@index([userId])
     @@index([id])
