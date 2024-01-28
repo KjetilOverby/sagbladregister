@@ -65,10 +65,10 @@ const Search = ({ theme }) => {
       sessionData?.user.role === "MO_ADMIN" ? (
         <>
           <HeaderComponent />
-          <div className="m-5 min-h-screen max-lg:m-0">
-            <div className="rounded-xl bg-accent">
+          <div className="mx-48 min-h-screen max-2xl:w-screen max-xl:m-0">
+            <div className="rounded-xl bg-base-100">
               {!closeSearchComponent ? (
-                <div className="mb-5 w-96 rounded-xl bg-accent p-5">
+                <div className="mb-5 w-96 rounded-xl bg-base-100 p-5">
                   <DatepickerComponent
                     setDateValue={setDateValue}
                     dateValue={dateValue}

@@ -131,7 +131,7 @@ const SearchMain = ({
   }, [sawblades]);
 
   return (
-    <div className="max-lg:overflow-scroll">
+    <div className=" max-lg:overflow-scroll">
       <div>
         {!closeSearchComponent ? (
           <div>
@@ -145,19 +145,19 @@ const SearchMain = ({
         ) : (
           ""
         )}
-        <table className="table table-xs whitespace-nowrap bg-neutral">
+        <table className="table table-xs whitespace-nowrap border border-b-accent border-l-base-100 border-r-base-100 border-t-accent bg-base-100">
           <thead>
-            <tr>
-              <th className="text-sm text-accent">ID</th>
-              <th className="text-sm text-accent">Type</th>
-              <th className="text-sm text-accent">Dato opprettet</th>
-              <th className="text-sm text-accent">Opprettet av</th>
+            <tr className="">
+              <th className="text-sm text-neutral">ID</th>
+              <th className="text-sm text-neutral">Type</th>
+              <th className="text-sm text-neutral">Dato opprettet</th>
+              <th className="text-sm text-neutral">Opprettet av</th>
               {sessionData?.user.role === "ADMIN" && (
-                <th className="text-sm text-accent">Service</th>
+                <th className="text-sm text-neutral">Service</th>
               )}
 
-              <th className="text-sm text-accent">Historikk</th>
-              <th className="text-sm text-accent">Slett</th>
+              <th className="text-sm text-neutral">Historikk</th>
+              <th className="text-sm text-neutral">Slett</th>
             </tr>
           </thead>
           <tbody>
@@ -208,11 +208,14 @@ const SearchMain = ({
               return (
                 <>
                   {!blade.deleted && (
-                    <tr key={blade.id} className="bg-accent even:bg-secondary">
-                      <td className="font-bold text-neutral">
+                    <tr
+                      key={blade.id}
+                      className="border border-base-100 bg-base-100 hover:bg-primary"
+                    >
+                      <td className="font-by-5  px-5">
                         {blade.IdNummer}{" "}
                         {blade.note !== "-" && (
-                          <span className="text-xs font-normal text-neutral">
+                          <span className="font-nory-5 px-5  text-xs">
                             ({blade.note})
                           </span>
                         )}
@@ -221,7 +224,7 @@ const SearchMain = ({
                         <div className="flex items-center space-x-3">
                           <div className="avatar"></div>
                           <div>
-                            <div className="text-xs text-neutral">
+                            <div className="texty-5  px-5">
                               {blade.type} {blade.side}
                             </div>
                           </div>
@@ -232,7 +235,7 @@ const SearchMain = ({
                           <div className="avatar"></div>
 
                           <div>
-                            <div className="text-xs text-neutral">
+                            <div className="texty-5  px-5">
                               {dateFormat(
                                 blade.createdAt,
                                 "dd.mm.yyyy , HH:MM",
@@ -241,7 +244,7 @@ const SearchMain = ({
                           </div>
                         </div>
                       </td>
-                      <td className="flex items-center">
+                      <td className="flex items-center py-5">
                         <div className="mr-2 h-5 w-5">
                           <img
                             className="rounded-full"
@@ -259,7 +262,7 @@ const SearchMain = ({
                             <div
                               onClick={() => statusHandler(blade.id)}
                               className={`h-3 w-3 rounded-full ${
-                                blade.active ? "bg-green-400" : "bg-primary"
+                                blade.active ? "bg-orange-600" : "bg-accent"
                               }`}
                             >
                               {openStatus === blade.id && !blade.active && (
@@ -284,7 +287,7 @@ const SearchMain = ({
                               fontSize: ".9rem",
                             }}
                             onClick={openHistorikkDataHandler}
-                            className="text-neutral"
+                            className=" py-5"
                           />
                         </div>
                       </td>
@@ -358,29 +361,27 @@ const SearchMain = ({
                     <div className="absolute top-0 z-50 h-screen w-full rounded-2xl  border border-primary bg-accent p-5 max-lg:relative">
                       <div className="mr-5 flex justify-between">
                         <div>
-                          <h1 className=" text-lg text-neutral">Historikk</h1>
-                          <h1 className="text-2xl font-semibold text-neutral">
+                          <h1 className=" texty-5  px-5">Historikk</h1>
+                          <h1 className="font-semiby-5 px-5  text-2xl">
                             ID: {blade.IdNummer}
                           </h1>
-                          <p className="text-xl text-neutral">
+                          <p className="texty-5  px-5">
                             Type: {blade.type} {blade.side}
                           </p>
-                          <p className="italic text-neutral">
+                          <p className="itay-5  px-5">
                             Registrert:
                             {dateFormat(blade.createdAt, "dd.mm.yyyy")}
                           </p>
-                          <p className="italic text-neutral">
+                          <p className="itay-5  px-5">
                             Registrert av: {blade.creator}
                           </p>
                         </div>
                         <div>
-                          <table className="table table-xs ml-5 w-full border border-primary bg-accent text-neutral">
+                          <table className="table table-xs ml-5 w-full border border-primary bg-accent  py-5">
                             <thead>
                               <tr className="border border-primary">
-                                <th className="text-lg italic text-neutral">
-                                  Kode
-                                </th>
-                                <th className="text-lg italic text-neutral">
+                                <th className="itay-5 px-5  text-lg">Kode</th>
+                                <th className="itay-5 px-5  text-lg">
                                   Beskrivelse
                                 </th>
                               </tr>

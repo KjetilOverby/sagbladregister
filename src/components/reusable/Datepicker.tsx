@@ -30,12 +30,13 @@ const DatepickerComponent: React.FC<DateProps> = ({
   };
 
   return (
-    <div className="flex flex-col rounded-2xl bg-accent p-5">
+    <div className="mb-5 flex flex-col rounded-2xl bg-base-100">
       <form
         onSubmit={(e) => {
           e.preventDefault();
         }}
       >
+        <p>Dato</p>
         <Datepicker
           placeholder={"Klikk her for å velge dato"}
           primaryColor={"orange"}

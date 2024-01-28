@@ -40,11 +40,11 @@ const Newtools = ({ theme, setTheme }) => {
         <>
           <HeaderComponent setTheme={setTheme} />
 
-          <div className="h-screen bg-base-100 p-5 max-lg:p-0">
+          <div className="mx-96 h-screen bg-base-100 p-5 max-lg:p-0">
             <div className="overflow-x-auto px-5 pt-5">
               <div className="flex h-96 flex-row py-5 max-lg:grid max-lg:h-5/6">
                 <CreatePost />
-                <div className="ml-5 rounded-xl bg-accent p-5 max-lg:ml-0">
+                <div className="ml-5 rounded-xl bg-base-100 p-5 shadow-xl max-lg:ml-0">
                   <DatepickerComponent
                     setDateValue={setDateValue}
                     dateValue={dateValue}
@@ -60,12 +60,12 @@ const Newtools = ({ theme, setTheme }) => {
                   </div>
                 </div>
               </div>
-              <h1 className="mb-3 text-neutral">
+              <h1 className="mb-3 mt-5 text-neutral">
                 Registrerte blad i perioden: {data?.length}
               </h1>
-              <table className="table table-xs whitespace-nowrap bg-primary">
+              <table className="table table-xs whitespace-nowrap bg-base-100">
                 <thead>
-                  <tr>
+                  <tr className="border border-b-accent border-l-base-100 border-r-base-100 border-t-accent">
                     <th className="text-sm text-neutral">Serienummer</th>
                     <th className="text-sm text-neutral">Produsent</th>
                     <th className="text-sm text-neutral">Type</th>
@@ -79,7 +79,7 @@ const Newtools = ({ theme, setTheme }) => {
                   {data?.map((blade) => {
                     return (
                       <>
-                        <tr className="border border-primary bg-accent">
+                        <tr className="border border-base-100 bg-base-100 hover:bg-primary">
                           <td className="font-bold text-neutral">
                             {blade.IdNummer}{" "}
                             {blade.note !== "-" && (
