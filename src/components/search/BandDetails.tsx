@@ -10,6 +10,7 @@ import HistorikkInputKS from "./HistorikkInputKS";
 import { CiEdit } from "react-icons/ci";
 import DeactivateBlade from "./DeactivateBlade";
 import EditBandDetails from "./EditBandDetails";
+import { FiRefreshCw } from "react-icons/fi";
 
 interface bandProps {
   blade: {
@@ -152,7 +153,7 @@ const BandDetails = ({
         />
       )}
 
-      <div>
+      <div className="bg-base-100">
         <div>
           <button
             onClick={() => setOpenInput(true)}
@@ -163,22 +164,22 @@ const BandDetails = ({
         </div>
       </div>
       <div className="max-xl:overflow-scroll">
-        <table className="table table-xs w-full bg-neutral">
+        <table className="table table-xs w-full bg-base-100">
           <thead>
             <tr>
-              <th className="text-sm font-thin text-accent">Service</th>
-              <th className="text-sm font-thin text-accent">Til service</th>
-              <th className="text-sm font-thin text-accent">Signatur</th>
+              <th className="text-sm font-thin text-neutral">Service</th>
+              <th className="text-sm font-thin text-neutral">Til service</th>
+              <th className="text-sm font-thin text-neutral">Signatur</th>
 
-              <th className="text-sm font-thin text-accent">Feilkode</th>
-              <th className="text-sm font-thin text-accent">Anm</th>
-              <th className="text-sm font-bold text-primary"></th>
-              <th className="text-sm font-bold text-primary"></th>
-              <th className="text-sm font-bold text-primary">Service</th>
-              <th className="text-sm font-bold text-primary">SK</th>
-              <th className="text-sm font-bold text-primary">Anm KS</th>
-              <th className="text-sm font-bold text-primary">Signatur</th>
-              <th className="text-sm font-bold text-primary">Dato srv</th>
+              <th className="text-sm font-thin text-neutral">Feilkode</th>
+              <th className="text-sm font-thin text-neutral">Anm</th>
+              <th className="text-sm font-bold text-neutral"></th>
+              <th className="text-sm font-bold text-neutral"></th>
+              <th className="text-sm font-bold text-neutral">Service</th>
+              <th className="text-sm font-bold text-neutral">SK</th>
+              <th className="text-sm font-bold text-neutral">Anm KS</th>
+              <th className="text-sm font-bold text-neutral">Signatur</th>
+              <th className="text-sm font-bold text-neutral">Dato srv</th>
             </tr>
           </thead>
           <tbody>
@@ -216,19 +217,17 @@ const BandDetails = ({
 
               return (
                 <>
-                  <tr
-                    className={post.activePost ? "bg-primary" : "bg-secondary"}
-                  >
-                    <td>
+                  <tr className="border border-base-100 bg-base-100">
+                    <td className="py-5">
                       <div className="text-xs text-neutral">{post.service}</div>
                     </td>
-                    <td>
+                    <td className="py-5">
                       <div className="text-xs text-neutral ">
                         {dateFormat(post.datoInn, "dd.mm.yyyy")},{" "}
                         {dateFormat(post.klInn, "HH:MM")}
                       </div>
                     </td>
-                    <td className="text-neutral">
+                    <td className="py-5 text-neutral">
                       <div className="flex items-center">
                         <div className="mr-2 h-5 w-5">
                           <img
@@ -242,9 +241,9 @@ const BandDetails = ({
                       </div>
                     </td>
 
-                    <td className="text-neutral">{post.feilkode}</td>
+                    <td className="py-5 text-neutral">{post.feilkode}</td>
 
-                    <td className="relative  max-w-56 text-neutral">
+                    <td className="relative  max-w-56 py-5 text-neutral">
                       {post.anmSag === "-" ? (
                         ""
                       ) : (
@@ -278,10 +277,8 @@ const BandDetails = ({
 
                     <td className="text-primary">
                       {post.activePost && (
-                        <div
-                          onClick={() => setOpenDeactivateModal(true)}
-                          className="h-3 w-3 rounded-full bg-green-400"
-                        >
+                        <div onClick={() => setOpenDeactivateModal(true)}>
+                          <FiRefreshCw className=" text-xl text-orange-400" />
                           {openDeactivateModal && (
                             <DeactivateBlade
                               blade={blade}

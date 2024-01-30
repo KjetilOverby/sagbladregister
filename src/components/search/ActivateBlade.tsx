@@ -103,7 +103,7 @@ const ActivateBlade = ({
 
   return (
     <div>
-      <div className="card z-40 w-96 bg-neutral text-neutral-content">
+      <div className="card absolute z-40 w-96 bg-neutral text-neutral-content">
         <div className="flex flex-col">
           <form
             className="flex flex-col items-center"

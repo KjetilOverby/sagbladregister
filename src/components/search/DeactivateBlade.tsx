@@ -113,7 +113,7 @@ const ActivateBlade = ({
   });
 
   return (
-    <div>
+    <div className="absolute">
       <div className="card z-40 flex w-96 items-center  bg-neutral text-neutral-content">
         <div>
           <form

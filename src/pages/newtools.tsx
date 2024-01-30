@@ -40,7 +40,7 @@ const Newtools = ({ theme, setTheme }) => {
         <>
           <HeaderComponent setTheme={setTheme} />
 
-          <div className="mx-96 h-screen bg-base-100 p-5 max-lg:p-0">
+          <div className="mx-48 min-h-screen bg-base-100 p-5 max-lg:p-0 ">
             <div className="overflow-x-auto px-5 pt-5">
               <div className="flex h-96 flex-row py-5 max-lg:grid max-lg:h-5/6">
                 <CreatePost />
@@ -63,7 +63,7 @@ const Newtools = ({ theme, setTheme }) => {
               <h1 className="mb-3 mt-5 text-neutral">
                 Registrerte blad i perioden: {data?.length}
               </h1>
-              <table className="table table-xs whitespace-nowrap bg-base-100">
+              <table className="table table-xs whitespace-nowrap border border-b-accent border-l-base-100 border-r-base-100 border-t-accent bg-base-100">
                 <thead>
                   <tr className="border border-b-accent border-l-base-100 border-r-base-100 border-t-accent">
                     <th className="text-sm text-neutral">Serienummer</th>
@@ -80,7 +80,7 @@ const Newtools = ({ theme, setTheme }) => {
                     return (
                       <>
                         <tr className="border border-base-100 bg-base-100 hover:bg-primary">
-                          <td className="font-bold text-neutral">
+                          <td className="py-5 font-bold text-neutral">
                             {blade.IdNummer}{" "}
                             {blade.note !== "-" && (
                               <span className="text-xs font-normal text-orange-200">
@@ -88,7 +88,7 @@ const Newtools = ({ theme, setTheme }) => {
                               </span>
                             )}
                           </td>
-                          <td>
+                          <td className="py-5">
                             <div className="flex items-center space-x-3">
                               <div className="avatar"></div>
                               <div>
@@ -98,7 +98,7 @@ const Newtools = ({ theme, setTheme }) => {
                               </div>
                             </div>
                           </td>
-                          <td>
+                          <td className="py-5">
                             <div className="flex items-center space-x-3">
                               <div className="avatar"></div>
                               <div>
@@ -109,7 +109,7 @@ const Newtools = ({ theme, setTheme }) => {
                             </div>
                           </td>
 
-                          <td>
+                          <td className="py-5">
                             <div className="flex items-center space-x-3">
                               <div className="avatar"></div>
                               <div>

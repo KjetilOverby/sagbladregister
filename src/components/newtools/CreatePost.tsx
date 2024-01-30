@@ -55,7 +55,12 @@ const CreatePost = () => {
               alert("Du må legge inn bladtype.");
             } else if (inputID === "") {
               alert("Du må legge inn ID nummer.");
-            } else if (bladeData.side === "") {
+            } else if (
+              (bladeData.type === "VS66 3,6-5,0 475 27z" &&
+                bladeData.side === "") ||
+              (bladeData.type === "VS66 3,6-5,0 475 24z Flens" &&
+                bladeData.side === "")
+            ) {
               alert("Side er påkrevd");
             } else if (bladeData.produsent === "") {
               alert("Produsent påkrevd");
@@ -113,20 +118,38 @@ const CreatePost = () => {
           <option value="Frezite">Frezite</option>
           <option value="Ukjent">Ukjent</option>
         </select>
-        <select
-          onChange={(e) =>
-            setBladeData({ ...bladeData, side: e.currentTarget.value })
-          }
-          className="select  select-sm border-neutral bg-accent text-lg text-neutral"
-        >
-          <option disabled selected>
-            Velg side
-          </option>
+        {bladeData.type === "VS66 3,6-5,0 475 24z Flens" && (
+          <select
+            onChange={(e) =>
+              setBladeData({ ...bladeData, side: e.currentTarget.value })
+            }
+            className="select  select-sm border-neutral bg-accent text-lg text-neutral"
+          >
+            <option disabled selected>
+              Velg side
+            </option>
 
-          <option value="Høyre">Høyre</option>
+            <option value="Høyre">Høyre</option>
 
-          <option value="Venstre">Venstre</option>
-        </select>
+            <option value="Venstre">Venstre</option>
+          </select>
+        )}
+        {bladeData.type === "VS66 3,6-5,0 475 27z" && (
+          <select
+            onChange={(e) =>
+              setBladeData({ ...bladeData, side: e.currentTarget.value })
+            }
+            className="select  select-sm border-neutral bg-accent text-lg text-neutral"
+          >
+            <option disabled selected>
+              Velg side
+            </option>
+
+            <option value="Høyre">Høyre</option>
+
+            <option value="Venstre">Venstre</option>
+          </select>
+        )}
 
         <input
           type="text"

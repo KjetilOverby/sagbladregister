@@ -128,7 +128,7 @@ const HistorikkInputKS = ({
           <p>BFS koder</p>
           <div className="rounded-xl border border-neutral p-1">
             <label className="label cursor-pointer">
-              <span className="label-text">BFS423</span>
+              <span className="label-text">SERV 764</span>
               <input
                 onChange={(e) =>
                   setBfsValue({
@@ -138,11 +138,11 @@ const HistorikkInputKS = ({
                 }
                 type="checkbox"
                 className="checkbox"
-                value="BFS423"
+                value="SERV 764"
               />
             </label>
             <label className="label cursor-pointer">
-              <span className="label-text">BFS426</span>
+              <span className="label-text">SERV 402</span>
               <input
                 onChange={(e) =>
                   setBfsValue({
@@ -152,11 +152,11 @@ const HistorikkInputKS = ({
                 }
                 type="checkbox"
                 className="checkbox"
-                value="BFS426"
+                value="SERV 402"
               />
             </label>
             <label className="label cursor-pointer">
-              <span className="label-text">BFS427</span>
+              <span className="label-text">SERV 407</span>
               <input
                 onChange={(e) =>
                   setBfsValue({
@@ -164,13 +164,13 @@ const HistorikkInputKS = ({
                     bfs3: e.currentTarget.value,
                   })
                 }
-                value="BFS427"
+                value="SERV 407"
                 type="checkbox"
                 className="checkbox"
               />
             </label>
             <label className="label cursor-pointer">
-              <span className="label-text">BFS429</span>
+              <span className="label-text">SERV 411</span>
               <input
                 onChange={(e) =>
                   setBfsValue({
@@ -178,13 +178,13 @@ const HistorikkInputKS = ({
                     bfs4: e.currentTarget.value,
                   })
                 }
-                value="BFS429"
+                value="SERV 411"
                 type="checkbox"
                 className="checkbox"
               />
             </label>
             <label className="label cursor-pointer">
-              <span className="label-text">BSF438</span>
+              <span className="label-text">SERV 427</span>
               <input
                 onChange={(e) =>
                   setBfsValue({
@@ -192,13 +192,13 @@ const HistorikkInputKS = ({
                     bfs5: e.currentTarget.value,
                   })
                 }
-                value="BSF438"
+                value="SERV 427"
                 type="checkbox"
                 className="checkbox"
               />
             </label>
             <label className="label cursor-pointer">
-              <span className="label-text">BFS442</span>
+              <span className="label-text">REKLAMASJON</span>
               <input
                 onChange={(e) =>
                   setBfsValue({
@@ -206,7 +206,7 @@ const HistorikkInputKS = ({
                     bfs6: e.currentTarget.value,
                   })
                 }
-                value="BFS442"
+                value="REKLAMASJON"
                 type="checkbox"
                 className="checkbox"
               />

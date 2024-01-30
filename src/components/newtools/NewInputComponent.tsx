@@ -52,8 +52,10 @@ export const NewInputComponent = ({
         <option value="MKV 3.0-4.4 445 36z">MKV 3.0-4.4 445 36z</option>
         <option value="MKV 3.2-4.6 510 36z">MKV 3.2-4.6 445 36z</option>
         <option value="VS66 N 3,2-4,8 475">VS66 N 3,2-4,8 475</option>
-        <option value="VS66 3,6-5,0 475 24z">VS66 3,6-5,0 475 24z</option>
-        <option value="VS66 3,6-5,0 475 Flens">VS66 N 3,2-4,8 475 Flens</option>
+        <option value="VS66 3,6-5,0 475 27z">VS66 3,6-5,0 475 27z</option>
+        <option value="VS66 3,6-5,0 475 24z Flens">
+          VS66 3,6-5,0 475 24z Flens
+        </option>
         <option value="Trimmer JV 4,0/2,8 500 96z">
           Trimmer JV 4,0/2,8 500 96z
         </option>

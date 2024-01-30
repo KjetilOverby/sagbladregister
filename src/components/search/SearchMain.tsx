@@ -3,18 +3,19 @@
 /* eslint-disable @next/next/no-img-element */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import React, { useState, useEffect } from "react";
 import dateFormat from "dateformat";
+import { useEffect, useState } from "react";
 // import { DeleteComponent } from "./DeleteComponent";
-import { RestoreComponent } from "./RestoreComponent";
 import BandDetails from "./BandDetails";
+import { RestoreComponent } from "./RestoreComponent";
 // import DatepickerComponent from "../reusable/Datepicker";
+import { useSession } from "next-auth/react";
+import { RiDeleteBinLine } from "react-icons/ri";
 import { api } from "~/utils/api";
 import ActivateBlade from "./ActivateBlade";
-import { RiDeleteBinLine } from "react-icons/ri";
-import { BsClipboardData } from "react-icons/bs";
 import { DeleteComponent } from "./DeleteComponent";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { FiRefreshCw } from "react-icons/fi";
+import { GiProgression } from "react-icons/gi";
 
 interface Blade {
   creatorImg: string | undefined;
@@ -210,7 +211,7 @@ const SearchMain = ({
                   {!blade.deleted && (
                     <tr
                       key={blade.id}
-                      className="border border-base-100 bg-base-100 hover:bg-primary"
+                      className="cursor-pointer border border-base-100 bg-base-100 hover:bg-primary"
                     >
                       <td className="font-by-5  px-5">
                         {blade.IdNummer}{" "}
@@ -259,12 +260,16 @@ const SearchMain = ({
                       {sessionData?.user.role === "ADMIN" && (
                         <th>
                           <div>
-                            <div
-                              onClick={() => statusHandler(blade.id)}
-                              className={`h-3 w-3 rounded-full ${
-                                blade.active ? "bg-orange-600" : "bg-accent"
-                              }`}
-                            >
+                            <div>
+                              <FiRefreshCw
+                                onClick={() => statusHandler(blade.id)}
+                                className={`text-xl ${
+                                  blade.active
+                                    ? "text-orange-600"
+                                    : "text-accent"
+                                }`}
+                              />
+
                               {openStatus === blade.id && !blade.active && (
                                 <ActivateBlade
                                   blade={blade}
@@ -279,16 +284,12 @@ const SearchMain = ({
                       )}
 
                       <td>
-                        <div className="flex items-center">
+                        <div
+                          onClick={openHistorikkDataHandler}
+                          className="flex items-center"
+                        >
                           <p className="w-5">{blade._count.bandhistorikk}</p>
-                          <BsClipboardData
-                            style={{
-                              marginLeft: ".5rem",
-                              fontSize: ".9rem",
-                            }}
-                            onClick={openHistorikkDataHandler}
-                            className=" py-5"
-                          />
+                          <GiProgression className="text-xl text-orange-600" />
                         </div>
                       </td>
 
@@ -358,7 +359,7 @@ const SearchMain = ({
                     </tr>
                   )}
                   {openHistorikk === blade.id && (
-                    <div className="absolute top-0 z-50 h-screen w-full rounded-2xl  border border-primary bg-accent p-5 max-lg:relative">
+                    <div className="absolute top-0 z-50 h-screen w-full rounded-2xl bg-base-100 p-5 max-lg:relative">
                       <div className="mr-5 flex justify-between">
                         <div>
                           <h1 className=" texty-5  px-5">Historikk</h1>
@@ -377,7 +378,7 @@ const SearchMain = ({
                           </p>
                         </div>
                         <div>
-                          <table className="table table-xs ml-5 w-full border border-primary bg-accent  py-5">
+                          <table className="table table-xs ml-5 w-full border border-primary bg-base-100  py-5">
                             <thead>
                               <tr className="border border-primary">
                                 <th className="itay-5 px-5  text-lg">Kode</th>
@@ -388,31 +389,28 @@ const SearchMain = ({
                             </thead>
                             <tbody>
                               <tr className="border border-primary">
-                                <th>BFS423</th>
-                                <th>EKSTRA RETTING BÅND</th>
+                                <th>SERV 764</th>
+                                <th>HELOMLODDING HM</th>
                               </tr>
                               <tr className="border border-primary">
-                                <th>BFS426</th>
-                                <th>BUNNSTUK BÅND</th>
+                                <th>SERV 402</th>
+                                <th>SLIP HM/STELLITBLAD</th>
                               </tr>
                               <tr className="border border-primary">
-                                <th>BFS427</th>
-                                <th>RETTING-STREKKING-SLIPING METER</th>
+                                <th>SERV 407</th>
+                                <th>LODDING HM</th>
                               </tr>
                               <tr className="border border-primary">
-                                <th>BFS429</th>
-                                <th>
-                                  STELL.FERDIG SLIP OG RETT f.o.m 100mm bredde
-                                  TANN
-                                </th>
+                                <th>SERV 411</th>
+                                <th>SVEISING TOPPBRUDD</th>
                               </tr>
                               <tr className="border border-primary">
-                                <th>BSF438</th>
-                                <th>REP.SVEIST STELLIT TANN</th>
+                                <th>Serv 427</th>
+                                <th>RENGJØRING</th>
                               </tr>
                               <tr>
-                                <th>BFS442</th>
-                                <th>SLIPESERVICE AV REP.TENNER METER</th>
+                                <th>REKLAMASJON</th>
+                                <th>REKLAMASJON</th>
                               </tr>
                             </tbody>
                           </table>
