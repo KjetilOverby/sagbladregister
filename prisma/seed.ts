@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 
 import { sawblades } from "./sawblades";
 import { PrismaClient } from "@prisma/client";
