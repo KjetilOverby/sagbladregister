@@ -16,6 +16,7 @@ import ActivateBlade from "./ActivateBlade";
 import { DeleteComponent } from "./DeleteComponent";
 import { FiRefreshCw } from "react-icons/fi";
 import { GiProgression } from "react-icons/gi";
+import ServiceKodeTabell from "../reusable/ServiceKodeTabell";
 
 interface Blade {
   creatorImg: string | undefined;
@@ -263,7 +264,7 @@ const SearchMain = ({
                             <div>
                               <FiRefreshCw
                                 onClick={() => statusHandler(blade.id)}
-                                className={`text-xl ${
+                                className={`text-lg ${
                                   blade.active
                                     ? "text-orange-600"
                                     : "text-accent"
@@ -284,13 +285,13 @@ const SearchMain = ({
                       )}
 
                       <td>
-                        <div
+                        <button
                           onClick={openHistorikkDataHandler}
-                          className="flex items-center"
+                          className="btn btn-xs flex items-center bg-blue-500 text-white"
                         >
                           <p className="w-5">{blade._count.bandhistorikk}</p>
-                          <GiProgression className="text-xl text-orange-600" />
-                        </div>
+                          Åpne
+                        </button>
                       </td>
 
                       <td className="relative">
@@ -378,42 +379,7 @@ const SearchMain = ({
                           </p>
                         </div>
                         <div>
-                          <table className="table table-xs ml-5 w-full border border-primary bg-base-100  py-5">
-                            <thead>
-                              <tr className="border border-primary">
-                                <th className="itay-5 px-5  text-lg">Kode</th>
-                                <th className="itay-5 px-5  text-lg">
-                                  Beskrivelse
-                                </th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr className="border border-primary">
-                                <th>SERV 764</th>
-                                <th>HELOMLODDING HM</th>
-                              </tr>
-                              <tr className="border border-primary">
-                                <th>SERV 402</th>
-                                <th>SLIP HM/STELLITBLAD</th>
-                              </tr>
-                              <tr className="border border-primary">
-                                <th>SERV 407</th>
-                                <th>LODDING HM</th>
-                              </tr>
-                              <tr className="border border-primary">
-                                <th>SERV 411</th>
-                                <th>SVEISING TOPPBRUDD</th>
-                              </tr>
-                              <tr className="border border-primary">
-                                <th>Serv 427</th>
-                                <th>RENGJØRING</th>
-                              </tr>
-                              <tr>
-                                <th>REKLAMASJON</th>
-                                <th>REKLAMASJON</th>
-                              </tr>
-                            </tbody>
-                          </table>
+                          <ServiceKodeTabell />
                         </div>
                       </div>
                       <BandDetails

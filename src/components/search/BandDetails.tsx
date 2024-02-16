@@ -278,7 +278,7 @@ const BandDetails = ({
                     <td className="text-primary">
                       {post.activePost && (
                         <div onClick={() => setOpenDeactivateModal(true)}>
-                          <FiRefreshCw className=" text-xl text-orange-400" />
+                          <FiRefreshCw className=" text-lg text-orange-400" />
                           {openDeactivateModal && (
                             <DeactivateBlade
                               blade={blade}

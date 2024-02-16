@@ -10,6 +10,8 @@ import SearchMain from "~/components/search/SearchMain";
 import { api } from "~/utils/api";
 import { signIn, signOut, useSession } from "next-auth/react";
 import NotAuthorized from "~/components/reusable/NotAuthorized";
+import RoleAdmin from "~/components/roles/RoleAdmin";
+import RoleAdminMV from "~/components/roles/RoleAdminMV";
 
 const Search = ({ theme }) => {
   const [closeSearchComponent, setCloseSearchComponent] = useState(false);
@@ -62,11 +64,10 @@ const Search = ({ theme }) => {
   return (
     <div data-theme={theme}>
       {sessionData?.user.role === "ADMIN" ||
-      sessionData?.user.role === "MO_ADMIN" ? (
+      sessionData?.user.role === "MV_ADMIN" ? (
         <>
           <HeaderComponent />
-          <button>The new button</button>
-          <button>The new button2</button>
+
           <div className="mx-48 min-h-screen max-2xl:w-screen max-xl:m-0">
             <div className="rounded-xl bg-base-100">
               {!closeSearchComponent ? (
@@ -90,7 +91,7 @@ const Search = ({ theme }) => {
                 ""
               )}
             </div>
-            {sessionData?.user.role === "ADMIN" && (
+            <RoleAdmin>
               <SearchMain
                 sawblades={sawblades}
                 deletedSawblades={deletedSawblades}
@@ -98,8 +99,9 @@ const Search = ({ theme }) => {
                 closeSearchComponent={closeSearchComponent}
                 setCloseSearchComponent={setCloseSearchComponent}
               />
-            )}
-            {sessionData?.user.role === "MO_ADMIN" && (
+            </RoleAdmin>
+
+            <RoleAdminMV>
               <SearchMain
                 sawblades={sawbladesOsterdal}
                 deletedSawblades={sawbladesOsterdalDeleted}
@@ -107,7 +109,7 @@ const Search = ({ theme }) => {
                 closeSearchComponent={closeSearchComponent}
                 setCloseSearchComponent={setCloseSearchComponent}
               />
-            )}
+            </RoleAdminMV>
           </div>
         </>
       ) : (
