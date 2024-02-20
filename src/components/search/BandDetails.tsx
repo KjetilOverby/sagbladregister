@@ -244,9 +244,7 @@ const BandDetails = ({
                     <td className="py-5 text-neutral">{post.feilkode}</td>
 
                     <td className="relative  max-w-56 py-5 text-neutral">
-                      {post.anmSag === "-" ? (
-                        ""
-                      ) : (
+                      {post.anmSag && (
                         <button
                           onClick={() => messageHander(post.id)}
                           className="btn btn-xs bg-accent"
@@ -287,6 +285,7 @@ const BandDetails = ({
                               handleCloseModal={handleCloseModal}
                               post={post}
                               setOpenDeactivateModal={setOpenDeactivateModal}
+                              setHistorikkKs={setHistorikkKs}
                             />
                           )}
                         </div>
@@ -315,9 +314,7 @@ const BandDetails = ({
                     <td className="text-neutral">{post.handling}</td>
                     <td className="text-neutral">{post.sideklaring}</td>
                     <td className="relative max-w-56 text-neutral">
-                      {post.anmKS === "-" ? (
-                        ""
-                      ) : (
+                      {post.anmKS && (
                         <>
                           <button
                             onClick={() => messageKShandler(post.id)}
@@ -347,21 +344,17 @@ const BandDetails = ({
                       )}
                     </td>
                     <td className="text-neutral">
-                      {post.creator3 === "-" ? (
-                        ""
-                      ) : (
-                        <div className="flex items-center">
-                          <div className="mr-2 h-5 w-5">
-                            <img
-                              className="w-full rounded-full"
-                              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                              src={post.creatorImg3}
-                              alt=""
-                            />
-                          </div>
-                          {post.creator3}
+                      <div className="flex items-center">
+                        <div className="mr-2 h-5 w-5">
+                          <img
+                            className="w-full rounded-full"
+                            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                            src={post.creatorImg3}
+                            alt=""
+                          />
                         </div>
-                      )}
+                        {post.creator3}
+                      </div>
                     </td>
                     <td className="text-neutral">
                       {dateFormat(post.datoSrv, "dd.mm.yyyy")}

@@ -135,18 +135,7 @@ const SearchMain = ({
   return (
     <div className=" max-lg:overflow-scroll">
       <div>
-        {!closeSearchComponent ? (
-          <div>
-            <h1 className="text-xl text-neutral">
-              Blad i bruk ({countBlades})
-            </h1>
-            <p className="text-neutral">
-              Nye registrerte blad denne perioden: {newBladesCount}
-            </p>
-          </div>
-        ) : (
-          ""
-        )}
+        {!closeSearchComponent ? <div></div> : ""}
         <table className="table table-xs whitespace-nowrap border border-b-accent border-l-base-100 border-r-base-100 border-t-accent bg-base-100">
           <thead>
             <tr className="">
@@ -214,7 +203,7 @@ const SearchMain = ({
                       key={blade.id}
                       className="cursor-pointer border border-base-100 bg-base-100 hover:bg-primary"
                     >
-                      <td className="font-by-5  px-5">
+                      <td className="font-by-5  px-5 font-bold ">
                         {blade.IdNummer}{" "}
                         {blade.note !== "-" && (
                           <span className="font-nory-5 px-5  text-xs">

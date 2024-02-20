@@ -159,11 +159,11 @@ const ActivateBlade = ({
                   ""
                 )}
               </h2>
-              <p>Legg til service</p>
+              <p>Legg til servicedata</p>
             </div>
 
             <button className="btn btn-primary btn-xs bg-accent">
-              Legg til
+              Deaktiver
             </button>
           </form>
         </div>

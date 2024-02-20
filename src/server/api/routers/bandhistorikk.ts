@@ -91,7 +91,9 @@ export const bandhistorikkRouter = createTRPCRouter({
               service: input.service,
               creator2: creatorName,
               creatorImg2: creatorImg,
-              ampere: input.ampere
+              ampere: input.ampere,
+              handling: "Ingen handling",
+                datoSrv: new Date(),
             
             
           

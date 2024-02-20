@@ -23,14 +23,10 @@ const Search = ({ theme }) => {
   const [idValue, setIdValue] = useState("");
 
   const { data: sawblades } = api.sawblades.getAll.useQuery({
-    date: `${dateValue.endDate}T23:59:59.000Z`,
-    date2: `${dateValue.startDate}T00:00:00.000Z`,
     IdNummer: idValue,
   });
 
   const { data: deletedSawblades } = api.sawblades.getAllDeleted.useQuery({
-    date: `${dateValue.endDate}T23:59:59.000Z`,
-    date2: `${dateValue.startDate}T00:00:00.000Z`,
     IdNummer: idValue,
   });
   const { data: sawbladeslActive } = api.sawblades.getActive.useQuery({
@@ -71,21 +67,15 @@ const Search = ({ theme }) => {
           <div className="mx-48 min-h-screen max-2xl:w-screen max-xl:m-0">
             <div className="rounded-xl bg-base-100">
               {!closeSearchComponent ? (
-                <div className="mb-5 w-96 rounded-xl bg-base-100 p-5">
-                  <DatepickerComponent
-                    setDateValue={setDateValue}
-                    dateValue={dateValue}
+                <div className="flex flex-col py-5">
+                  <label>Søk</label>
+                  <input
+                    value={idValue}
+                    onChange={(e) => setIdValue(e.currentTarget.value)}
+                    type="text"
+                    placeholder="Skriv id nummer"
+                    className="input input-bordered input-xs  w-28 max-w-xs bg-base-100"
                   />
-                  <div className="flex flex-col">
-                    <label>Søk</label>
-                    <input
-                      value={idValue}
-                      onChange={(e) => setIdValue(e.currentTarget.value)}
-                      type="text"
-                      placeholder="Skriv id nummer"
-                      className="input input-bordered input-xs w-full max-w-xs bg-accent"
-                    />
-                  </div>
                 </div>
               ) : (
                 ""
