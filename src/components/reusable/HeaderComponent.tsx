@@ -111,7 +111,7 @@ const HeaderComponent = () => {
                     className="mr-3 h-6 sm:h-9"
                     alt="Flowbite Logo"
                   /> */}
-                  <span className="self-center whitespace-nowrap text-xl font-semibold text-neutral">
+                  <span className="self-center whitespace-nowrap text-xl font-semibold text-orange-600">
                     Sagbladregister
                   </span>
                 </p>
@@ -135,6 +135,15 @@ const HeaderComponent = () => {
                     className={`lg:hover:text-primary-700  block border-b border-gray-100 py-2 pl-3 pr-4 text-sm text-neutral hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:border-0 lg:p-0 lg:hover:bg-transparent lg:dark:hover:bg-transparent lg:dark:hover:text-white ${actualPage.statistikk}`}
                   >
                     Statistikk
+                  </p>
+                </li>
+              </Link>
+              <Link href="/oversikt">
+                <li>
+                  <p
+                    className={`lg:hover:text-primary-700  block border-b border-gray-100 py-2 pl-3 pr-4 text-sm text-neutral hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:border-0 lg:p-0 lg:hover:bg-transparent lg:dark:hover:bg-transparent lg:dark:hover:text-white ${actualPage.oversikt}`}
+                  >
+                    Oversikt
                   </p>
                 </li>
               </Link>

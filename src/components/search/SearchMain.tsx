@@ -382,7 +382,7 @@ const SearchMain = ({
 
                       <button
                         onClick={handleCloseHistorikk}
-                        className="btn btn-primary btn-xs mt-5"
+                        className="text-primary-100  btn btn-xs mt-5 bg-red-500"
                       >
                         Lukk historikk
                       </button>
@@ -395,7 +395,7 @@ const SearchMain = ({
         </table>
       </div>
       <button
-        className="btn btn-xs my-5"
+        className="btn btn-xs my-5 bg-green-500 text-white"
         onClick={() => setShowDeletedBlades(!showDeletedBlades)}
       >
         {showDeletedBlades ? "Skjul slettede blad" : "Vis slettede blad"}

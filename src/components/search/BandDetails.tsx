@@ -157,7 +157,7 @@ const BandDetails = ({
         <div>
           <button
             onClick={() => setOpenInput(true)}
-            className="btn btn-xs mb-5 mt-5 bg-primary"
+            className="btn btn-xs mb-5 mt-5 bg-green-500 text-base-100"
           >
             Ny post
           </button>
@@ -247,7 +247,7 @@ const BandDetails = ({
                       {post.anmSag && (
                         <button
                           onClick={() => messageHander(post.id)}
-                          className="btn btn-xs bg-accent"
+                          className="btn btn-xs bg-green-500"
                         >
                           Vis
                         </button>
@@ -294,18 +294,18 @@ const BandDetails = ({
                     <td className="text-neutral">
                       <button
                         onClick={editHistorikkPostHandler}
-                        className="btn btn-xs mr-5 bg-base-100"
+                        className="btn btn-xs mr-5 bg-blue-500"
                       >
                         <CiEdit
                           style={{ fontSize: ".8rem" }}
-                          className="text-neutral"
+                          className="text-base-100"
                         />
                       </button>
 
                       {!post.activePost && (
                         <button
                           onClick={openKSinput}
-                          className="btn btn-xs text-neutral"
+                          className="btn btn-xs bg-yellow-500 text-base-100"
                         >
                           KS
                         </button>
@@ -318,7 +318,7 @@ const BandDetails = ({
                         <>
                           <button
                             onClick={() => messageKShandler(post.id)}
-                            className="btn btn-xs bg-accent"
+                            className="btn btn-xs bg-yellow-500 text-base-100"
                           >
                             Vis
                           </button>

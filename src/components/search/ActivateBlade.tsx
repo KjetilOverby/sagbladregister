@@ -153,13 +153,13 @@ const ActivateBlade = ({
           >
             <div className="card-body items-center text-center">
               <h2 className="card-title">
-                <span className="text-accent">{blade.IdNummer}</span>
+                <span className="text-base-100">{blade.IdNummer}</span>
               </h2>
               <p className="text-accent">Aktiver service</p>
 
               <select
                 onChange={(e) => setserviceInput(e.currentTarget.value)}
-                className="rounded-xl bg-white p-1"
+                className="rounded-xl bg-base-100 p-1 text-neutral"
                 name=""
                 id=""
               >

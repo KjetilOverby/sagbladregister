@@ -22,6 +22,8 @@ const Search = ({ theme }) => {
   });
   const [idValue, setIdValue] = useState("");
 
+  const { data: countAllBlades } = api.sawblades.countAllBlades.useQuery({});
+
   const { data: sawblades } = api.sawblades.getAll.useQuery({
     IdNummer: idValue,
   });
@@ -76,6 +78,9 @@ const Search = ({ theme }) => {
                     placeholder="Skriv id nummer"
                     className="input input-bordered input-xs  w-28 max-w-xs bg-base-100"
                   />
+                  <p className="mt-5 text-sm">
+                    Antall blad i bruk: {countAllBlades?.notDeleted}
+                  </p>
                 </div>
               ) : (
                 ""
