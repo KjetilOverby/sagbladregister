@@ -3,7 +3,7 @@ import OverviewTable from "~/components/oversikt/OverviewTable";
 import HeaderComponent from "~/components/reusable/HeaderComponent";
 import { api } from "~/utils/api";
 
-const oversikt = ({ theme }) => {
+const oversikt = ({ theme }: { theme: string }) => {
   const { data: count } = api.sawblades.countSawblades.useQuery();
   return (
     <div className="min-h-screen" data-theme={theme}>

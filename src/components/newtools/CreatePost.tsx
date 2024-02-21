@@ -31,6 +31,7 @@ const CreatePost = () => {
   const createPost = api.sawblades.create.useMutation({
     onSuccess: () => {
       void ctx.sawblades.getAll.invalidate();
+      void ctx.sawblades.getAllCreate.invalidate();
     },
   });
   useEffect(() => {

@@ -217,7 +217,7 @@ const BandDetails = ({
 
               return (
                 <>
-                  <tr className="border border-base-100 bg-base-100">
+                  <tr className="border border-base-100 bg-base-100 hover:bg-accent">
                     <td className="py-5">
                       <div className="text-xs text-neutral">{post.service}</div>
                     </td>
