@@ -114,6 +114,10 @@ const SearchMain = ({
     },
   });
 
+  const handleCloseModal = () => {
+    setOpenStatus(null);
+  };
+
   const updatePost = api.bandhistorikk.update.useMutation({
     onSuccess: () => {
       void ctx.sawblades.getAll.invalidate();
@@ -182,6 +186,12 @@ const SearchMain = ({
               const closeDeleteHandler = () => {
                 setOpenDeleteID(null);
                 setWasteReasonInput("");
+              };
+              const updateStatusHandler = () => {
+                void updateStatus.mutate({
+                  id: blade.id,
+                  active: true,
+                });
               };
 
               return (
@@ -349,6 +359,7 @@ const SearchMain = ({
               blade={blade}
               updatePost={updatePost}
               updateStatusHandler={updateStatusHandler}
+              handleCloseModal={handleCloseModal}
             />
           );
         })}

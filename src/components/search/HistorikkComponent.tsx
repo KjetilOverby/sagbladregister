@@ -8,6 +8,7 @@ const HistorikkComponent = ({
   setOpenBandhistorikkData,
   updatePost,
   updateStatusHandler,
+  handleCloseModal,
 }) => {
   return (
     <div>
@@ -37,6 +38,7 @@ const HistorikkComponent = ({
           blade={blade}
           updatePost={updatePost}
           updateStatusHandler={updateStatusHandler}
+          handleCloseModal={handleCloseModal}
         />
       </div>
     </div>

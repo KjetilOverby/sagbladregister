@@ -73,6 +73,7 @@ const BandDetails = ({
   blade,
   updatePost,
   deactivateStatusHandler,
+  handleCloseModal,
 }: bandProps) => {
   const [openInput, setOpenInput] = useState(false);
   const [openMessage, setOpenMessage] = useState<string | null>(null);
