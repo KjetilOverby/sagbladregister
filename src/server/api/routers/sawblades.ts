@@ -47,34 +47,34 @@ export const sawbladesRouter = createTRPCRouter({
        })
     }),
 
-  getAll: protectedProcedure
-  .input(z.object({IdNummer: z.string()}))
-      .query(({ ctx, input }) => {
-       return ctx.db.sawblades.findMany({
-        take: 10,
-        where: {
-          AND: [{
-          
-            IdNummer: {contains: input.IdNummer ? input.IdNummer : undefined},
-          }]
-        },
-        orderBy: {
-          IdNummer: 'desc'
-                        },
-          include: {
-            _count: {
-              select: {
-                bandhistorikk: true,
+    getAll: protectedProcedure
+    .input(z.object({IdNummer: z.string()}))
+        .query(({ ctx, input }) => {
+         return ctx.db.sawblades.findMany({
+          take: 5,
+          where: {
+            AND: [{
+            
+              IdNummer: input.IdNummer,
+            }]
+          },
+          orderBy: {
+            IdNummer: 'desc'
+                          },
+            include: {
+              _count: {
+                select: {
+                  bandhistorikk: true,
+                },
+              },
+              bandhistorikk: {
+                orderBy: {
+                  createdAt: 'asc'
+                }
               },
             },
-            bandhistorikk: {
-              orderBy: {
-                createdAt: 'asc'
-              }
-            },
-          },
-       })
-    }),
+         })
+      }),
 
 
    

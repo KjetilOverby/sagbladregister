@@ -66,7 +66,7 @@ const Search = ({ theme }) => {
         <>
           <HeaderComponent />
 
-          <div className="mx-48 min-h-screen max-2xl:w-screen max-xl:m-0">
+          <div className="mx-20 min-h-screen max-2xl:w-screen max-xl:m-0">
             <div className="rounded-xl bg-base-100">
               {!closeSearchComponent ? (
                 <div className="flex flex-col py-5">

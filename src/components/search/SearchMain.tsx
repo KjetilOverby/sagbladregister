@@ -6,7 +6,6 @@
 import dateFormat from "dateformat";
 import { useEffect, useState } from "react";
 // import { DeleteComponent } from "./DeleteComponent";
-import BandDetails from "./BandDetails";
 import { RestoreComponent } from "./RestoreComponent";
 // import DatepickerComponent from "../reusable/Datepicker";
 import { useSession } from "next-auth/react";
@@ -16,7 +15,8 @@ import ActivateBlade from "./ActivateBlade";
 import { DeleteComponent } from "./DeleteComponent";
 import { FiRefreshCw } from "react-icons/fi";
 import { GiProgression } from "react-icons/gi";
-import ServiceKodeTabell from "../reusable/ServiceKodeTabell";
+import HistorikkComponent from "./HistorikkComponent";
+import DeletedBladesComponent from "./DeletedBladesComponent";
 
 interface Blade {
   creatorImg: string | undefined;
@@ -74,11 +74,6 @@ const SearchMain = ({
   setCloseSearchComponent,
   closeSearchComponent,
 }: BladeProps) => {
-  // const page = params["page"] ?? "1";
-  // const per_page = params["per_page"] ?? "10";
-  // const start = (Number(page) - 1) * Number(per_page);
-  // const end = start + Number(per_page);
-  // const entries = sawblades.slice(start, end);
   const { data: sessionData } = useSession();
 
   const [showDeletedBlades, setShowDeletedBlades] = useState(false);
@@ -133,7 +128,7 @@ const SearchMain = ({
   }, [sawblades]);
 
   return (
-    <div className=" max-lg:overflow-scroll">
+    <div className="max-lg:overflow-scroll">
       <div>
         {!closeSearchComponent ? <div></div> : ""}
         <table className="table table-xs whitespace-nowrap border border-b-accent border-l-base-100 border-r-base-100 border-t-accent bg-base-100">
@@ -172,13 +167,6 @@ const SearchMain = ({
                 }, 100);
               };
 
-              const updateStatusHandler = () => {
-                void updateStatus.mutate({
-                  id: blade.id,
-                  active: true,
-                });
-              };
-
               const deactivateStatusHandler = () => {
                 void updateStatus.mutate({
                   id: blade.id,
@@ -198,13 +186,13 @@ const SearchMain = ({
 
               return (
                 <>
-                  {!blade.deleted && (
+                  {
                     <tr
                       key={blade.id}
                       className="cursor-pointer border border-base-100 bg-base-100 hover:bg-primary"
                     >
                       <td className="font-by-5  px-5 font-bold ">
-                        {blade.IdNummer}{" "}
+                        {blade.IdNummer}
                         {blade.note !== "-" && (
                           <span className="font-nory-5 px-5  text-xs">
                             ({blade.note})
@@ -274,23 +262,19 @@ const SearchMain = ({
                       )}
 
                       <td>
-                        <button
-                          onClick={openHistorikkDataHandler}
-                          className="btn btn-xs flex items-center bg-blue-500 text-white"
-                        >
-                          <p className="w-5">{blade._count.bandhistorikk}</p>
-                          Åpne
-                        </button>
+                        <p className="w-5">{blade._count.bandhistorikk}</p>
                       </td>
 
                       <td className="relative">
-                        <RiDeleteBinLine
-                          style={{
-                            color: "indianred",
-                            fontSize: "1rem",
-                          }}
-                          onClick={() => deleteHandler(blade.id)}
-                        />
+                        {!blade.deleted && (
+                          <RiDeleteBinLine
+                            style={{
+                              color: "indianred",
+                              fontSize: "1rem",
+                            }}
+                            onClick={() => deleteHandler(blade.id)}
+                          />
+                        )}
                         {openDeleteID === blade.id && (
                           <div className="card absolute right-24 z-40 flex w-96 flex-col items-center bg-primary text-primary-content">
                             <div className="card-body">
@@ -311,14 +295,12 @@ const SearchMain = ({
                                   Normal slitasje
                                 </option>
                                 <option value="Ikjøring">Ikjøring</option>
-                                <option className="Havari">Havari</option>
-                                <option className="Dårlig stamme">
+                                <option value="Havari">Havari</option>
+                                <option value="Dårlig stamme">
                                   Dårlig stamme
                                 </option>
-                                <option className="Varmekjørt">
-                                  Varmekjørt
-                                </option>
-                                <option className="Store tannskader">
+                                <option value="Varmekjørt">Varmekjørt</option>
+                                <option value="Store tannskader">
                                   Store tannskader
                                 </option>
                               </select>
@@ -347,52 +329,29 @@ const SearchMain = ({
                         )}
                       </td>
                     </tr>
-                  )}
-                  {openHistorikk === blade.id && (
-                    <div className="absolute top-0 z-50 h-screen w-full rounded-2xl bg-base-100 p-5 max-lg:relative">
-                      <div className="mr-5 flex justify-between">
-                        <div>
-                          <h1 className=" texty-5  px-5">Historikk</h1>
-                          <h1 className="font-semiby-5 px-5  text-2xl">
-                            ID: {blade.IdNummer}
-                          </h1>
-                          <p className="texty-5  px-5">
-                            Type: {blade.type} {blade.side}
-                          </p>
-                          <p className="itay-5  px-5">
-                            Registrert:
-                            {dateFormat(blade.createdAt, "dd.mm.yyyy")}
-                          </p>
-                          <p className="itay-5  px-5">
-                            Registrert av: {blade.creator}
-                          </p>
-                        </div>
-                        <div>
-                          <ServiceKodeTabell />
-                        </div>
-                      </div>
-                      <BandDetails
-                        bandhistorikkData={blade}
-                        setOpenBandhistorikkData={setOpenBandhistorikkData}
-                        blade={blade}
-                        updatePost={updatePost}
-                        updateStatusHandler={updateStatusHandler}
-                        handleCloseModal={handleCloseModal}
-                      />
-
-                      <button
-                        onClick={handleCloseHistorikk}
-                        className="text-primary-100  btn btn-xs mt-5 bg-red-500"
-                      >
-                        Lukk historikk
-                      </button>
-                    </div>
-                  )}
+                  }
                 </>
               );
             })}
           </tbody>
         </table>
+        {sawblades?.map((blade) => {
+          const updateStatusHandler = () => {
+            void updateStatus.mutate({
+              id: blade.id,
+              active: true,
+            });
+          };
+          return (
+            <HistorikkComponent
+              bandhistorikkData={blade}
+              setOpenBandhistorikkData={setOpenBandhistorikkData}
+              blade={blade}
+              updatePost={updatePost}
+              updateStatusHandler={updateStatusHandler}
+            />
+          );
+        })}
       </div>
       <button
         className="btn btn-xs my-5 bg-green-500 text-white"
@@ -401,92 +360,7 @@ const SearchMain = ({
         {showDeletedBlades ? "Skjul slettede blad" : "Vis slettede blad"}
       </button>
       {showDeletedBlades && (
-        <div>
-          <h1 className="text-xl text-neutral">
-            Slettede blad ({deletedSawblades?.length})
-          </h1>
-          <table className="table table-xs whitespace-nowrap bg-neutral">
-            <thead>
-              <tr>
-                <th className="text-sm text-accent">ID</th>
-                <th className="text-sm text-accent">Type</th>
-
-                {/* <th className="text-sm text-accent">Opprettet av</th> */}
-                <th className="text-sm text-accent">Slettet av</th>
-                <th className="text-sm text-accent">Dato slettet</th>
-                <th className="text-sm text-accent">Årsak</th>
-                <th className="text-sm text-accent"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {deletedSawblades?.map((blade) => {
-                return (
-                  <>
-                    {blade.deleted && (
-                      <tr className="bg-primary">
-                        <td className="font-bold text-neutral">
-                          {blade.IdNummer}{" "}
-                          {blade.note !== "-" && (
-                            <span className="text-xs font-normal text-orange-200">
-                              ({blade.note})
-                            </span>
-                          )}
-                        </td>
-                        <td>
-                          <div className="flex items-center space-x-3">
-                            <div className="avatar"></div>
-                            <div>
-                              <div className="text-xs text-neutral">
-                                {blade.type} {blade.side}
-                              </div>
-                            </div>
-                          </div>
-                        </td>
-                        {/*   <td className="flex items-center">
-                          <div className="mr-2 h-5 w-5">
-                            <img
-                              className="rounded-full"
-                              src={blade.creatorImg}
-                              alt=""
-                            />
-                          </div>
-                          {blade.creator}
-                        </td> */}
-
-                        <td className="flex items-center">
-                          <div className="mr-2 h-5 w-5">
-                            <img
-                              className="rounded-full"
-                              src={blade.deleterImg}
-                              alt=""
-                            />
-                          </div>
-                          {blade.deleter}
-                        </td>
-                        <td>
-                          <div className="flex items-center space-x-3">
-                            <div className="text-xs text-neutral">
-                              {dateFormat(
-                                blade.updatedAt,
-                                "dd.mm.yyyy , HH:MM",
-                              )}
-                            </div>
-                          </div>
-                        </td>
-                        <td>{blade.deleteReason}</td>
-                        <td>
-                          <th className="text-neutral">
-                            <RestoreComponent id={blade.id} />
-                          </th>
-                        </td>
-                      </tr>
-                    )}
-                  </>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+        <DeletedBladesComponent deletedSawblades={deletedSawblades} />
       )}
     </div>
   );

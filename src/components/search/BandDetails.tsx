@@ -73,7 +73,6 @@ const BandDetails = ({
   blade,
   updatePost,
   deactivateStatusHandler,
-  handleCloseModal,
 }: bandProps) => {
   const [openInput, setOpenInput] = useState(false);
   const [openMessage, setOpenMessage] = useState<string | null>(null);
@@ -122,7 +121,7 @@ const BandDetails = ({
   });
 
   return (
-    <div className="z-50 w-full">
+    <div className="">
       {openInput && (
         <HistorikkInput
           setOpenInput={setOpenInput}
