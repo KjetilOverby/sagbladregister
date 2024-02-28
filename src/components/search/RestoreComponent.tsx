@@ -8,11 +8,17 @@ interface IdProps {
   id: string;
 }
 
-export const RestoreComponent = ({ id }: IdProps) => {
+export const RestoreComponent = ({ id, setOpenGjenopprettID }: IdProps) => {
+  const ctx = api.useContext();
   const router = useRouter();
   const updateBlade = api.sawblades.update.useMutation({
     onSuccess: () => {
-      router.refresh();
+      void ctx.sawblades.getAll.invalidate();
+      void ctx.sawblades.getCustomer.invalidate();
+      void ctx.sawblades.getAllDeleted.invalidate();
+      void ctx.sawblades.getCustomerAllDeleted.invalidate();
+      void ctx.sawblades.countAllBlades.invalidate();
+      setOpenGjenopprettID(null);
     },
   });
   return (
