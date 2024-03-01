@@ -11,6 +11,7 @@ import { CiEdit } from "react-icons/ci";
 import DeactivateBlade from "./DeactivateBlade";
 import EditBandDetails from "./EditBandDetails";
 import { FiRefreshCw } from "react-icons/fi";
+import { RiDeleteBinFill } from "react-icons/ri";
 
 interface bandProps {
   blade: {
@@ -83,6 +84,7 @@ const BandDetails = ({
 
   const [openDeactivateModal, setOpenDeactivateModal] = useState(false);
   const [openEditBandDetails, setOpenEditBandDetails] = useState(false);
+  const [openDeleteId, setOpenDeleteId] = useState<string | null>(null);
 
   const [historikkKs, setHistorikkKs] = useState({
     anmKS: "",
@@ -91,6 +93,10 @@ const BandDetails = ({
     handling: "",
     sideklaring: 0,
   });
+
+  const openDeletePost = (postID: string) => {
+    setOpenDeleteId(postID);
+  };
 
   const messageHander = (postID: string) => {
     setOpenMessage(postID);
@@ -360,10 +366,39 @@ const BandDetails = ({
                       {dateFormat(post.datoSrv, "dd.mm.yyyy")}
                     </td>
                     <td className="text-neutral">
-                      <Deletehistorikkpost
-                        post={post.id}
-                        setOpenBandhistorikkData={setOpenBandhistorikkData}
-                      />
+                      {openDeleteId === post.id && (
+                        <div className="card absolute right-20 z-50 bg-red-500 p-5 text-white">
+                          <div>
+                            <h1 className="mb-5 text-lg">Slett post</h1>
+                            <p>
+                              Sletting av post er permanent og kan ikke angres.
+                            </p>
+                            <p className="mb-3">
+                              Statistikk i forbindelse med posten blir borte.
+                            </p>
+                          </div>
+                          <div className="flex">
+                            <button
+                              onClick={() => setOpenDeleteId(null)}
+                              className="btn btn-sm mr-5 bg-blue-500 text-white hover:bg-blue-400"
+                            >
+                              Avbryt
+                            </button>
+
+                            <Deletehistorikkpost
+                              post={post.id}
+                              setOpenBandhistorikkData={
+                                setOpenBandhistorikkData
+                              }
+                            />
+                          </div>
+                        </div>
+                      )}
+                      <td>
+                        <button onClick={() => openDeletePost(post.id)}>
+                          <RiDeleteBinFill className="text-sm text-red-500" />
+                        </button>
+                      </td>
                     </td>
                   </tr>
                 </>
