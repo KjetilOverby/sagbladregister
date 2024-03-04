@@ -73,6 +73,8 @@ const SearchMain = ({
   deletedSawblades,
   setCloseSearchComponent,
   closeSearchComponent,
+  dateValue,
+  setDateValue,
 }: BladeProps) => {
   const { data: sessionData } = useSession();
 
@@ -421,7 +423,11 @@ const SearchMain = ({
         {showDeletedBlades ? "Skjul slettede blad" : "Vis slettede blad"}
       </button>
       {showDeletedBlades && (
-        <DeletedBladesComponent deletedSawblades={deletedSawblades} />
+        <DeletedBladesComponent
+          dateValue={dateValue}
+          setDateValue={setDateValue}
+          deletedSawblades={deletedSawblades}
+        />
       )}
     </div>
   );

@@ -3,10 +3,13 @@
 import React from "react";
 import dateFormat from "dateformat";
 import { RestoreComponent } from "./RestoreComponent";
+import DatepickerComponent from "../reusable/Datepicker";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const DeletedBladesComponent = ({
   deletedSawblades,
+  dateValue,
+  setDateValue,
 }: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   deletedSawblades: any[];
@@ -14,6 +17,12 @@ const DeletedBladesComponent = ({
   return (
     <div>
       <div>
+        <div className="shadow-xl">
+          <DatepickerComponent
+            setDateValue={setDateValue}
+            dateValue={dateValue}
+          />
+        </div>
         <h1 className="text-xl text-neutral">
           Slettede blad ({deletedSawblades?.length})
         </h1>
@@ -27,7 +36,6 @@ const DeletedBladesComponent = ({
               <th className="text-sm text-accent">Slettet av</th>
               <th className="text-sm text-accent">Dato slettet</th>
               <th className="text-sm text-accent">Årsak</th>
-              <th className="text-sm text-accent"></th>
             </tr>
           </thead>
           <tbody>
@@ -86,11 +94,6 @@ const DeletedBladesComponent = ({
                         </div>
                       </td>
                       <td>{blade.deleteReason}</td>
-                      <td>
-                        <th className="text-neutral">
-                          <RestoreComponent id={blade.id} />
-                        </th>
-                      </td>
                     </tr>
                   )}
                 </>

@@ -79,15 +79,19 @@ export const sawbladesRouter = createTRPCRouter({
 
    
 
+      
     getAllDeleted: protectedProcedure
-    .input(z.object({ IdNummer: z.string(),}))
+    .input(z.object({ IdNummer: z.string(),date2: z.string(), date: z.string()}))
         .query(({ ctx, input }) => {
          // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
          return ctx.db.sawblades.findMany({
-          take: 5,
+          
           where: {
             AND: [{
-           
+              updatedAt: {
+                lte: new Date(input.date),
+                gte: new Date(input.date2),
+               },
               deleted: true,
               IdNummer: {contains: input.IdNummer ? input.IdNummer : undefined},
             }]

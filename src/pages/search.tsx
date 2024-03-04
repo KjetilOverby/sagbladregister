@@ -12,13 +12,14 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import NotAuthorized from "~/components/reusable/NotAuthorized";
 import RoleAdmin from "~/components/roles/RoleAdmin";
 import RoleAdminMV from "~/components/roles/RoleAdminMV";
+import dateFormat from "dateformat";
 
 const Search = ({ theme }) => {
   const [closeSearchComponent, setCloseSearchComponent] = useState(false);
   const { data: sessionData } = useSession();
   const [dateValue, setDateValue] = useState({
-    endDate: "2040-01-14",
-    startDate: "2023-12-01",
+    endDate: dateFormat(new Date(), "yyyy-mm-dd"),
+    startDate: dateFormat(new Date(), "yyyy-mm-dd"),
   });
   const [idValue, setIdValue] = useState("");
 
@@ -29,8 +30,11 @@ const Search = ({ theme }) => {
   });
 
   const { data: deletedSawblades } = api.sawblades.getAllDeleted.useQuery({
+    date: `${dateValue.endDate}T23:59:59.000Z`,
+    date2: `${dateValue.startDate}T00:00:00.000Z`,
     IdNummer: idValue,
   });
+
   const { data: sawbladeslActive } = api.sawblades.getActive.useQuery({
     date: `${dateValue.endDate}T23:59:59.000Z`,
     date2: `${dateValue.startDate}T00:00:00.000Z`,
@@ -93,6 +97,8 @@ const Search = ({ theme }) => {
                 activeBlades={sawbladeslActive}
                 closeSearchComponent={closeSearchComponent}
                 setCloseSearchComponent={setCloseSearchComponent}
+                dateValue={dateValue}
+                setDateValue={setDateValue}
               />
             </RoleAdmin>
 
@@ -103,6 +109,8 @@ const Search = ({ theme }) => {
                 activeBlades={sawbladesOsterdalActive}
                 closeSearchComponent={closeSearchComponent}
                 setCloseSearchComponent={setCloseSearchComponent}
+                dateValue={dateValue}
+                setDateValue={setDateValue}
               />
             </RoleAdminMV>
           </div>
