@@ -45,27 +45,33 @@ export const NewInputComponent = ({
           Velg bladtype
         </option>
 
-        <option value="MKV 2.2-3.3 445 36z">MKV 2.2-3.3 445 36z</option>
-        <option value="MKV 2.4-3.8 445 36z">MKV 2.4-3.8 445 36z</option>
-        <option value="MKV 2.6-4.0 445 36z">MKV 2.6-4.0 445 36z</option>
-        <option value="MKV 2.8-4.2 445 36z">MKV 2.8-4.2 445 36z</option>
-        <option value="MKV 3.0-4.4 445 36z">MKV 3.0-4.4 445 36z</option>
-        <option value="MKV 3.2-4.6 510 36z">MKV 3.2-4.6 445 36z</option>
-        <option value="VS66 N 3,2-4,8 475">VS66 N 3,2-4,8 475</option>
-        <option value="VS66 3,6-5,0 475 27z">VS66 3,6-5,0 475 27z</option>
-        <option value="VS66 3,6-5,0 475 24z Flens">
-          VS66 3,6-5,0 475 24z Flens
+        <option value="445/210 2.2-3.4 z36 MKV">445/210 2.2-3.4 z36 MKV</option>
+        <option value="445/210 2.4-3.6 z36 MKV">445/210 2.4-3.6 z36 MKV</option>
+        <option value="445/210 2.6-4.0 z36 MKV">445/210 2.6-4.0 z36 MKV</option>
+        <option value="445/210 2.8-4.2 z36 MKV">445/210 2.8-4.2 z36 MKV</option>
+        <option value="445/210 3.0-4.4 z36 MKV">445/210 3.0-4.4 z36 MKV</option>
+        <option value="510/210 3.2-4.6 z36 MKV">445/210 3.2-4.6 z36 MKV</option>
+        <option value="475/120 3.2-4.8 z30 VS66">
+          475/120 3.2-4.8 z30 N-blad VS66
         </option>
-        <option value="Trimmer JV 4,0/2,8 500 96z">
-          Trimmer JV 4,0/2,8 500 96z
+        <option value="475/120 3.6-5.0 z24 VS66">
+          475/120 3.6-5.0 z24 VS66
         </option>
-        <option value="Eksakt JV 3.5/2,5 400 80z">
-          Eksakt JV 3.5/2,5 400 80z
+        <option value="475/120 3.6-5.0 z24 flens VS66">
+          475/120 3.6-5.0 z24 flens VS66
         </option>
-        <option value="Endekapp JV 4.4/3.3 610 96z">
-          Endekapp JV 4.4/3.3 610 96z
+        <option value="500/30 2.8-4.0 z96 JV Trimmer">
+          500/30 2.8-4.0 z96 JV Trimmer
         </option>
-        <option value="Trimmer RS 4.0-2.8 450">Trimmer RS 4.0-2.8 450</option>
+        <option value="400/30 2.5-3.5 z80 JV Eksakt">
+          400/30 2.5-3.5 z80 JV Eksakt
+        </option>
+        <option value="400/30 3.3-4.4 z96 JV Endekapp">
+          400/30 3.3-4.4 z96 JV Endekapp
+        </option>
+        <option value="450/35 2.8-4.0 z72 RS Trimmer">
+          450/35 2.8-4.0 z72 RS Trimmer
+        </option>
       </select>
     </div>
   );
