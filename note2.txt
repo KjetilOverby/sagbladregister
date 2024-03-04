@@ -1,5 +1,3 @@
-closeDeleteHandler (searchMain 211) Virker ikke
 Legge til Nom antall og reelt antall blader 
-Statistikk ikke i orden
 Finne ut hva som skal vises i service og feil Statistikk
 Lage en datafilter side med nedlasting av CSV.

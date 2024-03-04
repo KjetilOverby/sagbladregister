@@ -331,6 +331,7 @@ const SearchMain = ({
                                       wasteReasonInput={wasteReasonInput}
                                       setWasteReasonInput={setWasteReasonInput}
                                       id={blade.id}
+                                      closeDeleteModal={closeDeleteHandler}
                                     />
                                   </button>
                                 </th>

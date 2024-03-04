@@ -50,7 +50,7 @@ export const NewInputComponent = ({
         <option value="445/210 2.6-4.0 z36 MKV">445/210 2.6-4.0 z36 MKV</option>
         <option value="445/210 2.8-4.2 z36 MKV">445/210 2.8-4.2 z36 MKV</option>
         <option value="445/210 3.0-4.4 z36 MKV">445/210 3.0-4.4 z36 MKV</option>
-        <option value="510/210 3.2-4.6 z36 MKV">445/210 3.2-4.6 z36 MKV</option>
+        <option value="505/210 3.2-4.6 z36 MKV">505/210 3.2-4.6 z36 MKV</option>
         <option value="475/120 3.2-4.8 z30 VS66">
           475/120 3.2-4.8 z30 N-blad VS66
         </option>
