@@ -403,6 +403,7 @@ const SearchMain = ({
           };
           return (
             <HistorikkComponent
+              key={blade.id}
               bandhistorikkData={blade}
               setOpenBandhistorikkData={setOpenBandhistorikkData}
               blade={blade}

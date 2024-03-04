@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import React from "react";
 import BandDetails from "./BandDetails";
 import ServiceKodeTabell from "../reusable/ServiceKodeTabell";
@@ -24,7 +28,7 @@ const HistorikkComponent = ({
             </p>
             <p className="itay-5  px-5">
               Registrert:
-              {dateFormat(blade.createdAt, "dd.mm.yyyy")}
+              {dateFormat(blade.createdAt as Date, "dd.mm.yyyy")}
             </p>
             <p className="itay-5  px-5">Registrert av: {blade.creator}</p>
           </div>

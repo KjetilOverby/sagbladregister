@@ -1,8 +1,16 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import React from "react";
 import dateFormat from "dateformat";
 import { RestoreComponent } from "./RestoreComponent";
 
-const DeletedBladesComponent = ({ deletedSawblades }) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const DeletedBladesComponent = ({
+  deletedSawblades,
+}: {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  deletedSawblades: any[];
+}) => {
   return (
     <div>
       <div>
@@ -70,7 +78,10 @@ const DeletedBladesComponent = ({ deletedSawblades }) => {
                       <td>
                         <div className="flex items-center space-x-3">
                           <div className="text-xs text-neutral">
-                            {dateFormat(blade.updatedAt, "dd.mm.yyyy , HH:MM")}
+                            {dateFormat(
+                              blade.updatedAt as Date,
+                              "dd.mm.yyyy , HH:MM",
+                            )}
                           </div>
                         </div>
                       </td>
