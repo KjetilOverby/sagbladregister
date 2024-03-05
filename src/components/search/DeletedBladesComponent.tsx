@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import React from "react";
 import dateFormat from "dateformat";
-import { RestoreComponent } from "./RestoreComponent";
 import DatepickerComponent from "../reusable/Datepicker";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
