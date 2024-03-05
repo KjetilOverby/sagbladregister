@@ -1,4 +1,5 @@
 import React from "react";
+import dateFormat from "dateformat";
 
 const SawbladeServiceTable = ({ sawbladesService }) => {
   return (
@@ -6,8 +7,9 @@ const SawbladeServiceTable = ({ sawbladesService }) => {
       <table className="table table-xs whitespace-nowrap ">
         <thead>
           <tr>
-            <th className="text-sm text-accent">ID</th>
-            <th className="text-sm text-accent">Type</th>
+            <th className="text-sm text-neutral">ID</th>
+            <th className="text-sm text-neutral">Type</th>
+            <th className="text-sm text-neutral">Til service</th>
 
             {/* <th className="text-sm text-accent">Opprettet av</th> */}
           </tr>
@@ -31,6 +33,15 @@ const SawbladeServiceTable = ({ sawbladesService }) => {
                         <div>
                           <div className="text-xs text-neutral">
                             {blade.type} {blade.side}
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="flex items-center space-x-3">
+                        <div>
+                          <div className="text-xs text-neutral">
+                            {dateFormat(blade.updatedAt, "dd.mm.yyyy")}
                           </div>
                         </div>
                       </div>

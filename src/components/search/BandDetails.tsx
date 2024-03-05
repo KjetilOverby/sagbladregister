@@ -159,12 +159,12 @@ const BandDetails = ({
         />
       )}
 
-      <div className="bg-base-100">
+      <div className="">
         <div>
           {!blade.active && (
             <button
               onClick={() => setOpenInput(true)}
-              className="btn btn-xs mb-5 mt-5 bg-green-500 text-base-100"
+              className="btn btn-xs mb-5 mt-5  text-base-100"
             >
               Ny post
             </button>
@@ -172,7 +172,7 @@ const BandDetails = ({
         </div>
       </div>
       <div className="max-xl:overflow-scroll">
-        <table className="table table-xs w-full bg-base-100">
+        <table className="table table-xs w-full bg-accent">
           <thead>
             <tr>
               <th className="text-sm font-thin text-neutral">Service</th>
@@ -225,7 +225,7 @@ const BandDetails = ({
 
               return (
                 <>
-                  <tr className="border border-base-100 bg-base-100 hover:bg-accent">
+                  <tr className="border border-base-100 bg-base-100 hover:bg-primary">
                     <td className="py-5">
                       <div className="text-xs text-neutral">{post.service}</div>
                     </td>

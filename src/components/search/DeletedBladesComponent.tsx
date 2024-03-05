@@ -27,7 +27,7 @@ const DeletedBladesComponent = ({
         <h1 className="text-xl text-neutral">
           Slettede blad ({deletedSawblades?.length})
         </h1>
-        <table className="table table-xs whitespace-nowrap bg-neutral">
+        <table className="table table-xs whitespace-nowrap ">
           <thead>
             <tr>
               <th className="text-sm text-accent">ID</th>
@@ -44,7 +44,7 @@ const DeletedBladesComponent = ({
               return (
                 <>
                   {blade.deleted && (
-                    <tr className="bg-primary">
+                    <tr className="">
                       <td className="font-bold text-neutral">
                         {blade.IdNummer}{" "}
                         {blade.note !== "-" && (

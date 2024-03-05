@@ -7,6 +7,8 @@ import BandDetails from "./BandDetails";
 import ServiceKodeTabell from "../reusable/ServiceKodeTabell";
 import dateFormat from "dateformat";
 
+import { FiRefreshCw } from "react-icons/fi";
+
 const HistorikkComponent = ({
   blade,
   setOpenBandhistorikkData,
@@ -16,7 +18,7 @@ const HistorikkComponent = ({
 }) => {
   return (
     <div>
-      <div className="rounded-2xl border bg-base-100 p-5 max-lg:relative">
+      <div className="mb-5  p-5 max-lg:relative">
         <div className="mr-5 flex justify-between">
           <div>
             <h1 className=" texty-5  px-5">Historikk</h1>
@@ -30,9 +32,33 @@ const HistorikkComponent = ({
               Registrert:
               {dateFormat(blade.createdAt as Date, "dd.mm.yyyy")}
             </p>
-            <p className="itay-5  px-5">Registrert av: {blade.creator}</p>
+            <div className="flex items-center justify-center">
+              <p className="itay-5  px-5">Registrert av: {blade.creator}</p>
+              <div className="w-10 ">
+                <img
+                  className="w-full rounded-full"
+                  src={blade.creatorImg}
+                  alt=""
+                />
+              </div>
+            </div>
           </div>
-          <div>
+          {/*  <div
+            onClick={() => statusHandler(blade.id)}
+            className="flex flex-col items-center justify-center"
+          >
+            <h1>Service</h1>
+            <div
+              className={`flex h-12 w-12 items-center justify-center rounded-full ${blade.active ? "bg-emerald-400" : "bg-base-100"}`}
+            >
+              <FiRefreshCw
+                className={`text-3xl ${
+                  blade.active ? "text-blue-600" : "text-accent"
+                }`}
+              />
+            </div>
+          </div> */}
+          <div className="mb-5">
             <ServiceKodeTabell />
           </div>
         </div>
