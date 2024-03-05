@@ -161,12 +161,14 @@ const BandDetails = ({
 
       <div className="bg-base-100">
         <div>
-          <button
-            onClick={() => setOpenInput(true)}
-            className="btn btn-xs mb-5 mt-5 bg-green-500 text-base-100"
-          >
-            Ny post
-          </button>
+          {!blade.active && (
+            <button
+              onClick={() => setOpenInput(true)}
+              className="btn btn-xs mb-5 mt-5 bg-green-500 text-base-100"
+            >
+              Ny post
+            </button>
+          )}
         </div>
       </div>
       <div className="max-xl:overflow-scroll">

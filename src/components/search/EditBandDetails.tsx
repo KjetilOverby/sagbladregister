@@ -4,6 +4,8 @@
 // @ts-nocheck
 import React from "react";
 import { api } from "~/utils/api";
+import ServiceInput from "./ServiceInput";
+import ReklamasjonsInput from "./ReklamasjonsInput";
 
 interface detailProps {
   historikkData: {
@@ -70,7 +72,10 @@ const EditBandDetails = ({
             datoUt: historikkData.datoUt,
             klUt: historikkData.klUt,
             sagtid: historikkData.sagtid,
-            feilkode: historikkData.feilkode,
+            feilkode:
+              historikkData.service === "Reklamasjon"
+                ? historikkData.feilkode
+                : "Ingen anmerkning",
             anmSag: historikkData.anmSag,
             temperatur: historikkData.temperatur,
             sgSag: historikkData.sgSag,
@@ -85,30 +90,10 @@ const EditBandDetails = ({
       >
         <div className="card-body">
           <h2 className="card-title">Rediger data</h2>
-          <div>
-            <p>Service:</p>
-            <select
-              onChange={(e) =>
-                setHistorikkData({
-                  ...historikkData,
-                  service: e.currentTarget.value,
-                })
-              }
-              value={historikkData.service}
-              className="select select-bordered select-xs w-full max-w-xs bg-white"
-            >
-              <option value="">Velg service</option>
-              <option value="Omlodding">Omlodding</option>
-              <option value="Rep tannskader">Rep tannskader</option>
-              <option value="Reklamasjon tannslipp">
-                Reklamasjon tannslipp
-              </option>
-              <option value="Reklamasjon dårlig lodd">
-                Reklamasjon dårlig lodd
-              </option>
-              <option value="Reklamasjon feil">Reklamasjon feil</option>
-            </select>
-          </div>
+          <ServiceInput
+            historikkData={historikkData}
+            setHistorikkData={setHistorikkData}
+          />
           {/* <div>
             <p>Dato til service:</p>
             <input
@@ -153,38 +138,14 @@ const EditBandDetails = ({
               value={historikkData.anmSag}
             />
           </div>
-          <div>
-            <p>Feilkode:</p>
-            <select
-              onChange={(e) =>
-                setHistorikkData({
-                  ...historikkData,
-                  feilkode: e.currentTarget.value,
-                })
-              }
-              className="select select-bordered select-xs w-full max-w-xs bg-white"
-              value={historikkData.feilkode}
-            >
-              <option value="Ingen anmerkning">Ingen anmerkning</option>
-              <option value="Bølger">Bølger</option>
-              <option value="Vandrer på hjul">Vandrer på hjul</option>
-              <option value="Sprekk">Sprekk</option>
-              <option value="Tannbrudd">Tannbrudd</option>
-              <option value="Sponpåliming">Sponpåliming</option>
-              <option value="Sløv">Sløv</option>
-              <option value="Riper">Riper</option>
-              <option value="Ytre faktorer">Ytre faktorer</option>
-              <option value="Reklamasjon">Reklamasjon</option>
-              <option value="Havari">Havari</option>
-              <option value="Ikjøring">Ikjøring</option>
-              <option value="Riper/bølger">Riper/bølger</option>
-              <option value="Riper/sprekk">Riper/sprekk</option>
-              <option value="Riper/vandrer">Riper/vandrer</option>
-              <option value="Bølger/sprekk">Bølger/sprekk</option>
-              <option value="Bølger/vandrer">Bølger/vandrer</option>
-              <option value="Ikjøring/riper">Ikjøring/riper</option>
-            </select>
-          </div>
+          {historikkData.service === "Reklamasjon" && (
+            <div>
+              <ReklamasjonsInput
+                historikkData={historikkData}
+                setHistorikkData={setHistorikkData}
+              />
+            </div>
+          )}
           <div>
             <p>Signatur:</p>
             <input

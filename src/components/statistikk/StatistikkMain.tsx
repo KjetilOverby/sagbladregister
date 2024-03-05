@@ -31,10 +31,9 @@ const StatistikkMain = ({
   ];
   const serviceReasons: string[] = [
     "Omlodding",
-    "Rep tannskader",
-    "Reklamasjon tannslipp",
-    "Reklamasjon dårlig lodd",
-    "Reklamasjon feil",
+    "Sliping",
+    "Reparasjon",
+    "Reklamasjon",
   ];
   const deleteReasonCount = deleteReasons.reduce((countObj, reason) => {
     countObj[reason] = 0;

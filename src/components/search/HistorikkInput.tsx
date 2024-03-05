@@ -4,6 +4,8 @@
 // @ts-nocheck
 import React, { useState } from "react";
 import { api } from "~/utils/api";
+import ServiceInput from "./ServiceInput";
+import ReklamasjonsInput from "./ReklamasjonsInput";
 
 interface historikkInputProps {
   setOpenInput: React.Dispatch<React.SetStateAction<boolean>>;
@@ -109,30 +111,11 @@ const HistorikkInput = ({
       >
         <div className="card-body">
           <h2 className="card-title">Legg til data</h2>
-          <div>
-            <p>service:</p>
-            <select
-              onChange={(e) =>
-                setHistorikkData({
-                  ...historikkData,
-                  service: e.currentTarget.value,
-                })
-              }
-              value={historikkData.service}
-              className="select select-bordered select-xs w-full max-w-xs bg-white"
-            >
-              <option value="">Velg service</option>
-              <option value="Omlodding">Omlodding</option>
-              <option value="Rep tannskader">Rep tannskader</option>
-              <option value="Reklamasjon tannslipp">
-                Reklamasjon tannslipp
-              </option>
-              <option value="Reklamasjon dårlig lodd">
-                Reklamasjon dårlig lodd
-              </option>
-              <option value="Reklamasjon feil">Reklamasjon feil</option>
-            </select>
-          </div>
+          <ServiceInput
+            historikkData={historikkData}
+            setHistorikkData={setHistorikkData}
+          />
+
           {/* <div>
             <p>Innpostningsdato:</p>
             <input
@@ -161,6 +144,12 @@ const HistorikkInput = ({
             />
           </div> */}
 
+          {historikkData.service === "Reklamasjon" && (
+            <ReklamasjonsInput
+              historikkData={historikkData}
+              setHistorikkData={setHistorikkData}
+            />
+          )}
           <div>
             <p>Anm sag:</p>
             <input
@@ -173,37 +162,6 @@ const HistorikkInput = ({
               type="text"
               className="input input-bordered input-xs w-full max-w-xs bg-white"
             />
-          </div>
-          <div>
-            <p>Feilkode:</p>
-            <select
-              onChange={(e) =>
-                setHistorikkData({
-                  ...historikkData,
-                  feilkode: e.currentTarget.value,
-                })
-              }
-              className="select select-bordered select-xs w-full max-w-xs bg-white"
-            >
-              <option value="Ingen anmerkning">Ingen anmerkning</option>
-              <option value="Bølger">Bølger</option>
-              <option value="Vandrer på hjul">Vandrer på hjul</option>
-              <option value="Sprekk">Sprekk</option>
-              <option value="Tannbrudd">Tannbrudd</option>
-              <option value="Sponpåliming">Sponpåliming</option>
-              <option value="Sløv">Sløv</option>
-              <option value="Riper">Riper</option>
-              <option value="Ytre faktorer">Ytre faktorer</option>
-              <option value="Reklamasjon">Reklamasjon</option>
-              <option value="Havari">Havari</option>
-              <option value="Ikjøring">Ikjøring</option>
-              <option value="Riper/bølger">Riper/bølger</option>
-              <option value="Riper/sprekk">Riper/sprekk</option>
-              <option value="Riper/vandrer">Riper/vandrer</option>
-              <option value="Bølger/sprekk">Bølger/sprekk</option>
-              <option value="Bølger/vandrer">Bølger/vandrer</option>
-              <option value="Ikjøring/riper">Ikjøring/riper</option>
-            </select>
           </div>
 
           <div className="card-actions">

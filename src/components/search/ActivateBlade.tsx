@@ -1,6 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import React, { useState } from "react";
+import ReklamasjonsInput from "./ReklamasjonsInput";
+import ServiceInput from "./ServiceInput";
 
 interface Blade {
   type: string;
@@ -100,6 +102,10 @@ const ActivateBlade = ({
   handleCloseModal,
 }: BladeProps) => {
   const [serviceInput, setserviceInput] = useState("");
+  const [historikkData, setHistorikkData] = useState({
+    feilkode: "",
+    service: "",
+  });
 
   return (
     <div>
@@ -110,12 +116,17 @@ const ActivateBlade = ({
             onSubmit={(e) => {
               e.preventDefault();
 
-              if (serviceInput === "") {
+              if (historikkData.service === "") {
                 alert("Servicetype er påkrevd");
+              } else if (
+                historikkData.service === "Reklamasjon" &&
+                historikkData.feilkode === ""
+              ) {
+                alert("Reklamasjonsårsak påkrevd.");
               } else {
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
                 createPost.mutate({
-                  service: serviceInput,
+                  service: historikkData.service,
                   activePost: true,
                   bladeRelationId: blade.IdNummer,
                   bladType: blade.type,
@@ -133,7 +144,7 @@ const ActivateBlade = ({
                   userId: "",
                   temperatur: 0,
                   anmSag: "",
-                  feilkode: "Aktivt blad",
+                  feilkode: historikkData.feilkode,
                   ampere: 0,
                   datoUt: new Date(),
                   datoInn: new Date(),
@@ -156,25 +167,18 @@ const ActivateBlade = ({
                 <span className="text-base-100">{blade.IdNummer}</span>
               </h2>
               <p className="text-accent">Aktiver service</p>
-
-              <select
-                onChange={(e) => setserviceInput(e.currentTarget.value)}
-                className="rounded-xl bg-base-100 p-1 text-neutral"
-                name=""
-                id=""
-              >
-                <option value="">Velg service</option>
-                <option value="Omlodding">Omlodding</option>
-                <option value="Rep tannskader">Rep tannskader</option>
-                <option value="Reklamasjon tannslipp">
-                  Reklamasjon tannslipp
-                </option>
-                <option value="Reklamasjon dårlig lodd">
-                  Reklamasjon dårlig lodd
-                </option>
-                <option value="Reklamasjon feil">Reklamasjon feil</option>
-              </select>
+              <ServiceInput
+                historikkData={historikkData}
+                setHistorikkData={setHistorikkData}
+              />
             </div>
+
+            {historikkData.service === "Reklamasjon" && (
+              <ReklamasjonsInput
+                historikkData={historikkData}
+                setHistorikkData={setHistorikkData}
+              />
+            )}
             <button className="btn btn-primary btn-xs w-1/4 bg-accent">
               Aktiver
             </button>

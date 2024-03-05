@@ -77,6 +77,23 @@ export const sawbladesRouter = createTRPCRouter({
       }),
 
 
+
+    getAllService: protectedProcedure
+   
+        .query(({ ctx }) => {
+         return ctx.db.sawblades.findMany({
+          
+          where: {
+           active: true
+          },
+          orderBy: {
+            IdNummer: 'desc'
+                          },
+         
+         })
+      }),
+
+
    
 
       

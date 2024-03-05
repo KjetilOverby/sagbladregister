@@ -28,6 +28,7 @@ const Search = ({ theme }) => {
   const { data: sawblades } = api.sawblades.getAll.useQuery({
     IdNummer: idValue,
   });
+  const { data: sawbladesService } = api.sawblades.getAllService.useQuery({});
 
   const { data: deletedSawblades } = api.sawblades.getAllDeleted.useQuery({
     date: `${dateValue.endDate}T23:59:59.000Z`,
@@ -99,6 +100,7 @@ const Search = ({ theme }) => {
                 setCloseSearchComponent={setCloseSearchComponent}
                 dateValue={dateValue}
                 setDateValue={setDateValue}
+                sawbladesService={sawbladesService}
               />
             </RoleAdmin>
 

@@ -18,6 +18,7 @@ import { FiRefreshCw } from "react-icons/fi";
 import { GiProgression } from "react-icons/gi";
 import HistorikkComponent from "./HistorikkComponent";
 import DeletedBladesComponent from "./DeletedBladesComponent";
+import SawbladeServiceTable from "./SawbladeServiceTable";
 
 interface Blade {
   creatorImg: string | undefined;
@@ -76,7 +77,10 @@ const SearchMain = ({
   closeSearchComponent,
   dateValue,
   setDateValue,
+  sawbladesService,
 }: BladeProps) => {
+  console.log(sawbladesService);
+
   const { data: sessionData } = useSession();
 
   const [showDeletedBlades, setShowDeletedBlades] = useState(false);
@@ -94,6 +98,7 @@ const SearchMain = ({
   );
 
   const [countBlades, setCountBlades] = useState();
+  const [showService, setShowService] = useState(false);
 
   const [newBladesCount, setNewBladesCount] = useState();
 
@@ -424,12 +429,25 @@ const SearchMain = ({
       >
         {showDeletedBlades ? "Skjul slettede blad" : "Vis slettede blad"}
       </button>
-      {showDeletedBlades && (
-        <DeletedBladesComponent
-          dateValue={dateValue}
-          setDateValue={setDateValue}
-          deletedSawblades={deletedSawblades}
-        />
+
+      <div>
+        {showDeletedBlades && (
+          <DeletedBladesComponent
+            dateValue={dateValue}
+            setDateValue={setDateValue}
+            deletedSawblades={deletedSawblades}
+          />
+        )}
+      </div>
+
+      <button className="btn btn-xs bg-blue-500 text-white">
+        Vis blad på service
+      </button>
+      {showService && (
+        <div className="rounded-xl border bg-blue-500 p-2">
+          <h1>Blad service</h1>
+          <SawbladeServiceTable sawbladesService={sawbladesService} />
+        </div>
       )}
     </div>
   );

@@ -1,3 +1,2 @@
 Legge til Nom antall og reelt antall blader 
-Finne ut hva som skal vises i service og feil Statistikk
 Lage en datafilter side med nedlasting av CSV.
