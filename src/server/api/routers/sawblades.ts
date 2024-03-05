@@ -89,6 +89,22 @@ export const sawbladesRouter = createTRPCRouter({
           orderBy: {
             updatedAt: 'desc'
                           },
+                          include: {
+                            _count: {
+                              select: {
+                                bandhistorikk: true,
+                              },
+                            },
+                            bandhistorikk: {
+                              select: {
+                                service: true
+                              },
+                              orderBy: {
+                                updatedAt: 'desc'
+                              },
+                              take: 1
+                            },
+                          },
          
          })
       }),

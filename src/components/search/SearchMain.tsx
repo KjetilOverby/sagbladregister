@@ -198,7 +198,7 @@ const SearchMain = ({
           return (
             <>
               {
-                <div key={blade.id} className="flex  pl-10 pt-5">
+                <div key={blade.id} className="flex pb-10">
                   <div>
                     <div>
                       <div
@@ -248,7 +248,7 @@ const SearchMain = ({
                             onChange={(e) =>
                               setWasteReasonInput(e.currentTarget.value)
                             }
-                            className="select select-bordered select-xs w-full max-w-xs"
+                            className="select select-bordered select-xs w-full max-w-xs text-neutral"
                           >
                             <option disabled selected>
                               Velg

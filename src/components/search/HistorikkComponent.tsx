@@ -7,8 +7,6 @@ import BandDetails from "./BandDetails";
 import ServiceKodeTabell from "../reusable/ServiceKodeTabell";
 import dateFormat from "dateformat";
 
-import { FiRefreshCw } from "react-icons/fi";
-
 const HistorikkComponent = ({
   blade,
   setOpenBandhistorikkData,
@@ -18,23 +16,26 @@ const HistorikkComponent = ({
 }) => {
   return (
     <div>
-      <div className="mb-5  p-5 max-lg:relative">
-        <div className="mr-5 flex justify-between">
-          <div>
-            <h1 className=" texty-5  px-5">Historikk</h1>
-            <h1 className="font-semiby-5 px-5  text-2xl">
-              ID: {blade.IdNummer}
+      <div className="mb-5  max-lg:relative">
+        <div className="mr-5 flex ">
+          <div className="mb-3 rounded-xl p-5 shadow-xl">
+            <h1 className="text-2xl">
+              ID: {blade.IdNummer}{" "}
+              {blade.deleted === true && (
+                <span className="text-red-500">VRAKET</span>
+              )}
             </h1>
-            <p className="texty-5  px-5">
+            <p className="mb-3">
               Type: {blade.type} {blade.side}
             </p>
-            <p className="itay-5  px-5">
-              Registrert:
-              {dateFormat(blade.createdAt as Date, "dd.mm.yyyy")}
-            </p>
-            <div className="flex items-center justify-center">
-              <p className="itay-5  px-5">Registrert av: {blade.creator}</p>
-              <div className="w-10 ">
+
+            <div className="mb-5 rounded-xl bg-green-200 p-2 text-xs">
+              <p className="">Registrert av: {blade.creator}</p>
+              <p className="mb-3">
+                Dato:
+                {dateFormat(blade.createdAt as Date, "dd.mm.yyyy")}
+              </p>
+              <div className="w-10">
                 <img
                   className="w-full rounded-full"
                   src={blade.creatorImg}
@@ -42,6 +43,20 @@ const HistorikkComponent = ({
                 />
               </div>
             </div>
+            {blade.deleted && (
+              <div className="mb-5 rounded-xl bg-red-200 p-2 text-xs">
+                <p>Slettet av: {blade.deleter}</p>
+                <p>Dato: {dateFormat(blade.updateAt as Date, "dd.mm.yyyy")}</p>
+                <p className="mb-3">Vrakårsak: {blade.deleteReason}</p>
+                <div className="w-10">
+                  <img
+                    className="w-full rounded-full"
+                    src={blade.deleterImg}
+                    alt=""
+                  />
+                </div>
+              </div>
+            )}
           </div>
           {/*  <div
             onClick={() => statusHandler(blade.id)}

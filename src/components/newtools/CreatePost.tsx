@@ -119,7 +119,7 @@ const CreatePost = () => {
           <option value="Frezite">Frezite</option>
           <option value="Ukjent">Ukjent</option>
         </select>
-        {bladeData.type === "VS66 3,6-5,0 475 24z Flens" && (
+        {bladeData.type === "475/120 3.6-5.0 z24 VS66" && (
           <select
             onChange={(e) =>
               setBladeData({ ...bladeData, side: e.currentTarget.value })
@@ -135,7 +135,7 @@ const CreatePost = () => {
             <option value="Venstre">Venstre</option>
           </select>
         )}
-        {bladeData.type === "VS66 3,6-5,0 475 27z" && (
+        {bladeData.type === "475/120 3.6-5.0 z24 flens VS66" && (
           <select
             onChange={(e) =>
               setBladeData({ ...bladeData, side: e.currentTarget.value })
