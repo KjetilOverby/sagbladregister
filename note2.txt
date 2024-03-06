@@ -4,8 +4,14 @@ Vis historikkantall på slettede blader
 Sett active false når man sletter et blad.
 Deactiver setter feilkode til Ingen anmerkning, det skal den ikke gjøre,
 Antall tenner på rep legges inn av KS
-Skjerebredde førsdt
+Skjerebredde først
 artikkelnummer
+
+
+
+
+
+
 
 Artikkelnr.	Artikkel
 SERV 401	SLIP HM/STELLITSAGBLAD Ø 0-600mm inntil 36t

@@ -1,6 +1,4 @@
-"use client";
-
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 interface bladeDataProps {
   bladeData: {
@@ -13,6 +11,7 @@ interface bladeDataProps {
     active: boolean;
     deleteReason: string;
     produsent: string;
+    artikkel: string;
   };
   setBladeData: Dispatch<
     SetStateAction<{
@@ -25,20 +24,41 @@ interface bladeDataProps {
       active: boolean;
       deleteReason: string;
       produsent: string;
+      artikkel: string;
     }>
   >;
 }
 
-export const NewInputComponent = ({
-  bladeData,
-  setBladeData,
-}: bladeDataProps) => {
+export const TypeInputMV = ({ bladeData, setBladeData }: bladeDataProps) => {
+  const [inputVal, setInputVal] = useState("");
+
+  const onChangeHandler = (e) => {
+    setBladeData({ ...bladeData, type: e.currentTarget.value });
+    setInputVal(e.currentTarget.value);
+  };
+
+  /*   useEffect(() => {
+    if (inputVal === "445/210 2.2-3.4 z36 MKV") {
+      setBladeData({ ...bladeData, artikkel: "V-SH9495" });
+    } else if (inputVal === "445/210 2.4-3.6 z36 MKV") {
+      setBladeData({ ...bladeData, artikkel: "V-SH9502" });
+    } else if (inputVal === "445/210 2.6-4.0 z36 MKV") {
+      setBladeData({ ...bladeData, artikkel: "V-SH9505" });
+    } else if (inputVal === "445/210 2.8-4.2 z36 MKV") {
+      setBladeData({ ...bladeData, artikkel: "V-SH9496" });
+    } else if (inputVal === "445/210 3.0-4.4 z36 MKV") {
+      setBladeData({ ...bladeData, artikkel: "V-SH9528" });
+    } else if (inputVal === "505/210 3.2-4.6 z36 MKV") {
+      setBladeData({ ...bladeData, artikkel: "V-SH9745" });
+    } else if (inputVal === "505/210 3.2-4.6 z36 MKV") {
+      setBladeData({ ...bladeData, artikkel: "V-SH9745" });
+    }
+  }, [inputVal]); */
+
   return (
     <div>
       <select
-        onChange={(e) =>
-          setBladeData({ ...bladeData, type: e.currentTarget.value })
-        }
+        onChange={onChangeHandler}
         className="select select-sm border-neutral bg-accent text-lg text-neutral"
       >
         <option disabled selected>

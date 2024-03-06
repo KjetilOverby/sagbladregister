@@ -100,6 +100,7 @@ export const bandhistorikkRouter = createTRPCRouter({
           }
       });
   }),
+ 
 
   updateKS: protectedProcedure.input(z.object({anmKS: z.string(), id: z.string(), handling: z.string(), sgKS: z.string(), datoSrv: z.date(), sideklaring: z.number(), creator3: z.string(), creatorImg3: z.string()}))
   .mutation(async ({ctx, input}) => {

@@ -105,16 +105,6 @@ const ActivateBlade = ({
     },
   });
 
-  const [inputValues, setInputValues] = useState({
-    sagtid: 10,
-    temperatur: 20,
-    anmSag: "",
-    feilkode: "Ingen anmerkning",
-    antTimer: 40,
-    sgSag: "",
-    ampere: 0,
-  });
-
   return (
     <div className="absolute">
       <div className="card z-40 flex w-96 items-center  bg-neutral text-neutral-content">
@@ -126,24 +116,16 @@ const ActivateBlade = ({
               // eslint-disable-next-line @typescript-eslint/no-unsafe-call
               updatePost.mutate({
                 activePost: false,
-                sagtid: inputValues.sagtid,
-                sgSag: inputValues.sgSag,
-                temperatur: inputValues.temperatur,
-                anmSag: inputValues.anmSag,
-                feilkode: inputValues.feilkode,
-                antTimer: inputValues.antTimer,
-                ampere: inputValues.ampere,
-                datoUt: new Date(),
-                klUt: new Date(),
+                anmKS: "",
+                handling: "",
+                sgKS: "",
+                sideklaring: 0,
+                creator3: "",
+                creatorImg3: "",
+                datoSrv: new Date(),
                 id: post.id,
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                datoInn: post.datoInn,
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                klInn: post.klInn,
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
                 service: post.service,
-                creator2: "",
-                creatorImg2: "",
               });
               //   updateStatusHandler();
 

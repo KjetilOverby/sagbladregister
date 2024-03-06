@@ -140,6 +140,12 @@ const SearchMain = ({
       void ctx.sawblades.getCustomer.invalidate();
     },
   });
+  const updatePostKS = api.bandhistorikk.updateKS.useMutation({
+    onSuccess: () => {
+      void ctx.sawblades.getAll.invalidate();
+      void ctx.sawblades.getCustomer.invalidate();
+    },
+  });
 
   useEffect(() => {
     setCountBlades(sawblades?.filter((item) => item.deleted === false).length);
@@ -350,6 +356,7 @@ const SearchMain = ({
               updatePost={updatePost}
               updateStatusHandler={updateStatusHandler}
               handleCloseModal={handleCloseModal}
+              updatePostKS={updatePostKS}
             />
           );
         })}

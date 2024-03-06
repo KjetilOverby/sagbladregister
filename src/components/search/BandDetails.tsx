@@ -75,6 +75,7 @@ const BandDetails = ({
   updatePost,
   deactivateStatusHandler,
   handleCloseModal,
+  updatePostKS,
 }: bandProps) => {
   const [openInput, setOpenInput] = useState(false);
   const [openMessage, setOpenMessage] = useState<string | null>(null);
@@ -161,14 +162,14 @@ const BandDetails = ({
 
       <div className="">
         <div>
-          {!blade.active && (
+          {/*      {!blade.active && (
             <button
               onClick={() => setOpenInput(true)}
               className="btn btn-xs mb-5 mt-5  text-base-100"
             >
               Ny post
             </button>
-          )}
+          )} */}
         </div>
       </div>
       <div className="max-xl:overflow-scroll">
@@ -288,7 +289,7 @@ const BandDetails = ({
                           {openDeactivateModal && (
                             <DeactivateBlade
                               blade={blade}
-                              updatePost={updatePost}
+                              updatePost={updatePostKS}
                               updateStatusHandler={deactivateStatusHandler}
                               handleCloseModal={handleCloseModal}
                               post={post}

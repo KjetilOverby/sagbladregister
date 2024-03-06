@@ -130,6 +130,7 @@ model sawblades {
     produsent    String
     deleter      String
     deleterImg   String
+    artikkel     String
 
     personal      personal[]
     bandhistorikk bandhistorikk[]

@@ -72,6 +72,7 @@ const Newtools = ({ theme, setTheme }) => {
                 <thead>
                   <tr className="border border-b-accent border-l-base-100 border-r-base-100 border-t-accent">
                     <th className="text-sm text-neutral">Serienummer</th>
+                    <th className="text-sm text-neutral">Art.nummer</th>
                     <th className="text-sm text-neutral">Produsent</th>
                     <th className="text-sm text-neutral">Type</th>
                     <th className="text-sm text-neutral">Dato</th>
@@ -86,12 +87,19 @@ const Newtools = ({ theme, setTheme }) => {
                       <>
                         <tr className="border border-base-100 bg-base-100 hover:bg-primary">
                           <td className="py-5 font-bold text-neutral">
-                            {blade.IdNummer}{" "}
-                            {blade.note !== "-" && (
-                              <span className="text-xs font-normal text-orange-200">
-                                ({blade.note})
+                            {blade.IdNummer}
+
+                            <span className="text-xs font-normal text-orange-500">
+                              {blade.note}
+                            </span>
+                          </td>
+                          <td className="py-5 font-bold text-neutral">
+                            {
+                              <span className="text-xs font-normal text-neutral">
+                                {blade.type === "445/210 2.2-3.4 z36 MKV" &&
+                                  "testing out"}
                               </span>
-                            )}
+                            }
                           </td>
                           <td className="py-5">
                             <div className="flex items-center space-x-3">
@@ -150,7 +158,7 @@ const Newtools = ({ theme, setTheme }) => {
                             </button>
                             {openDeleteID === blade.id && (
                               <th className="">
-                                <div className="card absolute bottom-5 right-28 z-50 flex bg-red-500 p-5 text-white">
+                                <div className="card absolute  right-28 z-50 flex bg-red-500 p-5 text-white">
                                   <h1 className="mb-5 text-lg">
                                     Slett {blade.IdNummer}?
                                   </h1>

@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import { api } from "~/utils/api";
 import { Prisma } from "@prisma/client";
 import { KundeSelector } from "./KundeSelector";
-import { NewInputComponent } from "./NewInputComponent";
+import { TypeInputMV } from "./mv/TypeInputMV";
 
 const CreatePost = () => {
   const [bladeData, setBladeData] = useState({
@@ -22,6 +22,7 @@ const CreatePost = () => {
     deleter: "-",
     deleterImg: "-",
     produsent: "",
+    artikkel: "",
   });
   const [inputID, setInputID] = useState("");
   const [kundeID, setKundeID] = useState("");
@@ -34,6 +35,7 @@ const CreatePost = () => {
       void ctx.sawblades.getAllCreate.invalidate();
     },
   });
+
   useEffect(() => {
     if (bladeData.kunde === "Moelven Våler") {
       setKundeID("MV");
@@ -69,16 +71,17 @@ const CreatePost = () => {
               const response = await createPost.mutateAsync({
                 IdNummer: `${kundeID}-${inputID}`,
                 type: bladeData.type,
-                note: bladeData.note === "" ? "-" : bladeData.note,
+                note: bladeData.note,
                 deleted: false,
                 kunde: bladeData.kunde,
                 side: bladeData.side,
                 active: false,
-                deleteReason: "-",
+                deleteReason: "",
                 produsent: bladeData.produsent,
-                creatorImg: "-",
-                deleter: "-",
-                deleterImg: "-",
+                creatorImg: "",
+                deleter: "",
+                deleterImg: "",
+                artikkel: bladeData.artikkel,
               });
               console.log(response);
             }
@@ -101,7 +104,7 @@ const CreatePost = () => {
       >
         <p className="text-neutral">Legg til nye</p>
         <KundeSelector bladeData={bladeData} setBladeData={setBladeData} />
-        <NewInputComponent bladeData={bladeData} setBladeData={setBladeData} />
+        <TypeInputMV bladeData={bladeData} setBladeData={setBladeData} />
         <select
           onChange={(e) =>
             setBladeData({ ...bladeData, produsent: e.currentTarget.value })
