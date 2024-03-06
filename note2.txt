@@ -3,3 +3,27 @@ Lage en datafilter side med nedlasting av CSV.
 Vis historikkantall på slettede blader
 Sett active false når man sletter et blad.
 Deactiver setter feilkode til Ingen anmerkning, det skal den ikke gjøre,
+Antall tenner på rep legges inn av KS
+Skjerebredde førsdt
+artikkelnummer
+
+Artikkelnr.	Artikkel
+SERV 401	SLIP HM/STELLITSAGBLAD Ø 0-600mm inntil 36t
+SERV 402	SLIP HM/STELLITSAGBLAD Ø 0-610mm f.o.m. 36t
+SERV 403	SLIP HM/STELLITE Ø 650/850mm. Inkl. retting og strekking
+SERV 404	SLIP HM/STELLITBLAD Ø 900/1250mm. Inkl. retting og strekking
+SERV 405	SLIP KANTVERKSBLAD,MELLOMSKJÆRENDE- OG FORSKJÆRENDE RINGER
+serv 406	SLIP HM/STELLIT PUSSRING
+SERV 407	LODDING HM Ø 0-610mm
+SERV 409	LODDING HM Ø 610 - 1250mm
+serv 410	LODDING HM-PUSSRINGER
+SERV 411	SVEISING TOPPBRUDD
+SERV 412	SVEISING TANNBRUDD
+SERV 415	LODDING STELLIT Ø 0-610mm
+SERV 416	LODDING STELLIT Ø 610 - 1250mm
+SERV 417	LODDING STELLIT PUSSRING
+SERV 418	SLIP SPONROM
+SERV 419	SLIPING STEGTANN
+SERV 423	EKSTRA RETTING
+SERV 427	RENGJØRING
+SERV 434	Slip-rett-strekk. Over- og underliggende tømmersagblad
