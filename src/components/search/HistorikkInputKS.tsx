@@ -31,6 +31,7 @@ const HistorikkInputKS = ({
   historikkKs,
   setHistorikkKs,
   setOpenInputKS,
+  blade,
 }: historikkInputProps) => {
   const ctx = api.useContext();
 
@@ -39,6 +40,15 @@ const HistorikkInputKS = ({
       void ctx.sawblades.getAll.invalidate();
       void ctx.sawblades.getCustomer.invalidate();
       setOpenInputKS(false);
+    },
+  });
+
+  const updateBladeStatus = api.sawblades.updateStatus.useMutation({
+    onSuccess: () => {
+      void ctx.sawblades.getAll.invalidate();
+      void ctx.sawblades.getCustomer.invalidate();
+      void ctx.sawblades.getAllService.invalidate();
+      setLoading(true);
     },
   });
 
@@ -70,6 +80,11 @@ const HistorikkInputKS = ({
             sideklaring: historikkKs.sideklaring,
             creator3: "",
             creatorImg3: "",
+            activePost: false,
+          });
+          updateBladeStatus.mutate({
+            id: blade.id,
+            active: false,
           });
         }}
         className="card w-96 border border-neutral bg-primary text-neutral"

@@ -148,6 +148,7 @@ const BandDetails = ({
           postId={postId}
           historikkKs={historikkKs}
           setHistorikkKs={setHistorikkKs}
+          blade={blade}
         />
       )}
 
@@ -311,14 +312,12 @@ const BandDetails = ({
                         />
                       </button>
 
-                      {!post.activePost && (
-                        <button
-                          onClick={openKSinput}
-                          className="btn btn-xs bg-yellow-500 text-base-100"
-                        >
-                          KS
-                        </button>
-                      )}
+                      <button
+                        onClick={openKSinput}
+                        className="btn btn-xs bg-yellow-500 text-base-100"
+                      >
+                        KS
+                      </button>
                     </td>
                     <td className="text-neutral">{post.handling}</td>
                     <td className="text-neutral">{post.sideklaring}</td>

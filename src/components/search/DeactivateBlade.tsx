@@ -4,6 +4,7 @@
 // @ts-nocheck
 import React, { useState } from "react";
 import { api } from "~/utils/api";
+import HistorikkInputKS from "./HistorikkInputKS";
 
 interface Blade {
   id: string;
@@ -115,6 +116,7 @@ const ActivateBlade = ({
               e.preventDefault();
               // eslint-disable-next-line @typescript-eslint/no-unsafe-call
               updatePost.mutate({
+                updatedAt: new Date(),
                 activePost: false,
                 anmKS: "",
                 handling: "",
