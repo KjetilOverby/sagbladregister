@@ -7,6 +7,7 @@ import { Prisma } from "@prisma/client";
 import { KundeSelector } from "./KundeSelector";
 import { TypeInputMV } from "./mv/TypeInputMV";
 import mvArticleTypes from "~/appdata/mvArticleTypes";
+import mtArticleTypes from "~/appdata/mtArticleTypes";
 
 const CreatePost = () => {
   const [bladeData, setBladeData] = useState({
@@ -27,6 +28,7 @@ const CreatePost = () => {
   });
   const [inputID, setInputID] = useState("");
   const [kundeID, setKundeID] = useState("");
+  const [bladeTypes, setBladeTypes] = useState();
 
   const ctx = api.useContext();
 
@@ -40,10 +42,10 @@ const CreatePost = () => {
   useEffect(() => {
     if (bladeData.kunde === "Moelven Våler") {
       setKundeID("MV");
-    } else if (bladeData.kunde === "Moelven Østerdalsbruket") {
-      setKundeID("MØ");
-    } else if (bladeData.kunde === "Moelven Mjøsbruket") {
-      setKundeID("MM");
+      setBladeTypes(mvArticleTypes);
+    } else if (bladeData.kunde === "Moelven Trysil") {
+      setKundeID("MT");
+      setBladeTypes(mtArticleTypes);
     }
   }, [bladeData]);
   return (
@@ -109,21 +111,26 @@ const CreatePost = () => {
       >
         <p className="text-neutral">Legg til nye</p>
         <KundeSelector bladeData={bladeData} setBladeData={setBladeData} />
-        <TypeInputMV bladeData={bladeData} setBladeData={setBladeData} />
+        <TypeInputMV
+          bladeData={bladeData}
+          setBladeData={setBladeData}
+          articleTypes={bladeTypes}
+        />
         <select
           onChange={(e) =>
             setBladeData({ ...bladeData, produsent: e.currentTarget.value })
           }
-          className="select  select-sm border-neutral bg-accent text-lg text-neutral"
+          className="select  select-xs border-accent bg-green-100 text-xs text-black"
         >
           <option disabled selected>
             Velg produsent
           </option>
 
           <option value="Kanefusa">Kanefusa</option>
-
+          <option value="Tenryu">Tenryu</option>
           <option value="Swedex">Swedex</option>
           <option value="Nässjö">Nässjö</option>
+          <option value="Micor">Micor</option>
           <option value="Frezite">Frezite</option>
           <option value="Ukjent">Ukjent</option>
         </select>
@@ -133,7 +140,7 @@ const CreatePost = () => {
             onChange={(e) =>
               setBladeData({ ...bladeData, side: e.currentTarget.value })
             }
-            className="select  select-sm border-neutral bg-accent text-lg text-neutral"
+            className="select select-xs border-accent bg-green-100 text-xs text-black"
           >
             <option disabled selected>
               Velg side
@@ -149,7 +156,7 @@ const CreatePost = () => {
             onChange={(e) =>
               setBladeData({ ...bladeData, side: e.currentTarget.value })
             }
-            className="select  select-sm border-neutral bg-accent text-lg text-neutral"
+            className="select select-xs border-accent bg-green-100 text-xs text-black"
           >
             <option disabled selected>
               Velg side
@@ -167,23 +174,25 @@ const CreatePost = () => {
           onChange={(e) =>
             setBladeData({ ...bladeData, note: e.currentTarget.value })
           }
-          className="w-full rounded-xl bg-gray-800 px-4 py-2 text-sm text-neutral"
+          className="w-full rounded-sm bg-gray-800 px-4 py-2 text-xs text-neutral"
           value={bladeData.note}
         />
         <div className="flex">
-          <div className="flex items-center justify-center">{kundeID}-</div>
+          <div className="flex items-center justify-center bg-blue-600 pl-2 text-white">
+            {kundeID}-
+          </div>
 
           <input
             type="text"
             placeholder={"ID nummer"}
             value={inputID}
             onChange={(e) => setInputID(e.currentTarget.value)}
-            className="w-full rounded-xl bg-primary  px-4 py-2 text-sm text-neutral"
+            className="w-full rounded-sm bg-blue-600 px-4  py-2 text-xs text-white outline-none"
           />
         </div>
         <button
           type="submit"
-          className="btn-xl rounded-xl bg-secondary px-10 py-3 text-xs font-semibold transition hover:bg-white/20"
+          className="btn-xs rounded-sm bg-green-700 text-xs  font-semibold text-white transition hover:bg-green-500"
           disabled={createPost.isLoading}
         >
           {createPost.isLoading ? "Lagrer..." : "Lagre"}

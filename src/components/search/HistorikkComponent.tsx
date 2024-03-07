@@ -7,6 +7,8 @@ import BandDetails from "./BandDetails";
 import ServiceKodeTabell from "../reusable/ServiceKodeTabell";
 import dateFormat from "dateformat";
 import TypesArticle from "../reusable/TypesArticle";
+import mvArticleTypes from "~/appdata/mvArticleTypes";
+import mtArticleTypes from "~/appdata/mtArticleTypes";
 
 const HistorikkComponent = ({
   blade,
@@ -33,7 +35,10 @@ const HistorikkComponent = ({
             <p className="mb-3 text-xs">
               Art nr:{" "}
               <span>
-                <TypesArticle blade={blade} />
+                <TypesArticle blade={blade} articleTypes={mvArticleTypes} />
+              </span>
+              <span>
+                <TypesArticle blade={blade} articleTypes={mtArticleTypes} />
               </span>
             </p>
 

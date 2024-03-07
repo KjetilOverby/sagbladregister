@@ -1,5 +1,3 @@
-import mvArticleTypes from "~/appdata/mvArticleTypes";
-
 type BladeType = {
   type: string;
   side: string;
@@ -8,11 +6,9 @@ type BladeType = {
 type BladeCellProps = {
   blade: BladeType;
 };
-const TypesArticle: React.FC<BladeCellProps> = ({ blade }) => {
+const TypesArticle: React.FC<BladeCellProps> = ({ blade, articleTypes }) => {
   let newProperty;
-  const matchingBlade = mvArticleTypes.find(
-    (item) => item.blade === blade.type,
-  );
+  const matchingBlade = articleTypes?.find((item) => item.blade === blade.type);
 
   if (matchingBlade) {
     if (Array.isArray(matchingBlade.art)) {

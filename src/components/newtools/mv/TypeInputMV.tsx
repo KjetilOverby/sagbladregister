@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Dispatch, SetStateAction } from "react";
-import mvArticleTypes from "~/appdata/mvArticleTypes";
 
 interface bladeDataProps {
   bladeData: {
@@ -33,7 +32,11 @@ interface bladeDataProps {
   >;
 }
 
-export const TypeInputMV = ({ bladeData, setBladeData }: bladeDataProps) => {
+export const TypeInputMV = ({
+  bladeData,
+  setBladeData,
+  articleTypes,
+}: bladeDataProps) => {
   const onChangeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setBladeData({ ...bladeData, type: e.currentTarget.value });
   };
@@ -41,13 +44,13 @@ export const TypeInputMV = ({ bladeData, setBladeData }: bladeDataProps) => {
     <div>
       <select
         onChange={onChangeHandler}
-        className="select select-sm border-neutral bg-accent text-lg text-neutral"
+        className="select select-xs border-accent bg-blue-100 text-xs text-black"
       >
         <option disabled selected>
           Velg bladtype
         </option>
 
-        {mvArticleTypes.map((item, index) => (
+        {articleTypes?.map((item, index) => (
           <option key={index} value={item.blade}>
             {item.blade}
           </option>

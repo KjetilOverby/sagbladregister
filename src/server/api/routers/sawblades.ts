@@ -177,6 +177,9 @@ export const sawbladesRouter = createTRPCRouter({
            })
         }),
 
+
+        // ************************* CUSTOMERS *****************************////////
+
     getCustomerAllDeleted: protectedProcedure
     .input(z.object({date: z.string(), date2: z.string(), IdNummer: z.string(), init: z.string()}))
         .query(({ ctx, input }) => {
@@ -225,7 +228,11 @@ export const sawbladesRouter = createTRPCRouter({
                lte: new Date(input.date),
                gte: new Date(input.date2),
               },
-              IdNummer: {contains: input.IdNummer ? input.IdNummer : undefined, startsWith: input.init},
+              IdNummer: {
+                startsWith: input.init,
+                equals: `${input.init}${input.IdNummer}`
+              
+              }
             }]
           },
           orderBy: {

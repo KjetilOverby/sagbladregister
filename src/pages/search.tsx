@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DatepickerComponent from "~/components/reusable/Datepicker";
 import HeaderComponent from "~/components/reusable/HeaderComponent";
 import SearchMain from "~/components/search/SearchMain";
@@ -24,6 +24,16 @@ const Search = ({ theme }) => {
   });
   const [idValue, setIdValue] = useState("");
 
+  const [customerInit, setCustomerInit] = useState("");
+
+  useEffect(() => {
+    if (sessionData?.user.role === "MV_ADMIN") {
+      setCustomerInit("MV-");
+    } else if (sessionData?.user.role === "MT_ADMIN") {
+      setCustomerInit("MT-");
+    }
+  }, [sessionData]);
+
   const { data: countAllBlades } = api.sawblades.countAllBlades.useQuery({});
 
   const { data: sawblades } = api.sawblades.getAll.useQuery({
@@ -42,6 +52,13 @@ const Search = ({ theme }) => {
     date2: `${dateValue.startDate}T00:00:00.000Z`,
     IdNummer: idValue,
     init: "MØ",
+  });
+
+  const { data: sawbladesCustomer } = api.sawblades.getCustomer.useQuery({
+    date: `${dateValue.endDate}T23:59:59.000Z`,
+    date2: `${dateValue.startDate}T00:00:00.000Z`,
+    IdNummer: idValue,
+    init: customerInit,
   });
 
   const { data: sawbladesOsterdal } = api.sawblades.getCustomer.useQuery({
@@ -68,7 +85,8 @@ const Search = ({ theme }) => {
   return (
     <div data-theme={theme}>
       {sessionData?.user.role === "ADMIN" ||
-      sessionData?.user.role === "MV_ADMIN" ? (
+      sessionData?.user.role === "MV_ADMIN" ||
+      sessionData?.user.role === "MT_ADMIN" ? (
         <>
           <HeaderComponent />
 
@@ -107,7 +125,7 @@ const Search = ({ theme }) => {
 
             <RoleAdminMV>
               <SearchMain
-                sawblades={sawbladesOsterdal}
+                sawblades={sawbladesCustomer}
                 deletedSawblades={sawbladesOsterdalDeleted}
                 activeBlades={sawbladesOsterdalActive}
                 closeSearchComponent={closeSearchComponent}
@@ -116,7 +134,17 @@ const Search = ({ theme }) => {
                 setDateValue={setDateValue}
               />
             </RoleAdminMV>
-            <RoleAdminMT>test</RoleAdminMT>
+            <RoleAdminMT>
+              <SearchMain
+                sawblades={sawbladesCustomer}
+                deletedSawblades={sawbladesOsterdalDeleted}
+                activeBlades={sawbladesOsterdalActive}
+                closeSearchComponent={closeSearchComponent}
+                setCloseSearchComponent={setCloseSearchComponent}
+                dateValue={dateValue}
+                setDateValue={setDateValue}
+              />
+            </RoleAdminMT>
           </div>
         </>
       ) : (

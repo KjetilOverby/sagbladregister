@@ -26,6 +26,9 @@ export default function Home({ theme }: adminProps) {
       {sessionData && sessionData.user.role === "MV_ADMIN" && (
         <CustomerStartpage />
       )}
+      {sessionData && sessionData.user.role === "MT_ADMIN" && (
+        <CustomerStartpage />
+      )}
     </div>
   );
 }

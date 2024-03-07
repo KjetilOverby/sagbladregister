@@ -12,6 +12,8 @@ import Deleteblades from "~/components/newtools/deleteblades";
 import { signIn, signOut, useSession } from "next-auth/react";
 import NotAuthorized from "~/components/reusable/NotAuthorized";
 import TypesArticle from "~/components/reusable/TypesArticle";
+import mtArticleTypes from "~/appdata/mtArticleTypes";
+import mvArticleTypes from "~/appdata/mvArticleTypes";
 const Newtools = ({ theme, setTheme }) => {
   const { data: sessionData } = useSession();
   // eslint-disable-next-line @typescript-eslint/unbound-method
@@ -94,15 +96,21 @@ const Newtools = ({ theme, setTheme }) => {
                               {blade.note}
                             </span>
                           </td>
-                          {/* <td className="py-5 font-bold text-neutral">
-                            {
-                              <span className="text-xs font-normal text-neutral">
-                                {blade.type === "445/210 2.2-3.4 z36 MKV" &&
-                                  "testing out"}
-                              </span>
-                            }
-                          </td> */}
-                          <TypesArticle blade={blade} />
+                          <td>
+                            <div>
+                              <div>
+                                <TypesArticle
+                                  blade={blade}
+                                  articleTypes={mtArticleTypes}
+                                />
+                              </div>
+                              <TypesArticle
+                                blade={blade}
+                                articleTypes={mvArticleTypes}
+                              />
+                              <div></div>
+                            </div>
+                          </td>
                           <td className="py-5">
                             <div className="flex items-center space-x-3">
                               <div className="avatar"></div>
@@ -153,7 +161,7 @@ const Newtools = ({ theme, setTheme }) => {
 
                           <td>
                             <button
-                              className="btn btn-sm bg-red-500 text-white hover:bg-red-600"
+                              className="btn btn-xs bg-red-500 text-xs text-white hover:bg-red-600"
                               onClick={() => deleteHandler(blade.id)}
                             >
                               SLETT

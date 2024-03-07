@@ -348,10 +348,10 @@ const HeaderComponent = () => {
             <div className="ml-5">
               <p className="text-neutral">{sessionData?.user.name}</p>
               <div>
-                {sessionData?.user.role === "MO_ADMIN" && (
-                  <p className="text-neutral">Østerdalsbruket</p>
+                {sessionData?.user.role === "MV_ADMIN" && (
+                  <p className="text-neutral">Moelven Våler</p>
                 )}
-                {sessionData?.user.role === "MM_ADMIN" && <p>Mjøsbruket</p>}
+                {sessionData?.user.role === "MT_ADMIN" && <p>Moelven Trysil</p>}
               </div>
             </div>
           </div>
