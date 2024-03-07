@@ -16,6 +16,8 @@ export const sawbladesRouter = createTRPCRouter({
 
     return { total, deleted, notDeleted };
   }),
+
+  
   countSawblades: protectedProcedure.query(async ({ ctx }) => {
     const count = await ctx.db.sawblades.groupBy({
  by : ['deleted', 'side', 'type'],
@@ -254,7 +256,7 @@ export const sawbladesRouter = createTRPCRouter({
       }),
    
     getCustomerActive: protectedProcedure
-    .input(z.object({date: z.string(), date2: z.string(), IdNummer: z.string(), init: z.string()}))
+    .input(z.object({ init: z.string()}))
         .query(({ ctx, input }) => {
          // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
          return ctx.db.sawblades.findMany({
@@ -324,19 +326,7 @@ export const sawbladesRouter = createTRPCRouter({
      })
   }),
 
-  // create: protectedProcedure
-  //   .input(z.object({ name: z.string().min(1) }))
-  //   .mutation(async ({ ctx, input }) => {
-  //     // simulate a slow db call
-  //     await new Promise((resolve) => setTimeout(resolve, 1000));
-
-  //     return ctx.db.post.create({
-  //       data: {
-  //         name: input.name,
-  //         createdBy: { connect: { id: ctx.session.user.id } },
-  //       },
-  //     });
-  //   }),
+  
   update: protectedProcedure.input(z.object({deleted: z.boolean(), id: z.string(), deleteReason: z.string()}))
   .mutation(async ({ctx, input}) => {
     const deleterName: string = ctx.session.user.name ?? "DefaultCreator";

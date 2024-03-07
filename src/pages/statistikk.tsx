@@ -8,13 +8,24 @@ import { getServerAuthSession } from "~/server/auth";
 import { signIn, signOut, useSession } from "next-auth/react";
 import StatistikkMain from "~/components/statistikk/StatistikkMain";
 import HeaderComponent from "~/components/reusable/HeaderComponent";
+import dateFormat from "dateformat";
 
 const statistikk = ({ theme }) => {
   const { data: sessionData } = useSession();
   const [dateValue, setDateValue] = useState({
-    endDate: "2040-01-14",
-    startDate: "2023-12-01",
+    endDate: dateFormat(new Date(), "yyyy-mm-dd"),
+    startDate: dateFormat(new Date(), "yyyy-mm-dd"),
   });
+
+  const [customerInit, setCustomerInit] = useState("");
+
+  useEffect(() => {
+    if (sessionData?.user.role === "MV_ADMIN") {
+      setCustomerInit("MV-");
+    } else if (sessionData?.user.role === "MT_ADMIN") {
+      setCustomerInit("MT-");
+    }
+  }, [sessionData]);
 
   const { data: statistikkData } =
     api.statistikkBladeData.getAllHistorikk.useQuery({
@@ -22,12 +33,12 @@ const statistikk = ({ theme }) => {
       date2: `${dateValue.startDate}T00:00:00.000Z`,
     });
 
-  const { data: statistikkDataMO } =
+  const { data: statistikkDataCustomer } =
     api.statistikkBladeData.getAllCustomerHistorikk.useQuery({
       date: `${dateValue.endDate}T23:59:59.000Z`,
       date2: `${dateValue.startDate}T00:00:00.000Z`,
-      bladeRelationId: "MØ",
-      init: "MØ",
+      bladeRelationId: customerInit,
+      init: customerInit,
     });
 
   const { data: deletedSawblades } = api.sawblades.getAllDeleted.useQuery({
@@ -36,12 +47,12 @@ const statistikk = ({ theme }) => {
     IdNummer: "",
   });
 
-  const { data: deletedSawbladesMo } =
+  const { data: deletedSawbladesCustomer } =
     api.sawblades.getCustomerAllDeleted.useQuery({
       date: `${dateValue.endDate}T23:59:59.000Z`,
       date2: `${dateValue.startDate}T00:00:00.000Z`,
       IdNummer: "",
-      init: "MØ",
+      init: customerInit,
     });
 
   return (
@@ -55,12 +66,20 @@ const statistikk = ({ theme }) => {
           deletedSawblades={deletedSawblades}
         />
       )}
-      {sessionData?.user.role === "MO_ADMIN" && (
+      {sessionData?.user.role === "MV_ADMIN" && (
         <StatistikkMain
-          historikkData={statistikkDataMO}
+          historikkData={statistikkDataCustomer}
           setDateValue={setDateValue}
           dateValue={dateValue}
-          deletedSawblades={deletedSawbladesMo}
+          deletedSawblades={deletedSawbladesCustomer}
+        />
+      )}
+      {sessionData?.user.role === "MT_ADMIN" && (
+        <StatistikkMain
+          historikkData={statistikkDataCustomer}
+          setDateValue={setDateValue}
+          dateValue={dateValue}
+          deletedSawblades={deletedSawbladesCustomer}
         />
       )}
     </div>

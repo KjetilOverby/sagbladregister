@@ -34,7 +34,7 @@ export const statistikkBladeDataRouter = createTRPCRouter({
                lte: new Date(input.date),
                gte: new Date(input.date2),
               },
-              bladeRelationId: { startsWith: 'MØ'},
+              bladeRelationId: { startsWith: input.init},
             }]
           },
          })

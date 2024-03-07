@@ -178,7 +178,7 @@ const CreatePost = () => {
           value={bladeData.note}
         />
         <div className="flex">
-          <div className="flex items-center justify-center bg-blue-600 pl-2 text-white">
+          <div className="flex items-center justify-center bg-blue-600 pl-2 text-xs text-white">
             {kundeID}-
           </div>
 

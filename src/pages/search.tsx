@@ -51,8 +51,10 @@ const Search = ({ theme }) => {
     date: `${dateValue.endDate}T23:59:59.000Z`,
     date2: `${dateValue.startDate}T00:00:00.000Z`,
     IdNummer: idValue,
-    init: "MØ",
+    init: "",
   });
+
+  // **************** CUSTOMERS ****************** //
 
   const { data: sawbladesCustomer } = api.sawblades.getCustomer.useQuery({
     date: `${dateValue.endDate}T23:59:59.000Z`,
@@ -61,25 +63,16 @@ const Search = ({ theme }) => {
     init: customerInit,
   });
 
-  const { data: sawbladesOsterdal } = api.sawblades.getCustomer.useQuery({
-    date: `${dateValue.endDate}T23:59:59.000Z`,
-    date2: `${dateValue.startDate}T00:00:00.000Z`,
-    IdNummer: idValue,
-    init: "MØ",
-  });
-  const { data: sawbladesOsterdalDeleted } =
+  const { data: sawbladesCustomerDeleted } =
     api.sawblades.getCustomerAllDeleted.useQuery({
       date: `${dateValue.endDate}T23:59:59.000Z`,
       date2: `${dateValue.startDate}T00:00:00.000Z`,
       IdNummer: idValue,
-      init: "MØ",
+      init: customerInit,
     });
-  const { data: sawbladesOsterdalActive } =
+  const { data: sawbladesCustomerActive } =
     api.sawblades.getCustomerActive.useQuery({
-      date: `${dateValue.endDate}T23:59:59.000Z`,
-      date2: `${dateValue.startDate}T00:00:00.000Z`,
-      IdNummer: idValue,
-      init: "MØ",
+      init: customerInit,
     });
 
   return (
@@ -102,9 +95,11 @@ const Search = ({ theme }) => {
                     placeholder="Skriv id nummer"
                     className="input input-bordered input-xs  w-28 max-w-xs bg-base-100"
                   />
-                  <p className="mt-5 text-sm">
-                    Antall blad i bruk: {countAllBlades?.notDeleted}
-                  </p>
+                  {sessionData?.user.role === "ADMIN" && (
+                    <p className="mt-5 text-sm">
+                      Antall blad i bruk: {countAllBlades?.notDeleted}
+                    </p>
+                  )}
                 </div>
               ) : (
                 ""
@@ -126,8 +121,8 @@ const Search = ({ theme }) => {
             <RoleAdminMV>
               <SearchMain
                 sawblades={sawbladesCustomer}
-                deletedSawblades={sawbladesOsterdalDeleted}
-                activeBlades={sawbladesOsterdalActive}
+                deletedSawblades={sawbladesCustomerDeleted}
+                sawbladesService={sawbladesCustomerActive}
                 closeSearchComponent={closeSearchComponent}
                 setCloseSearchComponent={setCloseSearchComponent}
                 dateValue={dateValue}
@@ -137,8 +132,8 @@ const Search = ({ theme }) => {
             <RoleAdminMT>
               <SearchMain
                 sawblades={sawbladesCustomer}
-                deletedSawblades={sawbladesOsterdalDeleted}
-                activeBlades={sawbladesOsterdalActive}
+                deletedSawblades={sawbladesCustomerDeleted}
+                sawbladesService={sawbladesCustomerActive}
                 closeSearchComponent={closeSearchComponent}
                 setCloseSearchComponent={setCloseSearchComponent}
                 dateValue={dateValue}

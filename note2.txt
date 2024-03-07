@@ -4,6 +4,7 @@ Vis historikkantall på slettede blader
 Sett active false når man sletter et blad.
 Antall tenner på rep legges inn av KS
 Det skal ikke være tillat og ha en tom SERV kode på KS, se i forhold til Ingen handling
+servicetype viser feil i oversikt over blad til service
 
 
 
