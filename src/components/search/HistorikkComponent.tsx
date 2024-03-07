@@ -6,6 +6,7 @@ import React from "react";
 import BandDetails from "./BandDetails";
 import ServiceKodeTabell from "../reusable/ServiceKodeTabell";
 import dateFormat from "dateformat";
+import TypesArticle from "../reusable/TypesArticle";
 
 const HistorikkComponent = ({
   blade,
@@ -26,8 +27,14 @@ const HistorikkComponent = ({
                 <span className="text-red-500">VRAKET</span>
               )}
             </h1>
-            <p className="mb-3">
+            <p className="text-xs">
               Type: {blade.type} {blade.side}
+            </p>
+            <p className="mb-3 text-xs">
+              Art nr:{" "}
+              <span>
+                <TypesArticle blade={blade} />
+              </span>
             </p>
 
             <div className="mb-5 rounded-xl bg-green-200 p-2 text-xs">

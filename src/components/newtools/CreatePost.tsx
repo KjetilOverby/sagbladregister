@@ -6,6 +6,7 @@ import { api } from "~/utils/api";
 import { Prisma } from "@prisma/client";
 import { KundeSelector } from "./KundeSelector";
 import { TypeInputMV } from "./mv/TypeInputMV";
+import mvArticleTypes from "~/appdata/mvArticleTypes";
 
 const CreatePost = () => {
   const [bladeData, setBladeData] = useState({
@@ -16,11 +17,11 @@ const CreatePost = () => {
     kunde: "",
     side: "",
     active: false,
-    deleteReason: "-",
+    deleteReason: "",
     produsent: "",
-    creatorImg: "-",
-    deleter: "-",
-    deleterImg: "-",
+    creatorImg: "",
+    deleter: "",
+    deleterImg: "",
     produsent: "",
     artikkel: "",
   });
@@ -59,9 +60,9 @@ const CreatePost = () => {
             } else if (inputID === "") {
               alert("Du må legge inn ID nummer.");
             } else if (
-              (bladeData.type === "VS66 3,6-5,0 475 27z" &&
+              (bladeData.type === mvArticleTypes[7].blade &&
                 bladeData.side === "") ||
-              (bladeData.type === "VS66 3,6-5,0 475 24z Flens" &&
+              (bladeData.type === mvArticleTypes[8].blade &&
                 bladeData.side === "")
             ) {
               alert("Side er påkrevd");
@@ -74,7 +75,11 @@ const CreatePost = () => {
                 note: bladeData.note,
                 deleted: false,
                 kunde: bladeData.kunde,
-                side: bladeData.side,
+                side:
+                  bladeData.type === mvArticleTypes[7].blade ||
+                  bladeData.type === mvArticleTypes[8].blade
+                    ? bladeData.side
+                    : "",
                 active: false,
                 deleteReason: "",
                 produsent: bladeData.produsent,
@@ -122,7 +127,8 @@ const CreatePost = () => {
           <option value="Frezite">Frezite</option>
           <option value="Ukjent">Ukjent</option>
         </select>
-        {bladeData.type === "475/120 3.6-5.0 z24 VS66" && (
+
+        {bladeData.type === mvArticleTypes[7].blade && (
           <select
             onChange={(e) =>
               setBladeData({ ...bladeData, side: e.currentTarget.value })
@@ -138,7 +144,7 @@ const CreatePost = () => {
             <option value="Venstre">Venstre</option>
           </select>
         )}
-        {bladeData.type === "475/120 3.6-5.0 z24 flens VS66" && (
+        {bladeData.type === mvArticleTypes[8].blade && (
           <select
             onChange={(e) =>
               setBladeData({ ...bladeData, side: e.currentTarget.value })

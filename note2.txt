@@ -2,10 +2,7 @@ Legge til Nom antall og reelt antall blader
 Lage en datafilter side med nedlasting av CSV.
 Vis historikkantall på slettede blader
 Sett active false når man sletter et blad.
-Deactiver setter feilkode til Ingen anmerkning, det skal den ikke gjøre,
 Antall tenner på rep legges inn av KS
-Skjerebredde først
-artikkelnummer
 
 
 

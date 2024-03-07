@@ -21,6 +21,7 @@ const ReklamasjonsInput = ({ setHistorikkData, historikkData }) => {
         <option value="Tannslipp">Tannslipp</option>
         <option value="Dårlig lodd">Dårlig lodd</option>
         <option value="Manglende sideslip">Manglende sideslip</option>
+        <option value="Dårlig retting">Dårlig retting</option>
       </select>
     </div>
   );
