@@ -286,19 +286,8 @@ const BandDetails = ({
 
                     <td className="text-primary">
                       {post.activePost && (
-                        <div onClick={() => setOpenDeactivateModal(true)}>
-                          <FiRefreshCw className=" text-lg text-orange-400" />
-                          {openDeactivateModal && (
-                            <DeactivateBlade
-                              blade={blade}
-                              updatePost={updatePostKS}
-                              updateStatusHandler={deactivateStatusHandler}
-                              handleCloseModal={handleCloseModal}
-                              post={post}
-                              setOpenDeactivateModal={setOpenDeactivateModal}
-                              setHistorikkKs={setHistorikkKs}
-                            />
-                          )}
+                        <div className="grid h-7 w-7 place-content-center rounded-full bg-gray-500">
+                          <FiRefreshCw className="text-lg text-yellow-500" />
                         </div>
                       )}
                     </td>

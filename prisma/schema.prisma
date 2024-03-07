@@ -61,10 +61,7 @@ enum UserRole {
     USER
     LOGIN
     MV_ADMIN
-    MO_ADMIN
-    MM_ADMIN
-    MS_ADMIN
-    KV_ADMIN
+    MT_ADMIN
 }
 
 model User {

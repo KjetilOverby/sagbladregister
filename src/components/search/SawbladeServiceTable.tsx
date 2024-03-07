@@ -31,10 +31,10 @@ const SawbladeServiceTable = ({ sawbladesService }) => {
                   <tr className="">
                     <td className="font-bold text-neutral">
                       {blade.IdNummer}{" "}
-                      {blade.note !== "-" && (
+                      {blade.note && (
                         <span className="text-xs font-normal text-orange-200">
                           ({blade.note})
-                        </span>
+                        </span>,
                       )}
                     </td>
                     <td>

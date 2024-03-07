@@ -250,6 +250,7 @@ const SearchMain = ({
                             Slett blad: {blade.IdNummer}
                           </h2>
                           <p>Velg årsaken til vrak?</p>
+
                           <select
                             onChange={(e) =>
                               setWasteReasonInput(e.currentTarget.value)
@@ -270,6 +271,10 @@ const SearchMain = ({
                               Store tannskader
                             </option>
                           </select>
+                          <p className="text-xs">
+                            Bladet blir ikke permanent slettet og kan
+                            gjenopprettes senere hvis behov.
+                          </p>
 
                           {wasteReasonInput && (
                             <th>

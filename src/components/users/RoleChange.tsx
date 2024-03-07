@@ -31,10 +31,7 @@ const RoleChange = () => {
               | "USER"
               | "LOGIN"
               | "MV_ADMIN"
-              | "MO_ADMIN"
-              | "MM_ADMIN"
-              | "MS_ADMIN"
-              | "KV_ADMIN",
+              | "MT_ADMIN",
           });
         }}
         className="select select-bordered select-xs w-full max-w-xs"
@@ -42,8 +39,7 @@ const RoleChange = () => {
         <option value="">Velg kunde</option>
         <option value="ADMIN">Alle</option>
         <option value="MV_ADMIN">Moelven Våler</option>
-        {/* <option value="MM_ADMIN">Mjøsbruket</option>
-        <option value="MS_ADMIN">Soknabruket</option> */}
+        <option value="MT_ADMIN">Moelven Trysil</option>
       </select>
     </div>
   );

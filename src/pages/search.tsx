@@ -13,6 +13,7 @@ import NotAuthorized from "~/components/reusable/NotAuthorized";
 import RoleAdmin from "~/components/roles/RoleAdmin";
 import RoleAdminMV from "~/components/roles/RoleAdminMV";
 import dateFormat from "dateformat";
+import RoleAdminMT from "~/components/roles/RoleAdminMT";
 
 const Search = ({ theme }) => {
   const [closeSearchComponent, setCloseSearchComponent] = useState(false);
@@ -115,6 +116,7 @@ const Search = ({ theme }) => {
                 setDateValue={setDateValue}
               />
             </RoleAdminMV>
+            <RoleAdminMT>test</RoleAdminMT>
           </div>
         </>
       ) : (
