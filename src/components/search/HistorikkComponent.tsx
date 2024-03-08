@@ -59,7 +59,7 @@ const HistorikkComponent = ({
             {blade.deleted && (
               <div className="mb-5 rounded-xl bg-red-200 p-2 text-xs">
                 <p>Slettet av: {blade.deleter}</p>
-                <p>Dato: {dateFormat(blade.updateAt as Date, "dd.mm.yyyy")}</p>
+                <p>Dato: {dateFormat(blade.updatedAt as Date, "dd.mm.yyyy")}</p>
                 <p className="mb-3">Vrakårsak: {blade.deleteReason}</p>
                 <div className="w-10">
                   <img

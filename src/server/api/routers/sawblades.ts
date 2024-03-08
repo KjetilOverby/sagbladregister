@@ -28,6 +28,8 @@ export const sawbladesRouter = createTRPCRouter({
   }),
 
 
+
+
   getAllCreate: protectedProcedure
   .input(z.object({date: z.string(), date2: z.string(), IdNummer: z.string()}))
       .query(({ ctx, input }) => {
@@ -181,6 +183,32 @@ export const sawbladesRouter = createTRPCRouter({
 
 
         // ************************* CUSTOMERS *****************************////////
+
+        countSawbladesCustomer: protectedProcedure
+        .input(z.object({ init: z.string()})).
+        query(async ({ ctx, input }) => {
+          const count = await ctx.db.sawblades
+            .groupBy({
+              by: ['deleted', 'side', 'type'],
+              _count: true,
+              where: {
+                IdNummer: {
+                  startsWith: input.init
+                }
+              }
+            });
+          
+          return count;
+        }),
+        countAllBladesCustomer: protectedProcedure
+        .input(z.object({ init: z.string()}))
+        .query(async ({ ctx, input }) => {
+          const total = await ctx.db.sawblades.count({ where: { IdNummer: { startsWith: input.init } } });
+          const deleted = await ctx.db.sawblades.count({ where: { IdNummer: { startsWith: input.init }, deleted: true } });
+          const notDeleted = await ctx.db.sawblades.count({ where: { IdNummer: { startsWith: input.init }, deleted: false } });
+      
+          return { total, deleted, notDeleted };
+        }),
 
     getCustomerAllDeleted: protectedProcedure
     .input(z.object({date: z.string(), date2: z.string(), IdNummer: z.string(), init: z.string()}))

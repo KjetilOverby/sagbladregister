@@ -7,6 +7,7 @@ Det skal ikke være tillat og ha en tom SERV kode på KS, se i forhold til Ingen
 servicetype viser feil i oversikt over blad til service
 Oversikt på kunder
 diagram på reklamasjonsårsaker
+Telle serviceposter og poster som er omlodding
 
 
 

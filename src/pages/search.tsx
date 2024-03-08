@@ -35,6 +35,10 @@ const Search = ({ theme }) => {
   }, [sessionData]);
 
   const { data: countAllBlades } = api.sawblades.countAllBlades.useQuery({});
+  const { data: countAllBladesCustomers } =
+    api.sawblades.countAllBladesCustomer.useQuery({
+      init: customerInit,
+    });
 
   const { data: sawblades } = api.sawblades.getAll.useQuery({
     IdNummer: idValue,
@@ -96,6 +100,16 @@ const Search = ({ theme }) => {
                   {sessionData?.user.role === "ADMIN" && (
                     <p className="mt-5 text-sm">
                       Antall blad i bruk: {countAllBlades?.notDeleted}
+                    </p>
+                  )}
+                  {sessionData?.user.role === "MV_ADMIN" && (
+                    <p className="mt-5 text-sm">
+                      Antall blad i bruk: {countAllBladesCustomers?.notDeleted}
+                    </p>
+                  )}
+                  {sessionData?.user.role === "MT_ADMIN" && (
+                    <p className="mt-5 text-sm">
+                      Antall blad i bruk: {countAllBladesCustomers?.notDeleted}
                     </p>
                   )}
                 </div>
