@@ -4,7 +4,7 @@ import HeaderComponent from "~/components/reusable/HeaderComponent";
 import { api } from "~/utils/api";
 import { signIn, signOut, useSession } from "next-auth/react";
 
-const oversikt = ({ theme }: { theme: string }) => {
+const Oversikt = ({ theme }: { theme: string }) => {
   const { data: sessionData } = useSession();
   const { data: count } = api.sawblades.countSawblades.useQuery();
   return (
@@ -17,4 +17,4 @@ const oversikt = ({ theme }: { theme: string }) => {
   );
 };
 
-export default oversikt;
+export default Oversikt;

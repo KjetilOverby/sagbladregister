@@ -220,16 +220,13 @@ export const sawbladesRouter = createTRPCRouter({
 
    
     getCustomer: protectedProcedure
-    .input(z.object({date: z.string(), date2: z.string(), IdNummer: z.string(), init: z.string()}))
+    .input(z.object({ IdNummer: z.string(), init: z.string()}))
         .query(({ ctx, input }) => {
          // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
          return ctx.db.sawblades.findMany({
           where: {
             AND: [{
-              createdAt: {
-               lte: new Date(input.date),
-               gte: new Date(input.date2),
-              },
+            
               IdNummer: {
                 startsWith: input.init,
                 equals: `${input.init}${input.IdNummer}`

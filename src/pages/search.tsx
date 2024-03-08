@@ -57,8 +57,6 @@ const Search = ({ theme }) => {
   // **************** CUSTOMERS ****************** //
 
   const { data: sawbladesCustomer } = api.sawblades.getCustomer.useQuery({
-    date: `${dateValue.endDate}T23:59:59.000Z`,
-    date2: `${dateValue.startDate}T00:00:00.000Z`,
     IdNummer: idValue,
     init: customerInit,
   });

@@ -34,7 +34,7 @@ const SawbladeServiceTable = ({ sawbladesService }) => {
                       {blade.note && (
                         <span className="text-xs font-normal text-orange-200">
                           ({blade.note})
-                        </span>,
+                        </span>
                       )}
                     </td>
                     <td>
