@@ -8,6 +8,7 @@ servicetype viser feil i oversikt over blad til service
 Oversikt på kunder
 diagram på reklamasjonsårsaker
 Telle serviceposter og poster som er omlodding
+Vis blad til service kunder virker ikke
 
 
 
