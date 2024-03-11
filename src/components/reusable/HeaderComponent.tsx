@@ -119,7 +119,6 @@ const HeaderComponent = () => {
                     />
                   </span>
                 </p>
-                <p className="text-end text-slate-500">Sirkelsagblad</p>
               </div>
             </Link>
           </div>
@@ -341,6 +340,11 @@ const HeaderComponent = () => {
             </ul>*/}
           </div>
           <div className="flex items-center lg:order-2">
+            <div className="mr-10 rounded-xl border border-yellow-500 bg-slate-500 p-1">
+              <p className=" text-end  text-sm font-bold text-yellow-500">
+                Sirkelsagblad
+              </p>
+            </div>
             <Link href={sessionData ? "/api/auth/signout" : "/api/auth/signin"}>
               <div className="h-10 w-10">
                 <img
