@@ -114,7 +114,7 @@ const HeaderComponent = () => {
                   <span className="w-64">
                     <img
                       className="w-full"
-                      src="https://lh3.googleusercontent.com/pw/AP1GczPkaeE7i9daXV7Z6RXSLWDnrCJrehv311q2kvTmD0BadaLEGhiJsD2bWib-nuexF6AzZVP3f6iRjQ4kA1H6vViCvLkfIcQYsqN404YyUYHRWxL8HfOPiMoeSbT5hQCTZi2OVJSFOh_jA0yazroYRITv=w1920-h193-s-no?authuser=0"
+                      src="https://lh3.googleusercontent.com/pw/AP1GczO19apGy2A8BpjpXfSxH9QqnIHayFE3D79I2fFrdmwJNHOHpn6q7T6w9AWxC6w5xkY-_CYbwYSuasGM8ppssCBtuLEz1m_mRsT8ttP5rHf_cHK153cz89ehUYEUpXKfetsUMRKUuYy0hMhZ2xLoPyR0=w1920-h193-s-no?authuser=0"
                       alt=""
                     />
                   </span>
