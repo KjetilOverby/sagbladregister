@@ -104,17 +104,22 @@ const HeaderComponent = () => {
         >
           <div className="flex">
             <Link href="/">
-              <div>
-                <p className="flex items-center">
+              <div className="">
+                <p className="flex">
                   {/* <img
                     src="https://static.wixstatic.com/media/ea9f2f_dff85b2ff00146c9ae8fe2884c5bcc49~mv2.png/v1/fill/w_560,h_424,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/imageedit_1_4852502502.png"
                     className="mr-3 h-6 sm:h-9"
                     alt="Flowbite Logo"
                   /> */}
-                  <span className="self-center whitespace-nowrap text-xl font-semibold text-orange-600">
-                    Sagbladregister
+                  <span className="w-64">
+                    <img
+                      className="w-full"
+                      src="https://lh3.googleusercontent.com/pw/AP1GczPkaeE7i9daXV7Z6RXSLWDnrCJrehv311q2kvTmD0BadaLEGhiJsD2bWib-nuexF6AzZVP3f6iRjQ4kA1H6vViCvLkfIcQYsqN404YyUYHRWxL8HfOPiMoeSbT5hQCTZi2OVJSFOh_jA0yazroYRITv=w1920-h193-s-no?authuser=0"
+                      alt=""
+                    />
                   </span>
                 </p>
+                <p className="text-end text-slate-500">Sirkelsagblad</p>
               </div>
             </Link>
           </div>
