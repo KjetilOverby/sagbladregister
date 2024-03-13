@@ -103,7 +103,7 @@ const ActivateBlade = ({
 }: BladeProps) => {
   const [serviceInput, setserviceInput] = useState("");
   const [historikkData, setHistorikkData] = useState({
-    feilkode: "",
+    feilkode: "Ingen reklamasjon",
     service: "",
   });
 
@@ -157,6 +157,9 @@ const ActivateBlade = ({
                   creatorImg2: "",
                   creator3: "",
                   creatorImg3: "",
+                  antRep: 0,
+                  antTannslipp: 0,
+                  stokkAnt: 0,
                 });
                 updateStatusHandler();
               }

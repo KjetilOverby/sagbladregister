@@ -166,6 +166,8 @@ model bandhistorikk {
     bladType        String
     datoSrv         DateTime
     activePost      Boolean
+    antRep          Int
+    antTannslipp    Int
     bladeRelationId String
     alt             String
     creator2        String

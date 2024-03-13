@@ -11,7 +11,7 @@ export const bandhistorikkRouter = createTRPCRouter({
 
     
       create: protectedProcedure
-      .input(z.object({ service: z.string(), datoInn: z.date(), klInn: z.date(), klUt: z.date(), datoUt: z.date(),ampere: z.number(), feilkode: z.string(), anmSag: z.string(), temperatur: z.number(), userId: z.string(),  handling: z.string(), sideklaring: z.number(), sgSag: z.string(), datoSrv: z.date(),createdById: z.string(), bladedata: z.string(), anmKS: z.string(), createdBy: z.string(), sagtid:z.number(), sgKS: z.string(), creatorImg: z.string(), side: z.string(), bladType: z.string(), activePost: z.boolean(), bladeRelationId: z.string(), alt: z.string(), creator: z.string(), creator2: z.string(), creatorImg2: z.string(), creator3: z.string(), creatorImg3: z.string() }))
+      .input(z.object({ service: z.string(), datoInn: z.date(), klInn: z.date(), klUt: z.date(), datoUt: z.date(),ampere: z.number(), feilkode: z.string(), anmSag: z.string(), temperatur: z.number(), userId: z.string(),  handling: z.string(), sideklaring: z.number(), sgSag: z.string(), datoSrv: z.date(),createdById: z.string(), bladedata: z.string(), anmKS: z.string(), createdBy: z.string(), sagtid:z.number(), sgKS: z.string(), creatorImg: z.string(), side: z.string(), bladType: z.string(), activePost: z.boolean(), bladeRelationId: z.string(), alt: z.string(), creator: z.string(), creator2: z.string(), creatorImg2: z.string(), creator3: z.string(), creatorImg3: z.string(), antRep: z.number(), antTannslipp: z.number(), stokkAnt: z.number()}))
       .mutation(({ ctx, input }) => {
         const creatorName: string = ctx.session.user.name ?? "DefaultCreator";
         const creatorImg: string = ctx.session.user.image ?? "DefaultCreator";
@@ -45,10 +45,12 @@ export const bandhistorikkRouter = createTRPCRouter({
              bladeRelationId: input.bladeRelationId,
              alt: input.alt,
              creator2: '',
-              creatorImg2: '',
+             creatorImg2: '',
              creator3: '',
-              creatorImg3: '',
-              stokkAnt: 0
+             creatorImg3: '',
+             stokkAnt: 0,
+             antRep: 0,
+             antTannslipp: 0,
 
              
 
@@ -102,7 +104,7 @@ export const bandhistorikkRouter = createTRPCRouter({
   }),
  
 
-  updateKS: protectedProcedure.input(z.object({anmKS: z.string(), id: z.string(), handling: z.string(), sgKS: z.string(), datoSrv: z.date(), sideklaring: z.number(), creator3: z.string(), creatorImg3: z.string(), activePost: z.boolean()}))
+  updateKS: protectedProcedure.input(z.object({anmKS: z.string(), id: z.string(), handling: z.string(), sgKS: z.string(), datoSrv: z.date(), sideklaring: z.number(), creator3: z.string(), creatorImg3: z.string(), activePost: z.boolean(), antRep: z.number(), antTannslipp: z.number()}))
   .mutation(async ({ctx, input}) => {
     const creatorName: string = ctx.session.user.name ?? "DefaultCreator";
         const creatorImg: string = ctx.session.user.image ?? "DefaultCreator";
@@ -119,7 +121,9 @@ export const bandhistorikkRouter = createTRPCRouter({
               sideklaring: input.sideklaring,
               creator3: creatorName,
               creatorImg3: creatorImg,
-              activePost: false
+              activePost: false,
+              antRep: input.antRep,
+              antTannslipp: input.antTannslipp,
             
             
           

@@ -16,6 +16,8 @@ interface historikkInputProps {
     sgKS: string;
     datoSrv: Date;
     sideklaring: number;
+    antRep: number;
+    antTannslipp: number;
   };
   setOpenInputKS: React.Dispatch<React.SetStateAction<boolean>>;
   setHistorikkKs: React.Dispatch<
@@ -25,6 +27,8 @@ interface historikkInputProps {
       datoSrv: Date;
       handling: string;
       sideklaring: number;
+      antRep: number;
+      antTannslipp: number;
     }>
   >;
 }
@@ -37,6 +41,8 @@ const HistorikkInputKS = ({
   blade,
 }: historikkInputProps) => {
   const ctx = api.useContext();
+
+  console.log(historikkKs);
 
   const updatePost = api.bandhistorikk.updateKS.useMutation({
     onSuccess: () => {
@@ -84,6 +90,8 @@ const HistorikkInputKS = ({
             creator3: "",
             creatorImg3: "",
             activePost: false,
+            antRep: historikkKs.antRep,
+            antTannslipp: historikkKs.antTannslipp,
           });
           updateBladeStatus.mutate({
             id: blade.id,
@@ -142,6 +150,34 @@ const HistorikkInputKS = ({
               <option value={0.65}>0.65</option>
               <option value={0.7}>0.7</option>
             </select>
+          </div>
+          <div>
+            <p>Antall tenner rep:</p>
+            <input
+              onChange={(e) =>
+                setHistorikkKs({
+                  ...historikkKs,
+                  antRep: Number(e.currentTarget.value),
+                })
+              }
+              className="input input-bordered input-xs w-full max-w-xs bg-white"
+              type="number"
+              value={Number(historikkKs.antRep)}
+            />
+          </div>
+          <div>
+            <p>Antall tannslipp:</p>
+            <input
+              onChange={(e) =>
+                setHistorikkKs({
+                  ...historikkKs,
+                  antTannslipp: Number(e.currentTarget.value),
+                })
+              }
+              className="input input-bordered input-xs w-full max-w-xs bg-white"
+              type="number"
+              value={Number(historikkKs.antTannslipp)}
+            />
           </div>
           <p>BFS koder</p>
           <div className="rounded-xl border border-neutral p-1">

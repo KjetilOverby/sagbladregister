@@ -60,6 +60,8 @@ interface bandProps {
       temperatur: number;
       ampere: number;
       activePost: boolean;
+      antRep: number;
+      antTannslipp: number;
     }[];
   };
 
@@ -89,11 +91,13 @@ const BandDetails = ({
   const [openDeleteId, setOpenDeleteId] = useState<string | null>(null);
 
   const [historikkKs, setHistorikkKs] = useState({
-    anmKS: "",
+    anmKS: "test",
     sgKS: "",
     datoSrv: new Date(),
     handling: "",
     sideklaring: 0,
+    antRep: 0,
+    antTannslipp: 0,
   });
 
   const openDeletePost = (postID: string) => {
@@ -179,14 +183,18 @@ const BandDetails = ({
           <thead>
             <tr>
               <th className="text-sm font-thin text-neutral">Service</th>
+              <th className="text-sm font-thin text-neutral">
+                Reklamasjonstype
+              </th>
               <th className="text-sm font-thin text-neutral">Til service</th>
               <th className="text-sm font-thin text-neutral">Signatur</th>
 
-              <th className="text-sm font-thin text-neutral">Feilkode</th>
               <th className="text-sm font-thin text-neutral">Anm</th>
               <th className="text-sm font-bold text-neutral"></th>
               <th className="text-sm font-bold text-neutral"></th>
               <th className="text-sm font-bold text-neutral">Service</th>
+              <th className="text-sm font-bold text-neutral">Rep ant</th>
+              <th className="text-sm font-bold text-neutral">Ant tannslipp</th>
               <th className="text-sm font-bold text-neutral">SK</th>
               <th className="text-sm font-bold text-neutral">Anm KS</th>
               <th className="text-sm font-bold text-neutral">Signatur</th>
@@ -204,6 +212,8 @@ const BandDetails = ({
                   sgKS: post.sgKS,
                   datoSrv: new Date(),
                   sideklaring: post.sideklaring,
+                  antRep: post.antRep,
+                  antTannslipp: post.antTannslipp,
                 });
               };
 
@@ -232,6 +242,7 @@ const BandDetails = ({
                     <td className="py-5">
                       <div className="text-xs text-neutral">{post.service}</div>
                     </td>
+                    <td className="py-5 text-neutral">{post.feilkode}</td>
                     <td className="py-5">
                       <div className="text-xs text-neutral ">
                         {dateFormat(post.datoInn, "dd.mm.yyyy")},{" "}
@@ -251,8 +262,6 @@ const BandDetails = ({
                         {post.creator}
                       </div>
                     </td>
-
-                    <td className="py-5 text-neutral">{post.feilkode}</td>
 
                     <td className="relative  max-w-56 py-5 text-neutral">
                       {post.anmSag && (
@@ -310,6 +319,8 @@ const BandDetails = ({
                       </button>
                     </td>
                     <td className="text-neutral">{post.handling}</td>
+                    <td className="text-neutral">{post.antRep}</td>
+                    <td className="text-neutral">{post.antTannslipp}</td>
                     <td className="text-neutral">{post.sideklaring}</td>
                     <td className="relative max-w-56 text-neutral">
                       {post.anmKS && (

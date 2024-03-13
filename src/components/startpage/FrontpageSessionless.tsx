@@ -8,10 +8,17 @@ interface userProps {
 
 const FrontpageSessionless = ({ session }: userProps) => {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-[url('https://static.albertafarmexpress.ca/wp-content/uploads/2016/11/WoodLogs_ThinkstockPhotos-8.jpg')] bg-cover bg-no-repeat text-white">
-      <div className="flex flex-col rounded-full   p-20 text-center">
-        <h1 className="mb-5 text-8xl font-bold text-yellow-400">KS TOOLS</h1>
+    <div className="flex min-h-screen flex-col items-center justify-center bg-black text-white">
+      <div className="flex flex-col rounded-full p-20 text-center">
+        <img
+          className="w-full"
+          src="https://lh3.googleusercontent.com/pw/AP1GczO19apGy2A8BpjpXfSxH9QqnIHayFE3D79I2fFrdmwJNHOHpn6q7T6w9AWxC6w5xkY-_CYbwYSuasGM8ppssCBtuLEz1m_mRsT8ttP5rHf_cHK153cz89ehUYEUpXKfetsUMRKUuYy0hMhZ2xLoPyR0=w1920-h193-s-no?authuser=0"
+          alt=""
+        />
 
+        <p className="py-5">
+          Du er inlogget i KS TOOLTRACKER men har ikke tilgang til appen enda.
+        </p>
         <div className="flex flex-col items-center gap-2">
           <div className="flex flex-col items-center justify-center gap-4">
             <p className="text-center text-2xl text-white"></p>
