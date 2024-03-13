@@ -1,4 +1,3 @@
-Legge til Nom antall og reelt antall blader 
 Lage en datafilter side med nedlasting av CSV.
 Vis historikkantall på slettede blader
 Sett active false når man sletter et blad.
