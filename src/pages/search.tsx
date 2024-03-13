@@ -69,7 +69,7 @@ const Search = ({ theme }) => {
     api.sawblades.getCustomerAllDeleted.useQuery({
       date: `${dateValue.endDate}T23:59:59.000Z`,
       date2: `${dateValue.startDate}T00:00:00.000Z`,
-      IdNummer: idValue,
+
       init: customerInit,
     });
   const { data: sawbladesCustomerActive } =

@@ -125,7 +125,7 @@ const OverviewTable = ({ count }) => {
       </table>
       {
         <RoleAdminMV>
-          <div className="mt-5 bg-gray-100 p-3">
+          <div className="mt-5 bg-primary p-3">
             <h1>Må bestilles:</h1>
             {negativeItems.map((item, index) => {
               const matchingArtItem = mvArticleTypes.find((artItem) => {

@@ -109,7 +109,7 @@ const ActivateBlade = ({
 
   return (
     <div>
-      <div className="card absolute z-40 w-96 bg-neutral text-neutral-content">
+      <div className="card absolute z-40 w-96 bg-blue-400">
         <div className="flex flex-col">
           <form
             className="flex flex-col items-center"
@@ -169,7 +169,7 @@ const ActivateBlade = ({
               <h2 className="card-title">
                 <span className="text-base-100">{blade.IdNummer}</span>
               </h2>
-              <p className="text-accent">Aktiver service</p>
+              <p className="text-neutral">Aktiver service</p>
               <ServiceInput
                 historikkData={historikkData}
                 setHistorikkData={setHistorikkData}
@@ -182,7 +182,7 @@ const ActivateBlade = ({
                 setHistorikkData={setHistorikkData}
               />
             )}
-            <button className="btn btn-primary btn-xs w-1/4 bg-accent">
+            <button className="btn btn-primary btn-xs mt-5 w-1/4 bg-accent">
               Aktiver
             </button>
           </form>

@@ -372,7 +372,7 @@ const SearchMain = ({
       <div>
         <button
           onClick={() => setShowService(!showService)}
-          className="btn btn-xs mb-5 bg-blue-500 text-white"
+          className="btn btn-xs bg-blue-500 text-white"
         >
           {showService ? "Skjul service blad" : "Vis service blad"}
         </button>
@@ -385,13 +385,13 @@ const SearchMain = ({
       </div>
       <div>
         <button
-          className="btn btn-xs my-5 bg-green-500 text-white"
+          className="btn btn-xs  bg-green-500 text-white"
           onClick={() => setShowDeletedBlades(!showDeletedBlades)}
         >
           {showDeletedBlades ? "Skjul slettede blad" : "Vis slettede blad"}
         </button>
 
-        <div className="mb-5 rounded-xl border p-2">
+        <div className=" rounded-xl border p-2">
           {showDeletedBlades && (
             <DeletedBladesComponent
               dateValue={dateValue}
