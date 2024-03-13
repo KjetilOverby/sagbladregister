@@ -10,12 +10,6 @@ const ServiceKodeTabell = ({ bladeInit }: { bladeInit: string[] }) => {
   return (
     <div>
       <table className="table table-xs ml-5 w-full bg-base-100 shadow-xl">
-        <thead>
-          <tr className="border-none">
-            <th className="px-5  text-xs">Kode</th>
-            <th className="px-5  text-xs">Beskrivelse</th>
-          </tr>
-        </thead>
         <tbody>
           {bladeInit.includes("MT-") && <ServiceKodeTblMT />}
           {bladeInit.includes("MV-") && <ServiceKodeTblMV />}

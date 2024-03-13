@@ -59,7 +59,11 @@ const SawbladeServiceTable = ({ sawbladesService }) => {
                       <div className="flex items-center space-x-3">
                         <div>
                           <div className="text-xs text-neutral">
-                            {blade.bandhistorikk.map((item) => item.service)}
+                            {
+                              blade.bandhistorikk[
+                                blade.bandhistorikk.length - 1
+                              ].service
+                            }
                           </div>
                         </div>
                       </div>
