@@ -87,7 +87,7 @@ const HistorikkComponent = ({
             </div>
           </div> */}
           <div className="mb-5">
-            <ServiceKodeTabell />
+            <ServiceKodeTabell bladeInit={blade.IdNummer} />
           </div>
         </div>
         <BandDetails

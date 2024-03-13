@@ -13,6 +13,7 @@ import DeactivateBlade from "./DeactivateBlade";
 import EditBandDetails from "./EditBandDetails";
 import { FiRefreshCw } from "react-icons/fi";
 import { RiDeleteBinFill } from "react-icons/ri";
+import RoleAdmin from "../roles/RoleAdmin";
 
 interface bandProps {
   blade: {
@@ -192,6 +193,7 @@ const BandDetails = ({
               <th className="text-sm font-thin text-neutral">Anm</th>
               <th className="text-sm font-bold text-neutral"></th>
               <th className="text-sm font-bold text-neutral"></th>
+              <th className="text-sm font-bold text-neutral"></th>
               <th className="text-sm font-bold text-neutral">Service</th>
               <th className="text-sm font-bold text-neutral">Rep ant</th>
               <th className="text-sm font-bold text-neutral">Ant tannslipp</th>
@@ -310,13 +312,16 @@ const BandDetails = ({
                           className="text-base-100"
                         />
                       </button>
-
-                      <button
-                        onClick={openKSinput}
-                        className="btn btn-xs bg-yellow-500 text-base-100"
-                      >
-                        KS
-                      </button>
+                    </td>
+                    <td>
+                      <RoleAdmin>
+                        <button
+                          onClick={openKSinput}
+                          className="btn btn-xs bg-yellow-500 text-base-100"
+                        >
+                          KS
+                        </button>
+                      </RoleAdmin>
                     </td>
                     <td className="text-neutral">{post.handling}</td>
                     <td className="text-neutral">{post.antRep}</td>

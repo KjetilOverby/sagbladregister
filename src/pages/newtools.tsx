@@ -44,7 +44,8 @@ const Newtools = ({ theme, setTheme }) => {
   });
   return (
     <div data-theme={theme}>
-      {sessionData?.user.role === "ADMIN" ? (
+      {sessionData?.user.role === "ADMIN" ||
+      sessionData?.user.role === "MV_ADMIN" ? (
         <>
           <HeaderComponent setTheme={setTheme} />
 

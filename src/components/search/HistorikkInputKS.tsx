@@ -5,6 +5,8 @@
 // @ts-nocheck
 import React, { useState } from "react";
 import { api } from "~/utils/api";
+import ServInputMV from "./CustomersInit/mv/ServInputMV";
+import ServInputMT from "./CustomersInit/mt/ServInputMT";
 
 interface historikkInputProps {
   postId: string;
@@ -42,7 +44,7 @@ const HistorikkInputKS = ({
 }: historikkInputProps) => {
   const ctx = api.useContext();
 
-  console.log(historikkKs);
+  console.log(blade.IdNummer);
 
   const updatePost = api.bandhistorikk.updateKS.useMutation({
     onSuccess: () => {
@@ -61,14 +63,7 @@ const HistorikkInputKS = ({
     },
   });
 
-  const [bfsValue, setBfsValue] = useState({
-    bfs1: "",
-    bfs2: "",
-    bfs3: "",
-    bfs4: "",
-    bfs5: "",
-    bfs6: "",
-  });
+  const [bfsValue, setBfsValue] = useState({});
 
   const nonEmptyValues = Object.values(bfsValue).filter(
     (value) => value !== "",
@@ -179,93 +174,7 @@ const HistorikkInputKS = ({
               value={Number(historikkKs.antTannslipp)}
             />
           </div>
-          <p>BFS koder</p>
-          <div className="rounded-xl border border-neutral p-1">
-            <label className="label cursor-pointer">
-              <span className="label-text">SERV 764</span>
-              <input
-                onChange={(e) =>
-                  setBfsValue({
-                    ...bfsValue,
-                    bfs1: e.currentTarget.value,
-                  })
-                }
-                type="checkbox"
-                className="checkbox"
-                value="SERV 764"
-              />
-            </label>
-            <label className="label cursor-pointer">
-              <span className="label-text">SERV 402</span>
-              <input
-                onChange={(e) =>
-                  setBfsValue({
-                    ...bfsValue,
-                    bfs2: e.currentTarget.value,
-                  })
-                }
-                type="checkbox"
-                className="checkbox"
-                value="SERV 402"
-              />
-            </label>
-            <label className="label cursor-pointer">
-              <span className="label-text">SERV 407</span>
-              <input
-                onChange={(e) =>
-                  setBfsValue({
-                    ...bfsValue,
-                    bfs3: e.currentTarget.value,
-                  })
-                }
-                value="SERV 407"
-                type="checkbox"
-                className="checkbox"
-              />
-            </label>
-            <label className="label cursor-pointer">
-              <span className="label-text">SERV 411</span>
-              <input
-                onChange={(e) =>
-                  setBfsValue({
-                    ...bfsValue,
-                    bfs4: e.currentTarget.value,
-                  })
-                }
-                value="SERV 411"
-                type="checkbox"
-                className="checkbox"
-              />
-            </label>
-            <label className="label cursor-pointer">
-              <span className="label-text">SERV 427</span>
-              <input
-                onChange={(e) =>
-                  setBfsValue({
-                    ...bfsValue,
-                    bfs5: e.currentTarget.value,
-                  })
-                }
-                value="SERV 427"
-                type="checkbox"
-                className="checkbox"
-              />
-            </label>
-            <label className="label cursor-pointer">
-              <span className="label-text">REKLAMASJON</span>
-              <input
-                onChange={(e) =>
-                  setBfsValue({
-                    ...bfsValue,
-                    bfs6: e.currentTarget.value,
-                  })
-                }
-                value="REKLAMASJON"
-                type="checkbox"
-                className="checkbox"
-              />
-            </label>
-          </div>
+          <p>SERV koder</p>
 
           {/* <div>
             <p>Sign:</p>
@@ -281,7 +190,12 @@ const HistorikkInputKS = ({
               className="input input-bordered input-xs w-full max-w-xs bg-white"
             />
           </div> */}
-
+          {blade.IdNummer.includes("MV-") && (
+            <ServInputMV setBfsValue={setBfsValue} bfsValue={bfsValue} />
+          )}
+          {blade.IdNummer.includes("MT-") && (
+            <ServInputMT setBfsValue={setBfsValue} bfsValue={bfsValue} />
+          )}
           <div className="card-actions">
             <button className="btn btn-primary btn-xs">Lagre</button>
             <button
