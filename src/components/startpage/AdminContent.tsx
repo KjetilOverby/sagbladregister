@@ -54,7 +54,10 @@ const AdminContent = ({
                         <span className="text-red-500">
                           {blade.type} {blade.side}
                         </span>{" "}
-                        for {blade.kunde}
+                        for{" "}
+                        <span className="text-purple-500">{blade.kunde}</span>,
+                        id nr:{" "}
+                        <span className="text-green-500">{blade.IdNummer}</span>
                       </li>
                     </div>
                   </ul>
@@ -81,7 +84,10 @@ const AdminContent = ({
                         <span className="text-red-500">
                           {blade.type} {blade.side}
                         </span>{" "}
-                        for {blade.kunde}
+                        for{" "}
+                        <span className="text-purple-500">{blade.kunde}</span>,
+                        id nr:{" "}
+                        <span className="text-green-500">{blade.IdNummer}</span>
                       </li>
                     </div>
                   </ul>
