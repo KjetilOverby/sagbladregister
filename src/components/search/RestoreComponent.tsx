@@ -9,11 +9,7 @@ interface IdProps {
   id: string;
 }
 
-export const RestoreComponent = ({
-  id,
-  setOpenGjenopprettID,
-  updateStatusHandler,
-}: IdProps) => {
+export const RestoreComponent = ({ id, setOpenGjenopprettID }: IdProps) => {
   const ctx = api.useContext();
   const router = useRouter();
   const updateBlade = api.sawblades.update.useMutation({
@@ -33,7 +29,6 @@ export const RestoreComponent = ({
       deleted: false,
       deleteReason: "",
     });
-    updateStatusHandler();
   };
 
   return (

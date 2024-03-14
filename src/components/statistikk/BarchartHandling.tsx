@@ -22,7 +22,10 @@ const MyChart = ({ data }) => {
       const processedData = {};
       // eslint-disable-next-line prefer-const
       for (let key in data) {
-        processedData[key || "Vraket"] = data[key];
+        if (key) {
+          // Skip empty keys
+          processedData[key] = data[key];
+        }
       }
 
       const chartData = {

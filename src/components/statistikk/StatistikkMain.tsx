@@ -12,6 +12,7 @@ import BarCharts from "../statistikk/BarCharts";
 import BarChartTooth from "../statistikk/BarChartTooth";
 import ReklamasjontyperChart from "../statistikk/ReklamasjontyperChart";
 import BarChartHandling from "../statistikk/BarchartHandling";
+import ServiceKodeTabell from "../reusable/ServiceKodeTabell";
 
 interface statistikkProps {
   historikkData: {
@@ -190,7 +191,7 @@ const StatistikkMain = ({
               </div>
             </div>
           </div>
-          <div>
+          <div className="flex">
             <div className="m-5 mt-20 flex w-1/2 rounded-xl p-10 shadow-xl shadow-primary max-lg:grid">
               <div className="w-full">
                 <h1 className="text-2xl text-neutral">Reklamasjonsårsaker</h1>
@@ -242,33 +243,41 @@ const StatistikkMain = ({
               </div>
             </div>
           </div>
-          <div className="m-5 mt-20 flex w-1/2 rounded-xl p-10 shadow-xl shadow-primary max-lg:grid">
-            <div className="w-full">
-              <h1 className="text-2xl text-neutral">Service handling</h1>
-              <p className="text-neutral">
-                Antall vrak: {deletedSawblades?.length}
-              </p>
-              <BarChartHandling data={handlingService} />
-              <div className="ml-16 rounded-xl  p-5 max-lg:ml-0 max-lg:w-full">
-                {
-                  <>
-                    <h1 className="text-neutral">Handling Service:</h1>
-                    <ul className="italic text-neutral">
-                      {handlingService &&
-                        Object.entries(handlingService).map(
-                          ([service, count]) => (
-                            <li key={service}>
-                              {service || "VRAKET"}: {count}
-                            </li>
-                          ),
-                        )}
-                    </ul>
-                  </>
-                }
+          <div className="flex">
+            <div className="m-5 mt-20 flex w-1/2 rounded-xl p-10 shadow-xl shadow-primary max-lg:grid">
+              <div className="w-full">
+                <h1 className="text-2xl text-neutral">Service handling</h1>
+                <p className="text-neutral">
+                  Antall vrak: {deletedSawblades?.length}
+                </p>
+                <BarChartHandling data={handlingService} />
+                <div className="ml-16 rounded-xl  p-5 max-lg:ml-0 max-lg:w-full">
+                  {
+                    <>
+                      <h1 className="text-neutral">Handling Service:</h1>
+                      <ul className="italic text-neutral">
+                        {handlingService &&
+                          Object.entries(handlingService).map(
+                            ([service, count]) => (
+                              <li key={service}>
+                                {service || "Ingen handling"}: {count}
+                              </li>
+                            ),
+                          )}
+                      </ul>
+                    </>
+                  }
+                </div>
+              </div>
+            </div>
+            <div className="m-5 mt-20 flex w-1/2 rounded-xl p-10 shadow-xl shadow-primary max-lg:grid">
+              <div>
+                <h1>Servicekoder</h1>
+                <ServiceKodeTabell bladeInit="MV-" />
+                <ServiceKodeTabell bladeInit="MT-" />
               </div>
             </div>
           </div>
-          <div></div>
         </div>
       </div>
     </div>

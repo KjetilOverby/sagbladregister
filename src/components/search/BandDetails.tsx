@@ -134,6 +134,14 @@ const BandDetails = ({
     service: "",
   });
 
+  const serviceCounts = bandhistorikkData?.bandhistorikk.reduce((acc, post) => {
+    const service = post.service;
+    if (service) {
+      acc[service] = (acc[service] || 0) + 1;
+    }
+    return acc;
+  }, {});
+
   return (
     <div className="">
       {openInput && (
@@ -168,7 +176,7 @@ const BandDetails = ({
       )}
 
       <div className="">
-        <div>
+        <div className="mb-5 p-3">
           {/*      {!blade.active && (
             <button
               onClick={() => setOpenInput(true)}
@@ -177,6 +185,22 @@ const BandDetails = ({
               Ny post
             </button>
           )} */}
+
+          <p>Serviceposter: {bandhistorikkData?.bandhistorikk.length}</p>
+          <ul>
+            {Object.entries(serviceCounts).map(([service, count]) => (
+              <li key={service}>
+                {service}:{" "}
+                <span
+                  className={
+                    service === "Omlodding" && count >= 3 ? "text-red-500" : ""
+                  }
+                >
+                  {count}
+                </span>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
       <div className="max-xl:overflow-scroll">

@@ -1,8 +1,6 @@
 Lage en datafilter side med nedlasting av CSV.
 Vis historikkantall på slettede blader
 Oversikt på kunder
-diagram på reklamasjonsårsaker
-Telle serviceposter og poster som er omlodding
 
 
 

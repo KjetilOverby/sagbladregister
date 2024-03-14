@@ -35,7 +35,6 @@ export const DeleteComponent = ({
       id: id,
       deleted: true,
       deleteReason: wasteReasonInput,
-      activePost: false,
     });
     closeDeleteModal();
     updateStatusAfterDeleteHandler();
