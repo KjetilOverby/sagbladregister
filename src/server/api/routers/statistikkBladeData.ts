@@ -23,6 +23,18 @@ export const statistikkBladeDataRouter = createTRPCRouter({
           },
          })
       }),
+    getAllHistorikkKS: protectedProcedure
+    .input(z.object({date: z.string(), date2: z.string()}))
+        .query(({ ctx, input }) => {
+         return ctx.db.bandhistorikk.findMany({
+          where: {
+              datoSrv: {
+               lte: new Date(input.date),
+               gte: new Date(input.date2),
+              },
+          },
+         })
+      }),
 
 
       getAllToothCount: protectedProcedure
