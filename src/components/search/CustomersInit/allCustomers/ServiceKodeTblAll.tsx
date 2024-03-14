@@ -1,9 +1,8 @@
 import React from "react";
 
-const ServiceKodeTblMT = () => {
+const ServiceKodeTblAll = () => {
   return (
-    <div>
-      {" "}
+    <table className="table table-xs ml-5 w-full bg-base-100 shadow-xl">
       <tr className="border-none">
         <th className="font-thin">SERV 402</th>
         <th className="font-thin">SLIP HM/STELLITBLAD Ø 0/610mm over 36t</th>
@@ -62,16 +61,12 @@ const ServiceKodeTblMT = () => {
         <th className="font-thin">SERV 474</th>
         <th className="font-thin">HELOMLODDING HM ø 700/48t</th>
       </tr>
-      <tr className="border-none">
-        <th className="font-thin">SERV 764</th>
-        <th className="font-thin">HELOMLODDING HM LINCKBLAD M/SPISS TANN</th>
-      </tr>
       <tr>
         <th className="font-thin">REKLAMASJON</th>
         <th className="font-thin">REKLAMASJON</th>
       </tr>
-    </div>
+    </table>
   );
 };
 
-export default ServiceKodeTblMT;
+export default ServiceKodeTblAll;

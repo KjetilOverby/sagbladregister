@@ -48,7 +48,6 @@ const Search = ({ theme }) => {
   const { data: deletedSawblades } = api.sawblades.getAllDeleted.useQuery({
     date: `${dateValue.endDate}T23:59:59.000Z`,
     date2: `${dateValue.startDate}T00:00:00.000Z`,
-    IdNummer: idValue,
   });
 
   const { data: sawbladeslActive } = api.sawblades.getActive.useQuery({
