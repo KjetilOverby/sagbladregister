@@ -9,7 +9,11 @@ interface IdProps {
   id: string;
 }
 
-export const RestoreComponent = ({ id, setOpenGjenopprettID }: IdProps) => {
+export const RestoreComponent = ({
+  id,
+  setOpenGjenopprettID,
+  updateStatusHandler,
+}: IdProps) => {
   const ctx = api.useContext();
   const router = useRouter();
   const updateBlade = api.sawblades.update.useMutation({
@@ -22,16 +26,18 @@ export const RestoreComponent = ({ id, setOpenGjenopprettID }: IdProps) => {
       setOpenGjenopprettID(null);
     },
   });
+
+  const restoreHandler = () => {
+    void updateBlade.mutate({
+      id: id,
+      deleted: false,
+      deleteReason: "",
+    });
+    updateStatusHandler();
+  };
+
   return (
-    <div
-      onClick={() =>
-        void updateBlade.mutate({
-          id: id,
-          deleted: false,
-          deleteReason: "",
-        })
-      }
-    >
+    <div onClick={restoreHandler}>
       <button>GJENOPPRETT</button>
     </div>
   );

@@ -374,6 +374,7 @@ const HeaderComponent = () => {
                   <p className="text-neutral">Moelven Våler</p>
                 )}
                 {sessionData?.user.role === "MT_ADMIN" && <p>Moelven Trysil</p>}
+                {sessionData?.user.role === "ADMIN" && <p>Alle kunder</p>}
               </div>
             </div>
           </div>

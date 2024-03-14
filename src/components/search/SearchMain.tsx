@@ -202,6 +202,12 @@ const SearchMain = ({
               active: true,
             });
           };
+          const updateStatusAfterDeleteHandler = () => {
+            void updateStatus.mutate({
+              id: blade.id,
+              active: false,
+            });
+          };
 
           return (
             <>
@@ -286,6 +292,10 @@ const SearchMain = ({
                                   setWasteReasonInput={setWasteReasonInput}
                                   id={blade.id}
                                   closeDeleteModal={closeDeleteHandler}
+                                  blade={blade}
+                                  updateStatusAfterDeleteHandler={
+                                    updateStatusAfterDeleteHandler
+                                  }
                                 />
                               </button>
                             </th>
@@ -329,6 +339,7 @@ const SearchMain = ({
                             <RestoreComponent
                               setOpenGjenopprettID={setOpenGjenopprettID}
                               id={blade.id}
+                              updateStatusHandler={updateStatusHandler}
                             />
                           </button>
                           <button

@@ -1,11 +1,8 @@
 Lage en datafilter side med nedlasting av CSV.
 Vis historikkantall på slettede blader
-Sett active false når man sletter et blad.
-Det skal ikke være tillat og ha en tom SERV kode på KS, se i forhold til Ingen handling
 Oversikt på kunder
 diagram på reklamasjonsårsaker
 Telle serviceposter og poster som er omlodding
-Statistikk antall tenner rep og tannslipp
 
 
 

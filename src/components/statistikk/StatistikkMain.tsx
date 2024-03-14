@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/prefer-optional-chain */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -7,6 +9,9 @@
 import React, { useState, useEffect } from "react";
 import DatepickerComponent from "../reusable/Datepicker";
 import BarCharts from "../statistikk/BarCharts";
+import BarChartTooth from "../statistikk/BarChartTooth";
+import ReklamasjontyperChart from "../statistikk/ReklamasjontyperChart";
+import BarChartHandling from "../statistikk/BarchartHandling";
 
 interface statistikkProps {
   historikkData: {
@@ -20,6 +25,9 @@ const StatistikkMain = ({
   setDateValue,
   dateValue,
   deletedSawblades,
+  toothCountCustomer,
+  feilkodeReklamasjon,
+  handlingService,
 }: statistikkProps) => {
   const deleteReasons: string[] = [
     "Normal slitasje",
@@ -118,7 +126,7 @@ const StatistikkMain = ({
   }, [historikkData]);
 
   return (
-    <div className="pb-10">
+    <div className="pb-45 mx-96">
       <div className="mx-5 mt-5 max-lg:mx-0">
         <div>
           <div className="w-1/5 max-lg:w-full">
@@ -129,49 +137,138 @@ const StatistikkMain = ({
           </div>
         </div>
 
-        <div className="mt-20 flex w-full rounded-xl border border-secondary p-5 max-lg:grid">
-          <div className="w-2/5 max-lg:w-full">
-            <h1 className="text-2xl text-neutral">Service</h1>
-            <p className="text-neutral">Antall: {historikkData?.length}</p>
-            <BarCharts deleteReasonCount={serviceReasonCount} />
+        <div className="flex w-full flex-col">
+          <div className="flex">
+            <div className="m-5 mt-20 flex w-1/2 rounded-xl p-10 shadow-xl shadow-primary max-lg:grid">
+              <div className="w-full ">
+                <h1 className="text-2xl text-neutral">Service</h1>
+                <p className="text-neutral">Antall: {historikkData?.length}</p>
+                <BarCharts deleteReasonCount={serviceReasonCount} />
+                <div className="ml-16 rounded-xl  p-5 max-lg:ml-0 max-lg:w-full">
+                  {
+                    <>
+                      <h1 className="text-neutral">Service:</h1>
+                      <ul className=" italic text-neutral">
+                        {Object.entries(serviceReasonCount).map(
+                          ([reason, count]) => (
+                            <li key={reason}>
+                              {reason}: {count}
+                            </li>
+                          ),
+                        )}
+                      </ul>
+                    </>
+                  }
+                </div>
+              </div>
+            </div>
+
+            <div className="m-5 mt-20 flex w-1/2 rounded-xl p-10 shadow-xl shadow-primary max-lg:grid">
+              <div className="w-full">
+                <h1 className="text-2xl text-neutral">
+                  Antall tannslipp og reparasjoner av tenner
+                </h1>
+
+                <BarChartTooth data={toothCountCustomer} />
+                <div className="ml-16 rounded-xl  p-5 max-lg:ml-0 max-lg:w-full">
+                  {
+                    <>
+                      <h1 className="text-neutral">Antall rep og tannslipp:</h1>
+                      <ul className="italic text-neutral">
+                        {toothCountCustomer?._sum &&
+                          Object.entries(toothCountCustomer._sum).map(
+                            ([key, value]) => (
+                              <li key={key}>
+                                {key}: {value}
+                              </li>
+                            ),
+                          )}
+                      </ul>
+                    </>
+                  }
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="ml-16 w-3/5 rounded-xl bg-accent p-5 max-lg:ml-0 max-lg:w-full">
-            {
-              <>
-                <h1 className="text-neutral">Service:</h1>
-                <ul className=" italic text-neutral">
-                  {Object.entries(serviceReasonCount).map(([reason, count]) => (
-                    <li key={reason}>
-                      {reason}: {count}
-                    </li>
-                  ))}
-                </ul>
-              </>
-            }
+          <div>
+            <div className="m-5 mt-20 flex w-1/2 rounded-xl p-10 shadow-xl shadow-primary max-lg:grid">
+              <div className="w-full">
+                <h1 className="text-2xl text-neutral">Reklamasjonsårsaker</h1>
+                <p className="text-neutral">
+                  Antall vrak: {deletedSawblades?.length}
+                </p>
+                <ReklamasjontyperChart data={feilkodeReklamasjon} />
+                <div className="ml-16 rounded-xl  p-5 max-lg:ml-0 max-lg:w-full">
+                  {
+                    <>
+                      <h1 className="text-neutral">Reklamasjonsårsaker:</h1>
+                      <ul className="italic text-neutral">
+                        {feilkodeReklamasjon &&
+                          feilkodeReklamasjon.map((item) => (
+                            <li key={item.feilkode}>
+                              {item.feilkode}: {item._count.feilkode}
+                            </li>
+                          ))}
+                      </ul>
+                    </>
+                  }
+                </div>
+              </div>
+            </div>
+
+            <div className="m-5 mt-20 flex w-1/2 rounded-xl p-10 shadow-xl shadow-primary max-lg:grid">
+              <div className="w-full">
+                <h1 className="text-2xl text-neutral">Årsak til vrak</h1>
+                <p className="text-neutral">
+                  Antall vrak: {deletedSawblades?.length}
+                </p>
+                <BarCharts deleteReasonCount={deleteReasonCount} />
+                <div className="ml-16 rounded-xl  p-5 max-lg:ml-0 max-lg:w-full">
+                  {
+                    <>
+                      <h1 className="text-neutral">Årsak til vrak:</h1>
+                      <ul className=" italic text-neutral">
+                        {Object.entries(deleteReasonCount).map(
+                          ([reason, count]) => (
+                            <li key={reason}>
+                              {reason}: {count}
+                            </li>
+                          ),
+                        )}
+                      </ul>
+                    </>
+                  }
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="mt-20 flex w-full rounded-xl border border-secondary p-5 max-lg:grid">
-          <div className="w-2/5 max-lg:w-full">
-            <h1 className="text-2xl text-neutral">Årsak til vrak</h1>
-            <p className="text-neutral">
-              Antall vrak: {deletedSawblades?.length}
-            </p>
-            <BarCharts deleteReasonCount={deleteReasonCount} />
+          <div className="m-5 mt-20 flex w-1/2 rounded-xl p-10 shadow-xl shadow-primary max-lg:grid">
+            <div className="w-full">
+              <h1 className="text-2xl text-neutral">Service handling</h1>
+              <p className="text-neutral">
+                Antall vrak: {deletedSawblades?.length}
+              </p>
+              <BarChartHandling data={handlingService} />
+              <div className="ml-16 rounded-xl  p-5 max-lg:ml-0 max-lg:w-full">
+                {
+                  <>
+                    <h1 className="text-neutral">Handling Service:</h1>
+                    <ul className="italic text-neutral">
+                      {handlingService &&
+                        Object.entries(handlingService).map(
+                          ([service, count]) => (
+                            <li key={service}>
+                              {service || "VRAKET"}: {count}
+                            </li>
+                          ),
+                        )}
+                    </ul>
+                  </>
+                }
+              </div>
+            </div>
           </div>
-          <div className="ml-16 w-3/5 rounded-xl bg-accent p-5 max-lg:ml-0 max-lg:w-full">
-            {
-              <>
-                <h1 className="text-neutral">Årsak til vrak:</h1>
-                <ul className=" italic text-neutral">
-                  {Object.entries(deleteReasonCount).map(([reason, count]) => (
-                    <li key={reason}>
-                      {reason}: {count}
-                    </li>
-                  ))}
-                </ul>
-              </>
-            }
-          </div>
+          <div></div>
         </div>
       </div>
     </div>

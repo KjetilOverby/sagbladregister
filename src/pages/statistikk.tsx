@@ -33,6 +33,12 @@ const statistikk = ({ theme }) => {
       date2: `${dateValue.startDate}T00:00:00.000Z`,
     });
 
+  const { data: toothCount } =
+    api.statistikkBladeData.getAllToothCount.useQuery({
+      date: `${dateValue.endDate}T23:59:59.000Z`,
+      date2: `${dateValue.startDate}T00:00:00.000Z`,
+    });
+
   const { data: statistikkDataCustomer } =
     api.statistikkBladeData.getAllCustomerHistorikk.useQuery({
       date: `${dateValue.endDate}T23:59:59.000Z`,
@@ -47,11 +53,44 @@ const statistikk = ({ theme }) => {
     IdNummer: "",
   });
 
+  const { data: reklamasjonTyper } =
+    api.statistikkBladeData.reklamasjonTypes.useQuery({
+      date: `${dateValue.endDate}T23:59:59.000Z`,
+      date2: `${dateValue.startDate}T00:00:00.000Z`,
+    });
+
+  const { data: handlingService } =
+    api.statistikkBladeData.handlingServiceData.useQuery({
+      date: `${dateValue.endDate}T23:59:59.000Z`,
+      date2: `${dateValue.startDate}T00:00:00.000Z`,
+    });
+
   const { data: deletedSawbladesCustomer } =
     api.sawblades.getCustomerAllDeleted.useQuery({
       date: `${dateValue.endDate}T23:59:59.000Z`,
       date2: `${dateValue.startDate}T00:00:00.000Z`,
       IdNummer: "",
+      init: customerInit,
+    });
+
+  const { data: toothCountCustomer } =
+    api.statistikkBladeData.getAllCustomerToothCount.useQuery({
+      date: `${dateValue.endDate}T23:59:59.000Z`,
+      date2: `${dateValue.startDate}T00:00:00.000Z`,
+      init: customerInit,
+    });
+
+  const { data: reklamasjonTyperCustomer } =
+    api.statistikkBladeData.reklamasjonTypesCustomer.useQuery({
+      date: `${dateValue.endDate}T23:59:59.000Z`,
+      date2: `${dateValue.startDate}T00:00:00.000Z`,
+      init: customerInit,
+    });
+
+  const { data: handlingServiceCustomer } =
+    api.statistikkBladeData.handlingServiceDataCustomer.useQuery({
+      date: `${dateValue.endDate}T23:59:59.000Z`,
+      date2: `${dateValue.startDate}T00:00:00.000Z`,
       init: customerInit,
     });
 
@@ -64,6 +103,9 @@ const statistikk = ({ theme }) => {
           setDateValue={setDateValue}
           dateValue={dateValue}
           deletedSawblades={deletedSawblades}
+          toothCountCustomer={toothCount}
+          feilkodeReklamasjon={reklamasjonTyper}
+          handlingService={handlingService}
         />
       )}
       {sessionData?.user.role === "MV_ADMIN" && (
@@ -72,6 +114,9 @@ const statistikk = ({ theme }) => {
           setDateValue={setDateValue}
           dateValue={dateValue}
           deletedSawblades={deletedSawbladesCustomer}
+          toothCountCustomer={toothCountCustomer}
+          feilkodeReklamasjon={reklamasjonTyperCustomer}
+          handlingService={handlingServiceCustomer}
         />
       )}
       {sessionData?.user.role === "MT_ADMIN" && (
@@ -80,6 +125,9 @@ const statistikk = ({ theme }) => {
           setDateValue={setDateValue}
           dateValue={dateValue}
           deletedSawblades={deletedSawbladesCustomer}
+          toothCountCustomer={toothCountCustomer}
+          feilkodeReklamasjon={reklamasjonTyperCustomer}
+          handlingService={handlingServiceCustomer}
         />
       )}
     </div>

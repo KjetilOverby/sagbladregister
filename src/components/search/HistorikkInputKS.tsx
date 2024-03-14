@@ -75,23 +75,28 @@ const HistorikkInputKS = ({
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          void updatePost.mutate({
-            id: postId,
-            anmKS: historikkKs.anmKS,
-            handling: concatenatedString,
-            sgKS: historikkKs.sgKS,
-            datoSrv: historikkKs.datoSrv,
-            sideklaring: historikkKs.sideklaring,
-            creator3: "",
-            creatorImg3: "",
-            activePost: false,
-            antRep: historikkKs.antRep,
-            antTannslipp: historikkKs.antTannslipp,
-          });
-          updateBladeStatus.mutate({
-            id: blade.id,
-            active: false,
-          });
+
+          if (concatenatedString === "") {
+            alert("Du må velge minst en BFS kode");
+          } else {
+            void updatePost.mutate({
+              id: postId,
+              anmKS: historikkKs.anmKS,
+              handling: concatenatedString,
+              sgKS: historikkKs.sgKS,
+              datoSrv: historikkKs.datoSrv,
+              sideklaring: historikkKs.sideklaring,
+              creator3: "",
+              creatorImg3: "",
+              activePost: false,
+              antRep: historikkKs.antRep,
+              antTannslipp: historikkKs.antTannslipp,
+            });
+            updateBladeStatus.mutate({
+              id: blade.id,
+              active: false,
+            });
+          }
         }}
         className="card w-96 border border-neutral bg-primary text-neutral"
       >

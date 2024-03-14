@@ -16,6 +16,7 @@ export const DeleteComponent = ({
   wasteReasonInput,
   setWasteReasonInput,
   closeDeleteModal,
+  updateStatusAfterDeleteHandler,
 }: AnyProps) => {
   const ctx = api.useContext();
   const updateBlade = api.sawblades.update.useMutation({
@@ -34,9 +35,10 @@ export const DeleteComponent = ({
       id: id,
       deleted: true,
       deleteReason: wasteReasonInput,
+      activePost: false,
     });
     closeDeleteModal();
-    console.log("Finished");
+    updateStatusAfterDeleteHandler();
   };
   return (
     <div onClick={deleteButtonHandler}>
