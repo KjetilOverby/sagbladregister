@@ -48,7 +48,7 @@ const AdminContent = ({
                         alt=""
                       />
                       <li className="text-xs text-neutral">
-                        {dateFormat(blade.createdAt, "dd.mm.yyyy")} -{" "}
+                        {dateFormat(blade.createdAt, "dd.mm.yyyy, HH:MM")} -{" "}
                         <span className="text-blue-500">{blade.creator}</span>{" "}
                         har lagt til{" "}
                         <span className="text-red-500">
@@ -78,7 +78,7 @@ const AdminContent = ({
                         alt=""
                       />
                       <li className="text-xs text-neutral">
-                        {dateFormat(blade.updatedAt, "dd.mm.yyyy")} -{" "}
+                        {dateFormat(blade.updatedAt, "dd.mm.yyyy, HH:MM")} -{" "}
                         <span className="text-blue-500">{blade.deleter}</span>{" "}
                         har slettet{" "}
                         <span className="text-red-500">
@@ -108,7 +108,7 @@ const AdminContent = ({
                         alt=""
                       />
                       <li className="text-xs text-neutral">
-                        {dateFormat(blade.createdAt, "dd.mm.yyyy")} -{" "}
+                        {dateFormat(blade.createdAt, "dd.mm.yyyy, HH:MM")} -{" "}
                         <span className="text-blue-500">{blade.creator}</span>{" "}
                         har lagt til servicepost for{" "}
                         <span className="text-red-500">
@@ -145,7 +145,7 @@ const AdminContent = ({
                             alt=""
                           />
                           <li className="text-xs text-neutral">
-                            {dateFormat(blade.datoSrv, "dd.mm.yyyy")} -{" "}
+                            {dateFormat(blade.datoSrv, "dd.mm.yyyy, HH:MM")} -{" "}
                             <span className="text-blue-500">
                               {blade.creator3}
                             </span>{" "}
