@@ -48,6 +48,9 @@ const StatistikkMain = ({
     "Reparasjon",
     "Reklamasjon",
   ];
+
+  console.log(historikkData);
+
   const deleteReasonCount = deleteReasons.reduce((countObj, reason) => {
     countObj[reason] = 0;
     return countObj;
@@ -199,9 +202,7 @@ const StatistikkMain = ({
             <div className="m-5 mt-20 flex rounded-xl p-10 shadow-xl shadow-primary max-lg:grid lg:w-1/2">
               <div className="w-full">
                 <h1 className="text-2xl text-neutral">Reklamasjonsårsaker</h1>
-                <p className="text-neutral">
-                  Antall vrak: {deletedSawblades?.length}
-                </p>
+
                 <ReklamasjontyperChart data={feilkodeReklamasjon} />
                 <div className="rounded-xl  p-5 max-lg:ml-0 max-lg:w-full">
                   {
@@ -247,15 +248,15 @@ const StatistikkMain = ({
               </div>
             </div>
           </div>
-          <div className="lg:flex">
-            <div className="m-5 mt-20 flex rounded-xl p-10 shadow-xl shadow-primary max-lg:grid lg:w-1/2">
+          <div className="">
+            <div className="m-5 mt-20 flex rounded-xl p-10 shadow-xl shadow-primary max-lg:grid ">
               <div className="w-full">
                 <h1 className="text-2xl text-neutral">Service handling</h1>
                 <p className="text-neutral">
-                  Antall vrak: {deletedSawblades?.length}
+                  Antall serviceposter: {historikkData?.length}
                 </p>
                 <BarChartHandling data={handlingService} />
-                <div className="rounded-xl  p-5 max-lg:ml-0 max-lg:w-full">
+                {/* <div className="rounded-xl  p-5 max-lg:ml-0 max-lg:w-full">
                   {
                     <>
                       <h1 className="text-neutral">Handling Service:</h1>
@@ -271,7 +272,7 @@ const StatistikkMain = ({
                       </ul>
                     </>
                   }
-                </div>
+                </div> */}
               </div>
             </div>
             <div className="m-5 mt-20 flex w-1/2 rounded-xl p-10 shadow-xl shadow-primary max-lg:grid">

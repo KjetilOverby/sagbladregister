@@ -61,6 +61,10 @@ const ServiceKodeTblAll = () => {
         <th className="font-thin">SERV 474</th>
         <th className="font-thin">HELOMLODDING HM ø 700/48t</th>
       </tr>
+      <tr className="border-none">
+        <th className="font-thin">SERV 764</th>
+        <th className="font-thin">HELOMLODDING HM LINCKBLAD M/SPISS TANN</th>
+      </tr>
       <tr>
         <th className="font-thin">REKLAMASJON</th>
         <th className="font-thin">REKLAMASJON</th>

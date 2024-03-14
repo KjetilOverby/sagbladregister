@@ -32,7 +32,7 @@ const MyChart = ({ data }) => {
         labels: Object.keys(processedData),
         datasets: [
           {
-            label: "Handling Count",
+            label: "",
             data: Object.values(processedData),
             backgroundColor: [
               "rgba(255, 99, 132, 0.2)",

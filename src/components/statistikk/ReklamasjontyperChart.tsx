@@ -23,7 +23,7 @@ const MyChart = ({ data }) => {
         labels: data.map((item) => item.feilkode),
         datasets: [
           {
-            label: "Feilkode Count",
+            label: "Reklamasjoner",
             data: data.map((item) => item._count.feilkode),
             backgroundColor: [
               "rgba(255, 99, 132, 0.2)",
