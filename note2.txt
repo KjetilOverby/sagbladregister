@@ -1,4 +1,3 @@
-Lage en datafilter side med nedlasting av CSV.
 Oversikt på kunder
 
 

@@ -8,6 +8,43 @@ import {
 } from "~/server/api/trpc";
 export const sawbladesRouter = createTRPCRouter({
 
+
+  columns: protectedProcedure
+  .input(z.object({ type: z.boolean(), id: z.boolean(), createdAt: z.boolean(), updatedAt: z.boolean(), kunde: z.boolean(), IdNummer: z.boolean(), creator: z.boolean(), side: z.boolean(), note: z.boolean(), active: z.boolean(), deleted: z.boolean(), deleteReason: z.boolean(), produsent: z.boolean(), deleter: z.boolean(), deleterImg: z.boolean(), creatorImg: z.boolean(), createdById: z.boolean(), userId: z.boolean(), userId: z.boolean(), date: z.string(), date2: z.string(), artikkel: z.boolean() }))
+  .query(async ({ ctx, input }) => {
+    console.log(input);
+    const total = await ctx.db.sawblades.findMany({
+      where: {
+        createdAt: {
+          lte: new Date(input.date),
+          gte: new Date(input.date2),
+        }
+      },
+      select: {
+        id: input.id,
+        createdAt: input.createdAt,
+        updatedAt: input.updatedAt,
+        kunde: input.kunde,
+        type: input.type,
+        IdNummer: input.IdNummer,
+        createdById: input.createdById,
+        userId: input.userId,
+        creator: input.creator,
+        creatorImg: input.creatorImg,
+        deleted: input.deleted,
+        note: input.note,
+        side: input.side,
+        active: input.active,
+        deleteReason: input.deleteReason,
+        produsent: input.produsent,
+        deleter: input.deleter,
+        deleterImg: input.deleterImg,
+        artikkel: input.artikkel,
+      },
+    });
+    return total;
+  }),
+
   countAllBlades: protectedProcedure
   .query(async ({ ctx }) => {
     const total = await ctx.db.sawblades.count({});

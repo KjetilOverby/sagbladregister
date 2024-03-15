@@ -130,6 +130,8 @@ const CreatePost = () => {
           <option value="Tenryu">Tenryu</option>
           <option value="Swedex">Swedex</option>
           <option value="Nässjö">Nässjö</option>
+          <option value="Aspi">Aspi</option>
+          <option value="Nook">Nook</option>
           <option value="Micor">Micor</option>
           <option value="Frezite">Frezite</option>
           <option value="Ukjent">Ukjent</option>
