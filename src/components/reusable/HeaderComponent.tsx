@@ -11,6 +11,7 @@ import { AppDataContext } from "~/context";
 import { MdLightMode } from "react-icons/md";
 import { MdDarkMode } from "react-icons/md";
 import RoleAdminMV from "../roles/RoleAdminMV";
+import RoleSuperAdmin from "../roles/RoleSuperAdmin";
 // import { getServerAuthSession } from "~/server/auth";
 // import RoleChange from "./users/RoleChange";
 interface headerProps {
@@ -185,6 +186,18 @@ const HeaderComponent = () => {
                   </li>
                 </Link>
               </RoleAdminMV>
+              <RoleSuperAdmin>
+                <Link href="/brukere">
+                  <li>
+                    <p
+                      className={`bg-primary-700 lg:text-primary-700 block rounded py-2 pl-3 pr-4 text-sm text-neutral lg:bg-transparent lg:p-0 ${actualPage.brukere}`}
+                      aria-current="page"
+                    >
+                      Brukere
+                    </p>
+                  </li>
+                </Link>
+              </RoleSuperAdmin>
               {sessionData?.user.email === "kailundquist@gmail.com" && (
                 <Link href="#">
                   <li>

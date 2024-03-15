@@ -4,113 +4,149 @@
 import React, { useState } from "react";
 import HeaderComponent from "~/components/reusable/HeaderComponent";
 import { api } from "~/utils/api";
+import { useRouter } from "next/navigation";
+import RoleSuperAdmin from "~/components/roles/RoleSuperAdmin";
 
 const Brukere = ({ theme }) => {
+  const router = useRouter();
   const { data: users } = api.users.getUsers.useQuery({});
 
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [newRole, setNewRole] = useState(null);
 
-  const updateStatus = api.users.updateRole.useMutation({
+  const updateStatus = api.users.updateRoleBrukere.useMutation({
     onSuccess: () => {
-      api.users.getUsers.invalidate();
+      router.refresh();
     },
   });
 
   const handleRoleChange = () => {
     if (selectedUserId && newRole) {
-      updateStatus.mutate({ id: selectedUserId, role: newRole });
-      setSelectedUserId(null);
-      setNewRole(null);
+      updateStatus.mutate({ email: selectedUserId, role: newRole });
+
+      setTimeout(() => {
+        setSelectedUserId(null);
+        setNewRole(null);
+      }, 200);
     }
   };
 
   return (
     <div data-theme={theme as string} className="min-h-screen">
-      <HeaderComponent />
+      <RoleSuperAdmin>
+        <HeaderComponent />
 
-      {selectedUserId && (
-        <div>
-          <select value={newRole} onChange={(e) => setNewRole(e.target.value)}>
-            <option value="">Choose role</option>
-            <option value="LOGIN">ADMIN</option>
-            <option value="USER">ADMIN</option>
-            <option value="MV_ADMIN">ADMIN</option>
-            <option value="MT_ADMIN">MV_ADMIN</option>
-            {/* Add more roles as needed */}
-          </select>
-          <button onClick={handleRoleChange}>Change role</button>
-        </div>
-      )}
+        {selectedUserId && (
+          <div className="absolute p-5 shadow-xl">
+            <p className="my-5">Change role for {selectedUserId}</p>
+            <div>
+              <div className="py-5">
+                <select
+                  value={newRole}
+                  onChange={(e) => setNewRole(e.target.value)}
+                >
+                  <option value="">Choose role</option>
+                  <option value="LOGIN">LOGIN</option>
+                  <option value="USER">USER</option>
+                  <option value="ADMIN">ADMIN</option>
+                  <option value="MV_ADMIN">MV_ADMIN</option>
+                  <option value="MT_ADMIN">MT_ADMIN</option>
+                </select>
+              </div>
+              <div className="flex flex-col">
+                <button
+                  className="btn btn-info mb-5 text-white"
+                  onClick={handleRoleChange}
+                >
+                  Change role
+                </button>
+                <button
+                  className="btn btn-warning text-white"
+                  onClick={() => setSelectedUserId(null)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
-      <div className="mt-20 flex flex-col lg:mx-96">
-        <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-            <div className="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
-                    >
-                      Name
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
-                    >
-                      Email
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
-                    >
-                      Image
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
-                    >
-                      Role
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200 bg-white">
-                  {users?.map((user, personIdx) => (
-                    <tr key={user.id}>
-                      <td className="whitespace-nowrap px-6 py-4">
-                        <div className="text-sm text-gray-900">{user.name}</div>
-                      </td>
-                      <td className="whitespace-nowrap px-6 py-4">
-                        <div className="text-sm text-gray-500">
-                          {user.email}
-                        </div>
-                      </td>
-                      <td className="whitespace-nowrap px-6 py-4">
-                        <div className="text-sm text-gray-500">
-                          <img
-                            src={user.image}
-                            alt={user.name}
-                            className="h-10 w-10 rounded-full"
-                          />
-                        </div>
-                      </td>
-
-                      <td className="whitespace-nowrap px-6 py-4">
-                        <div className="text-sm text-gray-500">{user.role}</div>
-                        <button onClick={() => setSelectedUserId(user.id)}>
-                          Change role
-                        </button>
-                      </td>
+        <div className="mt-20 flex flex-col lg:mx-96">
+          <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+              <div className="overflow-hidden border-b border-primary shadow sm:rounded-lg">
+                <h1 className="mb-10 text-center text-xl">Brukere</h1>
+                <table className="min-w-full divide-y divide-primary">
+                  <thead className="bg-accent">
+                    <tr>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
+                      >
+                        Name
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
+                      >
+                        Email
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
+                      >
+                        Image
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
+                      >
+                        Role
+                      </th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody className="divide-y divide-primary bg-base-100">
+                    {users?.map((user, personIdx) => (
+                      <tr className="hover:bg-primary" key={user.id}>
+                        <td className="whitespace-nowrap px-6 py-4">
+                          <div className="text-sm text-gray-900">
+                            {user.name}
+                          </div>
+                        </td>
+                        <td className="whitespace-nowrap px-6 py-4">
+                          <div className="text-sm text-gray-500">
+                            {user.email}
+                          </div>
+                        </td>
+                        <td className="whitespace-nowrap px-6 py-4">
+                          <div className="text-sm text-gray-500">
+                            <img
+                              src={user.image}
+                              alt={user.name}
+                              className="h-10 w-10 rounded-full"
+                            />
+                          </div>
+                        </td>
+
+                        <td className="whitespace-nowrap px-6 py-4">
+                          <div
+                            className={`text-sm  ${user.role === "LOGIN" ? "text-red-500" : "text-gray-500"}`}
+                          >
+                            {user.role}
+                          </div>
+                          <button onClick={() => setSelectedUserId(user.email)}>
+                            Change role
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </RoleSuperAdmin>
     </div>
   );
 };
