@@ -120,12 +120,20 @@ const AdminContent = ({
                         <span className="text-red-500">
                           {blade.bladType} {blade.side}
                         </span>{" "}
-                        med service: {blade.service} og id nummer:{" "}
+                        med service:{" "}
+                        <span className="text-orange-600">{blade.service}</span>{" "}
+                        og id nummer:{" "}
                         <span className="text-green-600">
                           {blade.bladeRelationId}
                         </span>
                         {blade.anmSag && (
-                          <span> Kommentar: {blade.anmSag}</span>
+                          <>
+                            Kommentar:{" "}
+                            <span className="text-blue-600">
+                              {" "}
+                              {blade.anmSag}
+                            </span>
+                          </>
                         )}
                       </li>
                     </div>
@@ -156,13 +164,23 @@ const AdminContent = ({
                         <span className="text-red-500">
                           {blade.bladType} {blade.side}
                         </span>{" "}
-                        med service: {blade.service} og id nummer:{" "}
+                        med service:{" "}
+                        <span className="text-orange-600">{blade.service}</span>{" "}
+                        ,{" "}
+                        {blade.anmSag && (
+                          <>
+                            Kommentar:{" "}
+                            <span className="text-blue-600">
+                              {" "}
+                              ({blade.anmSag})
+                            </span>
+                            ,{" "}
+                          </>
+                        )}
+                        id nummer:{" "}
                         <span className="text-green-600">
                           {blade.bladeRelationId}
                         </span>
-                        {blade.anmSag && (
-                          <span> Kommentar: {blade.anmSag}</span>
-                        )}
                       </li>
                     </div>
                   </ul>
@@ -195,11 +213,22 @@ const AdminContent = ({
                             <span className="text-red-500">
                               {blade.bladType} {blade.side}
                             </span>
-                            , kode: {blade.handling},{" "}
+                            , kode:{" "}
+                            <span className="text-orange-600">
+                              {blade.handling}
+                            </span>
+                            ,{" "}
                             {blade.anmKS && (
-                              <span> Kommentar: ({blade.anmKS})</span>
+                              <>
+                                Kommentar:{" "}
+                                <span className="text-blue-600">
+                                  {" "}
+                                  ({blade.anmKS})
+                                </span>
+                                ,{" "}
+                              </>
                             )}{" "}
-                            og id nummer:{" "}
+                            id nummer:{" "}
                             <span className="text-green-500">
                               {blade.bladeRelationId}
                             </span>
