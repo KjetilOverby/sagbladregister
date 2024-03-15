@@ -142,7 +142,7 @@ const AdminContent = ({
                         alt=""
                       />
                       <li className="text-xs text-neutral">
-                        {dateFormat(blade.uptedAt, "dd.mm.yyyy, HH:MM")} -{" "}
+                        {dateFormat(blade.updatedAt, "dd.mm.yyyy, HH:MM")} -{" "}
                         <span className="text-blue-500">
                           {" "}
                           {blade.sgSag ? blade.sgSag : blade.creator2}
