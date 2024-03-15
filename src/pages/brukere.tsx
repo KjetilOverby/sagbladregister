@@ -44,6 +44,7 @@ const Brukere = ({ theme }) => {
                 <select
                   value={newRole}
                   onChange={(e) => setNewRole(e.target.value)}
+                  className="bg-primary"
                 >
                   <option value="">Choose role</option>
                   <option value="LOGIN">LOGIN</option>
@@ -109,12 +110,12 @@ const Brukere = ({ theme }) => {
                     {users?.map((user, personIdx) => (
                       <tr className="hover:bg-primary" key={user.id}>
                         <td className="whitespace-nowrap px-6 py-4">
-                          <div className="text-sm text-gray-900">
+                          <div className="text-sm text-neutral">
                             {user.name}
                           </div>
                         </td>
                         <td className="whitespace-nowrap px-6 py-4">
-                          <div className="text-sm text-gray-500">
+                          <div className="text-sm text-neutral">
                             {user.email}
                           </div>
                         </td>
@@ -130,7 +131,7 @@ const Brukere = ({ theme }) => {
 
                         <td className="whitespace-nowrap px-6 py-4">
                           <div
-                            className={`text-sm  ${user.role === "LOGIN" ? "text-red-500" : "text-gray-500"}`}
+                            className={`text-sm  ${user.role === "LOGIN" ? "text-red-500" : "text-gray-400"}`}
                           >
                             {user.role}
                           </div>
