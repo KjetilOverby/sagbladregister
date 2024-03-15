@@ -51,6 +51,7 @@ export const bandhistorikkRouter = createTRPCRouter({
              stokkAnt: 0,
              antRep: 0,
              antTannslipp: 0,
+             updatedAt: new Date(0),
 
              
 
@@ -94,8 +95,8 @@ export const bandhistorikkRouter = createTRPCRouter({
               creator2: creatorName,
               creatorImg2: creatorImg,
               ampere: input.ampere,
-              handling: "Ingen handling",
-                datoSrv: new Date(),
+              updatedAt: new Date(),
+            
             
             
           
@@ -114,7 +115,6 @@ export const bandhistorikkRouter = createTRPCRouter({
           },
           data: {
               anmKS: input.anmKS,
-              updatedAt: new Date(),
               handling: input.handling,
               sgKS: input.sgKS,
               datoSrv: input.datoSrv,

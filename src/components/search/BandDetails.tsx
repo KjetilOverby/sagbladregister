@@ -285,7 +285,7 @@ const BandDetails = ({
                             alt=""
                           />
                         </div>
-                        {post.creator}
+                        {post.sgSag ? post.sgSag : post.creator}
                       </div>
                     </td>
 

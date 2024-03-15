@@ -17,6 +17,7 @@ const AdminContent = ({
   servicepostKS,
   dateValue,
   setDateValue,
+  servicepostUpdate,
 }) => {
   return (
     <>
@@ -66,7 +67,7 @@ const AdminContent = ({
             })}
           </div>
           <div>
-            <h1 className="my-3 font-bold">Blad slettet:</h1>
+            <h1 className="mb-3 mt-10 font-bold">Blad slettet:</h1>
             {deletedblades?.map((blade) => {
               return (
                 <div>
@@ -96,7 +97,7 @@ const AdminContent = ({
             })}
           </div>
           <div>
-            <h1 className="my-3 font-bold">Serviceposter:</h1>
+            <h1 className="mb-3 mt-10 font-bold">Serviceposter:</h1>
             {servicepost?.map((blade) => {
               return (
                 <div>
@@ -109,7 +110,10 @@ const AdminContent = ({
                       />
                       <li className="text-xs text-neutral">
                         {dateFormat(blade.createdAt, "dd.mm.yyyy, HH:MM")} -{" "}
-                        <span className="text-blue-500">{blade.creator}</span>{" "}
+                        <span className="text-blue-500">
+                          {" "}
+                          {blade.sgSag ? blade.sgSag : blade.creator}
+                        </span>{" "}
                         har lagt til servicepost for{" "}
                         <span className="text-red-500">
                           {blade.bladType} {blade.side}
@@ -129,7 +133,43 @@ const AdminContent = ({
             })}
           </div>
           <div>
-            <h1 className="my-3 font-bold">
+            <h1 className="mb-3 mt-10 font-bold">Serviceposter endret:</h1>
+            {servicepostUpdate?.map((blade) => {
+              return (
+                <div>
+                  <ul>
+                    <div className="mb-2 flex items-center">
+                      <img
+                        className="mr-3 w-5 rounded-full"
+                        src={blade.creatorImg2}
+                        alt=""
+                      />
+                      <li className="text-xs text-neutral">
+                        {dateFormat(blade.uptedAt, "dd.mm.yyyy, HH:MM")} -{" "}
+                        <span className="text-blue-500">
+                          {" "}
+                          {blade.sgSag ? blade.sgSag : blade.creator2}
+                        </span>{" "}
+                        har endret servicepost for{" "}
+                        <span className="text-red-500">
+                          {blade.bladType} {blade.side}
+                        </span>{" "}
+                        med service: {blade.service} og id nummer:{" "}
+                        <span className="text-green-500">
+                          {blade.bladeRelationId}
+                        </span>
+                        {blade.anmSag && (
+                          <span> Kommentar: {blade.anmSag}</span>
+                        )}
+                      </li>
+                    </div>
+                  </ul>
+                </div>
+              );
+            })}
+          </div>
+          <div>
+            <h1 className="mb-3 mt-10 font-bold">
               Handling Kvarnstrands & Stridsbergs:
             </h1>
             {servicepostKS?.map((blade) => {
@@ -147,7 +187,7 @@ const AdminContent = ({
                           <li className="text-xs text-neutral">
                             {dateFormat(blade.datoSrv, "dd.mm.yyyy, HH:MM")} -{" "}
                             <span className="text-blue-500">
-                              {blade.creator3}
+                              {blade.sgKs ? blade.sgKs : blade.creator3}
                             </span>{" "}
                             har lagt til handling for{" "}
                             <span className="text-red-500">

@@ -1,7 +1,10 @@
 Lage en datafilter side med nedlasting av CSV.
 Vis historikkantall på slettede blader
 Oversikt på kunder
-signatur postcreator and KS
+signatur på Avtivateblade
+Signatur på Handling KS
+Vise liste over ting som er endret
+
 
 
 

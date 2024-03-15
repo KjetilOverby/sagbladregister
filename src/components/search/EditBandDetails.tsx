@@ -75,7 +75,7 @@ const EditBandDetails = ({
             feilkode:
               historikkData.service === "Reklamasjon"
                 ? historikkData.feilkode
-                : "Ingen anmerkning",
+                : "Ingen reklamasjon",
             anmSag: historikkData.anmSag,
             temperatur: historikkData.temperatur,
             sgSag: historikkData.sgSag,

@@ -17,6 +17,7 @@ const AdminStartpage = ({
   servicepostKS,
   dateValue,
   setDateValue,
+  servicepostUpdate,
 }: adminProps) => {
   return (
     <div data-theme={theme} className="min-h-screen bg-base-100">
@@ -28,6 +29,7 @@ const AdminStartpage = ({
         servicepostKS={servicepostKS}
         dateValue={dateValue}
         setDateValue={setDateValue}
+        servicepostUpdate={servicepostUpdate}
       />
     </div>
   );
