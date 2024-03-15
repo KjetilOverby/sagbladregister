@@ -58,7 +58,7 @@ const AdminContent = ({
                         for{" "}
                         <span className="text-purple-500">{blade.kunde}</span>,
                         id nr:{" "}
-                        <span className="text-green-500">{blade.IdNummer}</span>
+                        <span className="text-green-600">{blade.IdNummer}</span>
                       </li>
                     </div>
                   </ul>
@@ -84,11 +84,16 @@ const AdminContent = ({
                         har slettet{" "}
                         <span className="text-red-500">
                           {blade.type} {blade.side}
-                        </span>{" "}
+                        </span>
+                        . Sletteårsak:
+                        <span className="text-orange-500">
+                          {" "}
+                          {blade.deleteReason},{" "}
+                        </span>
                         for{" "}
                         <span className="text-purple-500">{blade.kunde}</span>,
                         id nr:{" "}
-                        <span className="text-green-500">{blade.IdNummer}</span>
+                        <span className="text-green-600">{blade.IdNummer}</span>
                       </li>
                     </div>
                   </ul>
@@ -116,7 +121,7 @@ const AdminContent = ({
                           {blade.bladType} {blade.side}
                         </span>{" "}
                         med service: {blade.service} og id nummer:{" "}
-                        <span className="text-green-500">
+                        <span className="text-green-600">
                           {blade.bladeRelationId}
                         </span>
                         {blade.anmSag && (
@@ -152,7 +157,7 @@ const AdminContent = ({
                           {blade.bladType} {blade.side}
                         </span>{" "}
                         med service: {blade.service} og id nummer:{" "}
-                        <span className="text-green-500">
+                        <span className="text-green-600">
                           {blade.bladeRelationId}
                         </span>
                         {blade.anmSag && (
