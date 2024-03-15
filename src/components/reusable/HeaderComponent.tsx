@@ -66,7 +66,7 @@ const HeaderComponent = () => {
   const { data: sessionData } = useSession();
   return (
     <header>
-      <nav className="border border-x-0 border-t-0 border-gray-200 border-b-primary bg-base-100 px-4 py-2.5  lg:px-6">
+      <nav className="border border-x-0 border-t-0 border-gray-200 border-b-primary bg-base-100 px-4  py-2.5 lg:px-6">
         <button
           data-collapse-toggle="mobile-menu-2"
           type="button"
@@ -176,7 +176,7 @@ const HeaderComponent = () => {
               )}
               <RoleAdminMV>
                 <Link href="/newtools">
-                  <li>
+                  <li className="bg-green-200">
                     <p
                       className={`bg-primary-700 lg:text-primary-700 block rounded py-2 pl-3 pr-4 text-sm text-neutral lg:bg-transparent lg:p-0 ${actualPage.opprett}`}
                       aria-current="page"
@@ -378,8 +378,8 @@ const HeaderComponent = () => {
             </ul>*/}
           </div>
           <div className="flex items-center lg:order-2">
-            <div className="mr-10 rounded-xl border border-yellow-500 bg-slate-500 p-1">
-              <p className=" text-end  text-sm font-bold text-yellow-500">
+            <div className="mr-10 rounded-xl border border-green-500 bg-blue-400 p-1">
+              <p className=" text-end  text-sm font-bold text-green-200">
                 Sirkelsagblad
               </p>
             </div>
