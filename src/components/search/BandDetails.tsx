@@ -304,7 +304,9 @@ const BandDetails = ({
                           <div className="card absolute top-0 z-50 w-96 bg-neutral text-accent">
                             <div className="card-body">
                               <h2 className="card-title">Melding fra sag</h2>
-                              <p>{post.anmSag}</p>
+                              <div className="break-words">
+                                <p>{post.anmSag}</p>
+                              </div>
                               <div className="card-actions justify-end">
                                 <button
                                   onClick={closeMessageHandler}
@@ -361,7 +363,7 @@ const BandDetails = ({
                             Vis
                           </button>
                           {openMessageKS === post.id && (
-                            <div className="card absolute right-0 top-0 z-50 w-96 bg-neutral text-accent">
+                            <div className="card absolute right-0 top-0 z-50 w-96 break-words bg-neutral text-accent">
                               <div className="card-body">
                                 <h2 className="card-title">
                                   Melding fra Stridsbergs
@@ -391,7 +393,7 @@ const BandDetails = ({
                             alt=""
                           />
                         </div>
-                        {post.creator3}
+                        {post.sgKS ? post.sgKS : post.creator3}
                       </div>
                     </td>
                     <td className="text-neutral">

@@ -110,10 +110,7 @@ const AdminContent = ({
                       />
                       <li className="text-xs text-neutral">
                         {dateFormat(blade.createdAt, "dd.mm.yyyy, HH:MM")} -{" "}
-                        <span className="text-blue-500">
-                          {" "}
-                          {blade.sgSag ? blade.sgSag : blade.creator}
-                        </span>{" "}
+                        <span className="text-blue-500"> {blade.creator}</span>{" "}
                         har lagt til servicepost for{" "}
                         <span className="text-red-500">
                           {blade.bladType} {blade.side}
@@ -187,7 +184,7 @@ const AdminContent = ({
                           <li className="text-xs text-neutral">
                             {dateFormat(blade.datoSrv, "dd.mm.yyyy, HH:MM")} -{" "}
                             <span className="text-blue-500">
-                              {blade.sgKs ? blade.sgKs : blade.creator3}
+                              {blade.sgKS ? blade.sgKS : blade.creator3}
                             </span>{" "}
                             har lagt til handling for{" "}
                             <span className="text-red-500">

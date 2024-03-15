@@ -60,9 +60,12 @@ const SawbladeServiceTable = ({ sawbladesService }) => {
                         <div>
                           <div className="text-xs text-neutral">
                             {
-                              blade.bandhistorikk[
-                                blade.bandhistorikk.length - 1
-                              ].service
+                              blade.bandhistorikk &&
+                              blade.bandhistorikk.length > 0
+                                ? blade.bandhistorikk[
+                                    blade.bandhistorikk.length - 1
+                                  ].service
+                                : "Default Value" // Replace with a suitable default value
                             }
                           </div>
                         </div>

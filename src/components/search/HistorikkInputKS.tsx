@@ -181,7 +181,14 @@ const HistorikkInputKS = ({
           </div>
           <p>SERV koder</p>
 
-          {/* <div>
+          {blade.IdNummer.includes("MV-") && (
+            <ServInputMV setBfsValue={setBfsValue} bfsValue={bfsValue} />
+          )}
+          {blade.IdNummer.includes("MT-") && (
+            <ServInputMT setBfsValue={setBfsValue} bfsValue={bfsValue} />
+          )}
+
+          <div>
             <p>Sign:</p>
             <input
               value={historikkKs.sgKS}
@@ -194,13 +201,7 @@ const HistorikkInputKS = ({
               type="text"
               className="input input-bordered input-xs w-full max-w-xs bg-white"
             />
-          </div> */}
-          {blade.IdNummer.includes("MV-") && (
-            <ServInputMV setBfsValue={setBfsValue} bfsValue={bfsValue} />
-          )}
-          {blade.IdNummer.includes("MT-") && (
-            <ServInputMT setBfsValue={setBfsValue} bfsValue={bfsValue} />
-          )}
+          </div>
           <div className="card-actions">
             <button className="btn btn-primary btn-xs">Lagre</button>
             <button

@@ -37,8 +37,6 @@ export default function Home({ theme }: adminProps) {
       date2: `${dateValue.startDate}T00:00:00.000Z`,
     });
 
-  console.log(servicepost);
-
   const { data: servicepostUpdate } =
     api.statistikkBladeData.getAllHistorikkUpdate.useQuery({
       date: `${dateValue.endDate}T23:59:59.000Z`,

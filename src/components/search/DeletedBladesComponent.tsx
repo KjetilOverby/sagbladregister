@@ -32,6 +32,7 @@ const DeletedBladesComponent = ({
             <tr>
               <th className="text-sm text-accent">ID</th>
               <th className="text-sm text-accent">Type</th>
+              <th className="text-sm text-accent">Historikk</th>
 
               {/* <th className="text-sm text-accent">Opprettet av</th> */}
               <th className="text-sm text-accent">Slettet av</th>
@@ -59,6 +60,16 @@ const DeletedBladesComponent = ({
                           <div>
                             <div className="text-xs text-neutral">
                               {blade.type} {blade.side}
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="flex items-center space-x-3">
+                          <div className="avatar"></div>
+                          <div>
+                            <div className="text-xs text-neutral">
+                              {blade._count?.bandhistorikk}
                             </div>
                           </div>
                         </div>
