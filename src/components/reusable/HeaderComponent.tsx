@@ -198,6 +198,18 @@ const HeaderComponent = () => {
                   </li>
                 </Link>
               </RoleSuperAdmin>
+              <RoleSuperAdmin>
+                <Link href="/filbehandling">
+                  <li>
+                    <p
+                      className={`bg-primary-700 lg:text-primary-700 block rounded py-2 pl-3 pr-4 text-sm text-neutral lg:bg-transparent lg:p-0 ${actualPage.filter}`}
+                      aria-current="page"
+                    >
+                      Filter
+                    </p>
+                  </li>
+                </Link>
+              </RoleSuperAdmin>
               {sessionData?.user.email === "kailundquist@gmail.com" && (
                 <Link href="#">
                   <li>
