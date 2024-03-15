@@ -17,7 +17,7 @@ const NotLoggedInPage = () => {
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
           <img
             className="w-full"
-            src="https://lh3.googleusercontent.com/pw/AP1GczO19apGy2A8BpjpXfSxH9QqnIHayFE3D79I2fFrdmwJNHOHpn6q7T6w9AWxC6w5xkY-_CYbwYSuasGM8ppssCBtuLEz1m_mRsT8ttP5rHf_cHK153cz89ehUYEUpXKfetsUMRKUuYy0hMhZ2xLoPyR0=w1920-h193-s-no?authuser=0"
+            src="https://lh3.googleusercontent.com/pw/AP1GczMo3DXbcGsHswgE46n36BzYht6UoYpKSmSMDpFaUbCELeYtF3GDlAB-CWY7zfrkXoyl24nz36eznGZ51KoSsAmXfwOfUDWYNE_NfzlrHR-EZ3cLoM-7_Ewpq1xRZ6Z9US-1YMmJqDK33sYJPxUPWY7f=w1920-h317-s-no?authuser=0"
             alt=""
           />
           <p className="text-2xl font-bold text-slate-400">Sirkelsagblad</p>
