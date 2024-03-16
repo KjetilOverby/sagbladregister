@@ -38,6 +38,7 @@ const DatepickerComponent: React.FC<DateProps> = ({
       >
         <p>Dato</p>
         <Datepicker
+          className="dark:bg-gray-800"
           placeholder={"Klikk her for å velge dato"}
           primaryColor={"orange"}
           showShortcuts={true}

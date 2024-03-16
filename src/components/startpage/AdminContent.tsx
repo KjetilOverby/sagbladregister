@@ -35,211 +35,264 @@ const AdminContent = ({
             setDateValue={setDateValue}
             dateValue={dateValue}
           />
-          <p>Aktivitet i gitt periode</p>
+          <p className="text-gray-500">Aktivitet i gitt periode</p>
           <div>
-            <h1 className="my-3 font-bold">Blad lagt til:</h1>
-            {newblades?.map((blade) => {
-              return (
-                <div>
-                  <ul>
-                    <div className="mb-2 flex items-center">
-                      <img
-                        className="mr-3 w-5 rounded-full"
-                        src={blade.creatorImg}
-                        alt=""
-                      />
-                      <li className="text-xs text-neutral">
-                        {dateFormat(blade.createdAt, "dd.mm.yyyy, HH:MM")} -{" "}
-                        <span className="text-blue-500">{blade.creator}</span>{" "}
-                        har lagt til{" "}
-                        <span className="text-red-500">
-                          {blade.type} {blade.side}
-                        </span>{" "}
-                        for{" "}
-                        <span className="text-purple-500">{blade.kunde}</span>,
-                        id nr:{" "}
-                        <span className="text-green-600">{blade.IdNummer}</span>
-                      </li>
-                    </div>
-                  </ul>
-                </div>
-              );
-            })}
-          </div>
-          <div>
-            <h1 className="mb-3 mt-10 font-bold">Blad slettet:</h1>
-            {deletedblades?.map((blade) => {
-              return (
-                <div>
-                  <ul>
-                    <div className="mb-2 flex items-center">
-                      <img
-                        className="mr-3 w-5 rounded-full"
-                        src={blade.deleterImg}
-                        alt=""
-                      />
-                      <li className="text-xs text-neutral">
-                        {dateFormat(blade.updatedAt, "dd.mm.yyyy, HH:MM")} -{" "}
-                        <span className="text-blue-500">{blade.deleter}</span>{" "}
-                        har slettet{" "}
-                        <span className="text-red-500">
-                          {blade.type} {blade.side}
-                        </span>
-                        . Sletteårsak:
-                        <span className="text-orange-500">
-                          {" "}
-                          {blade.deleteReason},{" "}
-                        </span>
-                        for{" "}
-                        <span className="text-purple-500">{blade.kunde}</span>,
-                        id nr:{" "}
-                        <span className="text-green-600">{blade.IdNummer}</span>
-                      </li>
-                    </div>
-                  </ul>
-                </div>
-              );
-            })}
-          </div>
-          <div>
-            <h1 className="mb-3 mt-10 font-bold">Serviceposter:</h1>
-            {servicepost?.map((blade) => {
-              return (
-                <div>
-                  <ul>
-                    <div className="mb-2 flex items-center">
-                      <img
-                        className="mr-3 w-5 rounded-full"
-                        src={blade.creatorImg}
-                        alt=""
-                      />
-                      <li className="text-xs text-neutral">
-                        {dateFormat(blade.createdAt, "dd.mm.yyyy, HH:MM")} -{" "}
-                        <span className="text-blue-500"> {blade.creator}</span>{" "}
-                        har lagt til servicepost for{" "}
-                        <span className="text-red-500">
-                          {blade.bladType} {blade.side}
-                        </span>{" "}
-                        med service:{" "}
-                        <span className="text-orange-600">{blade.service}</span>{" "}
-                        og id nummer:{" "}
-                        <span className="text-green-600">
-                          {blade.bladeRelationId}
-                        </span>
-                        {blade.anmSag && (
-                          <>
-                            Kommentar:{" "}
-                            <span className="text-blue-600">
-                              {" "}
-                              {blade.anmSag}
-                            </span>
-                          </>
-                        )}
-                      </li>
-                    </div>
-                  </ul>
-                </div>
-              );
-            })}
-          </div>
-          <div>
-            <h1 className="mb-3 mt-10 font-bold">Serviceposter endret:</h1>
-            {servicepostUpdate?.map((blade) => {
-              return (
-                <div>
-                  <ul>
-                    <div className="mb-2 flex items-center">
-                      <img
-                        className="mr-3 w-5 rounded-full"
-                        src={blade.creatorImg2}
-                        alt=""
-                      />
-                      <li className="text-xs text-neutral">
-                        {dateFormat(blade.updatedAt, "dd.mm.yyyy, HH:MM")} -{" "}
-                        <span className="text-blue-500">
-                          {" "}
-                          {blade.sgSag ? blade.sgSag : blade.creator2}
-                        </span>{" "}
-                        har endret servicepost for{" "}
-                        <span className="text-red-500">
-                          {blade.bladType} {blade.side}
-                        </span>{" "}
-                        med service:{" "}
-                        <span className="text-orange-600">{blade.service}</span>{" "}
-                        ,{" "}
-                        {blade.anmSag && (
-                          <>
-                            Kommentar:{" "}
-                            <span className="text-blue-600">
-                              {" "}
-                              ({blade.anmSag})
-                            </span>
-                            ,{" "}
-                          </>
-                        )}
-                        id nummer:{" "}
-                        <span className="text-green-600">
-                          {blade.bladeRelationId}
-                        </span>
-                      </li>
-                    </div>
-                  </ul>
-                </div>
-              );
-            })}
-          </div>
-          <div>
-            <h1 className="mb-3 mt-10 font-bold">
-              Handling Kvarnstrands & Stridsbergs:
+            <h1 className="my-3 font-bold text-gray-500">
+              Blad lagt til: ({newblades?.length})
             </h1>
-            {servicepostKS?.map((blade) => {
-              return (
-                <div>
-                  <ul>
-                    <div className="mb-2 flex items-center">
-                      {blade.creator3 && (
-                        <>
-                          <img
-                            className="mr-3 w-5 rounded-full"
-                            src={blade.creatorImg3}
-                            alt=""
-                          />
-                          <li className="text-xs text-neutral">
-                            {dateFormat(blade.datoSrv, "dd.mm.yyyy, HH:MM")} -{" "}
-                            <span className="text-blue-500">
-                              {blade.sgKS ? blade.sgKS : blade.creator3}
-                            </span>{" "}
-                            har lagt til handling for{" "}
-                            <span className="text-red-500">
-                              {blade.bladType} {blade.side}
-                            </span>
-                            , kode:{" "}
-                            <span className="text-orange-600">
-                              {blade.handling}
-                            </span>
-                            ,{" "}
-                            {blade.anmKS && (
-                              <>
-                                Kommentar:{" "}
-                                <span className="text-blue-600">
-                                  {" "}
-                                  ({blade.anmKS})
-                                </span>
-                                ,{" "}
-                              </>
-                            )}{" "}
-                            id nummer:{" "}
-                            <span className="text-green-500">
-                              {blade.bladeRelationId}
-                            </span>
-                          </li>
-                        </>
-                      )}
-                    </div>
-                  </ul>
-                </div>
-              );
-            })}
+            {newblades && newblades.length > 0 ? (
+              newblades.map((blade) => {
+                return (
+                  <div>
+                    <ul>
+                      <div className="mb-2 flex items-center">
+                        <img
+                          className="mr-3 w-5 rounded-full"
+                          src={blade.creatorImg}
+                          alt=""
+                        />
+                        <li className="text-xs text-gray-500">
+                          {dateFormat(blade.createdAt, "dd.mm.yyyy, HH:MM")} -{" "}
+                          <span className="text-blue-500">{blade.creator}</span>{" "}
+                          har lagt til{" "}
+                          <span className="text-red-500">
+                            {blade.type} {blade.side}
+                          </span>{" "}
+                          , produsent:{" "}
+                          <span className="text-blue-600">
+                            {blade.produsent}
+                          </span>{" "}
+                          for{" "}
+                          <span className="text-purple-500">{blade.kunde}</span>
+                          , id nr:{" "}
+                          <span className="text-green-600">
+                            {blade.IdNummer}
+                          </span>
+                        </li>
+                      </div>
+                    </ul>
+                  </div>
+                );
+              })
+            ) : (
+              <p className="text-xs italic text-gray-500">
+                Ingen aktivitet i perioden.
+              </p>
+            )}
+          </div>
+          <div>
+            <h1 className="mb-3 mt-10 font-bold text-gray-500">
+              Blad slettet: ({deletedblades?.length})
+            </h1>
+            {deletedblades && deletedblades.length > 0 ? (
+              deletedblades.map((blade) => {
+                return (
+                  <div>
+                    <ul>
+                      <div className="mb-2 flex items-center">
+                        <img
+                          className="mr-3 w-5 rounded-full"
+                          src={blade.deleterImg}
+                          alt=""
+                        />
+                        <li className="text-xs text-gray-500">
+                          {dateFormat(blade.updatedAt, "dd.mm.yyyy, HH:MM")} -{" "}
+                          <span className="text-blue-500">{blade.deleter}</span>{" "}
+                          har slettet{" "}
+                          <span className="text-red-500">
+                            {blade.type} {blade.side}
+                          </span>
+                          . Sletteårsak:
+                          <span className="text-orange-500">
+                            {" "}
+                            {blade.deleteReason},{" "}
+                          </span>
+                          for{" "}
+                          <span className="text-purple-500">{blade.kunde}</span>
+                          , id nr:{" "}
+                          <span className="text-green-600">
+                            {blade.IdNummer}
+                          </span>
+                        </li>
+                      </div>
+                    </ul>
+                  </div>
+                );
+              })
+            ) : (
+              <p className="text-xs italic text-gray-500">
+                Ingen aktivitet i perioden.
+              </p>
+            )}
+          </div>
+          <div>
+            <h1 className="mb-3 mt-10 font-bold text-gray-500">
+              Serviceposter: ({servicepost?.length})
+            </h1>
+            {servicepost && servicepost.length > 0 ? (
+              servicepost.map((blade) => {
+                return (
+                  <div>
+                    <ul>
+                      <div className="mb-2 flex items-center">
+                        <img
+                          className="mr-3 w-5 rounded-full"
+                          src={blade.creatorImg}
+                          alt=""
+                        />
+                        <li className="text-xs text-gray-500">
+                          {dateFormat(blade.createdAt, "dd.mm.yyyy, HH:MM")} -{" "}
+                          <span className="text-blue-500">
+                            {" "}
+                            {blade.creator}
+                          </span>{" "}
+                          har lagt til servicepost for{" "}
+                          <span className="text-red-500">
+                            {blade.bladType} {blade.side}
+                          </span>{" "}
+                          med service: ,{" "}
+                          <span className="text-orange-600">
+                            {blade.service}
+                          </span>{" "}
+                          {blade.anmSag && (
+                            <>
+                              Kommentar:{" "}
+                              <span className="text-blue-600">
+                                {" "}
+                                ({blade.anmSag})
+                              </span>
+                            </>
+                          )}
+                          , og id nummer:{" "}
+                          <span className="text-green-600">
+                            {blade.bladeRelationId}
+                          </span>
+                        </li>
+                      </div>
+                    </ul>
+                  </div>
+                );
+              })
+            ) : (
+              <p className="text-xs italic text-gray-500">
+                Ingen aktivitet i perioden.
+              </p>
+            )}
+          </div>
+          <div>
+            <h1 className="mb-3 mt-10 font-bold text-gray-500">
+              Serviceposter endret: ({servicepostUpdate?.length})
+            </h1>
+            {servicepostUpdate && servicepostUpdate.length > 0 ? (
+              servicepostUpdate.map((blade) => {
+                return (
+                  <div>
+                    <ul>
+                      <div className="mb-2 flex items-center">
+                        <img
+                          className="mr-3 w-5 rounded-full"
+                          src={blade.creatorImg2}
+                          alt=""
+                        />
+                        <li className="text-xs text-gray-500">
+                          {dateFormat(blade.updatedAt, "dd.mm.yyyy, HH:MM")} -{" "}
+                          <span className="text-blue-500">
+                            {" "}
+                            {blade.sgSag ? blade.sgSag : blade.creator2}
+                          </span>{" "}
+                          har endret servicepost for{" "}
+                          <span className="text-red-500">
+                            {blade.bladType} {blade.side}
+                          </span>{" "}
+                          med service:{" "}
+                          <span className="text-orange-600">
+                            {blade.service}
+                          </span>{" "}
+                          ,{" "}
+                          {blade.anmSag && (
+                            <>
+                              Kommentar:{" "}
+                              <span className="text-blue-600">
+                                {" "}
+                                ({blade.anmSag})
+                              </span>
+                              ,{" "}
+                            </>
+                          )}
+                          id nummer:{" "}
+                          <span className="text-green-600">
+                            {blade.bladeRelationId}
+                          </span>
+                        </li>
+                      </div>
+                    </ul>
+                  </div>
+                );
+              })
+            ) : (
+              <p className="text-xs italic text-gray-500">
+                Ingen aktivitet i perioden.
+              </p>
+            )}
+          </div>
+          <div>
+            <h1 className="mb-3 mt-10 font-bold text-gray-500">
+              Handling Kvarnstrands & Stridsbergs: ({servicepostKS?.length})
+            </h1>
+            {servicepostKS && servicepostKS.length > 0 ? (
+              servicepostKS.map((blade) => {
+                return (
+                  <div>
+                    <ul>
+                      <div className="mb-2 flex items-center">
+                        {blade.creator3 && (
+                          <>
+                            <img
+                              className="mr-3 w-5 rounded-full"
+                              src={blade.creatorImg3}
+                              alt=""
+                            />
+                            <li className="text-xs text-gray-500">
+                              {dateFormat(blade.datoSrv, "dd.mm.yyyy, HH:MM")} -{" "}
+                              <span className="text-blue-500">
+                                {blade.sgKS ? blade.sgKS : blade.creator3}
+                              </span>{" "}
+                              har lagt til handling for{" "}
+                              <span className="text-red-500">
+                                {blade.bladType} {blade.side}
+                              </span>
+                              , kode:{" "}
+                              <span className="text-orange-600">
+                                {blade.handling}
+                              </span>
+                              ,{" "}
+                              {blade.anmKS && (
+                                <>
+                                  Kommentar:{" "}
+                                  <span className="text-blue-600">
+                                    {" "}
+                                    ({blade.anmKS})
+                                  </span>
+                                  ,{" "}
+                                </>
+                              )}{" "}
+                              id nummer:{" "}
+                              <span className="text-green-500">
+                                {blade.bladeRelationId}
+                              </span>
+                            </li>
+                          </>
+                        )}
+                      </div>
+                    </ul>
+                  </div>
+                );
+              })
+            ) : (
+              <p className="text-xs italic text-gray-500">
+                Ingen aktivitet i perioden.
+              </p>
+            )}
           </div>
         </div>
       </div>
