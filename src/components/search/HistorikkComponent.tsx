@@ -22,7 +22,7 @@ const HistorikkComponent = ({
     <div>
       <div className="mb-5  max-lg:relative">
         <div className="mr-5 flex ">
-          <div className="mb-3 rounded-xl p-5 shadow-xl">
+          <div className="mb-3 rounded-xl p-5 shadow-xl shadow-primary">
             <h1 className="text-2xl">
               ID: {blade.IdNummer}{" "}
               {blade.deleted === true && (
@@ -42,7 +42,7 @@ const HistorikkComponent = ({
               </span>
             </p>
 
-            <div className="mb-5 rounded-xl bg-green-200 p-2 text-xs">
+            <div className="mb-5 rounded-xl bg-green-100 p-2 text-xs text-gray-600">
               <p className="">Registrert av: {blade.creator}</p>
               <p className="mb-3">
                 Dato:
@@ -57,7 +57,7 @@ const HistorikkComponent = ({
               </div>
             </div>
             {blade.deleted && (
-              <div className="mb-5 rounded-xl bg-red-200 p-2 text-xs">
+              <div className="mb-5 rounded-xl bg-red-100 p-2 text-xs text-gray-600">
                 <p>Slettet av: {blade.deleter}</p>
                 <p>Dato: {dateFormat(blade.updatedAt as Date, "dd.mm.yyyy")}</p>
                 <p className="mb-3">Vrakårsak: {blade.deleteReason}</p>

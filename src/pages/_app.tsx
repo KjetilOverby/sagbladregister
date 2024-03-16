@@ -16,6 +16,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   const [theme, setTheme] = useState("lightmode");
   const [themeUse, setThemeUse] = useState<string>("darkmode");
+  const [darkMode, setDarkMode] = useState("");
 
   const UseComponentDidMount = () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -50,7 +51,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
 
   return (
     <SessionProvider session={session}>
-      <AppDataContext.Provider value={{ setTheme, theme }}>
+      <AppDataContext.Provider
+        value={{ setTheme, theme, darkMode, setDarkMode }}
+      >
         <Component {...pageProps} theme={themeUse} setTheme={setTheme} />
       </AppDataContext.Provider>
     </SessionProvider>

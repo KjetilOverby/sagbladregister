@@ -53,7 +53,7 @@ const Newtools = ({ theme, setTheme }) => {
             <div className="overflow-x-auto px-5 pt-5">
               <div className="flex h-96 flex-row py-5 max-lg:grid max-lg:h-5/6">
                 <CreatePost />
-                <div className="ml-5 rounded-xl bg-base-100 p-5 shadow-xl max-lg:ml-0">
+                <div className="ml-5 rounded-xl bg-base-100 p-5 shadow-xl shadow-primary max-lg:ml-0">
                   <DatepickerComponent
                     setDateValue={setDateValue}
                     dateValue={dateValue}

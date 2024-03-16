@@ -157,6 +157,22 @@ const SearchMain = ({
 
   return (
     <div className="max-lg:overflow-scroll">
+      <div className="mb-10">
+        {" "}
+        <button
+          className="btn btn-xs mr-5 mt-5 bg-orange-400 text-gray-700 hover:bg-orange-500"
+          onClick={() => setShowDeletedBlades(!showDeletedBlades)}
+        >
+          {showDeletedBlades ? "Skjul slettede blad" : "Vis slettede blad"}
+        </button>
+        <button
+          onClick={() => setShowService(!showService)}
+          className="btn btn-xs bg-blue-500 text-white hover:bg-blue-600"
+        >
+          {showService ? "Skjul service blad" : "Vis service blad"}
+        </button>
+      </div>
+
       <div>
         {!closeSearchComponent ? <div></div> : ""}
 
@@ -381,34 +397,27 @@ const SearchMain = ({
       </div>
 
       <div>
-        <button
-          onClick={() => setShowService(!showService)}
-          className="btn btn-xs bg-blue-500 text-white"
-        >
-          {showService ? "Skjul service blad" : "Vis service blad"}
-        </button>
         {showService && (
-          <div className="rounded-xl border  p-2">
-            <h1>Blad service ({sawbladesService?.length})</h1>
+          <div className="p-2">
+            <hr className="my-10 border-gray-400" />
+            <h1 className="text-xl text-gray-500">
+              Blad service ({sawbladesService?.length})
+            </h1>
             <SawbladeServiceTable sawbladesService={sawbladesService} />
           </div>
         )}
       </div>
       <div>
-        <button
-          className="btn btn-xs  bg-green-500 text-white"
-          onClick={() => setShowDeletedBlades(!showDeletedBlades)}
-        >
-          {showDeletedBlades ? "Skjul slettede blad" : "Vis slettede blad"}
-        </button>
-
-        <div className=" rounded-xl border p-2">
+        <div className="p-2">
           {showDeletedBlades && (
-            <DeletedBladesComponent
-              dateValue={dateValue}
-              setDateValue={setDateValue}
-              deletedSawblades={deletedSawblades}
-            />
+            <>
+              <hr className="my-10 border-gray-400" />
+              <DeletedBladesComponent
+                dateValue={dateValue}
+                setDateValue={setDateValue}
+                deletedSawblades={deletedSawblades}
+              />
+            </>
           )}
         </div>
       </div>

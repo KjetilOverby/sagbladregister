@@ -31,10 +31,12 @@ const AdminContent = ({
         </div>
 
         <div className="mt-10">
-          <DatepickerComponent
-            setDateValue={setDateValue}
-            dateValue={dateValue}
-          />
+          <div className="w-96">
+            <DatepickerComponent
+              setDateValue={setDateValue}
+              dateValue={dateValue}
+            />
+          </div>
           <p className="text-gray-500">Aktivitet i gitt periode</p>
           <div>
             <h1 className="my-3 font-bold text-gray-500">

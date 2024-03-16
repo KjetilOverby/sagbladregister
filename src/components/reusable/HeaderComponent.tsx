@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
@@ -20,7 +21,7 @@ interface headerProps {
 
 const HeaderComponent = () => {
   const router = useRouter();
-  const { setTheme, theme } = useContext(AppDataContext);
+  const { setTheme, theme, setDarkMode } = useContext(AppDataContext);
 
   const [toggleMenu, setToggleMenu] = useState(true);
 
@@ -28,6 +29,16 @@ const HeaderComponent = () => {
     search: "",
     statistikk: "",
   });
+
+  const setDarkModeHandler = () => {
+    setDarkMode("dark");
+    setTheme("darkmode");
+  };
+
+  const setLightModeHandler = () => {
+    setDarkMode("light");
+    setTheme("lightmode");
+  };
 
   const classText = "font-bold underline";
 
@@ -230,7 +241,7 @@ const HeaderComponent = () => {
               )}
               {theme === "darkmode" && (
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-                <li onClick={() => setTheme("lightmode")}>
+                <li onClick={setLightModeHandler}>
                   <p className="lg:hover:text-primary-700 block border-b border-gray-100 py-2 pl-3 pr-4 text-sm text-neutral hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:border-0 lg:p-0 lg:hover:bg-transparent lg:dark:hover:bg-transparent lg:dark:hover:text-white">
                     <MdLightMode className="text-xl" />
                   </p>
@@ -238,7 +249,7 @@ const HeaderComponent = () => {
               )}
               {theme === "lightmode" && (
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-                <li onClick={() => setTheme("darkmode")}>
+                <li onClick={setDarkModeHandler}>
                   <p className="lg:hover:text-primary-700 block border-b border-gray-100 py-2 pl-3 pr-4 text-sm text-neutral hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:border-0 lg:p-0 lg:hover:bg-transparent lg:dark:hover:bg-transparent lg:dark:hover:text-white">
                     <MdDarkMode className="text-xl" />
                   </p>

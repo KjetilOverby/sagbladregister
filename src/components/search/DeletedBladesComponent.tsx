@@ -18,15 +18,15 @@ const DeletedBladesComponent = ({
   return (
     <div>
       <div>
+        <h1 className="text-xl text-gray-500">
+          Slettede blad ({deletedSawblades?.length})
+        </h1>
         <div className="shadow-xl">
           <DatepickerComponent
             setDateValue={setDateValue}
             dateValue={dateValue}
           />
         </div>
-        <h1 className="text-xl text-neutral">
-          Slettede blad ({deletedSawblades?.length})
-        </h1>
         <table className="table table-xs whitespace-nowrap ">
           <thead>
             <tr>

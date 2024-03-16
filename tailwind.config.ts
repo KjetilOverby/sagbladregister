@@ -39,7 +39,7 @@ export default {
           "primary": "#e3e3e3",
           "secondary": "#c2c0c0",
           "accent": "#c2c0c0",
-          "neutral": "rgb(51, 51, 51)",
+          "neutral": "#5e5e5e",
           "base-100": "#ffffff",
         },
         // futurisk: {
