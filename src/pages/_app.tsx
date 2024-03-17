@@ -9,6 +9,7 @@ import { api } from "~/utils/api";
 import "~/styles/globals.css";
 import { useEffect, useState, useRef } from "react";
 import { AppDataContext } from "~/context";
+import { set } from "zod";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -16,7 +17,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   const [theme, setTheme] = useState("lightmode");
   const [themeUse, setThemeUse] = useState<string>("darkmode");
+  const [datetheme, setDatetheme] = useState("dark");
   const [darkMode, setDarkMode] = useState("");
+  const [dateThemeUse, setDateThemeUse] = useState("");
 
   const UseComponentDidMount = () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -42,19 +45,26 @@ const MyApp: AppType<{ session: Session | null }> = ({
   useEffect(() => {
     if (isComponentMounted) {
       localStorage.setItem("theme", theme);
+      localStorage.setItem("datetheme", darkMode);
     }
   }, [theme]);
 
   useEffect(() => {
     setThemeUse(localStorage.getItem("theme"));
+    setDateThemeUse(localStorage.getItem("datetheme"));
   }, [theme]);
 
   return (
     <SessionProvider session={session}>
       <AppDataContext.Provider
-        value={{ setTheme, theme, darkMode, setDarkMode }}
+        value={{ setTheme, theme, darkMode, setDarkMode, dateThemeUse }}
       >
-        <Component {...pageProps} theme={themeUse} setTheme={setTheme} />
+        <Component
+          {...pageProps}
+          theme={themeUse}
+          darkMode={datetheme}
+          setTheme={setTheme}
+        />
       </AppDataContext.Provider>
     </SessionProvider>
   );

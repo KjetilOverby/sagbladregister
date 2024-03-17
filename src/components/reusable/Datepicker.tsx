@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AppDataContext } from "~/context";
 import Datepicker, {
   DateRangeType,
@@ -30,10 +30,12 @@ const DatepickerComponent: React.FC<DateProps> = ({
     setDateValue(newValue);
   };
 
-  const { darkMode } = useContext(AppDataContext);
+  const { dateThemeUse } = useContext(AppDataContext);
 
   return (
-    <div className={`mb-5 flex flex-col rounded-2xl bg-base-100 ${darkMode}`}>
+    <div
+      className={`mb-5 flex flex-col rounded-2xl bg-base-100 ${dateThemeUse}`}
+    >
       <form
         onSubmit={(e) => {
           e.preventDefault();
