@@ -15,7 +15,7 @@ import RoleAdminMV from "~/components/roles/RoleAdminMV";
 import dateFormat from "dateformat";
 import RoleAdminMT from "~/components/roles/RoleAdminMT";
 import { FaCircleInfo } from "react-icons/fa6";
-import InfoComponent from "~/components/search/InfoComponent";
+import InfoComponent from "~/components/reusable/InfoComponent";
 
 const Search = ({ theme }) => {
   const [closeSearchComponent, setCloseSearchComponent] = useState(false);
