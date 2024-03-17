@@ -19,6 +19,7 @@ const AdminContent = ({
   setDateValue,
   servicepostUpdate,
 }) => {
+  const countService = servicepostKS?.filter((item) => item.creator3).length;
   return (
     <>
       <div className="min-h-screen bg-base-100 px-96 pb-10 pt-24">
@@ -239,7 +240,7 @@ const AdminContent = ({
           </div>
           <div>
             <h1 className="mb-3 mt-10 font-bold text-gray-500">
-              Handling Kvarnstrands & Stridsbergs: ({servicepostKS?.length})
+              Handling Kvarnstrands & Stridsbergs: ({countService})
             </h1>
             {servicepostKS && servicepostKS.length > 0 ? (
               servicepostKS.map((blade) => {

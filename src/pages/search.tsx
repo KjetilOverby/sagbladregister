@@ -14,6 +14,8 @@ import RoleAdmin from "~/components/roles/RoleAdmin";
 import RoleAdminMV from "~/components/roles/RoleAdminMV";
 import dateFormat from "dateformat";
 import RoleAdminMT from "~/components/roles/RoleAdminMT";
+import { FaCircleInfo } from "react-icons/fa6";
+import InfoComponent from "~/components/search/InfoComponent";
 
 const Search = ({ theme }) => {
   const [closeSearchComponent, setCloseSearchComponent] = useState(false);
@@ -23,6 +25,7 @@ const Search = ({ theme }) => {
     startDate: dateFormat(new Date(), "yyyy-mm-dd"),
   });
   const [idValue, setIdValue] = useState("");
+  const [openInfoModal, setOpenInfoModal] = useState(false);
 
   const [customerInit, setCustomerInit] = useState("");
 
@@ -88,14 +91,35 @@ const Search = ({ theme }) => {
             <div className="my-5 rounded-xl bg-primary pl-5">
               {!closeSearchComponent ? (
                 <div className="flex flex-col py-5">
-                  <label>Søk</label>
-                  <input
-                    value={idValue}
-                    onChange={(e) => setIdValue(e.currentTarget.value)}
-                    type="text"
-                    placeholder="Skriv id nummer"
-                    className="input input-bordered input-xs  w-28 max-w-xs bg-base-100"
-                  />
+                  <div className="flex">
+                    <label className="mr-5">Søk</label>
+                    <input
+                      value={idValue}
+                      onChange={(e) => setIdValue(e.currentTarget.value)}
+                      type="text"
+                      placeholder="Skriv id nummer"
+                      className="input input-bordered input-xs  w-28 max-w-xs bg-base-100"
+                    />
+                    <RoleAdmin>
+                      <div className="relative">
+                        <FaCircleInfo
+                          onMouseOver={() => setOpenInfoModal(true)}
+                          onMouseOut={() => setOpenInfoModal(false)}
+                          className="ml-5 text-lg text-info"
+                        />
+                        {openInfoModal && (
+                          <InfoComponent
+                            title="Id nummer"
+                            text="Id nummer for Kunder skrives kundebokstavene først for Moelven Våler er det MV- foran id nummeret se liste over kunder lenger ned. For kanefusa blader for Moelven Våler etter MV- skrives de to første som er et tall og en bokstav. Deretter brukes de 6 siste sifrene eks: "
+                            span="MV-8D410120"
+                            bg="bg-info"
+                            listTitle="Start betegnelse for kunder:"
+                            list={["Moelven Våler: MV-", "Moelven Trysil: MT-"]}
+                          />
+                        )}
+                      </div>
+                    </RoleAdmin>
+                  </div>
                   {sessionData?.user.role === "ADMIN" && (
                     <p className="mt-5 text-sm">
                       Antall blad i bruk: {countAllBlades?.notDeleted}

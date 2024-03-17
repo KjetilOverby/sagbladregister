@@ -7,7 +7,10 @@ interface RoleAdminProps {
 
 const RoleAdmin = ({ children }: RoleAdminProps) => {
   const { data: sessionData } = useSession();
-  return <div>{sessionData?.user.role === "ADMIN" && children}</div>;
+  if (sessionData?.user.role === "ADMIN") {
+    return <>{children}</>;
+  }
+  return null;
 };
 
 export default RoleAdmin;
