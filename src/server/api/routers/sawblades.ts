@@ -221,6 +221,29 @@ export const sawbladesRouter = createTRPCRouter({
 
         // ************************* CUSTOMERS *****************************////////
 
+
+        getAllCreateCustomer: protectedProcedure
+  .input(z.object({date: z.string(), date2: z.string(), IdNummer: z.string(), init: z.string()}))
+  .query(({ ctx, input }) => {
+    return ctx.db.sawblades.findMany({
+      where: {
+        AND: [{
+          createdAt: {
+            lte: new Date(input.date),
+            gte: new Date(input.date2),
+          },
+          IdNummer: {
+            startsWith: input.init,
+            contains: input.IdNummer,
+          }
+        }]
+      },
+      orderBy: {
+        IdNummer: 'desc'
+      },
+    })
+  }),
+
         countSawbladesCustomer: protectedProcedure
         .input(z.object({ init: z.string()})).
         query(async ({ ctx, input }) => {

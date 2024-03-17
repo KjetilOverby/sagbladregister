@@ -14,12 +14,12 @@ import NotAuthorized from "~/components/reusable/NotAuthorized";
 import TypesArticle from "~/components/reusable/TypesArticle";
 import mtArticleTypes from "~/appdata/mtArticleTypes";
 import mvArticleTypes from "~/appdata/mvArticleTypes";
+import RoleAdmin from "~/components/roles/RoleAdmin";
+import RoleAdminMV from "~/components/roles/RoleAdminMV";
+import CustomerCreate from "~/components/newtools/CustomerCreate";
 const Newtools = ({ theme, setTheme }) => {
   const { data: sessionData } = useSession();
   // eslint-disable-next-line @typescript-eslint/unbound-method
-  const year = new Date().getFullYear();
-  const month = new Date().getMonth() + 1;
-  const date = new Date().getDate();
 
   // endDate: `${year}-${month}-${date}`,
   // startDate: `${year}-${month}-${date}`,
@@ -29,6 +29,16 @@ const Newtools = ({ theme, setTheme }) => {
     endDate: dateFormat(new Date(), "yyyy-mm-dd"),
     startDate: dateFormat(new Date(), "yyyy-mm-dd"),
   });
+
+  const [customerInit, setCustomerInit] = useState("");
+
+  useEffect(() => {
+    if (sessionData?.user.role === "MV_ADMIN") {
+      setCustomerInit("MV-");
+    } else if (sessionData?.user.role === "MT_ADMIN") {
+      setCustomerInit("MT-");
+    }
+  }, [sessionData]);
 
   const [idValue, setIdValue] = useState("");
   const [openDeleteID, setOpenDeleteID] = useState<string | null>(null);
@@ -42,13 +52,18 @@ const Newtools = ({ theme, setTheme }) => {
     date2: `${dateValue.startDate}T00:00:00.000Z`,
     IdNummer: idValue,
   });
+
+  const { data: createCustomer } = api.sawblades.getAllCreateCustomer.useQuery({
+    date: `${dateValue.endDate}T23:59:59.000Z`,
+    date2: `${dateValue.startDate}T00:00:00.000Z`,
+    IdNummer: idValue,
+    init: "MV",
+  });
   return (
     <div data-theme={theme}>
-      {sessionData?.user.role === "ADMIN" ||
-      sessionData?.user.role === "MV_ADMIN" ? (
-        <>
+      <>
+        <RoleAdmin>
           <HeaderComponent setTheme={setTheme} />
-
           <div className="mx-48 min-h-screen bg-base-100 p-5 max-lg:p-0 ">
             <div className="overflow-x-auto px-5 pt-5">
               <div className="flex h-96 flex-row py-5 max-lg:grid max-lg:h-5/6">
@@ -202,10 +217,22 @@ const Newtools = ({ theme, setTheme }) => {
               </table>
             </div>
           </div>
-        </>
-      ) : (
-        <NotAuthorized />
-      )}
+        </RoleAdmin>
+        <RoleAdminMV>
+          <HeaderComponent setTheme={setTheme} />
+          <CustomerCreate
+            data={createCustomer}
+            dateValue={dateValue}
+            setDateValue={setDateValue}
+            openDeleteID={openDeleteID}
+            deleteHandler={deleteHandler}
+            customerInit={customerInit}
+            idValue={idValue}
+            setIdValue={setIdValue}
+            setOpenDeleteID={setOpenDeleteID}
+          />
+        </RoleAdminMV>
+      </>
     </div>
   );
 };

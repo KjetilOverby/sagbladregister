@@ -15,6 +15,7 @@ const Deleteblades = ({ blade }: bladeProps) => {
       void ctx.sawblades.getAll.invalidate();
       void ctx.sawblades.getCustomer.invalidate();
       void ctx.sawblades.getAllCreate.invalidate();
+      void ctx.sawblades.getAllCreateCustomer.invalidate();
     },
   });
 
