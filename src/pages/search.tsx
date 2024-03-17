@@ -110,7 +110,7 @@ const Search = ({ theme }) => {
                         {openInfoModal && (
                           <InfoComponent
                             title="Id nummer"
-                            text="Id nummer for Kunder skrives kundebokstavene først for Moelven Våler er det MV- foran id nummeret se liste over kunder lenger ned. For kanefusa blader for Moelven Våler etter MV- skrives de to første som er et tall og en bokstav. Deretter brukes de 6 siste sifrene eks: "
+                            text="Id nummer for Kunder skrives kundebokstavene først. For Moelven Våler er det MV- foran id nummeret, se liste over kunder lenger ned. For Kanefusa blader for Moelven Våler, etter MV- skrives de to første som er et tall og en bokstav. Deretter brukes de 6 siste sifrene eks: "
                             span="MV-8D410120"
                             bg="bg-info"
                             listTitle="Start betegnelse for kunder:"

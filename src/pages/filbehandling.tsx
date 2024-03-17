@@ -6,7 +6,7 @@ import { api } from "~/utils/api";
 import { signIn, signOut, useSession } from "next-auth/react";
 import FilbehandlingMain from "~/filbehandling/FilbehandlingMain";
 
-const filbehandling = () => {
+const filbehandling = ({ theme }) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { data: sessionData } = useSession();
   const [dateValue, setDateValue] = useState({
@@ -23,7 +23,7 @@ const filbehandling = () => {
 
   return (
     <div>
-      <FilbehandlingMain sawblades={sawblades} />
+      <FilbehandlingMain sawblades={sawblades} theme={theme} />
     </div>
   );
 };
