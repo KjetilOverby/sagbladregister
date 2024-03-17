@@ -17,6 +17,7 @@ import mvArticleTypes from "~/appdata/mvArticleTypes";
 import RoleAdmin from "~/components/roles/RoleAdmin";
 import RoleAdminMV from "~/components/roles/RoleAdminMV";
 import CustomerCreate from "~/components/newtools/CustomerCreate";
+import RoleAdminMT from "~/components/roles/RoleAdminMT";
 const Newtools = ({ theme, setTheme }) => {
   const { data: sessionData } = useSession();
   // eslint-disable-next-line @typescript-eslint/unbound-method
@@ -57,7 +58,7 @@ const Newtools = ({ theme, setTheme }) => {
     date: `${dateValue.endDate}T23:59:59.000Z`,
     date2: `${dateValue.startDate}T00:00:00.000Z`,
     IdNummer: idValue,
-    init: "MV",
+    init: customerInit,
   });
   return (
     <div data-theme={theme}>
@@ -232,6 +233,20 @@ const Newtools = ({ theme, setTheme }) => {
             setOpenDeleteID={setOpenDeleteID}
           />
         </RoleAdminMV>
+        <RoleAdminMT>
+          <HeaderComponent setTheme={setTheme} />
+          <CustomerCreate
+            data={createCustomer}
+            dateValue={dateValue}
+            setDateValue={setDateValue}
+            openDeleteID={openDeleteID}
+            deleteHandler={deleteHandler}
+            customerInit={customerInit}
+            idValue={idValue}
+            setIdValue={setIdValue}
+            setOpenDeleteID={setOpenDeleteID}
+          />
+        </RoleAdminMT>
       </>
     </div>
   );

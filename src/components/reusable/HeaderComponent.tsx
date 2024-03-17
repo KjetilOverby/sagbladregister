@@ -13,6 +13,7 @@ import { MdLightMode } from "react-icons/md";
 import { MdDarkMode } from "react-icons/md";
 import RoleAdminMV from "../roles/RoleAdminMV";
 import RoleSuperAdmin from "../roles/RoleSuperAdmin";
+import RoleAdminMT from "../roles/RoleAdminMT";
 // import { getServerAuthSession } from "~/server/auth";
 // import RoleChange from "./users/RoleChange";
 interface headerProps {
@@ -197,6 +198,18 @@ const HeaderComponent = () => {
                   </li>
                 </Link>
               </RoleAdminMV>
+              <RoleAdminMT>
+                <Link href="/newtools">
+                  <li>
+                    <p
+                      className={`bg-primary-700 lg:text-primary-700 block rounded py-2 pl-3 pr-4 text-sm text-neutral lg:bg-transparent lg:p-0 ${actualPage.opprett}`}
+                      aria-current="page"
+                    >
+                      Opprett
+                    </p>
+                  </li>
+                </Link>
+              </RoleAdminMT>
               <RoleSuperAdmin>
                 <Link href="/brukere">
                   <li>

@@ -9,7 +9,10 @@ import { TypeInputMV } from "./mv/TypeInputMV";
 import mvArticleTypes from "~/appdata/mvArticleTypes";
 import mtArticleTypes from "~/appdata/mtArticleTypes";
 
+import { signIn, signOut, useSession } from "next-auth/react";
+
 const CreatePostCustomer = ({ customerInit }) => {
+  const { data: sessionData } = useSession();
   const [inputID, setInputID] = useState("");
   const [kundeID, setKundeID] = useState("");
   const [kunde, setKunde] = useState("");
@@ -19,7 +22,7 @@ const CreatePostCustomer = ({ customerInit }) => {
     IdNummer: "",
     note: "",
     deleted: false,
-    kunde: "Moelven Våler",
+    kunde: kunde,
     side: "",
     active: false,
     deleteReason: "",
@@ -41,26 +44,17 @@ const CreatePostCustomer = ({ customerInit }) => {
     },
   });
   useEffect(() => {
-    if (customerInit === "MV-") {
+    if (sessionData?.user.role === "MV_ADMIN") {
       setKunde("Moelven Våler");
-      setBladeTypes(mvArticleTypes);
-    } else if (customerInit === "MT-") {
-      setKunde("Moelven Trysil");
-      setBladeTypes(mtArticleTypes);
-    }
-  }, [bladeData]);
-
-  console.log(customerInit);
-
-  useEffect(() => {
-    if (bladeData.kunde === "Moelven Våler") {
       setKundeID("MV");
       setBladeTypes(mvArticleTypes);
-    } else if (bladeData.kunde === "Moelven Trysil") {
+    } else if (sessionData?.user.role === "MT_ADMIN") {
+      setKunde("Moelven Trysil");
       setKundeID("MT");
       setBladeTypes(mtArticleTypes);
     }
-  }, [bladeData]);
+  }, [sessionData]);
+
   return (
     <div className="rounded-xl bg-base-100 p-5 shadow-xl shadow-primary">
       <form

@@ -42,7 +42,7 @@ const HistorikkComponent = ({
               </span>
             </p>
 
-            <div className="mb-5 rounded-xl bg-green-100 p-2 text-xs text-gray-600">
+            <div className="mb-5 rounded-xl bg-blue-400 p-2 text-xs text-white ">
               <p className="">Registrert av: {blade.creator}</p>
               <p className="mb-3">
                 Dato:
@@ -57,7 +57,7 @@ const HistorikkComponent = ({
               </div>
             </div>
             {blade.deleted && (
-              <div className="mb-5 rounded-xl bg-red-100 p-2 text-xs text-gray-600">
+              <div className="mb-5 rounded-xl bg-red-400 p-2 text-xs text-white">
                 <p>Slettet av: {blade.deleter}</p>
                 <p>Dato: {dateFormat(blade.updatedAt as Date, "dd.mm.yyyy")}</p>
                 <p className="mb-3">Vrakårsak: {blade.deleteReason}</p>
