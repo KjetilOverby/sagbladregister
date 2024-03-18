@@ -25,6 +25,7 @@ const HistorikkComponent = ({
           <div className="mb-3 rounded-xl p-5 shadow-xl shadow-primary">
             <h1 className="text-2xl">
               ID: {blade.IdNummer}{" "}
+              <span className="text-gray-400">{blade.note}</span>
               {blade.deleted === true && (
                 <span className="text-red-500">VRAKET</span>
               )}

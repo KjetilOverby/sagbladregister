@@ -49,8 +49,8 @@ const DeletedBladesComponent = ({
                       <td className="font-bold text-neutral">
                         {blade.IdNummer}{" "}
                         {blade.note && (
-                          <span className="text-xs font-normal text-orange-200">
-                            ({blade.note})
+                          <span className="text-xs font-normal text-gray-400">
+                            {blade.note}
                           </span>
                         )}
                       </td>
