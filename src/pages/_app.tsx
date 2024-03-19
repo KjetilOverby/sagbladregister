@@ -3,6 +3,7 @@
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
+import { Analytics } from "@vercel/analytics/react";
 
 import { api } from "~/utils/api";
 
@@ -65,6 +66,8 @@ const MyApp: AppType<{ session: Session | null }> = ({
           darkMode={datetheme}
           setTheme={setTheme}
         />
+        <Analytics />
+        vercel ==
       </AppDataContext.Provider>
     </SessionProvider>
   );

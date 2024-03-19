@@ -142,6 +142,38 @@ export const statistikkBladeDataRouter = createTRPCRouter({
          })
       }),
 
+      getAllHistorikkUpdateCustomer: protectedProcedure
+      .input(z.object({date: z.string(), date2: z.string(), init: z.string()}))
+          .query(({ ctx, input }) => {
+           return ctx.db.bandhistorikk.findMany({
+            where: {
+              AND: [{
+                updatedAt: {
+                 lte: new Date(input.date),
+                 gte: new Date(input.date2),
+                },
+                bladeRelationId: { startsWith: input.init},
+              }]
+            },
+           })
+        }),
+
+        getAllHistorikkKSCustomer: protectedProcedure
+        .input(z.object({date: z.string(), date2: z.string(), init: z.string()}))
+            .query(({ ctx, input }) => {
+             return ctx.db.bandhistorikk.findMany({
+              where: {
+                AND: [{
+                  datoSrv: {
+                   lte: new Date(input.date),
+                   gte: new Date(input.date2),
+                  },
+                  bladeRelationId: { startsWith: input.init},
+                }]
+              },
+             })
+          }),
+
      reklamasjonTypesCustomer: protectedProcedure
     .input(z.object({date: z.string(), date2: z.string(), init: z.string()}))
         .query(({ ctx, input }) => {

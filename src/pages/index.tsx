@@ -6,9 +6,10 @@ import AdminStartpage from "~/components/startpage/AdminStartpage";
 import FrontpageSessionless from "~/components/startpage/FrontpageSessionless";
 import CustomerStartpage from "../components/startpage/CustomerStartpage";
 import NotLoggedInPage from "~/components/startpage/NotLoggedInPage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dateFormat from "dateformat";
 import { api } from "~/utils/api";
+import RoleAdminMV from "~/components/roles/RoleAdminMV";
 
 interface adminProps {
   theme: string;
@@ -16,6 +17,16 @@ interface adminProps {
 
 export default function Home({ theme }: adminProps) {
   const { data: sessionData } = useSession();
+
+  const [customerInit, setCustomerInit] = useState("");
+
+  useEffect(() => {
+    if (sessionData?.user.role === "MV_ADMIN") {
+      setCustomerInit("MV-");
+    } else if (sessionData?.user.role === "MT_ADMIN") {
+      setCustomerInit("MT-");
+    }
+  }, [sessionData]);
 
   const [dateValue, setDateValue] = useState({
     endDate: dateFormat(new Date(), "yyyy-mm-dd"),
@@ -48,6 +59,46 @@ export default function Home({ theme }: adminProps) {
       date2: `${dateValue.startDate}T00:00:00.000Z`,
     });
 
+  // ************* CUSTOMERS *************
+
+  const { data: newbladesCustomer } =
+    api.sawblades.getAllCreateCustomer.useQuery({
+      date: `${dateValue.endDate}T23:59:59.000Z`,
+      date2: `${dateValue.startDate}T00:00:00.000Z`,
+      IdNummer: "",
+      init: customerInit,
+    });
+
+  const { data: deletedbladesCustomer } =
+    api.sawblades.getCustomerAllDeleted.useQuery({
+      date: `${dateValue.endDate}T23:59:59.000Z`,
+      date2: `${dateValue.startDate}T00:00:00.000Z`,
+      init: customerInit,
+    });
+
+  const { data: servicepostCustomer } =
+    api.statistikkBladeData.getAllCustomerHistorikk.useQuery({
+      date: `${dateValue.endDate}T23:59:59.000Z`,
+      date2: `${dateValue.startDate}T00:00:00.000Z`,
+      init: customerInit,
+      bladeRelationId: "",
+    });
+
+  const { data: servicepostUpdateCustomer } =
+    api.statistikkBladeData.getAllHistorikkUpdateCustomer.useQuery({
+      date: `${dateValue.endDate}T23:59:59.000Z`,
+      date2: `${dateValue.startDate}T00:00:00.000Z`,
+      init: customerInit,
+    });
+
+  const { data: servicepostKSCustomer } =
+    api.statistikkBladeData.getAllHistorikkKSCustomer.useQuery({
+      date: `${dateValue.endDate}T23:59:59.000Z`,
+      date2: `${dateValue.startDate}T00:00:00.000Z`,
+      init: customerInit,
+      bladeRelationId: "",
+    });
+
   return (
     <div className="min-h-screen">
       {!sessionData && <NotLoggedInPage />}
@@ -66,9 +117,19 @@ export default function Home({ theme }: adminProps) {
           servicepostUpdate={servicepostUpdate}
         />
       )}
-      {sessionData && sessionData.user.role === "MV_ADMIN" && (
-        <CustomerStartpage />
-      )}
+      <RoleAdminMV>
+        <CustomerStartpage
+          dateValue={dateValue}
+          setDateValue={setDateValue}
+          theme={theme}
+          newblades={newbladesCustomer}
+          deletedblades={deletedbladesCustomer}
+          servicepost={servicepostCustomer}
+          servicepostUpdate={servicepostUpdateCustomer}
+          servicepostKS={servicepostKSCustomer}
+        />
+      </RoleAdminMV>
+
       {sessionData && sessionData.user.role === "MT_ADMIN" && (
         <CustomerStartpage />
       )}
