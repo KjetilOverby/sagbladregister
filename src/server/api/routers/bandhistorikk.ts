@@ -16,7 +16,7 @@ export const bandhistorikkRouter = createTRPCRouter({
     .query(async ({ ctx, input }) => {
       const total = await ctx.db.bandhistorikk.findMany({
         where: {
-          updatedAt: {
+          createdAt: {
             lte: new Date(input.date),
             gte: new Date(input.date2),
           }

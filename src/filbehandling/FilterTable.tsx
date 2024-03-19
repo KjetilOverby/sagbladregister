@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -12,17 +13,14 @@ const FilterTable = ({ data }) => {
         <thead>
           <tr className="bg-blue-400 text-white ">
             {data?.length > 0 &&
-              Object.keys(data[0]).map((key, index) => (
-                <th key={index}>{key}</th>
-              ))}
+              Object.keys(data[0]).map((key) => <th key={key}>{key}</th>)}
           </tr>
         </thead>
         <tbody>
-          {data?.map((item, index) => (
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            <tr key={index} className="hover:cursor-pointer hover:bg-primary">
-              {Object.values(item).map((value, i) => (
-                <td key={i} className="whitespace-nowrap">
+          {data?.map((item) => (
+            <tr key={item.id} className="hover:cursor-pointer hover:bg-primary">
+              {Object.entries(item).map(([key, value]) => (
+                <td key={key} className="whitespace-nowrap">
                   {value instanceof Date
                     ? value.toISOString()
                     : typeof value === "boolean"

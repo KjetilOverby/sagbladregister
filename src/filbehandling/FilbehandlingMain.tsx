@@ -17,7 +17,7 @@ interface Props {
 
 const Filter = ({ theme }: Props) => {
   const [sawbladesData, setSawbladesData] = useState();
-  const [historikkData, setHistorikkData] = useState([]);
+  const [historikkData, setHistorikkData] = useState();
 
   const [sawbladeColumns, setSawbladeColumns] = useState({
     id: false,
@@ -164,7 +164,6 @@ const Filter = ({ theme }: Props) => {
         anmSag: item.anmSag,
         temperatur: item.temperatur,
         creator: item.creator,
-        userId: item.userId,
         sagtid: item.sagtid,
         sgSag: item.sgSag,
         anmKS: item.anmKS,
@@ -309,7 +308,7 @@ const Filter = ({ theme }: Props) => {
                 </button>
               )}
               <div className="card-actions mb-5">
-                {sawbladesData && openList && (
+                {historikkData && openList && (
                   <CSVLink
                     data={historikkData}
                     filename="Historikk.csv"
