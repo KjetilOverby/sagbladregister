@@ -81,7 +81,7 @@ const CreatePostCustomer = ({ customerInit }) => {
                 type: bladeData.type,
                 note: bladeData.note,
                 deleted: false,
-                kunde: bladeData.kunde,
+                kunde: kunde,
                 side:
                   bladeData.type === mvArticleTypes[7].blade ||
                   bladeData.type === mvArticleTypes[8].blade
