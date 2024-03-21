@@ -40,6 +40,14 @@ const CreatePost = () => {
     },
   });
 
+  const editSawblades = api.sawblades.editSawblade.useMutation({
+    onSuccess: () => {
+      void ctx.sawblades.getAll.invalidate();
+      void ctx.sawblades.getCustomer.invalidate();
+      void ctx.sawblades.getAllCreate.invalidate();
+    },
+  });
+
   useEffect(() => {
     if (bladeData.kunde === "Moelven Våler") {
       setKundeID("MV");

@@ -18,6 +18,7 @@ import RoleAdmin from "~/components/roles/RoleAdmin";
 import RoleAdminMV from "~/components/roles/RoleAdminMV";
 import CustomerCreate from "~/components/newtools/CustomerCreate";
 import RoleAdminMT from "~/components/roles/RoleAdminMT";
+import EditInputComponent from "~/components/newtools/EditInputComponent";
 const Newtools = ({ theme, setTheme }) => {
   const { data: sessionData } = useSession();
   // eslint-disable-next-line @typescript-eslint/unbound-method
@@ -43,6 +44,11 @@ const Newtools = ({ theme, setTheme }) => {
 
   const [idValue, setIdValue] = useState("");
   const [openDeleteID, setOpenDeleteID] = useState<string | null>(null);
+  const [openEditID, setOpenEditID] = useState<string | null>(null);
+
+  const openEditHandler = (postID: string) => {
+    setOpenEditID(postID);
+  };
 
   const deleteHandler = (postID: string) => {
     setOpenDeleteID(postID);
@@ -60,13 +66,23 @@ const Newtools = ({ theme, setTheme }) => {
     IdNummer: idValue,
     init: customerInit,
   });
+  const ctx = api.useContext();
+
+  const editSawblade = api.sawblades.editSawblade.useMutation({
+    onSuccess: () => {
+      void ctx.sawblades.getAll.invalidate();
+      void ctx.sawblades.getCustomer.invalidate();
+      void ctx.sawblades.getAllCreate.invalidate();
+    },
+  });
+
   return (
     <div data-theme={theme}>
       <>
         <RoleAdmin>
           <HeaderComponent setTheme={setTheme} />
           <div className="mx-48 min-h-screen bg-base-100 p-5 max-lg:p-0 ">
-            <div className="overflow-x-auto px-5 pt-5">
+            <div className="min-h-screen overflow-x-auto px-5 pt-5">
               <div className="flex h-96 flex-row py-5 max-lg:grid max-lg:h-5/6">
                 <CreatePost />
                 <div className="ml-5 rounded-xl bg-base-100 p-5 shadow-xl shadow-primary max-lg:ml-0">
@@ -88,7 +104,7 @@ const Newtools = ({ theme, setTheme }) => {
               <h1 className="mb-3 mt-5 text-neutral">
                 Registrerte blad i perioden: {data?.length}
               </h1>
-              <table className="table table-xs whitespace-nowrap border border-b-accent border-l-base-100 border-r-base-100 border-t-accent bg-base-100">
+              <table className="table table-xs whitespace-nowrap border border-b-accent border-l-base-100 border-r-base-100 border-t-accent bg-base-100 ">
                 <thead>
                   <tr className="border border-b-accent border-l-base-100 border-r-base-100 border-t-accent">
                     <th className="text-sm text-neutral">Serienummer</th>
@@ -98,6 +114,7 @@ const Newtools = ({ theme, setTheme }) => {
                     <th className="text-sm text-neutral">Dato</th>
 
                     <th className="text-sm text-neutral">Opprettet av</th>
+                    <th className="text-sm text-neutral"></th>
                     <th className="text-sm text-neutral"></th>
                   </tr>
                 </thead>
@@ -174,6 +191,25 @@ const Newtools = ({ theme, setTheme }) => {
                               </div>
                               {blade.creator}
                             </td>
+                          </td>
+
+                          <td>
+                            <button
+                              onClick={() => openEditHandler(blade.id)}
+                              className=" btn btn-xs mr-5 bg-warning text-xs text-white"
+                            >
+                              Rediger
+                            </button>
+                            {openEditID === blade.id && (
+                              <div className="absolute z-50 rounded-xl bg-warning p-5 shadow-xl">
+                                <h1>Rediger: {blade.IdNummer}</h1>
+                                <EditInputComponent
+                                  editSawblade={editSawblade}
+                                  blade={blade}
+                                  openEditHandler={openEditHandler}
+                                />
+                              </div>
+                            )}
                           </td>
 
                           <td>

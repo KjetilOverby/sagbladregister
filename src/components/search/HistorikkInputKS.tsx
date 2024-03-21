@@ -44,8 +44,6 @@ const HistorikkInputKS = ({
 }: historikkInputProps) => {
   const ctx = api.useContext();
 
-  console.log(blade.IdNummer);
-
   const updatePost = api.bandhistorikk.updateKS.useMutation({
     onSuccess: () => {
       void ctx.sawblades.getAll.invalidate();

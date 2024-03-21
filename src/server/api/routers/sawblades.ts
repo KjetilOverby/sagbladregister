@@ -411,6 +411,34 @@ export const sawbladesRouter = createTRPCRouter({
      })
   }),
 
+
+     editSawblade: protectedProcedure
+      .input(z.object({id: z.string(), IdNummer: z.string(), type: z.string(), deleted: z.boolean(), note: z.string(), kunde: z.string(), side: z.string(), active: z.boolean(), deleteReason: z.string(), produsent: z.string(), artikkel: z.string() }))
+      .mutation(({ ctx, input }) => {
+        const creatorName: string = ctx.session.user.name ?? "DefaultCreator";
+        const creatorImg: string = ctx.session.user.image ?? "DefaultCreator";
+    
+     // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+     return ctx.db.sawblades.update({
+      where: {
+        id: input.id
+    },
+         data: {
+             IdNummer: input.IdNummer,
+             type: input.type,
+             deleted: false,
+             note: input.note,
+             kunde: input.kunde,
+             side: input.side,
+             active: input.active,
+             deleteReason: input.deleteReason,
+             produsent: input.produsent,
+           
+             artikkel: input.artikkel
+         },
+     })
+  }),
+
   
   update: protectedProcedure.input(z.object({deleted: z.boolean(), id: z.string(), deleteReason: z.string()}))
   .mutation(async ({ctx, input}) => {
