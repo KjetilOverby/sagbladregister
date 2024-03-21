@@ -88,7 +88,11 @@ const CreatePost = () => {
                 kunde: bladeData.kunde,
                 side:
                   bladeData.type === mvArticleTypes[7].blade ||
-                  bladeData.type === mvArticleTypes[8].blade
+                  bladeData.type === mvArticleTypes[8].blade ||
+                  bladeData.type === mvArticleTypes[9].blade ||
+                  bladeData.type === mvArticleTypes[10].blade ||
+                  bladeData.type === mvArticleTypes[11].blade ||
+                  bladeData.type === mvArticleTypes[12].blade
                     ? bladeData.side
                     : "",
                 active: false,
@@ -163,6 +167,22 @@ const CreatePost = () => {
           </select>
         )}
         {bladeData.type === mvArticleTypes[8].blade && (
+          <select
+            onChange={(e) =>
+              setBladeData({ ...bladeData, side: e.currentTarget.value })
+            }
+            className="select select-xs border-accent bg-green-100 text-xs text-black"
+          >
+            <option disabled selected>
+              Velg side
+            </option>
+
+            <option value="Høyre">Høyre</option>
+
+            <option value="Venstre">Venstre</option>
+          </select>
+        )}
+        {bladeData.type === mvArticleTypes[9].blade && (
           <select
             onChange={(e) =>
               setBladeData({ ...bladeData, side: e.currentTarget.value })

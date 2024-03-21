@@ -84,7 +84,11 @@ const CreatePostCustomer = ({ customerInit }) => {
                 kunde: kunde,
                 side:
                   bladeData.type === mvArticleTypes[7].blade ||
-                  bladeData.type === mvArticleTypes[8].blade
+                  bladeData.type === mvArticleTypes[8].blade ||
+                  bladeData.type === mvArticleTypes[9].blade ||
+                  bladeData.type === mvArticleTypes[10].blade ||
+                  bladeData.type === mvArticleTypes[11].blade ||
+                  bladeData.type === mvArticleTypes[12].blade
                     ? bladeData.side
                     : "",
                 active: false,
