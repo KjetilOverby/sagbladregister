@@ -103,6 +103,7 @@ const EditInputComponent = ({ editSawblade, blade, openEditHandler }) => {
             className="select select-bordered select-xs mb-5 w-full max-w-xs bg-white"
             value={editInputVal.kunde}
           >
+            <option value="">Velg kunde</option>
             <option value="Moelven Våler">Moelven Våler</option>
             <option value="Moelven Trysil">Moelven Trysil</option>
           </select>

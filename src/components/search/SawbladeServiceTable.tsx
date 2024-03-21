@@ -28,7 +28,7 @@ const SawbladeServiceTable = ({ sawbladesService }) => {
             return (
               <>
                 {blade && (
-                  <tr className="">
+                  <tr className="hover:cursor-pointer hover:bg-primary">
                     <td className="font-bold text-neutral">
                       {blade.IdNummer}{" "}
                       {blade.note && (

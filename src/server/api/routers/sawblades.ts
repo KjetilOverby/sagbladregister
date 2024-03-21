@@ -426,7 +426,7 @@ export const sawbladesRouter = createTRPCRouter({
          data: {
              IdNummer: input.IdNummer,
              type: input.type,
-             deleted: false,
+             deleted: input.deleted,
              note: input.note,
              kunde: input.kunde,
              side: input.side,

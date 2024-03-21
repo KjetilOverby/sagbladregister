@@ -45,7 +45,7 @@ const DeletedBladesComponent = ({
               return (
                 <>
                   {blade.deleted && (
-                    <tr className="">
+                    <tr className="hover:cursor-pointer hover:bg-primary">
                       <td className="font-bold text-neutral">
                         {blade.IdNummer}{" "}
                         {blade.note && (
