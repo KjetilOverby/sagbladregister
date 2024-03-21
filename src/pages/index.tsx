@@ -127,6 +127,7 @@ export default function Home({ theme }: adminProps) {
           servicepost={servicepostCustomer}
           servicepostUpdate={servicepostUpdateCustomer}
           servicepostKS={servicepostKSCustomer}
+          oppstartsDato={new Date("03/19/2024")}
         />
       </RoleAdminMV>
 

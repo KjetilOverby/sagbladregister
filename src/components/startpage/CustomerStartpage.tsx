@@ -13,10 +13,13 @@ const CustomerStartpage = ({
   servicepost,
   servicepostUpdate,
   servicepostKS,
+  oppstartsDato,
+  theme,
 }) => {
   return (
-    <div data-theme="lightmode" className="min-h-screen bg-base-100">
+    <div data-theme={theme} className="min-h-screen bg-base-100">
       <HeaderComponent />
+
       <CustomerContent
         dateValue={dateValue}
         setDateValue={setDateValue}
@@ -25,6 +28,7 @@ const CustomerStartpage = ({
         servicepost={servicepost}
         servicepostUpdate={servicepostUpdate}
         servicepostKS={servicepostKS}
+        oppstartsDato={oppstartsDato}
         de
       />
     </div>

@@ -67,7 +67,6 @@ const MyApp: AppType<{ session: Session | null }> = ({
           setTheme={setTheme}
         />
         <Analytics />
-        vercel ==
       </AppDataContext.Provider>
     </SessionProvider>
   );

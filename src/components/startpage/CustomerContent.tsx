@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
@@ -8,6 +9,7 @@ import ActivityDelete from "./activity/ActivityDelete";
 import ActivityServiceCreate from "./activity/ActivityServiceCreate";
 import ActivityServiceEdit from "./ActivityServiceEdit";
 import ActivityHandling from "./activity/ActivityHandling";
+import dateFormat from "dateformat";
 
 const CustomerContent = ({
   newblades,
@@ -17,6 +19,7 @@ const CustomerContent = ({
   servicepost,
   servicepostUpdate,
   servicepostKS,
+  oppstartsDato,
 }) => {
   return (
     <>
@@ -28,9 +31,13 @@ const CustomerContent = ({
             alt=""
           />
         </div>
+        <h1 className="text-gray-400">
+          Oppstart database for Moelven Våler:{" "}
+          {dateFormat(oppstartsDato, "dd.mm.yyyy")}
+        </h1>
 
         <div className="mt-10">
-          <div className="w-96">
+          <div className="w-96 shadow-lg">
             <DatepickerComponent
               setDateValue={setDateValue}
               dateValue={dateValue}
