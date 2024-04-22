@@ -50,7 +50,7 @@ const SawbladeServiceTable = ({ sawbladesService }) => {
                       <div className="flex items-center space-x-3">
                         <div>
                           <div className="text-xs text-neutral">
-                            {dateFormat(blade.updatedAt, "dd.mm.yyyy")}
+                            {dateFormat(blade.updatedAt, "dd.mm.yyyy, HH:MM")}
                           </div>
                         </div>
                       </div>

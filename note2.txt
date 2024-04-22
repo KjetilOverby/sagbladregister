@@ -1,3 +1,6 @@
+Statistikk: Service handling antall service viser feil. Den viser for dato som er lagt inn og ikke når handling er lagt inn.
+Statistikk: Antall tenner rep og tannslipp viser ikke riktig
+Søk: Sletting av servicepost må deaktivere blad til service.
 
 
 
