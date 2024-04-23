@@ -27,7 +27,7 @@ const AdminContent = ({
 }) => {
   return (
     <>
-      <div className="min-h-screen bg-base-100 px-96 pb-10 pt-24">
+      <div className="min-h-screen bg-base-100 px-20 pb-10 pt-24 2xl:px-96">
         <div className="w-[30rem]">
           <img
             className="w-full"

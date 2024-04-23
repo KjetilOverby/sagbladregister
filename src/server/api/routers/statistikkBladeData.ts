@@ -56,7 +56,7 @@ export const statistikkBladeDataRouter = createTRPCRouter({
            return ctx.db.bandhistorikk.aggregate({
             where: {
             
-                createdAt: {
+                updatedAt: {
                  lte: new Date(input.date),
                  gte: new Date(input.date2),
                 },

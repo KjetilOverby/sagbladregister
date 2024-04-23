@@ -49,8 +49,6 @@ const StatistikkMain = ({
     "Reklamasjon",
   ];
 
-  console.log(historikkData);
-
   const deleteReasonCount = deleteReasons.reduce((countObj, reason) => {
     countObj[reason] = 0;
     return countObj;
@@ -134,7 +132,7 @@ const StatistikkMain = ({
   }, [historikkData]);
 
   return (
-    <div className="pb-45 xl:mx-96">
+    <div className="pb-45 mx-20 2xl:mx-96">
       <div className="mx-5 mt-5 max-lg:mx-0">
         <div>
           <div className="w-1/5 max-lg:w-full">
