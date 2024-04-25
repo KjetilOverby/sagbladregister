@@ -110,7 +110,7 @@ export const sawbladesRouter = createTRPCRouter({
               },
               bandhistorikk: {
                 orderBy: {
-                  createdAt: 'asc'
+                  createdAt: 'desc'
                 }
               },
             },
@@ -171,7 +171,7 @@ export const sawbladesRouter = createTRPCRouter({
             }]
           },
           orderBy: {
-            updatedAt: 'asc'
+            updatedAt: 'desc'
                           },
                           include: {
                             _count: {
@@ -239,7 +239,7 @@ export const sawbladesRouter = createTRPCRouter({
         }]
       },
       orderBy: {
-        IdNummer: 'desc'
+       createdAt: 'desc'
       },
     })
   }),
@@ -286,7 +286,7 @@ export const sawbladesRouter = createTRPCRouter({
             }]
           },
           orderBy: {
-            updatedAt: 'asc'
+            updatedAt: 'desc'
                           },
                           include: {
                             _count: {
@@ -323,7 +323,7 @@ export const sawbladesRouter = createTRPCRouter({
             }]
           },
           orderBy: {
-            IdNummer: 'asc'
+            IdNummer: 'desc'
                           },
                           include: {
                             _count: {
@@ -333,7 +333,7 @@ export const sawbladesRouter = createTRPCRouter({
                             },
                             bandhistorikk: {
                               orderBy: {
-                                createdAt: 'asc'
+                                createdAt: 'desc'
                               }
                             },
                           },
@@ -353,7 +353,7 @@ export const sawbladesRouter = createTRPCRouter({
             }]
           },
           orderBy: {
-            IdNummer: 'asc'
+            updatedAt: 'desc'
                           },
                           include: {
                             _count: {

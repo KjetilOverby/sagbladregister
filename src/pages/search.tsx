@@ -163,6 +163,7 @@ const Search = ({ theme }) => {
                 setCloseSearchComponent={setCloseSearchComponent}
                 dateValue={dateValue}
                 setDateValue={setDateValue}
+                setIdValue={setIdValue}
               />
             </RoleAdminMV>
             <RoleAdminMT>

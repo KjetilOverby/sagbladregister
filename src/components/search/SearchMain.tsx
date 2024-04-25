@@ -80,8 +80,6 @@ const SearchMain = ({
   sawbladesService,
   setIdValue,
 }: BladeProps) => {
-  console.log(sawbladesService);
-
   const { data: sessionData } = useSession();
 
   const [showDeletedBlades, setShowDeletedBlades] = useState(false);

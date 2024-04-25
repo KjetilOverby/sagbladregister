@@ -20,7 +20,11 @@ export const statistikkBladeDataRouter = createTRPCRouter({
                lte: new Date(input.date),
                gte: new Date(input.date2),
               },
+             
           },
+          orderBy: {
+            createdAt: 'desc'
+                          }
          })
       }),
    
@@ -33,7 +37,11 @@ export const statistikkBladeDataRouter = createTRPCRouter({
                lte: new Date(input.date),
                gte: new Date(input.date2),
               },
+              
           },
+          orderBy: {
+            updatedAt: 'desc'
+                          }
          })
       }),
     getAllHistorikkKS: protectedProcedure
@@ -46,6 +54,9 @@ export const statistikkBladeDataRouter = createTRPCRouter({
                gte: new Date(input.date2),
               },
           },
+          orderBy: {
+            datoSrv: 'desc'
+                          }
          })
       }),
 
@@ -139,6 +150,9 @@ export const statistikkBladeDataRouter = createTRPCRouter({
               bladeRelationId: { startsWith: input.init},
             }]
           },
+          orderBy: {
+            createdAt: 'desc'
+                          }
          })
       }),
 
@@ -153,8 +167,14 @@ export const statistikkBladeDataRouter = createTRPCRouter({
                  gte: new Date(input.date2),
                 },
                 bladeRelationId: { startsWith: input.init},
-              }]
+               
+              }],
+              
             },
+            orderBy: {
+              updatedAt: 'desc'
+                            }
+            
            })
         }),
 
@@ -171,6 +191,9 @@ export const statistikkBladeDataRouter = createTRPCRouter({
                   bladeRelationId: { startsWith: input.init},
                 }]
               },
+              orderBy: {
+                datoSrv: 'desc'
+                              }
              })
           }),
 
