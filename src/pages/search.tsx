@@ -150,6 +150,7 @@ const Search = ({ theme }) => {
                 dateValue={dateValue}
                 setDateValue={setDateValue}
                 sawbladesService={sawbladesService}
+                setIdValue={setIdValue}
               />
             </RoleAdmin>
 

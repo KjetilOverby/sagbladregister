@@ -7,7 +7,7 @@
 import React from "react";
 import dateFormat from "dateformat";
 
-const SawbladeServiceTable = ({ sawbladesService }) => {
+const SawbladeServiceTable = ({ sawbladesService, setIdValue }) => {
   return (
     <div>
       <table className="table table-xs whitespace-nowrap ">
@@ -28,7 +28,10 @@ const SawbladeServiceTable = ({ sawbladesService }) => {
             return (
               <>
                 {blade && (
-                  <tr className="hover:cursor-pointer hover:bg-primary">
+                  <tr
+                    onClick={() => setIdValue(blade.IdNummer)}
+                    className="hover:cursor-pointer hover:bg-primary"
+                  >
                     <td className="font-bold text-neutral">
                       {blade.IdNummer}{" "}
                       {blade.note && (

@@ -78,6 +78,7 @@ const SearchMain = ({
   dateValue,
   setDateValue,
   sawbladesService,
+  setIdValue,
 }: BladeProps) => {
   console.log(sawbladesService);
 
@@ -403,7 +404,10 @@ const SearchMain = ({
             <h1 className="text-xl text-gray-500">
               Blad service ({sawbladesService?.length})
             </h1>
-            <SawbladeServiceTable sawbladesService={sawbladesService} />
+            <SawbladeServiceTable
+              sawbladesService={sawbladesService}
+              setIdValue={setIdValue}
+            />
           </div>
         )}
       </div>
