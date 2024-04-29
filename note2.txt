@@ -1,5 +1,6 @@
 Statistikk: Service handling antall service viser feil. Den viser for dato som er lagt inn og ikke når handling er lagt inn.
 Søk: Sletting av servicepost må deaktivere blad til service.
+Mulighet for å slette innlegging av handling eller sette null verdi på handling
 
 
 
