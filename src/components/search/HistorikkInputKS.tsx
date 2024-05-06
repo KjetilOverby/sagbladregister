@@ -44,6 +44,9 @@ const HistorikkInputKS = ({
 }: historikkInputProps) => {
   const ctx = api.useContext();
 
+  console.log(blade.bandhistorikk);
+  console.log(historikkKs.antTannslipp);
+
   const updatePost = api.bandhistorikk.updateKS.useMutation({
     onSuccess: () => {
       void ctx.sawblades.getAll.invalidate();
@@ -74,8 +77,20 @@ const HistorikkInputKS = ({
         onSubmit={(e) => {
           e.preventDefault();
 
+          const lastPost = blade.bandhistorikk[0];
+
           if (concatenatedString === "") {
             alert("Du må velge minst en BFS kode");
+          } else if (
+            lastPost.feilkode === "Tannslipp" &&
+            historikkKs.antTannslipp === 0
+          ) {
+            alert("du må legg inn antall tannslipp");
+          } else if (
+            lastPost.service === "Reparasjon" &&
+            historikkKs.antRep === 0
+          ) {
+            alert("du må legg inn antall reparasjoner");
           } else {
             void updatePost.mutate({
               id: postId,
