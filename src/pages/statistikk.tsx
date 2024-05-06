@@ -58,6 +58,17 @@ const statistikk = ({ theme }) => {
       date: `${dateValue.endDate}T23:59:59.000Z`,
       date2: `${dateValue.startDate}T00:00:00.000Z`,
     });
+  const { data: serviceTypes } =
+    api.statistikkBladeData.serviceTypesCount.useQuery({
+      date: `${dateValue.endDate}T23:59:59.000Z`,
+      date2: `${dateValue.startDate}T00:00:00.000Z`,
+    });
+  const { data: serviceTypesCustomer } =
+    api.statistikkBladeData.serviceTypesCountCustomer.useQuery({
+      date: `${dateValue.endDate}T23:59:59.000Z`,
+      date2: `${dateValue.startDate}T00:00:00.000Z`,
+      init: customerInit,
+    });
 
   const { data: handlingService } =
     api.statistikkBladeData.handlingServiceData.useQuery({
@@ -106,6 +117,7 @@ const statistikk = ({ theme }) => {
           toothCountCustomer={toothCount}
           feilkodeReklamasjon={reklamasjonTyper}
           handlingService={handlingService}
+          serviceTypes={serviceTypes}
         />
       )}
       {sessionData?.user.role === "MV_ADMIN" && (
@@ -117,6 +129,7 @@ const statistikk = ({ theme }) => {
           toothCountCustomer={toothCountCustomer}
           feilkodeReklamasjon={reklamasjonTyperCustomer}
           handlingService={handlingServiceCustomer}
+          serviceTypes={serviceTypesCustomer}
         />
       )}
       {sessionData?.user.role === "MT_ADMIN" && (

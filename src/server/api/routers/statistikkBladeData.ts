@@ -88,7 +88,7 @@ export const statistikkBladeDataRouter = createTRPCRouter({
               by: ['feilkode'],
               where: {
                 AND: [{
-                  createdAt: {
+                  updatedAt: {
                    lte: new Date(input.date),
                    gte: new Date(input.date2),
                   },
@@ -100,6 +100,44 @@ export const statistikkBladeDataRouter = createTRPCRouter({
               }
              })
           }),
+
+          serviceTypesCount: protectedProcedure
+  .input(z.object({date: z.string(), date2: z.string()}))
+  .query(({ ctx, input }) => {
+    return ctx.db.bandhistorikk.groupBy({
+      by: ['service'],
+      where: {
+        AND: [{
+          updatedAt: {
+            lte: new Date(input.date),
+            gte: new Date(input.date2),
+          },
+        }]
+      },
+      _count: {
+        service: true,
+      }
+    })
+  }),
+          serviceTypesCountCustomer: protectedProcedure
+  .input(z.object({date: z.string(), date2: z.string(), init: z.string()}))
+  .query(({ ctx, input }) => {
+    return ctx.db.bandhistorikk.groupBy({
+      by: ['service'],
+      where: {
+        AND: [{
+          updatedAt: {
+            lte: new Date(input.date),
+            gte: new Date(input.date2),
+          },
+          bladeRelationId: { startsWith: input.init},
+        }]
+      },
+      _count: {
+        service: true,
+      }
+    })
+  }),
 
           handlingServiceData: protectedProcedure
     .input(z.object({date: z.string(), date2: z.string()}))
@@ -204,7 +242,7 @@ export const statistikkBladeDataRouter = createTRPCRouter({
           by: ['feilkode'],
           where: {
             AND: [{
-              createdAt: {
+              updatedAt: {
                lte: new Date(input.date),
                gte: new Date(input.date2),
               },

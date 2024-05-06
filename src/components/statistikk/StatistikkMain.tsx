@@ -17,6 +17,7 @@ import RoleAdminMV from "../roles/RoleAdminMV";
 import RoleAdminMT from "../roles/RoleAdminMT";
 import RoleAdmin from "../roles/RoleAdmin";
 import ServiceKodeTblAll from "../search/CustomersInit/allCustomers/ServiceKodeTblAll";
+import BarchartServiceTypes from "./BarchartServiceTypes";
 
 interface statistikkProps {
   historikkData: {
@@ -33,6 +34,7 @@ const StatistikkMain = ({
   toothCountCustomer,
   feilkodeReklamasjon,
   handlingService,
+  serviceTypes,
 }: statistikkProps) => {
   const deleteReasons: string[] = [
     "Normal slitasje",
@@ -131,6 +133,9 @@ const StatistikkMain = ({
     setTableData(updatedServiceTableData);
   }, [historikkData]);
 
+  console.log(serviceReasonCount);
+  console.log(serviceTypes);
+
   return (
     <div className="pb-45 mx-20 2xl:mx-96">
       <div className="mx-5 mt-5 max-lg:mx-0">
@@ -148,8 +153,20 @@ const StatistikkMain = ({
             <div className="m-5 mt-20 flex rounded-xl p-10 shadow-xl shadow-primary max-lg:grid lg:w-1/2">
               <div className="w-full ">
                 <h1 className="text-2xl text-neutral">Service</h1>
+
                 <p className="text-neutral">Antall: {historikkData?.length}</p>
-                <BarCharts deleteReasonCount={serviceReasonCount} />
+
+                <BarchartServiceTypes data={serviceTypes} />
+                <h1 className="text-neutral">Service:</h1>
+                <ul className="text-xs italic text-neutral">
+                  {serviceTypes?.map((item) => (
+                    <li key={item.service}>
+                      {item.service}: {item._count.service}
+                    </li>
+                  ))}
+                </ul>
+
+                {/* <BarCharts deleteReasonCount={serviceReasonCount} />
                 <div className="rounded-xl  p-5 max-lg:ml-0 max-lg:w-full">
                   {
                     <>
@@ -165,7 +182,7 @@ const StatistikkMain = ({
                       </ul>
                     </>
                   }
-                </div>
+                </div> */}
               </div>
             </div>
 
