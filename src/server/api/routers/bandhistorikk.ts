@@ -190,7 +190,23 @@ export const bandhistorikkRouter = createTRPCRouter({
       });
   }),
 
-
+  getFlaws: protectedProcedure
+  .query(({ ctx }) => {
+    return ctx.db.bandhistorikk.findMany({
+      where: {
+        handling: {not: ''},
+        feilkode: 'Tannslipp',
+        antTannslipp: {
+          lte: 0
+        }
+      },
+      orderBy: {
+        createdAt: 'desc'
+      }
+    })
+  })
+ 
+  
 
  
 })

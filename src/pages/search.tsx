@@ -53,6 +53,10 @@ const Search = ({ theme }) => {
     date2: `${dateValue.startDate}T00:00:00.000Z`,
   });
 
+  const { data: showFlaws } = api.bandhistorikk.getFlaws.useQuery({});
+
+  console.log("showFlaws", showFlaws);
+
   const { data: sawbladeslActive } = api.sawblades.getActive.useQuery({
     date: `${dateValue.endDate}T23:59:59.000Z`,
     date2: `${dateValue.startDate}T00:00:00.000Z`,
@@ -151,6 +155,7 @@ const Search = ({ theme }) => {
                 setDateValue={setDateValue}
                 sawbladesService={sawbladesService}
                 setIdValue={setIdValue}
+                showFlaws={showFlaws}
               />
             </RoleAdmin>
 

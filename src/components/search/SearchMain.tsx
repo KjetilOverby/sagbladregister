@@ -79,6 +79,7 @@ const SearchMain = ({
   setDateValue,
   sawbladesService,
   setIdValue,
+  showFlaws,
 }: BladeProps) => {
   const { data: sessionData } = useSession();
 
@@ -156,6 +157,15 @@ const SearchMain = ({
 
   return (
     <div className="max-lg:overflow-scroll">
+      {/* {showFlaws?.map((flaw) => {
+        return (
+          <div key={flaw.IdNummer}>
+            <div className="">
+              <h1 className="text-xs">Id: {flaw.bladeRelationId}</h1>
+            </div>
+          </div>
+        );
+      })} */}
       <div className="mb-10">
         {" "}
         <button
