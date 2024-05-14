@@ -20,6 +20,8 @@ const EditInputComponent = ({ editSawblade, blade, openEditHandler }) => {
     artikkel: blade.artikkel,
   });
 
+  console.log(editInputVal.active);
+
   return (
     <div className="mt-5">
       <form
@@ -34,7 +36,7 @@ const EditInputComponent = ({ editSawblade, blade, openEditHandler }) => {
             note: editInputVal.note,
             kunde: editInputVal.kunde,
             side: editInputVal.side,
-            active: editInputVal.active,
+            active: Boolean(editInputVal.active),
             deleteReason: editInputVal.deleteReason,
             produsent: editInputVal.produsent,
 
@@ -108,6 +110,23 @@ const EditInputComponent = ({ editSawblade, blade, openEditHandler }) => {
             <option value="Moelven Trysil">Moelven Trysil</option>
           </select>
         </div>
+        <div>
+          <p>Service:</p>
+          <select
+            onChange={(e) =>
+              setEditInputVal({
+                ...editInputVal,
+                active: e.currentTarget.value,
+              })
+            }
+            className="select select-bordered select-xs mb-5 w-full max-w-xs bg-white"
+            value={Boolean(editInputVal.active)}
+          >
+            <option value="">Velg</option>
+            <option value={true}>Aktiver service</option>
+            <option value={false}>Deaktiver service</option>
+          </select>
+        </div>
         <div className="mt-5">
           <button className="btn btn-xs bg-success text-white" type="submit">
             Oppdater
@@ -115,7 +134,6 @@ const EditInputComponent = ({ editSawblade, blade, openEditHandler }) => {
           <button
             onClick={() => openEditHandler(null)}
             className="btn btn-xs bg-info text-white"
-            type="submit"
           >
             Avbryt
           </button>
