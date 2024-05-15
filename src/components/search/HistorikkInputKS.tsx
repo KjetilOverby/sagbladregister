@@ -44,9 +44,6 @@ const HistorikkInputKS = ({
 }: historikkInputProps) => {
   const ctx = api.useContext();
 
-  console.log(blade.bandhistorikk);
-  console.log(historikkKs.antTannslipp);
-
   const updatePost = api.bandhistorikk.updateKS.useMutation({
     onSuccess: () => {
       void ctx.sawblades.getAll.invalidate();
@@ -71,8 +68,27 @@ const HistorikkInputKS = ({
   );
   const concatenatedString = nonEmptyValues.join(", ");
 
+  const deleteServiceHandling = () => {
+    void updatePost.mutate({
+      id: postId,
+      anmKS: "",
+      handling: "",
+      sgKS: "",
+      datoSrv: historikkKs.datoSrv,
+      sideklaring: 0,
+      creator3: "",
+      creatorImg3: "",
+      activePost: true,
+      antRep: 0,
+      antTannslipp: 0,
+    });
+  };
+
   return (
     <div className="absolute z-40">
+      <button className="btn btn-sm bg-red-400" onClick={deleteServiceHandling}>
+        Slett service
+      </button>
       <form
         onSubmit={(e) => {
           e.preventDefault();

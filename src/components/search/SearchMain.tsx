@@ -19,6 +19,8 @@ import { GiProgression } from "react-icons/gi";
 import HistorikkComponent from "./HistorikkComponent";
 import DeletedBladesComponent from "./DeletedBladesComponent";
 import SawbladeServiceTable from "./SawbladeServiceTable";
+import { CiEdit } from "react-icons/ci";
+import EditInputComponent from "../newtools/EditInputComponent";
 
 interface Blade {
   creatorImg: string | undefined;
@@ -101,6 +103,7 @@ const SearchMain = ({
   const [showService, setShowService] = useState(false);
 
   const [newBladesCount, setNewBladesCount] = useState();
+  const [openEdit, setOpenEdit] = useState();
 
   const deleteHandler = (postID: string) => {
     setOpenDeleteID(postID);
@@ -263,7 +266,6 @@ const SearchMain = ({
                       )}
                     </div>
                   </div>
-
                   <div className="relative">
                     {!blade.deleted && (
                       <div className="grid h-10 w-10 place-content-center rounded-full bg-red-200">
@@ -376,6 +378,15 @@ const SearchMain = ({
                         </div>
                       </div>
                     )}
+                  </div>
+                  <div>
+                    <div className="ml-5 grid h-10 w-10 place-content-center rounded-full bg-green-200">
+                      <CiEdit
+                        className="text-green-600"
+                        /*  onClick={() => deleteHandler(blade.id)} */
+                      />
+                    </div>
+                    {openEdit && <EditInputComponent blade={blade} />}
                   </div>
                 </div>
               }

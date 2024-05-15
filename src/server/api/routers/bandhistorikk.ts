@@ -180,7 +180,7 @@ export const bandhistorikkRouter = createTRPCRouter({
               sideklaring: input.sideklaring,
               creator3: creatorName,
               creatorImg3: creatorImg,
-              activePost: false,
+              activePost: input.activePost,
               antRep: input.antRep,
               antTannslipp: input.antTannslipp,
             
