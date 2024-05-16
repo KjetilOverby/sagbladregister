@@ -323,8 +323,8 @@ const BandDetails = ({
 
                     <td className="text-primary">
                       {post.activePost && (
-                        <div className="grid h-7 w-7 place-content-center rounded-full bg-gray-500">
-                          <FiRefreshCw className="text-lg text-yellow-500" />
+                        <div className="grid h-6 w-6 place-content-center rounded-full bg-orange-500">
+                          <FiRefreshCw className="text-xs text-white" />
                         </div>
                       )}
                     </td>

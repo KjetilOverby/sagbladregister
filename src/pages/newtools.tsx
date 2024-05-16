@@ -196,17 +196,17 @@ const Newtools = ({ theme, setTheme }) => {
                           <td>
                             <button
                               onClick={() => openEditHandler(blade.id)}
-                              className=" btn btn-xs mr-5 bg-warning text-xs text-white"
+                              className="btn btn-xs mr-5 bg-warning text-xs text-white"
                             >
                               Rediger
                             </button>
                             {openEditID === blade.id && (
-                              <div className="absolute z-50 rounded-xl bg-warning p-5 shadow-xl">
-                                <h1>Rediger: {blade.IdNummer}</h1>
+                              <div className="z-50 rounded-xl  shadow-xl">
                                 <EditInputComponent
                                   editSawblade={editSawblade}
                                   blade={blade}
                                   openEditHandler={openEditHandler}
+                                  title={blade.IdNummer}
                                 />
                               </div>
                             )}

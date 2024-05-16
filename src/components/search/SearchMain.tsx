@@ -135,6 +135,14 @@ const SearchMain = ({
     },
   });
 
+  const editSawblade = api.sawblades.editSawblade.useMutation({
+    onSuccess: () => {
+      void ctx.sawblades.getAll.invalidate();
+      void ctx.sawblades.getCustomer.invalidate();
+      void ctx.sawblades.getAllCreate.invalidate();
+    },
+  });
+
   const handleCloseModal = () => {
     setOpenStatus(null);
   };
@@ -244,14 +252,16 @@ const SearchMain = ({
                   <div>
                     <div>
                       <div
-                        className={`mr-5 grid h-10 w-10 place-content-center rounded-full ${
-                          blade.active ? "bg-blue-400" : "bg-neutral"
+                        className={`mr-5 grid h-10 w-10 cursor-pointer place-content-center rounded-full ${
+                          blade.active
+                            ? "bg-orange-400 transition hover:bg-orange-500"
+                            : "bg-gray-200 transition hover:bg-gray-300"
                         }`}
                       >
                         <FiRefreshCw
                           onClick={() => statusHandler(blade.id)}
                           className={`text-lg ${
-                            blade.active ? "text-blue-600" : "text-accent"
+                            blade.active ? "text-white" : "text-gray-500"
                           }`}
                         />
                       </div>
@@ -268,7 +278,7 @@ const SearchMain = ({
                   </div>
                   <div className="relative">
                     {!blade.deleted && (
-                      <div className="grid h-10 w-10 place-content-center rounded-full bg-red-200">
+                      <div className="grid h-10 w-10 cursor-pointer place-content-center rounded-full bg-red-200 transition hover:bg-red-300">
                         <RiDeleteBinLine
                           style={{
                             color: "indianred",
@@ -380,13 +390,20 @@ const SearchMain = ({
                     )}
                   </div>
                   <div>
-                    <div className="ml-5 grid h-10 w-10 place-content-center rounded-full bg-green-200">
+                    <div className="ml-5 grid h-10 w-10 cursor-pointer place-content-center rounded-full bg-green-200 transition hover:bg-green-300">
                       <CiEdit
                         className="text-green-600"
-                        /*  onClick={() => deleteHandler(blade.id)} */
+                        onClick={() => setOpenEdit(true)}
                       />
                     </div>
-                    {openEdit && <EditInputComponent blade={blade} />}
+                    {openEdit && (
+                      <EditInputComponent
+                        blade={blade}
+                        openEditHandler={setOpenEdit}
+                        editSawblade={editSawblade}
+                        title={blade.IdNummer}
+                      />
+                    )}
                   </div>
                 </div>
               }

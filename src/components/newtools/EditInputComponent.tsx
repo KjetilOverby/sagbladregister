@@ -6,7 +6,12 @@
 // @ts-nocheck
 import React, { useState } from "react";
 
-const EditInputComponent = ({ editSawblade, blade, openEditHandler }) => {
+const EditInputComponent = ({
+  editSawblade,
+  blade,
+  openEditHandler,
+  title,
+}) => {
   const [editInputVal, setEditInputVal] = useState({
     IdNummer: blade.IdNummer,
     type: blade.type,
@@ -20,10 +25,8 @@ const EditInputComponent = ({ editSawblade, blade, openEditHandler }) => {
     artikkel: blade.artikkel,
   });
 
-  console.log(editInputVal.active);
-
   return (
-    <div className="mt-5">
+    <div className="absolute z-50 mt-5 w-60 rounded-xl bg-white p-5 shadow-xl">
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -46,7 +49,8 @@ const EditInputComponent = ({ editSawblade, blade, openEditHandler }) => {
         }}
       >
         <div className="mb-5 flex flex-col">
-          <label className="text-gray-600">Id nummer: </label>
+          <h2 className="mb-5 font-bold">Rediger: {title}</h2>
+          <label className="text-xs font-bold text-gray-600">Id nummer: </label>
           <input
             onChange={(e) =>
               setEditInputVal({
@@ -60,7 +64,7 @@ const EditInputComponent = ({ editSawblade, blade, openEditHandler }) => {
           />
         </div>
         <div className="mb-5 flex flex-col">
-          <label className="text-gray-600">Notat: </label>
+          <label className="text-xs font-bold text-gray-600">Notat: </label>
           <input
             onChange={(e) =>
               setEditInputVal({ ...editInputVal, note: e.currentTarget.value })
@@ -71,7 +75,7 @@ const EditInputComponent = ({ editSawblade, blade, openEditHandler }) => {
           />
         </div>
         <div>
-          <p>Produsent:</p>
+          <p className="text-xs font-bold">Produsent:</p>
           <select
             onChange={(e) =>
               setEditInputVal({
@@ -94,7 +98,7 @@ const EditInputComponent = ({ editSawblade, blade, openEditHandler }) => {
           </select>
         </div>
         <div>
-          <p>Kunde:</p>
+          <p className="text-xs font-bold">Kunde:</p>
           <select
             onChange={(e) =>
               setEditInputVal({
@@ -111,7 +115,7 @@ const EditInputComponent = ({ editSawblade, blade, openEditHandler }) => {
           </select>
         </div>
         <div>
-          <p>Service:</p>
+          <p className="text-xs font-bold">Service:</p>
           <select
             onChange={(e) =>
               setEditInputVal({
