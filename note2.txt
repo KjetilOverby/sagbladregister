@@ -1,6 +1,6 @@
 Statistikk: Service handling antall service viser feil. Den viser for dato som er lagt inn og ikke når handling er lagt inn.
 Blad service lista viser ikke den siste type service på servicetype
-
+Ved sletting så slås aktiv blad av men ikke aktiv post
 
 
 
