@@ -23,6 +23,8 @@ const SawbladeServiceTable = ({ sawbladesService, setIdValue }) => {
         </thead>
         <tbody>
           {sawbladesService?.map((blade) => {
+            console.log(blade);
+
             return (
               <>
                 {blade && (

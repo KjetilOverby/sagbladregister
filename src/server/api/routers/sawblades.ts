@@ -143,7 +143,7 @@ export const sawbladesRouter = createTRPCRouter({
                               orderBy: {
                                 updatedAt: 'desc'
                               },
-                              take: 1
+                              take: 15
                             },
                           },
          
