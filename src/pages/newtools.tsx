@@ -81,7 +81,7 @@ const Newtools = ({ theme, setTheme }) => {
       <>
         <RoleAdmin>
           <HeaderComponent setTheme={setTheme} />
-          <div className="mx-48 min-h-screen bg-base-100 p-5 max-lg:p-0 ">
+          <div className="min-h-screen bg-base-100 p-5 max-lg:p-0 md:mx-48 ">
             <div className="min-h-screen overflow-x-auto px-5 pt-5">
               <div className="flex h-96 flex-row py-5 max-lg:grid max-lg:h-5/6">
                 <CreatePost />
@@ -104,154 +104,157 @@ const Newtools = ({ theme, setTheme }) => {
               <h1 className="mb-3 mt-5 text-neutral">
                 Registrerte blad i perioden: {data?.length}
               </h1>
-              <table className="table table-xs whitespace-nowrap border border-b-accent border-l-base-100 border-r-base-100 border-t-accent bg-base-100 ">
-                <thead>
-                  <tr className="border border-b-accent border-l-base-100 border-r-base-100 border-t-accent">
-                    <th className="text-sm text-neutral">Serienummer</th>
-                    <th className="text-sm text-neutral">Art.nummer</th>
-                    <th className="text-sm text-neutral">Produsent</th>
-                    <th className="text-sm text-neutral">Type</th>
-                    <th className="text-sm text-neutral">Dato</th>
+              <div className="overflow-scroll">
+                <table className="table table-xs whitespace-nowrap border border-b-accent border-l-base-100 border-r-base-100 border-t-accent bg-base-100 ">
+                  <thead>
+                    <tr className="border border-b-accent border-l-base-100 border-r-base-100 border-t-accent">
+                      <th className="text-sm text-neutral">Serienummer</th>
+                      <th className="text-sm text-neutral">Art.nummer</th>
+                      <th className="text-sm text-neutral">Produsent</th>
+                      <th className="text-sm text-neutral">Type</th>
+                      <th className="text-sm text-neutral">Dato</th>
 
-                    <th className="text-sm text-neutral">Opprettet av</th>
-                    <th className="text-sm text-neutral"></th>
-                    <th className="text-sm text-neutral"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data?.map((blade) => {
-                    return (
-                      <>
-                        <tr className="border border-base-100 bg-base-100 hover:bg-primary">
-                          <td className="py-5 font-bold text-neutral">
-                            {blade.IdNummer}
+                      <th className="text-sm text-neutral">Opprettet av</th>
+                      <th className="text-sm text-neutral"></th>
+                      <th className="text-sm text-neutral"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data?.map((blade) => {
+                      return (
+                        <>
+                          <tr className="border border-base-100 bg-base-100 hover:bg-primary">
+                            <td className="py-5 font-bold text-neutral">
+                              {blade.IdNummer}
 
-                            <span className="text-xs font-normal text-orange-500">
-                              {blade.note}
-                            </span>
-                          </td>
-                          <td>
-                            <div>
+                              <span className="text-xs font-normal text-orange-500">
+                                {blade.note}
+                              </span>
+                            </td>
+                            <td>
                               <div>
+                                <div>
+                                  <TypesArticle
+                                    blade={blade}
+                                    articleTypes={mtArticleTypes}
+                                  />
+                                </div>
                                 <TypesArticle
                                   blade={blade}
-                                  articleTypes={mtArticleTypes}
+                                  articleTypes={mvArticleTypes}
                                 />
+                                <div></div>
                               </div>
-                              <TypesArticle
-                                blade={blade}
-                                articleTypes={mvArticleTypes}
-                              />
-                              <div></div>
-                            </div>
-                          </td>
-                          <td className="py-5">
-                            <div className="flex items-center space-x-3">
-                              <div className="avatar"></div>
-                              <div>
-                                <div className="text-xs text-neutral">
-                                  {blade.produsent}
-                                </div>
-                              </div>
-                            </div>
-                          </td>
-                          <td className="py-5">
-                            <div className="flex items-center space-x-3">
-                              <div className="avatar"></div>
-                              <div>
-                                <div className="text-xs text-neutral">
-                                  {blade.type} {blade.side}
-                                </div>
-                              </div>
-                            </div>
-                          </td>
-
-                          <td className="py-5">
-                            <div className="flex items-center space-x-3">
-                              <div className="avatar"></div>
-                              <div>
-                                <div className="text-xs text-neutral">
-                                  {dateFormat(
-                                    blade.updatedAt,
-                                    "dd.mm.yyyy , HH:MM",
-                                  )}
-                                </div>
-                              </div>
-                            </div>
-                          </td>
-
-                          <td className="text-neutral">
-                            <td className="flex items-center">
-                              <div className="mr-2 h-5 w-5">
-                                <img
-                                  className="rounded-full"
-                                  src={blade.creatorImg}
-                                  alt=""
-                                />
-                              </div>
-                              {blade.creator}
                             </td>
-                          </td>
-
-                          <td>
-                            <button
-                              onClick={() => openEditHandler(blade.id)}
-                              className="btn btn-xs mr-5 bg-warning text-xs text-white"
-                            >
-                              Rediger
-                            </button>
-                            {openEditID === blade.id && (
-                              <div className="z-50 rounded-xl  shadow-xl">
-                                <EditInputComponent
-                                  editSawblade={editSawblade}
-                                  blade={blade}
-                                  openEditHandler={openEditHandler}
-                                  title={blade.IdNummer}
-                                />
-                              </div>
-                            )}
-                          </td>
-
-                          <td>
-                            <button
-                              className="btn btn-xs bg-red-500 text-xs text-white hover:bg-red-600"
-                              onClick={() => deleteHandler(blade.id)}
-                            >
-                              SLETT
-                            </button>
-                            {openDeleteID === blade.id && (
-                              <th className="">
-                                <div className="card absolute  right-28 z-50 flex bg-red-500 p-5 text-white">
-                                  <h1 className="mb-5 text-lg">
-                                    Slett {blade.IdNummer}?
-                                  </h1>
-                                  <p className="mb-3">
-                                    Slettingen er permanent og kan ikke angres.
-                                  </p>
-                                  <p className="mb-5">
-                                    Bladet vil ikke legge seg i statistikk for
-                                    slettede blad.
-                                  </p>
-
-                                  <div className="flex">
-                                    <button
-                                      onClick={() => setOpenDeleteID(null)}
-                                      className="btn btn-sm mr-5"
-                                    >
-                                      Avbryt
-                                    </button>
-                                    <Deleteblades blade={blade.id} />
+                            <td className="py-5">
+                              <div className="flex items-center space-x-3">
+                                <div className="avatar"></div>
+                                <div>
+                                  <div className="text-xs text-neutral">
+                                    {blade.produsent}
                                   </div>
                                 </div>
-                              </th>
-                            )}
-                          </td>
-                        </tr>
-                      </>
-                    );
-                  })}
-                </tbody>
-              </table>
+                              </div>
+                            </td>
+                            <td className="py-5">
+                              <div className="flex items-center space-x-3">
+                                <div className="avatar"></div>
+                                <div>
+                                  <div className="text-xs text-neutral">
+                                    {blade.type} {blade.side}
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+
+                            <td className="py-5">
+                              <div className="flex items-center space-x-3">
+                                <div className="avatar"></div>
+                                <div>
+                                  <div className="text-xs text-neutral">
+                                    {dateFormat(
+                                      blade.updatedAt,
+                                      "dd.mm.yyyy , HH:MM",
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+
+                            <td className="text-neutral">
+                              <td className="flex items-center">
+                                <div className="mr-2 h-5 w-5">
+                                  <img
+                                    className="rounded-full"
+                                    src={blade.creatorImg}
+                                    alt=""
+                                  />
+                                </div>
+                                {blade.creator}
+                              </td>
+                            </td>
+
+                            <td>
+                              <button
+                                onClick={() => openEditHandler(blade.id)}
+                                className="btn btn-xs mr-5 bg-warning text-xs text-white"
+                              >
+                                Rediger
+                              </button>
+                              {openEditID === blade.id && (
+                                <div className="z-50 rounded-xl  shadow-xl">
+                                  <EditInputComponent
+                                    editSawblade={editSawblade}
+                                    blade={blade}
+                                    openEditHandler={openEditHandler}
+                                    title={blade.IdNummer}
+                                  />
+                                </div>
+                              )}
+                            </td>
+
+                            <td>
+                              <button
+                                className="btn btn-xs bg-red-500 text-xs text-white hover:bg-red-600"
+                                onClick={() => deleteHandler(blade.id)}
+                              >
+                                SLETT
+                              </button>
+                              {openDeleteID === blade.id && (
+                                <th className="">
+                                  <div className="card absolute  right-28 z-50 flex bg-red-500 p-5 text-white">
+                                    <h1 className="mb-5 text-lg">
+                                      Slett {blade.IdNummer}?
+                                    </h1>
+                                    <p className="mb-3">
+                                      Slettingen er permanent og kan ikke
+                                      angres.
+                                    </p>
+                                    <p className="mb-5">
+                                      Bladet vil ikke legge seg i statistikk for
+                                      slettede blad.
+                                    </p>
+
+                                    <div className="flex">
+                                      <button
+                                        onClick={() => setOpenDeleteID(null)}
+                                        className="btn btn-sm mr-5"
+                                      >
+                                        Avbryt
+                                      </button>
+                                      <Deleteblades blade={blade.id} />
+                                    </div>
+                                  </div>
+                                </th>
+                              )}
+                            </td>
+                          </tr>
+                        </>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </RoleAdmin>

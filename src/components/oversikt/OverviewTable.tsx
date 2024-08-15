@@ -82,9 +82,9 @@ const OverviewTable = ({ count }) => {
 
   return (
     <div>
-      <table className="table table-xs mt-10">
+      <table className="table-xs mt-10 md:table">
         <thead>
-          <tr className="border border-b-accent border-l-base-100 border-r-base-100 border-t-accent">
+          <tr className="md:text-md border border-b-accent border-l-base-100 border-r-base-100 border-t-accent text-[.7rem]">
             <th>Type</th>
             <th>Blad i bruk: {nonDeletedSum}</th>
             <th>Slettet: {deletedSum}</th>
@@ -102,18 +102,24 @@ const OverviewTable = ({ count }) => {
         <tbody>
           {itemsArray.map((item, index) => (
             <tr key={index} className="border-none hover:bg-primary">
-              <td className="py-5">
+              <td className="md:text-md py-5 text-[.7rem]">
                 {item.type} {item.side}
               </td>
-              <td className="py-5">{item.nonDeletedCount}</td>
-              <td className="py-5">{item.deletedCount}</td>
-              <td className="py-5">{item.totalCount}</td>
+              <td className="md:text-md py-5 text-[.7rem]">
+                {item.nonDeletedCount}
+              </td>
+              <td className="md:text-md py-5 text-[.7rem]">
+                {item.deletedCount}
+              </td>
+              <td className="md:text-md py-5 text-[.7rem]">
+                {item.totalCount}
+              </td>
 
-              <td className="py-5">
+              <td className="md:text-md py-5 text-[.7rem]">
                 <RoleAdminMV>{item.customCount}</RoleAdminMV>
               </td>
               <td
-                className={`py-5 ${item.nonDeletedCount - item.customCount < 0 ? "text-red-500" : ""}`}
+                className={`md:text-md py-5 text-[.7rem] ${item.nonDeletedCount - item.customCount < 0 ? "text-red-500" : ""}`}
               >
                 <RoleAdminMV>
                   {item.nonDeletedCount - item.customCount}
@@ -126,7 +132,7 @@ const OverviewTable = ({ count }) => {
       {
         <RoleAdminMV>
           <div className="mt-5 bg-primary p-3">
-            <h1>Må bestilles:</h1>
+            <h1 className="md:text-md text-xs">Må bestilles:</h1>
             {negativeItems.map((item, index) => {
               const matchingArtItem = mvArticleTypes.find((artItem) => {
                 if (Array.isArray(artItem.side)) {
@@ -141,9 +147,11 @@ const OverviewTable = ({ count }) => {
               });
               return (
                 <div key={index} className="flex border-none hover:bg-primary">
-                  <p className="mr-1 text-xs">Type: {item.type}</p>
-                  <p className="mr-1 text-xs">{item.side}</p>
-                  <p className="mr-5 text-xs">
+                  <p className="mr-1 text-[.7rem] md:text-xs">
+                    Type: {item.type}
+                  </p>
+                  <p className="mr-1 text-[.7rem] md:text-xs">{item.side}</p>
+                  <p className="mr-5 text-[.7rem] md:text-xs">
                     Artnr:{" "}
                     {matchingArtItem
                       ? Array.isArray(matchingArtItem.art)
