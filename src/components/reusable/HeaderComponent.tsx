@@ -114,7 +114,7 @@ const HeaderComponent = () => {
           </svg>
         </button>
         <div
-          className={`z-10 mx-auto flex max-w-screen-xl flex-wrap items-center justify-between max-lg:absolute max-lg:h-96 max-lg:w-60 max-lg:bg-accent max-lg:p-5  ${toggleMenu ? "left-0 duration-200" : "-left-60 duration-200"}`}
+          className={`z-10 mx-auto flex max-w-screen-xl flex-wrap items-center justify-between max-lg:absolute max-lg:h-96 max-lg:w-60 max-lg:bg-primary max-lg:p-5 max-md:h-[600px]  ${toggleMenu ? "left-0 duration-200" : "-left-60 duration-200"}`}
         >
           <div className="flex">
             <Link href="/">
@@ -125,7 +125,7 @@ const HeaderComponent = () => {
                     className="mr-3 h-6 sm:h-9"
                     alt="Flowbite Logo"
                   /> */}
-                  <span className="w-64">
+                  <span className="w-42 md:w-64">
                     <img
                       className="w-full"
                       src="https://lh3.googleusercontent.com/pw/AP1GczPe-wnVTp-JJxvvMeWQ4mPFcMhkJNQUfiDUldcuxwaVqoeRqNYqd9DzOgteJQNiwayYOEZJJ_qQpgqTVuv07CQT4dN_aPG2uEWuUFMvNOTUwqrURLpgIGc9HoW9DmkkfE6toB3NFow2ts2LaKipxydZ=w1920-h192-s-no?authuser=0"
@@ -401,8 +401,8 @@ const HeaderComponent = () => {
               )}
             </ul>*/}
           </div>
-          <div className="flex items-center lg:order-2">
-            <div className="mr-10 rounded-xl border border-green-500 bg-blue-400 p-1">
+          <div className="flex flex-col md:flex-row md:items-center lg:order-2">
+            <div className="mb-5 mr-10 rounded-xl border border-green-500 bg-blue-400 p-1 md:mb-0">
               <p className=" text-end  text-sm font-bold text-green-200">
                 Sirkelsagblad
               </p>
@@ -416,7 +416,7 @@ const HeaderComponent = () => {
                 />
               </div>
             </Link>
-            <div className="ml-5">
+            <div className="ml-5 mt-5 md:mt-0">
               <p className="text-neutral">{sessionData?.user.name}</p>
               <div>
                 {sessionData?.user.role === "MV_ADMIN" && (

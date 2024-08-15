@@ -10,7 +10,7 @@ import dateFormat from "dateformat";
 const ActivityServiceEdit = ({ servicepostUpdate }) => {
   return (
     <div>
-      <h1 className="mb-3 mt-10 font-bold text-gray-500">
+      <h1 className="my-3 text-xs font-bold text-gray-500 md:text-lg">
         Serviceposter endret: ({servicepostUpdate?.length})
       </h1>
       {servicepostUpdate && servicepostUpdate.length > 0 ? (
@@ -24,7 +24,7 @@ const ActivityServiceEdit = ({ servicepostUpdate }) => {
                     src={blade.creatorImg2}
                     alt=""
                   />
-                  <li className="text-xs text-gray-500">
+                  <li className="mb-3 text-[0.55rem] text-gray-500 md:mb-0 md:text-xs">
                     {dateFormat(blade.updatedAt, "dd.mm.yyyy, HH:MM")} -{" "}
                     <span className="text-blue-500">
                       {" "}
