@@ -13,10 +13,10 @@ const SawbladeServiceTable = ({ sawbladesService, setIdValue }) => {
       <table className="table table-xs whitespace-nowrap ">
         <thead>
           <tr>
-            <th className="text-sm text-neutral">ID</th>
-            <th className="text-sm text-neutral">Type</th>
-            <th className="text-sm text-neutral">Til service</th>
-            <th className="text-sm text-neutral">Servicetype</th>
+            <th className="text-neutral md:text-sm">ID</th>
+            <th className="text-neutral md:text-sm">Type</th>
+            <th className="text-neutral md:text-sm">Til service</th>
+            <th className="text-neutral md:text-sm">Servicetype</th>
 
             {/* <th className="text-sm text-accent">Opprettet av</th> */}
           </tr>
@@ -32,18 +32,18 @@ const SawbladeServiceTable = ({ sawbladesService, setIdValue }) => {
                     onClick={() => setIdValue(blade.IdNummer)}
                     className="hover:cursor-pointer hover:bg-primary"
                   >
-                    <td className="font-bold text-neutral">
+                    <td className="text-[0.6rem] font-bold text-neutral md:text-xs">
                       {blade.IdNummer}{" "}
                       {blade.note && (
-                        <span className="text-xs font-normal text-gray-400">
+                        <span className="text-[0.6rem] font-normal  text-gray-400 md:text-xs ">
                           {blade.note}
                         </span>
                       )}
                     </td>
                     <td>
-                      <div className="flex items-center space-x-3">
+                      <div className="flex items-center space-x-3 ">
                         <div>
-                          <div className="text-xs text-neutral">
+                          <div className="text-[0.6rem] text-neutral md:text-xs">
                             {blade.type} {blade.side}
                           </div>
                         </div>
@@ -52,7 +52,7 @@ const SawbladeServiceTable = ({ sawbladesService, setIdValue }) => {
                     <td>
                       <div className="flex items-center space-x-3">
                         <div>
-                          <div className="text-xs text-neutral">
+                          <div className=" text-[0.6rem] text-neutral md:text-xs">
                             {dateFormat(blade.updatedAt, "dd.mm.yyyy, HH:MM")}
                           </div>
                         </div>
@@ -61,7 +61,7 @@ const SawbladeServiceTable = ({ sawbladesService, setIdValue }) => {
                     <td>
                       <div className="flex items-center space-x-3">
                         <div>
-                          <div className="text-xs text-neutral">
+                          <div className="text-[0.6rem] text-neutral md:text-xs">
                             {
                               blade.bandhistorikk &&
                               blade.bandhistorikk.length > 0

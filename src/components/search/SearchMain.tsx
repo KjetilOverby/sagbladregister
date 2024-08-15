@@ -435,7 +435,7 @@ const SearchMain = ({
 
       <div>
         {showService && (
-          <div className="p-2">
+          <div className="overflow-scroll p-2">
             <hr className="my-10 border-gray-400" />
             <h1 className="text-xl text-gray-500">
               Blad service ({sawbladesService?.length})

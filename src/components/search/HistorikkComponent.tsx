@@ -21,7 +21,7 @@ const HistorikkComponent = ({
   return (
     <div>
       <div className="mb-5  max-lg:relative">
-        <div className="mr-5 flex ">
+        <div className="mr-5 flex flex-col md:flex-row">
           <div className="mb-3 rounded-xl p-5 shadow-xl shadow-primary">
             <h1 className="text-2xl">
               ID: <span className="text-blue-500">{blade.IdNummer}</span>{" "}
