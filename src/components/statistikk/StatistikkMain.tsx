@@ -137,8 +137,8 @@ const StatistikkMain = ({
   console.log(serviceTypes);
 
   return (
-    <div className="pb-45 mx-20 2xl:mx-96">
-      <div className="mx-5 mt-5 max-lg:mx-0">
+    <div className="md:pb-45 mx-0 pb-0 md:mx-20 2xl:mx-96">
+      <div className=" mx-5 mt-5 max-lg:mx-0">
         <div>
           <div className="w-1/5 max-lg:w-full">
             <DatepickerComponent
@@ -150,8 +150,8 @@ const StatistikkMain = ({
 
         <div className="flex w-full flex-col">
           <div className="lg:flex">
-            <div className="m-5 mt-20 flex rounded-xl p-10 shadow-xl shadow-primary max-lg:grid lg:w-1/2">
-              <div className="w-full ">
+            <div className="mb-10 mt-20 flex rounded-xl max-lg:grid md:m-5 md:p-10 md:shadow-xl md:shadow-primary lg:w-1/2">
+              <div className=" w-full">
                 <h1 className="text-2xl text-neutral">Service</h1>
 
                 <p className="text-neutral">Antall: {historikkData?.length}</p>
@@ -186,7 +186,7 @@ const StatistikkMain = ({
               </div>
             </div>
 
-            <div className="m-5 mt-20 flex rounded-xl p-10 shadow-xl shadow-primary max-lg:grid lg:w-1/2">
+            <div className="mb-10 mt-20 flex rounded-xl max-lg:grid md:m-5 md:p-10 md:shadow-xl md:shadow-primary lg:w-1/2">
               <div className="w-full">
                 <h1 className="text-2xl text-neutral">
                   Antall tannslipp og reparasjoner av tenner
@@ -214,7 +214,7 @@ const StatistikkMain = ({
             </div>
           </div>
           <div className="lg:flex">
-            <div className="m-5 mt-20 flex rounded-xl p-10 shadow-xl shadow-primary max-lg:grid lg:w-1/2">
+            <div className="mb-10 mt-20 flex rounded-xl max-lg:grid md:m-5 md:p-10 md:shadow-xl md:shadow-primary lg:w-1/2">
               <div className="w-full">
                 <h1 className="text-2xl text-neutral">Reklamasjonsårsaker</h1>
 
@@ -237,7 +237,7 @@ const StatistikkMain = ({
               </div>
             </div>
 
-            <div className="m-5 mt-20 flex rounded-xl p-10 shadow-xl shadow-primary max-lg:grid lg:w-1/2">
+            <div className="mb-10 mt-20 flex rounded-xl max-lg:grid md:m-5 md:p-10 md:shadow-xl md:shadow-primary lg:w-1/2">
               <div className="w-full">
                 <h1 className="text-2xl text-neutral">Årsak til vrak</h1>
                 <p className="text-neutral">
@@ -264,7 +264,7 @@ const StatistikkMain = ({
             </div>
           </div>
           <div className="">
-            <div className="m-5 mt-20 flex rounded-xl p-10 shadow-xl shadow-primary max-lg:grid ">
+            <div className="mb-10 mt-20 flex rounded-xl max-lg:grid md:m-5 md:p-10 md:shadow-xl md:shadow-primary lg:w-1/2">
               <div className="w-full">
                 <h1 className="text-2xl text-neutral">Service handling</h1>
                 <p className="text-neutral">
@@ -290,7 +290,7 @@ const StatistikkMain = ({
                 </div> */}
               </div>
             </div>
-            <div className="m-5 mt-20 flex w-1/2 rounded-xl p-10 shadow-xl shadow-primary max-lg:grid">
+            <div className="flex rounded-xl shadow-xl shadow-primary max-lg:grid md:m-5 md:mt-20 md:w-1/2 md:p-10">
               <div>
                 <h1>Servicekoder</h1>
                 <RoleAdmin>

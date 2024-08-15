@@ -24,12 +24,15 @@ const HeaderComponent = () => {
   const router = useRouter();
   const { setTheme, theme, setDarkMode } = useContext(AppDataContext);
 
-  const [toggleMenu, setToggleMenu] = useState(true);
+  const [toggleMenu, setToggleMenu] = useState(false);
 
   const [actualPage, setActualPage] = useState({
     search: "",
     statistikk: "",
   });
+  const closeMenu = () => {
+    setToggleMenu(false);
+  };
 
   const setDarkModeHandler = () => {
     setDarkMode("dark");
@@ -114,10 +117,11 @@ const HeaderComponent = () => {
           </svg>
         </button>
         <div
+          onBlur={closeMenu}
           className={`z-10 mx-auto flex max-w-screen-xl flex-wrap items-center justify-between max-lg:absolute max-lg:h-96 max-lg:w-60 max-lg:bg-primary max-lg:p-5 max-md:h-[600px]  ${toggleMenu ? "left-0 duration-200" : "-left-60 duration-200"}`}
         >
           <div className="flex">
-            <Link href="/">
+            <Link href="/" onClick={closeMenu}>
               <div className="">
                 <p className="flex">
                   {/* <img
@@ -138,7 +142,7 @@ const HeaderComponent = () => {
           </div>
           <div className="flex">
             <ul className="mt-4 flex flex-col font-medium lg:mt-0 lg:flex-row lg:space-x-8">
-              <Link href="/search">
+              <Link onClick={closeMenu} href="/search">
                 <li>
                   <p
                     className={`lg:hover:text-primary-700  block border-b border-gray-100 py-2 pl-3 pr-4 text-sm text-neutral  hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:border-0 lg:p-0 lg:hover:bg-transparent lg:dark:hover:bg-transparent lg:dark:hover:text-white ${actualPage.search}`}
@@ -147,7 +151,7 @@ const HeaderComponent = () => {
                   </p>
                 </li>
               </Link>
-              <Link href="/statistikk">
+              <Link onClick={closeMenu} href="/statistikk">
                 <li>
                   <p
                     className={`lg:hover:text-primary-700  block border-b border-gray-100 py-2 pl-3 pr-4 text-sm text-neutral hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:border-0 lg:p-0 lg:hover:bg-transparent lg:dark:hover:bg-transparent lg:dark:hover:text-white ${actualPage.statistikk}`}
@@ -156,7 +160,7 @@ const HeaderComponent = () => {
                   </p>
                 </li>
               </Link>
-              <Link href="/oversikt">
+              <Link onClick={closeMenu} href="/oversikt">
                 <li>
                   <p
                     className={`lg:hover:text-primary-700  block border-b border-gray-100 py-2 pl-3 pr-4 text-sm text-neutral hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:border-0 lg:p-0 lg:hover:bg-transparent lg:dark:hover:bg-transparent lg:dark:hover:text-white ${actualPage.oversikt}`}
@@ -175,7 +179,7 @@ const HeaderComponent = () => {
                 </li>
               </Link> */}
               {sessionData?.user.role === "ADMIN" && (
-                <Link href="/newtools">
+                <Link onClick={closeMenu} href="/newtools">
                   <li>
                     <p
                       className={`bg-primary-700 lg:text-primary-700 block rounded py-2 pl-3 pr-4 text-sm text-neutral lg:bg-transparent lg:p-0 ${actualPage.opprett}`}
@@ -187,7 +191,7 @@ const HeaderComponent = () => {
                 </Link>
               )}
               <RoleAdminMV>
-                <Link href="/newtools">
+                <Link onClick={closeMenu} href="/newtools">
                   <li className="">
                     <p
                       className={`bg-primary-700 lg:text-primary-700 block rounded py-2 pl-3 pr-4 text-sm text-neutral lg:bg-transparent lg:p-0 ${actualPage.opprett}`}
@@ -199,7 +203,7 @@ const HeaderComponent = () => {
                 </Link>
               </RoleAdminMV>
               <RoleAdminMT>
-                <Link href="/newtools">
+                <Link onClick={closeMenu} href="/newtools">
                   <li>
                     <p
                       className={`bg-primary-700 lg:text-primary-700 block rounded py-2 pl-3 pr-4 text-sm text-neutral lg:bg-transparent lg:p-0 ${actualPage.opprett}`}
@@ -211,7 +215,7 @@ const HeaderComponent = () => {
                 </Link>
               </RoleAdminMT>
               <RoleSuperAdmin>
-                <Link href="/brukere">
+                <Link onClick={closeMenu} href="/brukere">
                   <li>
                     <p
                       className={`bg-primary-700 lg:text-primary-700 block rounded py-2 pl-3 pr-4 text-sm text-neutral lg:bg-transparent lg:p-0 ${actualPage.brukere}`}
@@ -223,7 +227,7 @@ const HeaderComponent = () => {
                 </Link>
               </RoleSuperAdmin>
               <RoleSuperAdmin>
-                <Link href="/filbehandling">
+                <Link onClick={closeMenu} href="/filbehandling">
                   <li>
                     <p
                       className={`bg-primary-700 lg:text-primary-700 block rounded py-2 pl-3 pr-4 text-sm text-neutral lg:bg-transparent lg:p-0 ${actualPage.filter}`}
@@ -235,7 +239,7 @@ const HeaderComponent = () => {
                 </Link>
               </RoleSuperAdmin>
               {sessionData?.user.email === "kailundquist@gmail.com" && (
-                <Link href="#">
+                <Link onClick={closeMenu} href="#">
                   <li>
                     <p className="lg:hover:text-primary-700 block border-b border-gray-100 py-2 pl-3 pr-4 text-sm text-neutral hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:border-0 lg:p-0 lg:hover:bg-transparent lg:dark:hover:bg-transparent lg:dark:hover:text-white">
                       <RoleChange />

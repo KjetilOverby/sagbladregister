@@ -5,11 +5,9 @@ import ServiceKodeTblMT from "../search/CustomersInit/mt/ServiceKodeTblMT";
 import ServiceKodeTblMV from "../search/CustomersInit/mv/ServiceKodeTblMV";
 
 const ServiceKodeTabell = ({ bladeInit }: { bladeInit: string[] }) => {
-  console.log(bladeInit);
-
   return (
     <div>
-      <table className="table table-xs ml-5 w-full bg-base-100 shadow-xl shadow-primary">
+      <table className="table table-xs ml-5 w-80 bg-base-100 shadow-xl shadow-primary md:w-full">
         <tbody>
           {bladeInit.includes("MT-") && <ServiceKodeTblMT />}
           {bladeInit.includes("MV-") && <ServiceKodeTblMV />}
