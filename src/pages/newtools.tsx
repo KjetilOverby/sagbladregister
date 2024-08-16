@@ -81,7 +81,7 @@ const Newtools = ({ theme, setTheme }) => {
       <>
         <RoleAdmin>
           <HeaderComponent setTheme={setTheme} />
-          <div className="min-h-screen bg-base-100 p-5 max-lg:p-0 md:mx-48 ">
+          <div className="min-h-screen bg-base-100 p-5 max-lg:p-0 xl:mx-48 ">
             <div className="min-h-screen overflow-x-auto px-5 pt-5">
               <div className="flex h-96 flex-row py-5 max-lg:grid max-lg:h-5/6">
                 <CreatePost />

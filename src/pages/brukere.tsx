@@ -72,7 +72,7 @@ const Brukere = ({ theme }) => {
           </div>
         )}
 
-        <div className="mt-20 flex flex-col lg:mx-96">
+        <div className="mx-5 mt-20 flex flex-col xl:mx-96">
           <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
               <div className="overflow-hidden border-b border-primary shadow sm:rounded-lg">

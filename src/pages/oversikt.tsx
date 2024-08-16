@@ -25,7 +25,7 @@ const Oversikt = ({ theme }: { theme: string }) => {
   return (
     <div className="min-h-screen" data-theme={theme}>
       <HeaderComponent />
-      <div className="max-2xl:w-screen max-xl:m-0 md:px-48">
+      <div className="px-5 max-2xl:w-screen max-xl:m-0 xl:px-48">
         {sessionData?.user.role === "ADMIN" && <OverviewTable count={count} />}
         {sessionData?.user.role === "MT_ADMIN" && (
           <OverviewTable count={countCustomer} />
