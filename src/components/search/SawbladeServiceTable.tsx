@@ -17,14 +17,13 @@ const SawbladeServiceTable = ({ sawbladesService, setIdValue }) => {
             <th className="text-neutral md:text-sm">Type</th>
             <th className="text-neutral md:text-sm">Til service</th>
             <th className="text-neutral md:text-sm">Servicetype</th>
+            <th className="text-neutral md:text-sm">Reklamasjon</th>
 
             {/* <th className="text-sm text-accent">Opprettet av</th> */}
           </tr>
         </thead>
         <tbody>
           {sawbladesService?.map((blade) => {
-            console.log(blade);
-
             return (
               <>
                 {blade && (
@@ -70,6 +69,27 @@ const SawbladeServiceTable = ({ sawbladesService, setIdValue }) => {
                                   ].service
                                 : "Default Value" // Replace with a suitable default value
                             }
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="flex items-center space-x-3">
+                        <div>
+                          <div className="text-[0.6rem] text-neutral md:text-xs">
+                            {blade?.bandhistorikk.filter(
+                              (item) => item.feilkode !== "Ingen reklamasjon",
+                            ).length > 0
+                              ? blade.bandhistorikk.filter(
+                                  (item) =>
+                                    item.feilkode !== "Ingen reklamasjon",
+                                )[
+                                  blade.bandhistorikk.filter(
+                                    (item) =>
+                                      item.feilkode !== "Ingen reklamasjon",
+                                  ).length - 1
+                                ].feilkode
+                              : ""}
                           </div>
                         </div>
                       </div>
