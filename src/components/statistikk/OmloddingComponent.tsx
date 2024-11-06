@@ -62,19 +62,15 @@ const OmloddingComponent: React.FC<OmloddingComponentProps> = ({
   // Gruppere bladene ved hjelp av funksjonen
   const groupedStats = groupByOmloddinger(retipStats);
 
-  // Skriv ut resultatene til konsollen for å se
-  console.log(groupedStats);
-
-  // Returner komponenten som viser resultatene
   return (
-    <div className="rounded-lg bg-base-100 p-6 shadow-md">
+    <div className="rounded-lg bg-base-100 p-6 ">
       <h2 className="mb-6 text-xl font-semibold text-neutral">
         Omloddingstatistikk per type
       </h2>
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
         {Object.keys(groupedStats).map((bladType) => (
           <div
-            className="mb-6 rounded-lg bg-primary p-5 shadow-xl"
+            className="mb-6 rounded-lg border border-primary bg-base-100 p-5"
             key={bladType}
           >
             <h3 className="mb-4 text-lg font-semibold text-neutral">
@@ -86,7 +82,7 @@ const OmloddingComponent: React.FC<OmloddingComponentProps> = ({
                   key={key}
                   className="flex justify-between rounded p-2 text-xs hover:bg-primary"
                 >
-                  <span className="text-gray-700">{key}</span>
+                  <span className="text-neutral">{key}</span>
                   <span className="text-xs font-semibold text-neutral">
                     {value}
                   </span>

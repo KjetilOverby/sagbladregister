@@ -149,7 +149,7 @@ const StatistikkMain = ({
 
         <div className="flex w-full flex-col">
           <div className="lg:flex">
-            <div className="mb-10 mt-20 flex rounded-xl max-lg:grid md:m-5 md:p-10 md:shadow-xl md:shadow-primary lg:w-1/2">
+            <div className="mb-10 mt-20 flex rounded-xl border border-primary max-lg:grid md:m-5 md:p-10 lg:w-1/2">
               <div className=" w-full">
                 <h1 className="text-2xl text-neutral">Service</h1>
 
@@ -185,7 +185,7 @@ const StatistikkMain = ({
               </div>
             </div>
 
-            <div className="mb-10 mt-20 flex rounded-xl max-lg:grid md:m-5 md:p-10 md:shadow-xl md:shadow-primary lg:w-1/2">
+            <div className="mb-10 mt-20 flex rounded-xl border border-primary max-lg:grid  md:m-5 md:p-10 lg:w-1/2">
               <div className="w-full">
                 <h1 className="text-2xl text-neutral">
                   Antall tannslipp og reparasjoner av tenner
@@ -212,8 +212,8 @@ const StatistikkMain = ({
               </div>
             </div>
           </div>
-          <div className="lg:flex">
-            <div className="mb-10 mt-20 flex rounded-xl max-lg:grid md:m-5 md:p-10 md:shadow-xl md:shadow-primary lg:w-1/2">
+          <div className=" lg:flex">
+            <div className="mb-10 mt-20 flex rounded-xl border border-primary max-lg:grid md:m-5 md:p-10 lg:w-1/2">
               <div className="w-full">
                 <h1 className="text-2xl text-neutral">Reklamasjonsårsaker</h1>
 
@@ -236,14 +236,14 @@ const StatistikkMain = ({
               </div>
             </div>
 
-            <div className="mb-10 mt-20 flex rounded-xl max-lg:grid md:m-5 md:p-10 md:shadow-xl md:shadow-primary lg:w-1/2">
+            <div className="mb-10 mt-20 flex rounded-xl border border-primary max-lg:grid  md:m-5 md:p-10 lg:w-1/2">
               <div className="w-full">
                 <h1 className="text-2xl text-neutral">Årsak til vrak</h1>
                 <p className="text-neutral">
                   Antall vrak: {deletedSawblades?.length}
                 </p>
                 <BarCharts deleteReasonCount={deleteReasonCount} />
-                <div className="rounded-xl  p-5 max-lg:ml-0 max-lg:w-full">
+                <div className="rounded-xl  p-5 max-lg:ml-0 max-lg:w-full ">
                   {
                     <>
                       <h1 className="text-neutral">Årsak til vrak:</h1>
@@ -263,7 +263,7 @@ const StatistikkMain = ({
             </div>
           </div>
           <div className="">
-            <div className="mb-10 mt-20 flex rounded-xl max-lg:grid md:m-5 md:p-10 md:shadow-xl md:shadow-primary lg:w-1/2">
+            <div className="mb-10 mt-20 flex rounded-xl border border-primary max-lg:grid md:m-5  md:p-10 lg:w-1/2">
               <div className="w-full">
                 <h1 className="text-2xl text-neutral">Service handling</h1>
                 <p className="text-neutral">
@@ -289,7 +289,7 @@ const StatistikkMain = ({
                 </div> */}
               </div>
             </div>
-            <div className="flex rounded-xl shadow-xl shadow-primary max-lg:grid md:m-5 md:mt-20 md:w-1/2 md:p-10">
+            <div className="flex rounded-xl border border-primary max-lg:grid md:m-5 md:mt-20 md:w-1/2 md:p-10">
               <div>
                 <h1>Servicekoder</h1>
                 <RoleAdmin>
