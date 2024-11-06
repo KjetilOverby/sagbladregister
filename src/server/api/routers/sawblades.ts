@@ -202,7 +202,7 @@ export const sawbladesRouter = createTRPCRouter({
               }]
             },
             orderBy: {
-              IdNummer: 'asc'
+              updatedAt: 'desc'
                             },
                             include: {
                               _count: {

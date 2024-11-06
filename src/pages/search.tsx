@@ -153,7 +153,7 @@ const Search = ({ theme }) => {
                 setCloseSearchComponent={setCloseSearchComponent}
                 dateValue={dateValue}
                 setDateValue={setDateValue}
-                sawbladesService={sawbladesService}
+                sawbladesService={sawbladeslActive}
                 setIdValue={setIdValue}
                 showFlaws={showFlaws}
               />
