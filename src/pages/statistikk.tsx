@@ -27,6 +27,12 @@ const statistikk = ({ theme }) => {
     }
   }, [sessionData]);
 
+  const { data: retipStats } = api.sawblades.getRetipStats.useQuery({});
+  const { data: retipStatsCustomer } =
+    api.sawblades.getRetipStatsCustomer.useQuery({
+      init: customerInit,
+    });
+
   const { data: statistikkData } =
     api.statistikkBladeData.getAllHistorikk.useQuery({
       date: `${dateValue.endDate}T23:59:59.000Z`,
@@ -118,6 +124,7 @@ const statistikk = ({ theme }) => {
           feilkodeReklamasjon={reklamasjonTyper}
           handlingService={handlingService}
           serviceTypes={serviceTypes}
+          retipStats={retipStats}
         />
       )}
       {sessionData?.user.role === "MV_ADMIN" && (
@@ -130,6 +137,7 @@ const statistikk = ({ theme }) => {
           feilkodeReklamasjon={reklamasjonTyperCustomer}
           handlingService={handlingServiceCustomer}
           serviceTypes={serviceTypesCustomer}
+          retipStats={retipStatsCustomer}
         />
       )}
       {sessionData?.user.role === "MT_ADMIN" && (
@@ -141,6 +149,7 @@ const statistikk = ({ theme }) => {
           toothCountCustomer={toothCountCustomer}
           feilkodeReklamasjon={reklamasjonTyperCustomer}
           handlingService={handlingServiceCustomer}
+          retipStats={retipStatsCustomer}
         />
       )}
     </div>

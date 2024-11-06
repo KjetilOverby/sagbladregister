@@ -10,7 +10,8 @@ import {
 export const statistikkBladeDataRouter = createTRPCRouter({
  
 
-   
+ 
+
     getAllHistorikk: protectedProcedure
     .input(z.object({date: z.string(), date2: z.string()}))
         .query(({ ctx, input }) => {

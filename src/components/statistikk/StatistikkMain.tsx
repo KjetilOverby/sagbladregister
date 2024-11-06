@@ -18,6 +18,7 @@ import RoleAdminMT from "../roles/RoleAdminMT";
 import RoleAdmin from "../roles/RoleAdmin";
 import ServiceKodeTblAll from "../search/CustomersInit/allCustomers/ServiceKodeTblAll";
 import BarchartServiceTypes from "./BarchartServiceTypes";
+import OmloddingComponent from "./OmloddingComponent";
 
 interface statistikkProps {
   historikkData: {
@@ -35,6 +36,7 @@ const StatistikkMain = ({
   feilkodeReklamasjon,
   handlingService,
   serviceTypes,
+  retipStats,
 }: statistikkProps) => {
   const deleteReasons: string[] = [
     "Normal slitasje",
@@ -132,9 +134,6 @@ const StatistikkMain = ({
 
     setTableData(updatedServiceTableData);
   }, [historikkData]);
-
-  console.log(serviceReasonCount);
-  console.log(serviceTypes);
 
   return (
     <div className="md:pb-45 mx-0 pb-0 md:mx-20 2xl:mx-96">
@@ -305,6 +304,7 @@ const StatistikkMain = ({
               </div>
             </div>
           </div>
+          <OmloddingComponent retipStats={retipStats} />
         </div>
       </div>
     </div>

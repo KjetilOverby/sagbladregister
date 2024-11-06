@@ -8,6 +8,63 @@ import {
 } from "~/server/api/trpc";
 export const sawbladesRouter = createTRPCRouter({
 
+  getRetipStats: protectedProcedure
+  .query(async ({ ctx }) => {
+    try {
+      // Hent alle blader som ikke er slettet (deleted: false), og inkluder bladType og service fra bandhistorikk
+      const activeBlader = await ctx.db.sawblades.findMany({
+        where: {
+          deleted: false,  // Filtrering for å hente blader som ikke er slettet
+        },
+        include: {
+          bandhistorikk: {
+            select: {
+              service: true,  // Hent kun service fra bandhistorikk
+            },
+          },
+        },
+      });
+
+     
+
+      return activeBlader;
+    } catch (error) {
+      console.error("Feil ved henting av aktive blader:", error);
+      throw new Error("Kunne ikke hente aktive blader");
+    }
+  }),
+
+  getRetipStatsCustomer: protectedProcedure
+  .input(z.object({ init: z.string() }))
+  .query(async ({ input, ctx }) => {
+    try {
+      // Hent alle blader som ikke er slettet (deleted: false), og inkluder bladType og service fra bandhistorikk
+      const activeBlader = await ctx.db.sawblades.findMany({
+        where: {
+          deleted: false, 
+          IdNummer: {startsWith: input.init} 
+        },
+        include: {
+          bandhistorikk: {
+            select: {
+              service: true,  // Hent kun service fra bandhistorikk
+            },
+          },
+        },
+      });
+
+     
+
+      return activeBlader;
+    } catch (error) {
+      console.error("Feil ved henting av aktive blader:", error);
+      throw new Error("Kunne ikke hente aktive blader");
+    }
+  }),
+
+
+
+
 
   columns: protectedProcedure
   .input(z.object({ type: z.boolean(), id: z.boolean(), createdAt: z.boolean(), updatedAt: z.boolean(), kunde: z.boolean(), IdNummer: z.boolean(), creator: z.boolean(), side: z.boolean(), note: z.boolean(), active: z.boolean(), deleted: z.boolean(), deleteReason: z.boolean(), produsent: z.boolean(), deleter: z.boolean(), deleterImg: z.boolean(), creatorImg: z.boolean(), createdById: z.boolean(), userId: z.boolean(), userId: z.boolean(), date: z.string(), date2: z.string(), artikkel: z.boolean() }))
