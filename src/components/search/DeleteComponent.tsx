@@ -25,6 +25,7 @@ export const DeleteComponent = ({
       void ctx.sawblades.getCustomer.invalidate();
       void ctx.sawblades.getAllDeleted.invalidate();
       void ctx.sawblades.getCustomerAllDeleted.invalidate();
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       void ctx.sawblades.countAllBlades.invalidate();
       setWasteReasonInput("");
     },

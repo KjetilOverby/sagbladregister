@@ -62,6 +62,45 @@ const OmloddingComponent: React.FC<OmloddingComponentProps> = ({
   // Gruppere bladene ved hjelp av funksjonen
   const groupedStats = groupByOmloddinger(retipStats);
 
+  const groupByOmloddingerAll = (blader: Blad[]) => {
+    const groupedStats: Record<string, number> = {
+      "0 omlodding": 0,
+      "1 omlodding": 0,
+      "2 omloddinger": 0,
+      "3 omloddinger": 0,
+      "4 omloddinger": 0,
+      "5 eller fler omloddinger": 0,
+    };
+
+    // Gå gjennom alle bladene
+    blader?.forEach((blad) => {
+      // Tell antall omloddinger for hvert blad
+      const omloddingCount = blad.bandhistorikk.filter(
+        (entry) => entry.service === "Omlodding",
+      ).length;
+
+      // Oppdater tellingen for antall omloddinger
+      if (omloddingCount === 0) {
+        groupedStats["0 omlodding"] += 1;
+      } else if (omloddingCount === 1) {
+        groupedStats["1 omlodding"] += 1;
+      } else if (omloddingCount === 2) {
+        groupedStats["2 omloddinger"] += 1;
+      } else if (omloddingCount === 3) {
+        groupedStats["3 omloddinger"] += 1;
+      } else if (omloddingCount === 4) {
+        groupedStats["4 omloddinger"] += 1;
+      } else {
+        groupedStats["5 eller fler omloddinger"] += 1;
+      }
+    });
+
+    return groupedStats;
+  };
+
+  // Gruppere bladene ved hjelp av funksjonen
+  const groupedStatsAll = groupByOmloddingerAll(retipStats);
+
   return (
     <div className="rounded-lg bg-base-100 p-6 ">
       <h2 className="mb-6 text-xl font-semibold text-neutral">
@@ -91,6 +130,24 @@ const OmloddingComponent: React.FC<OmloddingComponentProps> = ({
             </ul>
           </div>
         ))}
+      </div>
+      <h2 className="mb-6 mt-8 text-xl font-semibold text-neutral">
+        Samlet omloddingstatistikk
+      </h2>
+      <div className="rounded-lg border border-primary bg-base-100 p-5">
+        <ul className="space-y-2">
+          {Object.entries(groupedStatsAll).map(([key, value]) => (
+            <li
+              key={key}
+              className="flex justify-between rounded p-2 text-xs hover:bg-primary"
+            >
+              <span className="text-neutral">{key}</span>
+              <span className="text-xs font-semibold text-neutral">
+                {value}
+              </span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

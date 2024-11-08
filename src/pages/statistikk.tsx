@@ -28,6 +28,7 @@ const statistikk = ({ theme }) => {
   }, [sessionData]);
 
   const { data: retipStats } = api.sawblades.getRetipStats.useQuery({});
+
   const { data: retipStatsCustomer } =
     api.sawblades.getRetipStatsCustomer.useQuery({
       init: customerInit,

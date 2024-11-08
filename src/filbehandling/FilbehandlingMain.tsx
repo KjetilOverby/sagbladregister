@@ -19,6 +19,8 @@ const Filter = ({ theme }: Props) => {
   const [sawbladesData, setSawbladesData] = useState();
   const [historikkData, setHistorikkData] = useState();
 
+  const [sortByType, setSortByType] = useState("createdAt");
+
   const [sawbladeColumns, setSawbladeColumns] = useState({
     id: false,
     createdAt: false,
@@ -89,6 +91,10 @@ const Filter = ({ theme }: Props) => {
     ...sawbladeColumns,
     date: `${dateValue.endDate}T23:59:59.000Z`,
     date2: `${dateValue.startDate}T00:00:00.000Z`,
+    orderBy: {
+      field: sortByType, // specify any field here
+      direction: "desc", // or 'asc'
+    },
   });
   const { data: historikk } = api.bandhistorikk?.columns.useQuery({
     ...historikkColumns,
@@ -196,7 +202,7 @@ const Filter = ({ theme }: Props) => {
   return (
     <div data-theme={theme} className="min-h-screen">
       <HeaderComponent />
-      <div className="mx-96">
+      <div className="mx-10">
         <h1 className="my-10 text-xl">Avanserte søk og filtrering av data</h1>
         <p>Velg tidsperiode</p>
         <div className="shadow-xl">
@@ -227,7 +233,7 @@ const Filter = ({ theme }: Props) => {
               onClick={openBandsagHandler}
               className="btn btn-sm bg-blue-500 text-white hover:bg-blue-600"
             >
-              Båndsagblad
+              Sagblad
             </button>
             <button
               onClick={openHistorikkHandler}
@@ -238,7 +244,7 @@ const Filter = ({ theme }: Props) => {
           </div>
         )}
       </div>
-      <div className="mx-96">
+      <div className="mx-10">
         {openBandsag && (
           <div className="mt-10">
             <div className="flex">
@@ -280,7 +286,13 @@ const Filter = ({ theme }: Props) => {
               </div>
             )}
             <div className="overflow-scroll">
-              {fetchData && <FilterTable data={sawblades && sawblades} />}
+              {fetchData && (
+                <FilterTable
+                  data={sawblades && sawblades}
+                  setSortByType={setSortByType}
+                  sortByType={sortByType}
+                />
+              )}
             </div>
           </div>
         )}

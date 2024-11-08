@@ -4,16 +4,28 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import React from "react";
 
-const FilterTable = ({ data }) => {
+const FilterTable = ({ data, setSortByType, sortByType }) => {
+  const handleColumnClick = (columnName) => {
+    setSortByType(columnName);
+  };
+
   return (
     <div>
-      <table className="table table-xs ">
+      <p>Selected Column: {setSortByType}</p>
+      <table className="table table-xs">
         <thead>
-          <tr className="bg-blue-400 text-white ">
+          <tr className="bg-blue-400 text-white">
             {data?.length > 0 &&
-              Object.keys(data[0]).map((key) => <th key={key}>{key}</th>)}
+              Object.keys(data[0]).map((key) => (
+                <th
+                  key={key}
+                  onClick={() => handleColumnClick(key)}
+                  className="hover:cursor-pointer"
+                >
+                  {key}
+                </th>
+              ))}
           </tr>
         </thead>
         <tbody>

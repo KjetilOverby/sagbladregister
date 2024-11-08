@@ -8,6 +8,11 @@ import {
 } from "~/server/api/trpc";
 export const sawbladesRouter = createTRPCRouter({
 
+
+
+
+
+
   getRetipStats: protectedProcedure
   .query(async ({ ctx }) => {
     try {
@@ -66,10 +71,44 @@ export const sawbladesRouter = createTRPCRouter({
 
 
 
-  columns: protectedProcedure
-  .input(z.object({ type: z.boolean(), id: z.boolean(), createdAt: z.boolean(), updatedAt: z.boolean(), kunde: z.boolean(), IdNummer: z.boolean(), creator: z.boolean(), side: z.boolean(), note: z.boolean(), active: z.boolean(), deleted: z.boolean(), deleteReason: z.boolean(), produsent: z.boolean(), deleter: z.boolean(), deleterImg: z.boolean(), creatorImg: z.boolean(), createdById: z.boolean(), userId: z.boolean(), userId: z.boolean(), date: z.string(), date2: z.string(), artikkel: z.boolean() }))
+ 
+
+columns: protectedProcedure
+  .input(z.object({
+    type: z.boolean(),
+    id: z.boolean(),
+    createdAt: z.boolean(),
+    updatedAt: z.boolean(),
+    kunde: z.boolean(),
+    IdNummer: z.boolean(),
+    creator: z.boolean(),
+    side: z.boolean(),
+    note: z.boolean(),
+    active: z.boolean(),
+    deleted: z.boolean(),
+    deleteReason: z.boolean(),
+    produsent: z.boolean(),
+    deleter: z.boolean(),
+    deleterImg: z.boolean(),
+    creatorImg: z.boolean(),
+    createdById: z.boolean(),
+    userId: z.boolean(),
+    date: z.string(),
+    date2: z.string(),
+    artikkel: z.boolean(),
+    orderBy: z.object({
+      field: z.string(),
+      direction: z.enum(['asc', 'desc']),
+    }).optional(),
+  }))
   .query(async ({ ctx, input }) => {
-    console.log(input);
+   
+
+    // Define default orderBy if not provided
+    const orderBy = input.orderBy
+      ? { [input.orderBy.field]: input.orderBy.direction }
+      : { deleteReason: 'asc' };
+
     const total = await ctx.db.sawblades.findMany({
       where: {
         createdAt: {
@@ -98,20 +137,13 @@ export const sawbladesRouter = createTRPCRouter({
         deleterImg: input.deleterImg,
         artikkel: input.artikkel,
       },
+      orderBy,
     });
+    
     return total;
   }),
 
-  countAllBlades: protectedProcedure
-  .query(async ({ ctx }) => {
-    const total = await ctx.db.sawblades.count({});
-    const deleted = await ctx.db.sawblades.count({ where: { deleted: true } });
-    const notDeleted = await ctx.db.sawblades.count({ where: { deleted: false } });
 
-    return { total, deleted, notDeleted };
-  }),
-
-  
   countSawblades: protectedProcedure.query(async ({ ctx }) => {
     const count = await ctx.db.sawblades.groupBy({
  by : ['deleted', 'side', 'type'],
@@ -120,7 +152,6 @@ export const sawbladesRouter = createTRPCRouter({
   
     return count;
   }),
-
 
 
 
