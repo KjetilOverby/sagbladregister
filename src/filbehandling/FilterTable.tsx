@@ -4,8 +4,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
+import dateFormat from "dateformat";
 
-const FilterTable = ({ data, setSortByType, sortByType }) => {
+const FilterTable = ({ data, setSortByType }) => {
   const handleColumnClick = (columnName) => {
     setSortByType(columnName);
   };
@@ -34,7 +35,9 @@ const FilterTable = ({ data, setSortByType, sortByType }) => {
               {Object.entries(item).map(([key, value]) => (
                 <td key={key} className="whitespace-nowrap">
                   {value instanceof Date
-                    ? value.toISOString()
+                    ? dateFormat(value, "dd.mm.yyyy") !== "01.01.1970"
+                      ? dateFormat(value, "dd.mm.yyyy")
+                      : ""
                     : typeof value === "boolean"
                       ? value.toString()
                       : value}

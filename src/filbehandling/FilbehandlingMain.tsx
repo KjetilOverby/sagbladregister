@@ -20,24 +20,25 @@ const Filter = ({ theme }: Props) => {
   const [historikkData, setHistorikkData] = useState();
 
   const [sortByType, setSortByType] = useState("createdAt");
+  const [sortOrder, setSortOrder] = useState("desc");
 
   const [sawbladeColumns, setSawbladeColumns] = useState({
     id: false,
-    createdAt: false,
-    updatedAt: false,
+    createdAt: true,
+    updatedAt: true,
     kunde: false,
-    type: false,
+    type: true,
     IdNummer: true,
     createdById: false,
     userId: false,
     creator: false,
     creatorImg: false,
-    deleted: false,
-    note: false,
-    side: false,
+    deleted: true,
+    note: true,
+    side: true,
     active: false,
-    deleteReason: false,
-    produsent: false,
+    deleteReason: true,
+    produsent: true,
     deleter: false,
     deleterImg: false,
     artikkel: false,
@@ -45,30 +46,30 @@ const Filter = ({ theme }: Props) => {
   const [historikkColumns, setHistorikkColumns] = useState({
     id: false,
     historikkId: false,
-    createdAt: false,
-    updatedAt: false,
+    createdAt: true,
+    updatedAt: true,
     userId: false,
-    service: false,
+    service: true,
     datoInn: false,
     klInn: false,
     datoUt: false,
     klUt: false,
     ampere: false,
-    feilkode: false,
+    feilkode: true,
     sideklaring: false,
-    anmSag: false,
+    anmSag: true,
     temperatur: false,
-    creator: false,
+    creator: true,
     userId: false,
     sagtid: false,
     sgSag: false,
-    anmKS: false,
-    handling: false,
+    anmKS: true,
+    handling: true,
     datoSrv: false,
     sgKS: false,
     creatorImg: false,
-    side: false,
-    bladType: false,
+    side: true,
+    bladType: true,
     activePost: false,
     bladeRelationId: true,
     alt: false,
@@ -77,8 +78,8 @@ const Filter = ({ theme }: Props) => {
     creator3: false,
     creatorImg3: false,
     stokkAnt: false,
-    antRep: false,
-    antTannslipp: false,
+    antRep: true,
+    antTannslipp: true,
   });
 
   const [dateValue, setDateValue] = useState({
@@ -92,14 +93,18 @@ const Filter = ({ theme }: Props) => {
     date: `${dateValue.endDate}T23:59:59.000Z`,
     date2: `${dateValue.startDate}T00:00:00.000Z`,
     orderBy: {
-      field: sortByType, // specify any field here
-      direction: "desc", // or 'asc'
+      field: sortByType,
+      direction: sortOrder,
     },
   });
   const { data: historikk } = api.bandhistorikk?.columns.useQuery({
     ...historikkColumns,
     date: `${dateValue.endDate}T23:59:59.000Z`,
     date2: `${dateValue.startDate}T00:00:00.000Z`,
+    orderBy: {
+      field: sortByType,
+      direction: sortOrder,
+    },
   });
 
   const [openToggle, setOpenToggle] = useState(true);
@@ -247,6 +252,41 @@ const Filter = ({ theme }: Props) => {
       <div className="mx-10">
         {openBandsag && (
           <div className="mt-10">
+            <div className="mb-10 flex w-40">
+              <div className="mr-10">
+                <label>Sorter etter:</label>
+                <select
+                  value={sortByType}
+                  onChange={(e) => setSortByType(e.target.value)}
+                >
+                  <option value="#">Velg sortering</option>
+                  <option value="createdAt">Opprettet</option>
+                  <option value="updatedAt">Oppdatert</option>
+                  <option value="kunde">Kunde</option>
+                  <option value="type">Bladtype</option>
+                  <option value="IdNummer">ID nummer</option>
+                  <option value="creator">Creator</option>
+                  <option value="deleted">Slettet</option>
+                  <option value="note">Notat</option>
+                  <option value="side">Side</option>
+                  <option value="deleteReason">Sletteårsak</option>
+                  <option value="produsent">Produsent</option>
+                  <option value="deleter">Slettet av</option>
+                </select>
+              </div>
+              <div className=" flex w-40 flex-col">
+                <label>Rekkefølge:</label>
+                <select
+                  value={sortOrder}
+                  onChange={(e) => setSortOrder(e.target.value)}
+                >
+                  <option value="#">Velg rekkefølge</option>
+                  <option value="asc">Stigende</option>
+                  <option value="desc">Synkende</option>
+                </select>
+              </div>
+            </div>
+
             <div className="flex">
               {!openList && (
                 <button
@@ -297,9 +337,44 @@ const Filter = ({ theme }: Props) => {
           </div>
         )}
       </div>
-      <div className="mx-96">
+      <div className="mx-10">
         {openHistorikk && (
           <div className="mt-10 ">
+            <div className="mb-10 flex w-40">
+              <div className="mr-10">
+                <label>Sorter etter:</label>
+                <select
+                  value={sortByType}
+                  onChange={(e) => setSortByType(e.target.value)}
+                >
+                  <option value="#">Velg sortering</option>
+                  <option value="createdAt">Opprettet</option>
+                  <option value="updatedAt">Oppdatert</option>
+                  <option value="service">Service</option>
+                  <option value="feilkode">Servicetype</option>
+                  <option value="anmSag">Anm sag</option>
+                  <option value="creator">Creator</option>
+                  <option value="anmKS">Anm KS</option>
+                  <option value="handling">Handling</option>
+                  <option value="side">Side</option>
+                  <option value="bladType">Blad type</option>
+                  <option value="bladeRelationId">ID nummer</option>
+                  <option value="antRep">Antall rep</option>
+                  <option value="antTannslipp">Antall tannslipp</option>
+                </select>
+              </div>
+              <div className=" flex w-40 flex-col">
+                <label>Rekkefølge:</label>
+                <select
+                  value={sortOrder}
+                  onChange={(e) => setSortOrder(e.target.value)}
+                >
+                  <option value="#">Velg rekkefølge</option>
+                  <option value="asc">Stigende</option>
+                  <option value="desc">Synkende</option>
+                </select>
+              </div>
+            </div>
             <div className="flex">
               {!openList && (
                 <button
@@ -341,7 +416,12 @@ const Filter = ({ theme }: Props) => {
               </div>
             )}
             <div className="overflow-scroll">
-              {fetchData && <FilterTable data={historikk && historikk} />}
+              {fetchData && (
+                <FilterTable
+                  setSortByType={setSortByType}
+                  data={historikk && historikk}
+                />
+              )}
             </div>
           </div>
         )}

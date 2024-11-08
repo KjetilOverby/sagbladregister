@@ -12,8 +12,16 @@ export const bandhistorikkRouter = createTRPCRouter({
     
 
     columns: protectedProcedure
-    .input(z.object({ id: z.boolean(), historikkId: z.boolean(), createdAt: z.boolean(), updatedAt: z.boolean(), userId: z.boolean(),service: z.boolean(), datoInn: z.boolean(), klInn: z.boolean(), datoUt: z.boolean(), klUt: z.boolean(), sagtid: z.boolean(), feilkode: z.boolean(), temperatur: z.boolean(), sideklaring: z.boolean(), ampere: z.boolean(), stokkAnt: z.boolean(), anmSag: z.boolean(), creator: z.boolean(), creatorImg: z.boolean(), anmKS: z.boolean(), sgSag: z.boolean(), sgKS: z.boolean(), handling: z.boolean(), side: z.boolean(), bladType: z.boolean(), datoSrv: z.boolean(), activePost: z.boolean(), bladeRelationId: z.boolean(), alt: z.boolean(), creator2: z.boolean(), creatorImg2: z.boolean(), creator3: z.boolean(), creatorImg3: z.boolean(), date: z.string(), date2: z.string(), antRep: z.boolean(), antTannslipp: z.boolean()}))
+    .input(z.object({ id: z.boolean(), historikkId: z.boolean(), createdAt: z.boolean(), updatedAt: z.boolean(), userId: z.boolean(),service: z.boolean(), datoInn: z.boolean(), klInn: z.boolean(), datoUt: z.boolean(), klUt: z.boolean(), sagtid: z.boolean(), feilkode: z.boolean(), temperatur: z.boolean(), sideklaring: z.boolean(), ampere: z.boolean(), stokkAnt: z.boolean(), anmSag: z.boolean(), creator: z.boolean(), creatorImg: z.boolean(), anmKS: z.boolean(), sgSag: z.boolean(), sgKS: z.boolean(), handling: z.boolean(), side: z.boolean(), bladType: z.boolean(), datoSrv: z.boolean(), activePost: z.boolean(), bladeRelationId: z.boolean(), alt: z.boolean(), creator2: z.boolean(), creatorImg2: z.boolean(), creator3: z.boolean(), creatorImg3: z.boolean(), date: z.string(), date2: z.string(), antRep: z.boolean(), antTannslipp: z.boolean(),
+      orderBy: z.object({
+        field: z.string(),
+        direction: z.enum(['asc', 'desc']),
+      }).optional(),
+    }))
     .query(async ({ ctx, input }) => {
+      const orderBy = input.orderBy
+      ? { [input.orderBy.field]: input.orderBy.direction }
+      : { createdAt: 'asc' };
       const total = await ctx.db.bandhistorikk.findMany({
         where: {
           createdAt: {
@@ -60,6 +68,7 @@ export const bandhistorikkRouter = createTRPCRouter({
             antTannslipp: input.antTannslipp,
           
         },
+        orderBy,
       });
   
   
