@@ -12,12 +12,12 @@ const FilterTable = ({ data, setSortByType }) => {
   };
 
   return (
-    <div>
+    <div className="mb-10">
       <p>Selected Column: {setSortByType}</p>
       <table className="table table-xs">
         <thead>
           <tr className="bg-blue-400 text-white">
-            {data?.length > 0 &&
+            {data?.length > 0 ? (
               Object.keys(data[0]).map((key) => (
                 <th
                   key={key}
@@ -26,7 +26,12 @@ const FilterTable = ({ data, setSortByType }) => {
                 >
                   {key}
                 </th>
-              ))}
+              ))
+            ) : (
+              <h4 className="p-5">
+                Ingen data. Sjekk om du har valgt riktig tidsperiode.
+              </h4>
+            )}
           </tr>
         </thead>
         <tbody>

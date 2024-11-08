@@ -19,11 +19,11 @@ const Checkbox = ({ sawbladeColumns, setSawbladeColumns, title }) => {
   };
 
   return (
-    <div className="flex w-96 flex-col p-5 shadow-2xl">
+    <div className="mb-10 flex w-96 flex-col rounded-xl border border-primary p-5">
       <h1>{title}</h1>
-      <p className="my-5">Velg hvilke data som skal vises</p>
+      <p className="my-5">Velg hvilke kolonner som skal vises</p>
       <button
-        className="btn mb-5 bg-green-500 text-white hover:bg-green-600"
+        className="btn btn-sm mb-5 bg-warning text-white hover:bg-orange-300"
         onClick={toggleAll}
       >
         {allChecked ? "Uncheck All" : "Check All"}
@@ -32,7 +32,7 @@ const Checkbox = ({ sawbladeColumns, setSawbladeColumns, title }) => {
         <div key={index}>
           <input
             type="checkbox"
-            className="toggle toggle-success mr-10 "
+            className="toggle toggle-warning mr-10 "
             checked={value}
             onChange={() => {
               setSawbladeColumns((prevState) => ({

@@ -1,5 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
+import { init } from "next/dist/compiled/webpack/webpack";
 import { z } from "zod";
 
 import {
@@ -115,6 +116,79 @@ columns: protectedProcedure
           lte: new Date(input.date),
           gte: new Date(input.date2),
         }
+      },
+      select: {
+        id: input.id,
+        createdAt: input.createdAt,
+        updatedAt: input.updatedAt,
+        kunde: input.kunde,
+        type: input.type,
+        IdNummer: input.IdNummer,
+        createdById: input.createdById,
+        userId: input.userId,
+        creator: input.creator,
+        creatorImg: input.creatorImg,
+        deleted: input.deleted,
+        note: input.note,
+        side: input.side,
+        active: input.active,
+        deleteReason: input.deleteReason,
+        produsent: input.produsent,
+        deleter: input.deleter,
+        deleterImg: input.deleterImg,
+        artikkel: input.artikkel,
+      },
+      orderBy,
+    });
+    
+    return total;
+  }),
+
+columnsCustomer: protectedProcedure
+  .input(z.object({
+    type: z.boolean(),
+    id: z.boolean(),
+    createdAt: z.boolean(),
+    updatedAt: z.boolean(),
+    kunde: z.boolean(),
+    IdNummer: z.boolean(),
+    creator: z.boolean(),
+    side: z.boolean(),
+    note: z.boolean(),
+    active: z.boolean(),
+    deleted: z.boolean(),
+    deleteReason: z.boolean(),
+    produsent: z.boolean(),
+    deleter: z.boolean(),
+    deleterImg: z.boolean(),
+    creatorImg: z.boolean(),
+    createdById: z.boolean(),
+    userId: z.boolean(),
+    date: z.string(),
+    date2: z.string(),
+    artikkel: z.boolean(),
+    init: z.string(),
+    orderBy: z.object({
+      field: z.string(),
+      direction: z.enum(['asc', 'desc']),
+    }).optional(),
+  }))
+  .query(async ({ ctx, input }) => {
+   
+
+    // Define default orderBy if not provided
+    const orderBy = input.orderBy
+      ? { [input.orderBy.field]: input.orderBy.direction }
+      : { deleteReason: 'asc' };
+
+    const total = await ctx.db.sawblades.findMany({
+      where: {
+        createdAt: {
+          lte: new Date(input.date),
+          gte: new Date(input.date2),
+         
+        }, 
+         IdNummer: {startsWith: input.init}
       },
       select: {
         id: input.id,

@@ -16,6 +16,7 @@ import dateFormat from "dateformat";
 import RoleAdminMT from "~/components/roles/RoleAdminMT";
 import { FaCircleInfo } from "react-icons/fa6";
 import InfoComponent from "~/components/reusable/InfoComponent";
+import Link from "next/link";
 
 const Search = ({ theme }) => {
   const [closeSearchComponent, setCloseSearchComponent] = useState(false);
@@ -95,15 +96,22 @@ const Search = ({ theme }) => {
             <div className="my-5 rounded-xl bg-primary pl-5">
               {!closeSearchComponent ? (
                 <div className="flex flex-col py-5">
-                  <div className="flex">
-                    <label className="mr-5">Søk</label>
-                    <input
-                      value={idValue}
-                      onChange={(e) => setIdValue(e.currentTarget.value)}
-                      type="text"
-                      placeholder="Skriv id nummer"
-                      className="input input-bordered input-xs  w-28 max-w-xs bg-base-100"
-                    />
+                  <div className="flex flex-col">
+                    <div>
+                      <label className="mr-5">Søk</label>
+                      <input
+                        value={idValue}
+                        onChange={(e) => setIdValue(e.currentTarget.value)}
+                        type="text"
+                        placeholder="Skriv id nummer"
+                        className="input input-bordered input-xs  w-28 max-w-xs bg-base-100"
+                      />
+                    </div>
+                    <Link href="/filbehandling">
+                      <button className="btn btn-sm mt-5 w-40 bg-primary text-neutral">
+                        Data filtrering
+                      </button>
+                    </Link>
                     <RoleAdmin>
                       <div className="relative">
                         <FaCircleInfo

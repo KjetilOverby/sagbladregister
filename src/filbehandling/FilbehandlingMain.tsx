@@ -10,17 +10,30 @@ import { CSVLink } from "react-csv";
 import dateFormat from "dateformat";
 import DatepickerComponent from "~/components/reusable/Datepicker";
 import Checkbox from "./Checkbox";
+import RoleAdmin from "~/components/roles/RoleAdmin";
+import RoleAdminMV from "~/components/roles/RoleAdminMV";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 interface Props {
   theme: string;
 }
 
 const Filter = ({ theme }: Props) => {
+  const { data: sessionData } = useSession();
   const [sawbladesData, setSawbladesData] = useState();
   const [historikkData, setHistorikkData] = useState();
 
   const [sortByType, setSortByType] = useState("createdAt");
   const [sortOrder, setSortOrder] = useState("desc");
+  const [customerInit, setCustomerInit] = useState("");
+
+  useEffect(() => {
+    if (sessionData?.user.role === "MV_ADMIN") {
+      setCustomerInit("MV-");
+    } else if (sessionData?.user.role === "MT_ADMIN") {
+      setCustomerInit("MT-");
+    }
+  }, [sessionData]);
 
   const [sawbladeColumns, setSawbladeColumns] = useState({
     id: false,
@@ -88,6 +101,7 @@ const Filter = ({ theme }: Props) => {
   });
 
   const [fetchData, setFetchData] = useState(false);
+
   const { data: sawblades } = api.sawblades?.columns.useQuery({
     ...sawbladeColumns,
     date: `${dateValue.endDate}T23:59:59.000Z`,
@@ -97,6 +111,18 @@ const Filter = ({ theme }: Props) => {
       direction: sortOrder,
     },
   });
+
+  const { data: sawbladesCustomer } = api.sawblades?.columnsCustomer.useQuery({
+    ...sawbladeColumns,
+    date: `${dateValue.endDate}T23:59:59.000Z`,
+    date2: `${dateValue.startDate}T00:00:00.000Z`,
+    orderBy: {
+      field: sortByType,
+      direction: sortOrder,
+    },
+    init: customerInit,
+  });
+
   const { data: historikk } = api.bandhistorikk?.columns.useQuery({
     ...historikkColumns,
     date: `${dateValue.endDate}T23:59:59.000Z`,
@@ -106,6 +132,18 @@ const Filter = ({ theme }: Props) => {
       direction: sortOrder,
     },
   });
+
+  const { data: historikkCustomer } =
+    api.bandhistorikk?.columnsCustomer.useQuery({
+      ...historikkColumns,
+      date: `${dateValue.endDate}T23:59:59.000Z`,
+      date2: `${dateValue.startDate}T00:00:00.000Z`,
+      orderBy: {
+        field: sortByType,
+        direction: sortOrder,
+      },
+      init: customerInit,
+    });
 
   const [openToggle, setOpenToggle] = useState(true);
   const [openBandsag, setOpenBandsag] = useState(false);
@@ -207,10 +245,10 @@ const Filter = ({ theme }: Props) => {
   return (
     <div data-theme={theme} className="min-h-screen">
       <HeaderComponent />
-      <div className="mx-10">
+      <div className="mx-10 ">
         <h1 className="my-10 text-xl">Avanserte søk og filtrering av data</h1>
         <p>Velg tidsperiode</p>
-        <div className="shadow-xl">
+        <div className="mb-5 rounded-xl border border-primary p-5">
           <DatepickerComponent
             setDateValue={setDateValue}
             dateValue={dateValue}
@@ -226,7 +264,7 @@ const Filter = ({ theme }: Props) => {
           <div className="mt-5">
             <button
               onClick={() => window.location.reload()}
-              className="btn bg-green-500 text-white hover:bg-green-600"
+              className="btn btn-sm bg-success text-white hover:bg-green-600"
             >
               Nytt søk
             </button>
@@ -249,13 +287,14 @@ const Filter = ({ theme }: Props) => {
           </div>
         )}
       </div>
-      <div className="mx-10">
+      <div className="mx-10 ">
         {openBandsag && (
-          <div className="mt-10">
-            <div className="mb-10 flex w-40">
+          <div className="mt-10 ">
+            <div className="mb-10 flex w-40 ">
               <div className="mr-10">
                 <label>Sorter etter:</label>
                 <select
+                  className="bg-primary"
                   value={sortByType}
                   onChange={(e) => setSortByType(e.target.value)}
                 >
@@ -277,6 +316,7 @@ const Filter = ({ theme }: Props) => {
               <div className=" flex w-40 flex-col">
                 <label>Rekkefølge:</label>
                 <select
+                  className="bg-primary"
                   value={sortOrder}
                   onChange={(e) => setSortOrder(e.target.value)}
                 >
@@ -287,10 +327,10 @@ const Filter = ({ theme }: Props) => {
               </div>
             </div>
 
-            <div className="flex">
+            <div className="flex ">
               {!openList && (
                 <button
-                  className="btn mb-5 mr-5 bg-blue-500 text-white hover:bg-blue-600"
+                  className="btn btn-sm mb-5 mr-5 bg-blue-500 text-white hover:bg-blue-600"
                   onClick={() => {
                     if (Object.values(sawbladeColumns).some((value) => value)) {
                       setFetchData(true);
@@ -304,15 +344,18 @@ const Filter = ({ theme }: Props) => {
                   Hent data
                 </button>
               )}
-              <div className="card-actions mb-5 justify-end">
+              <div className="card-actions mb-5 flex flex-col justify-end">
                 {sawbladesData && openList && (
-                  <CSVLink
-                    data={sawbladesData}
-                    filename="Bandsagblad.csv"
-                    className="btn btn-neutral"
-                  >
-                    Download
-                  </CSVLink>
+                  <>
+                    <label className="text-neutral">Last ned CSV fil </label>
+                    <CSVLink
+                      data={sawbladesData}
+                      filename="Bandsagblad.csv"
+                      className="btn btn-warning btn-sm"
+                    >
+                      Download
+                    </CSVLink>
+                  </>
                 )}
               </div>
             </div>
@@ -321,18 +364,29 @@ const Filter = ({ theme }: Props) => {
                 <Checkbox
                   sawbladeColumns={sawbladeColumns}
                   setSawbladeColumns={setSawbladeColumns}
-                  title="Båndsagblad"
+                  title="Sagblad"
                 />
               </div>
             )}
             <div className="overflow-scroll">
-              {fetchData && (
-                <FilterTable
-                  data={sawblades && sawblades}
-                  setSortByType={setSortByType}
-                  sortByType={sortByType}
-                />
-              )}
+              <RoleAdmin>
+                {fetchData && (
+                  <FilterTable
+                    data={sawblades && sawblades}
+                    setSortByType={setSortByType}
+                    sortByType={sortByType}
+                  />
+                )}
+              </RoleAdmin>
+              <RoleAdminMV>
+                {fetchData && (
+                  <FilterTable
+                    data={sawbladesCustomer && sawbladesCustomer}
+                    setSortByType={setSortByType}
+                    sortByType={sortByType}
+                  />
+                )}
+              </RoleAdminMV>
             </div>
           </div>
         )}
@@ -340,10 +394,11 @@ const Filter = ({ theme }: Props) => {
       <div className="mx-10">
         {openHistorikk && (
           <div className="mt-10 ">
-            <div className="mb-10 flex w-40">
+            <div className="mb-10 flex w-40 ">
               <div className="mr-10">
                 <label>Sorter etter:</label>
                 <select
+                  className="bg-primary"
                   value={sortByType}
                   onChange={(e) => setSortByType(e.target.value)}
                 >
@@ -366,6 +421,7 @@ const Filter = ({ theme }: Props) => {
               <div className=" flex w-40 flex-col">
                 <label>Rekkefølge:</label>
                 <select
+                  className="bg-primary"
                   value={sortOrder}
                   onChange={(e) => setSortOrder(e.target.value)}
                 >
@@ -378,7 +434,7 @@ const Filter = ({ theme }: Props) => {
             <div className="flex">
               {!openList && (
                 <button
-                  className="btn  mb-5 mr-5 bg-blue-500 text-white hover:bg-blue-600"
+                  className="btn btn-sm  mb-5 mr-5 bg-blue-500 text-white hover:bg-blue-600"
                   onClick={() => {
                     if (
                       Object.values(historikkColumns).some((value) => value)
@@ -394,15 +450,18 @@ const Filter = ({ theme }: Props) => {
                   Hent data historikk
                 </button>
               )}
-              <div className="card-actions mb-5">
+              <div className="card-actions mb-5 flex flex-col">
                 {historikkData && openList && (
-                  <CSVLink
-                    data={historikkData}
-                    filename="Historikk.csv"
-                    className="btn btn-neutral"
-                  >
-                    Download
-                  </CSVLink>
+                  <>
+                    <label className="text-neutral">Last ned CSV fil </label>
+                    <CSVLink
+                      data={historikkData}
+                      filename="Historikk.csv"
+                      className="btn btn-warning btn-sm"
+                    >
+                      Download
+                    </CSVLink>
+                  </>
                 )}
               </div>
             </div>
@@ -416,12 +475,22 @@ const Filter = ({ theme }: Props) => {
               </div>
             )}
             <div className="overflow-scroll">
-              {fetchData && (
-                <FilterTable
-                  setSortByType={setSortByType}
-                  data={historikk && historikk}
-                />
-              )}
+              <RoleAdmin>
+                {fetchData && (
+                  <FilterTable
+                    setSortByType={setSortByType}
+                    data={historikk && historikk}
+                  />
+                )}
+              </RoleAdmin>
+              <RoleAdminMV>
+                {fetchData && (
+                  <FilterTable
+                    setSortByType={setSortByType}
+                    data={historikkCustomer && historikkCustomer}
+                  />
+                )}
+              </RoleAdminMV>
             </div>
           </div>
         )}
