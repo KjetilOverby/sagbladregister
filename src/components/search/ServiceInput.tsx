@@ -18,7 +18,7 @@ const ServiceInput = ({ setHistorikkData, historikkData }) => {
           })
         }
         value={historikkData.service}
-        className="select select-bordered select-xs w-full max-w-xs bg-white"
+        className="select select-bordered select-xs w-full max-w-xs bg-white text-neutral"
       >
         <option value="">Velg service</option>
         <option value="Omlodding">Omlodding</option>

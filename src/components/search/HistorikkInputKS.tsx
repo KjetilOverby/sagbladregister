@@ -85,7 +85,7 @@ const HistorikkInputKS = ({
   };
 
   return (
-    <div className="absolute z-40">
+    <div className="absolute right-[40rem] top-5 z-40">
       <button className="btn btn-sm bg-red-400" onClick={deleteServiceHandling}>
         Slett service
       </button>

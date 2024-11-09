@@ -16,7 +16,7 @@ const InfoComponent = ({
   list: string[];
 }) => {
   return (
-    <div className={`card absolute w-80 ${bg} text-blue-700 shadow-xl`}>
+    <div className={`card absolute w-80 ${bg} z-[100] text-blue-800 shadow-xl`}>
       <div className="card-body">
         <h2 className="card-title">{title}</h2>
         <p className="text-xs">

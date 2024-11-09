@@ -15,7 +15,7 @@ const ReklamasjonsInput = ({ setHistorikkData, historikkData }) => {
             feilkode: e.currentTarget.value,
           })
         }
-        className="select select-bordered select-xs w-full max-w-xs bg-white"
+        className="select select-bordered select-xs w-full max-w-xs bg-white text-neutral"
       >
         <option value="">Velg årsak</option>
         <option value="Tannslipp">Tannslipp</option>

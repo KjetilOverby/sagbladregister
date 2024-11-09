@@ -22,7 +22,7 @@ const HistorikkComponent = ({
     <div>
       <div className="mb-5  max-lg:relative">
         <div className="mr-5 flex flex-col md:flex-row">
-          <div className="mb-3 rounded-xl p-5 shadow-xl shadow-primary">
+          <div className="mb-3 rounded-xl border border-primary p-5">
             <h1 className="text-2xl">
               ID: <span className="text-blue-500">{blade.IdNummer}</span>{" "}
               <span className="text-gray-400">{blade.note}</span>
@@ -43,7 +43,7 @@ const HistorikkComponent = ({
               </span>
             </p>
 
-            <div className="mb-5 rounded-xl bg-blue-400 p-2 text-xs text-white ">
+            <div className="mb-5 rounded-xl bg-primary p-2 text-xs text-neutral ">
               <p className="">Registrert av: {blade.creator}</p>
               <p className="mb-3">
                 Dato:
