@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import { Prisma } from "@prisma/client";
+
 import { z } from "zod";
 
 import {
@@ -17,6 +17,66 @@ export const sawbladesRouter = createTRPCRouter({
     try {
       // Hent alle poster med både createdAt og updatedAt
       const allBlader = await ctx.db.sawblades.findMany({
+        select: {
+          createdAt: true,
+          updatedAt: true,
+          deleted: true,
+        },
+      });
+
+      // Funksjon for å gruppere og telle poster etter år og måned
+      const groupByMonth = (
+        blader: { createdAt: Date; updatedAt: Date; deleted: boolean }[],
+        dateField: "createdAt" | "updatedAt",
+        filterDeleted?: boolean
+      ) => {
+        return blader.reduce((acc, blade) => {
+          // Bruker riktig dato-felt for tellingen (createdAt eller updatedAt)
+          const date = blade[dateField];
+          const yearMonth = `${date.getFullYear()}-${date.getMonth() + 1}`;
+
+          // Filtrerer etter `deleted` hvis spesifisert
+          if (filterDeleted === undefined || blade.deleted === filterDeleted) {
+            acc[yearMonth] = (acc[yearMonth] ?? 0) + 1;
+          }
+          return acc;
+        }, {} as Record<string, number>);
+      };
+
+      // Teller nye poster per måned (basert på createdAt)
+      const newMonthlyStats = groupByMonth(allBlader, "createdAt");
+
+      // Teller slettede poster per måned (basert på updatedAt og kun når deleted: true)
+      const deletedMonthlyStats = groupByMonth(allBlader, "updatedAt", true);
+
+      // Kombinerer de månedlige resultatene i ønsket format
+      const allMonths = new Set([
+        ...Object.keys(newMonthlyStats),
+        ...Object.keys(deletedMonthlyStats),
+      ]);
+
+      const monthlyStats = Array.from(allMonths).map((yearMonth) => ({
+        yearMonth,
+        newCount: newMonthlyStats[yearMonth] ?? 0,
+        deletedCount: deletedMonthlyStats[yearMonth] ?? 0,
+      }));
+
+      return monthlyStats;
+    } catch (error) {
+      console.error("Feil ved henting av månedlige statistikker:", error);
+      throw new Error("Kunne ikke hente månedlige statistikker");
+    }
+  }),
+
+  getMonthlyCountCustomer: protectedProcedure
+  .input(z.object({ init: z.string() }))
+  .query(async ({ input, ctx }) => {
+    try {
+      // Hent alle poster med både createdAt og updatedAt
+      const allBlader = await ctx.db.sawblades.findMany({
+        where: {
+          IdNummer: {startsWith: input.init}  
+        },
         select: {
           createdAt: true,
           updatedAt: true,
@@ -480,12 +540,23 @@ columnsCustomer: protectedProcedure
           
           return count;
         }),
+
         countAllBladesCustomer: protectedProcedure
         .input(z.object({ init: z.string()}))
         .query(async ({ ctx, input }) => {
           const total = await ctx.db.sawblades.count({ where: { IdNummer: { startsWith: input.init } } });
           const deleted = await ctx.db.sawblades.count({ where: { IdNummer: { startsWith: input.init }, deleted: true } });
           const notDeleted = await ctx.db.sawblades.count({ where: { IdNummer: { startsWith: input.init }, deleted: false } });
+      
+          return { total, deleted, notDeleted };
+        }),
+
+        countAllBlades: protectedProcedure
+      
+        .query(async ({ ctx }) => {
+          const total = await ctx.db.sawblades.count();
+          const deleted = await ctx.db.sawblades.count({where: {deleted: true}});
+          const notDeleted = await ctx.db.sawblades.count({where: {deleted: false}});
       
           return { total, deleted, notDeleted };
         }),

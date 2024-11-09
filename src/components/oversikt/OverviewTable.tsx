@@ -84,7 +84,7 @@ const OverviewTable = ({ count }) => {
     <div>
       <table className="table-xs mt-10 md:table">
         <thead>
-          <tr className="md:text-md border border-b-accent border-l-base-100 border-r-base-100 border-t-accent text-[.7rem]">
+          <tr className="md:text-md border border-b-accent border-l-base-100 border-r-base-100 border-t-accent bg-purple-500 text-[.7rem] text-white">
             <th>Type</th>
             <th>Blad i bruk: {nonDeletedSum}</th>
             <th>Slettet: {deletedSum}</th>
