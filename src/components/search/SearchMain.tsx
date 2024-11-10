@@ -15,7 +15,7 @@ import { api } from "~/utils/api";
 import ActivateBlade from "./ActivateBlade";
 import { DeleteComponent } from "./DeleteComponent";
 import { FiRefreshCw } from "react-icons/fi";
-import { GiProgression } from "react-icons/gi";
+import { GiPauseButton, GiProgression } from "react-icons/gi";
 import HistorikkComponent from "./HistorikkComponent";
 import DeletedBladesComponent from "./DeletedBladesComponent";
 import SawbladeServiceTable from "./SawbladeServiceTable";
@@ -181,14 +181,14 @@ const SearchMain = ({
       <div className="mb-10">
         {" "}
         <button
-          className="btn btn-xs mr-5 mt-5 bg-orange-400 text-gray-700 hover:bg-orange-500"
+          className={`btn btn-sm mr-5 mt-5 bg-neutral text-gray-200 ${theme === "darkmode" ? "bg-primary" : "bg-neutral"} hover:bg-primary`}
           onClick={() => setShowDeletedBlades(!showDeletedBlades)}
         >
           {showDeletedBlades ? "Skjul slettede blad" : "Vis slettede blad"}
         </button>
         <button
           onClick={() => setShowService(!showService)}
-          className="btn btn-xs bg-blue-500 text-white hover:bg-blue-600"
+          className={`btn btn-sm ${theme === "darkmode" ? "bg-primary" : "bg-neutral"} text-gray-200 hover:bg-primary`}
         >
           {showService ? "Skjul service blad" : "Vis service blad"}
         </button>
@@ -252,20 +252,13 @@ const SearchMain = ({
                 <div key={blade.id} className="flex pb-10">
                   <div>
                     <div>
-                      <div
-                        className={`mr-5 grid h-10 w-10 cursor-pointer place-content-center rounded-full ${
-                          blade.active
-                            ? "bg-orange-400 transition hover:bg-orange-500"
-                            : "bg-gray-200 transition hover:bg-gray-300"
-                        }`}
+                      <button
+                        disabled={blade.active}
+                        onClick={() => statusHandler(blade.id)}
+                        className={`btn btn-sm  mr-5 grid cursor-pointer bg-neutral text-gray-200 ${theme === "darkmode" ? "bg-primary" : "bg-neutral"} hover:bg-primary`}
                       >
-                        <FiRefreshCw
-                          onClick={() => statusHandler(blade.id)}
-                          className={`text-lg ${
-                            blade.active ? "text-white" : "text-gray-500"
-                          }`}
-                        />
-                      </div>
+                        Legg til post
+                      </button>
 
                       {openStatus === blade.id && !blade.active && (
                         <ActivateBlade
@@ -279,15 +272,18 @@ const SearchMain = ({
                   </div>
                   <div className="relative">
                     {!blade.deleted && (
-                      <div className="grid h-10 w-10 cursor-pointer place-content-center rounded-full bg-red-200 transition hover:bg-red-300">
+                      <button
+                        onClick={() => deleteHandler(blade.id)}
+                        className="btn  btn-sm flex  cursor-pointer place-content-center bg-red-200 text-red-600 transition hover:bg-red-300"
+                      >
                         <RiDeleteBinLine
                           style={{
                             color: "indianred",
                             fontSize: "1rem",
                           }}
-                          onClick={() => deleteHandler(blade.id)}
                         />
-                      </div>
+                        SLETT
+                      </button>
                     )}
                     {openDeleteID === blade.id && (
                       <div className="card absolute z-40 flex w-96 flex-col items-center bg-neutral text-base-100">
@@ -391,12 +387,13 @@ const SearchMain = ({
                     )}
                   </div>
                   <div>
-                    <div className="ml-5 grid h-10 w-10 cursor-pointer place-content-center rounded-full bg-green-200 transition hover:bg-green-300">
-                      <CiEdit
-                        className="text-green-600"
-                        onClick={() => setOpenEdit(true)}
-                      />
-                    </div>
+                    <button
+                      onClick={() => setOpenEdit(true)}
+                      className="btn  btn-sm ml-5 flex  cursor-pointer place-content-center bg-green-200 text-green-600 transition hover:bg-green-300"
+                    >
+                      <CiEdit className="text-green-600" />
+                      Rediger
+                    </button>
                     {openEdit && (
                       <EditInputComponent
                         blade={blade}

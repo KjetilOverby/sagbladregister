@@ -29,7 +29,7 @@ const EditInputComponent = ({
 
   return (
     <div
-      className={`z-96 absolute right-10 top-6 mt-5 w-96 rounded-xl ${theme === "darkmode" ? "bg-primary" : "bg-neutral"} p-5 text-gray-200 shadow-xl`}
+      className={`absolute   z-[100] mt-5 w-96 rounded-xl ${theme === "darkmode" ? "bg-primary" : "bg-neutral"} p-5 text-gray-200 shadow-xl`}
     >
       <form
         onSubmit={(e) => {
