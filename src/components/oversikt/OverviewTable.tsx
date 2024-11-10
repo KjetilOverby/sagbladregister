@@ -84,7 +84,7 @@ const OverviewTable = ({ count, theme }) => {
       <table className="table-xs  md:table">
         <thead>
           <tr
-            className={`md:text-md border border-b-accent border-l-base-100 border-r-base-100 border-t-accent  text-[.7rem] text-white ${theme === "darkmode" ? "bg-accent" : "bg-neutral"}`}
+            className={`md:text-md border border-b-accent border-l-base-100 border-r-base-100 border-t-accent  text-[.7rem] text-white ${theme === "darkmode" ? "bg-primary" : "bg-neutral"}`}
           >
             <th>Type</th>
             <th>Blad i bruk: {nonDeletedSum}</th>
@@ -106,20 +106,20 @@ const OverviewTable = ({ count, theme }) => {
               key={index}
               className={`border-none  ${theme === "darkmode" ? "odd:bg-gray-700" : "odd:bg-gray-200"}`}
             >
-              <td className="md:text-md py-5 text-[.7rem]">
+              <td className="md:text-md py-5 text-[.7rem] text-neutral">
                 {item.type} {item.side}
               </td>
-              <td className="md:text-md py-5 text-[.7rem]">
+              <td className="md:text-md py-5 text-[.7rem] text-neutral">
                 {item.nonDeletedCount}
               </td>
-              <td className="md:text-md py-5 text-[.7rem]">
+              <td className="md:text-md py-5 text-[.7rem] text-neutral">
                 {item.deletedCount}
               </td>
-              <td className="md:text-md py-5 text-[.7rem]">
+              <td className="md:text-md py-5 text-[.7rem] text-neutral">
                 {item.totalCount}
               </td>
 
-              <td className="md:text-md py-5 text-[.7rem]">
+              <td className="md:text-md py-5 text-[.7rem] text-neutral">
                 <RoleAdminMV>{item.customCount}</RoleAdminMV>
               </td>
               <td
@@ -135,8 +135,10 @@ const OverviewTable = ({ count, theme }) => {
       </table>
       {
         <RoleAdminMV>
-          <div className="mt-5 bg-primary p-3">
-            <h1 className="md:text-md text-xs">Må bestilles:</h1>
+          <div
+            className={`mt-5 ${theme === "darkmode" ? "bg-primary" : "bg-neutral"} p-3 text-white`}
+          >
+            <h1 className="md:text-md text-xs text-white">Må bestilles:</h1>
             {negativeItems.map((item, index) => {
               const matchingArtItem = mvArticleTypes.find((artItem) => {
                 if (Array.isArray(artItem.side)) {
@@ -165,7 +167,7 @@ const OverviewTable = ({ count, theme }) => {
                         : matchingArtItem.art
                       : "N/A"}
                   </p>
-                  <p className=" text-xs text-blue-500">
+                  <p className=" textgray-200 text-xs">
                     {Math.abs(item.difference)}stk
                   </p>
                 </div>

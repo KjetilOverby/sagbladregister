@@ -89,7 +89,7 @@ const OmloddingComponent: React.FC<OmloddingComponentProps> = ({
       </h2>
       <table className="table-sm w-full border-collapse">
         <thead>
-          <tr className={`bg-${theme === "darkmode" ? "gray-600" : "neutral"}`}>
+          <tr className={`bg-${theme === "darkmode" ? "primary" : "neutral"}`}>
             <th className="p-2 text-left text-xs text-gray-200">Bladtype</th>
             <th className="p-2 text-left text-xs text-gray-200">0 omlodding</th>
             <th className="p-2 text-left text-xs text-gray-200">1 omlodding</th>
@@ -109,7 +109,10 @@ const OmloddingComponent: React.FC<OmloddingComponentProps> = ({
         </thead>
         <tbody>
           {Object.keys(groupedStats).map((bladType) => (
-            <tr key={bladType} className="text-neutral hover:bg-accent">
+            <tr
+              key={bladType}
+              className={`text-neutral ${theme === "darkmode" ? "odd:bg-gray-700" : "odd:bg-gray-200"} `}
+            >
               <td className=" p-3">{bladType}</td>
               <td className=" p-3">{groupedStats[bladType]["0 omlodding"]}</td>
               <td className=" p-3">{groupedStats[bladType]["1 omlodding"]}</td>

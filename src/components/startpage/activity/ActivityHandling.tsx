@@ -12,7 +12,7 @@ const ActivityHandling = ({ servicepostKS }) => {
   const countService = servicepostKS?.filter((item) => item.handling).length;
   return (
     <div>
-      <h1 className="my-3 text-xs font-bold text-gray-500 md:text-lg">
+      <h1 className="my-3 text-xs text-neutral md:text-lg">
         Handling Kvarnstrands & Stridsbergs: ({countService})
       </h1>
       {servicepostKS && servicepostKS.length >= 0 ? (
@@ -30,7 +30,7 @@ const ActivityHandling = ({ servicepostKS }) => {
                             src={blade.creatorImg3}
                             alt=""
                           />
-                          <li className="mb-3 text-[0.55rem] text-gray-500 md:mb-0 md:text-xs">
+                          <li className="mb-3 text-[0.55rem] text-neutral md:mb-0 md:text-xs">
                             {dateFormat(blade.datoSrv, "dd.mm.yyyy, HH:MM")} -{" "}
                             <span className="text-blue-500">
                               {blade.sgKS ? blade.sgKS : blade.creator3}

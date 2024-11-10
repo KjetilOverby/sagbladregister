@@ -124,10 +124,10 @@ const HeaderComponent = () => {
             <Link href="/" onClick={closeMenu}>
               <div className="">
                 <p className="flex">
-                  <span className="w-40 xl:w-64">
+                  <span className="w-38 xl:w-52">
                     <img
                       className="w-full"
-                      src="https://lh3.googleusercontent.com/pw/AP1GczPe-wnVTp-JJxvvMeWQ4mPFcMhkJNQUfiDUldcuxwaVqoeRqNYqd9DzOgteJQNiwayYOEZJJ_qQpgqTVuv07CQT4dN_aPG2uEWuUFMvNOTUwqrURLpgIGc9HoW9DmkkfE6toB3NFow2ts2LaKipxydZ=w1920-h192-s-no?authuser=0"
+                      src="https://lh3.googleusercontent.com/pw/AP1GczMl2BWtf6-zh2g4uWGl4naDJ87x01pfcRvMNy21LlElrQVqWdSt9MtQAUfa-6nfeexrJGbcSln4ULat4QzkDp1rPGTJJkVy2MBHsUaqhCInScxCnhVUA4ZvR7wl-YlfpmviKWTvLPdU61V2Gx8Tz9sD=w1920-h196-s-no?authuser=0"
                       alt=""
                     />
                   </span>
@@ -421,8 +421,12 @@ const HeaderComponent = () => {
                 {sessionData?.user.role === "MV_ADMIN" && (
                   <p className="text-neutral">Moelven Våler</p>
                 )}
-                {sessionData?.user.role === "MT_ADMIN" && <p>Moelven Trysil</p>}
-                {sessionData?.user.role === "ADMIN" && <p>Alle kunder</p>}
+                {sessionData?.user.role === "MT_ADMIN" && (
+                  <p className="text-neutral">Moelven Trysil</p>
+                )}
+                {sessionData?.user.role === "ADMIN" && (
+                  <p className="text-neutral">Alle kunder</p>
+                )}
               </div>
             </div>
           </div>

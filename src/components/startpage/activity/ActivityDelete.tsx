@@ -10,7 +10,7 @@ import dateFormat from "dateformat";
 const ActivityDelete = ({ deletedblades }) => {
   return (
     <div>
-      <h1 className="my-3 text-xs font-bold text-gray-500 md:text-lg">
+      <h1 className="my-3 text-xs  text-neutral md:text-lg">
         Blad slettet: ({deletedblades?.length})
       </h1>
       {deletedblades && deletedblades.length > 0 ? (
@@ -24,7 +24,7 @@ const ActivityDelete = ({ deletedblades }) => {
                     src={blade.deleterImg}
                     alt=""
                   />
-                  <li className="mb-3 text-[0.55rem] text-gray-500 md:mb-0 md:text-xs">
+                  <li className="mb-3 text-[0.55rem] text-neutral md:mb-0 md:text-xs">
                     {dateFormat(blade.updatedAt, "dd.mm.yyyy, HH:MM")} -{" "}
                     <span className="text-blue-500">{blade.deleter}</span> har
                     slettet{" "}

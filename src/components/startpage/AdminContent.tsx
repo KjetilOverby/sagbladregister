@@ -31,7 +31,7 @@ const AdminContent = ({
         <div className="md:w-[30rem]">
           <img
             className="w-full"
-            src="https://lh3.googleusercontent.com/pw/AP1GczMo3DXbcGsHswgE46n36BzYht6UoYpKSmSMDpFaUbCELeYtF3GDlAB-CWY7zfrkXoyl24nz36eznGZ51KoSsAmXfwOfUDWYNE_NfzlrHR-EZ3cLoM-7_Ewpq1xRZ6Z9US-1YMmJqDK33sYJPxUPWY7f=w1920-h317-s-no?authuser=0"
+            src="https://lh3.googleusercontent.com/pw/AP1GczMl2BWtf6-zh2g4uWGl4naDJ87x01pfcRvMNy21LlElrQVqWdSt9MtQAUfa-6nfeexrJGbcSln4ULat4QzkDp1rPGTJJkVy2MBHsUaqhCInScxCnhVUA4ZvR7wl-YlfpmviKWTvLPdU61V2Gx8Tz9sD=w1920-h196-s-no?authuser=0"
             alt=""
           />
         </div>
@@ -43,7 +43,7 @@ const AdminContent = ({
               dateValue={dateValue}
             />
           </div>
-          <p className="text-xs text-gray-500">Aktivitet i gitt periode</p>
+          <p className="text-xs text-neutral">Aktivitet i gitt periode</p>
           <ActivityNewblades newblades={newblades} />
           <ActivityDelete deletedblades={deletedblades} />
           <ActivityServiceCreate servicepost={servicepost} />

@@ -437,8 +437,8 @@ const SearchMain = ({
       <div>
         {showService && (
           <div className="overflow-scroll p-2">
-            <hr className="my-10 border-gray-400" />
-            <h1 className="text-xl text-gray-500">
+            <hr className="my-10 border-primary" />
+            <h1 className="text-xl text-neutral">
               Blad service ({sawbladesService?.length})
             </h1>
             <SawbladeServiceTable

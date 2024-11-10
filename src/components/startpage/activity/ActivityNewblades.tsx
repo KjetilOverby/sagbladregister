@@ -11,7 +11,7 @@ import dateFormat from "dateformat";
 const AvtivityNewblades = ({ newblades }) => {
   return (
     <div>
-      <h1 className="my-3 text-xs font-bold text-gray-500 md:text-lg">
+      <h1 className="my-3 text-xs text-neutral md:text-lg">
         Blad lagt til: ({newblades?.length})
       </h1>
       {newblades && newblades.length > 0 ? (
@@ -25,7 +25,7 @@ const AvtivityNewblades = ({ newblades }) => {
                     src={blade.creatorImg}
                     alt=""
                   />
-                  <li className="mb-3 text-[0.55rem] text-gray-500 md:mb-0 md:text-xs">
+                  <li className="mb-3 text-[0.55rem] text-neutral md:mb-0 md:text-xs">
                     {dateFormat(blade.createdAt, "dd.mm.yyyy, HH:MM")} -{" "}
                     <span className="text-blue-500">{blade.creator}</span> har
                     lagt til{" "}

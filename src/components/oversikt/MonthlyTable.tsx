@@ -77,7 +77,7 @@ const MonthlyTable = ({ monthlyCount, monthlyHistoryCount, theme }) => {
       <table className="table-xs w-full table-auto border-collapse text-left">
         <thead>
           <tr
-            className={`${theme === "darkmode" ? "bg-accent" : "bg-neutral"}`}
+            className={`${theme === "darkmode" ? "bg-primary" : "bg-neutral"}`}
           >
             <th className="p-3 text-xs text-white">Måned</th>
             <th className="p-3 text-xs text-white">Nye Sagblad</th>
@@ -93,12 +93,14 @@ const MonthlyTable = ({ monthlyCount, monthlyHistoryCount, theme }) => {
               key={entry.yearMonth}
               className={`${theme === "darkmode" ? "odd:bg-gray-700" : "odd:bg-gray-200"}`}
             >
-              <td className="p-2">{formatYearMonth(entry.yearMonth)}</td>
-              <td className="p-3">{entry.newCount}</td>
-              <td className="p-3">{entry.deletedCount}</td>
-              <td className="p-3">{entry.reparasjon}</td>
-              <td className="p-3">{entry.omlodding}</td>
-              <td className="p-3">{entry.reklamasjon}</td>
+              <td className="p-3 text-neutral">
+                {formatYearMonth(entry.yearMonth)}
+              </td>
+              <td className="p-3 text-neutral">{entry.newCount}</td>
+              <td className="p-3 text-neutral">{entry.deletedCount}</td>
+              <td className="p-3 text-neutral">{entry.reparasjon}</td>
+              <td className="p-3 text-neutral">{entry.omlodding}</td>
+              <td className="p-3 text-neutral">{entry.reklamasjon}</td>
             </tr>
           ))}
           {/* Totalrad */}
