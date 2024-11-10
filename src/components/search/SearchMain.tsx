@@ -82,6 +82,7 @@ const SearchMain = ({
   sawbladesService,
   setIdValue,
   showFlaws,
+  theme,
 }: BladeProps) => {
   const { data: sessionData } = useSession();
 
@@ -443,6 +444,7 @@ const SearchMain = ({
             <SawbladeServiceTable
               sawbladesService={sawbladesService}
               setIdValue={setIdValue}
+              theme={theme}
             />
           </div>
         )}

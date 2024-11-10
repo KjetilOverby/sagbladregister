@@ -37,6 +37,7 @@ const StatistikkMain = ({
   handlingService,
   serviceTypes,
   retipStats,
+  theme,
 }: statistikkProps) => {
   const deleteReasons: string[] = [
     "Normal slitasje",
@@ -304,7 +305,7 @@ const StatistikkMain = ({
               </div>
             </div>
           </div>
-          <OmloddingComponent retipStats={retipStats} />
+          <OmloddingComponent retipStats={retipStats} theme={theme} />
         </div>
       </div>
     </div>

@@ -126,6 +126,7 @@ const statistikk = ({ theme }) => {
           handlingService={handlingService}
           serviceTypes={serviceTypes}
           retipStats={retipStats}
+          theme={theme}
         />
       )}
       {sessionData?.user.role === "MV_ADMIN" && (
@@ -139,6 +140,7 @@ const statistikk = ({ theme }) => {
           handlingService={handlingServiceCustomer}
           serviceTypes={serviceTypesCustomer}
           retipStats={retipStatsCustomer}
+          theme={theme}
         />
       )}
       {sessionData?.user.role === "MT_ADMIN" && (
@@ -151,6 +153,7 @@ const statistikk = ({ theme }) => {
           feilkodeReklamasjon={reklamasjonTyperCustomer}
           handlingService={handlingServiceCustomer}
           retipStats={retipStatsCustomer}
+          theme={theme}
         />
       )}
     </div>

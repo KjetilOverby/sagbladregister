@@ -12,10 +12,12 @@ interface Blad {
 
 interface OmloddingComponentProps {
   retipStats: Blad[];
+  theme: string;
 }
 
 const OmloddingComponent: React.FC<OmloddingComponentProps> = ({
   retipStats,
+  theme,
 }) => {
   // Funksjon for å gruppere etter antall omloddinger og bladtype
   const groupByOmloddinger = (blader: Blad[]) => {
@@ -109,13 +111,15 @@ const OmloddingComponent: React.FC<OmloddingComponentProps> = ({
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
         {Object.keys(groupedStats).map((bladType) => (
           <div
-            className="mb-6 rounded-lg border border-primary bg-base-100 p-5"
+            className={`mb-6 rounded-lg border border-primary ${theme === "darkmode" ? "bg-gray-700" : "bg-blue-100"}`}
             key={bladType}
           >
-            <h3 className="mb-4 text-lg font-semibold text-neutral">
-              {bladType}
-            </h3>
-            <ul className="space-y-2">
+            <div className="grid place-items-center bg-slate-600 p-5">
+              <h3 className="text-lg font-semibold text-gray-200">
+                {bladType}
+              </h3>
+            </div>
+            <ul className="space-y-2 p-5">
               {Object.entries(groupedStats[bladType]).map(([key, value]) => (
                 <li
                   key={key}
@@ -134,7 +138,9 @@ const OmloddingComponent: React.FC<OmloddingComponentProps> = ({
       <h2 className="mb-6 mt-8 text-xl font-semibold text-neutral">
         Samlet omloddingstatistikk
       </h2>
-      <div className="rounded-lg border border-primary bg-base-100 p-5">
+      <div
+        className={`rounded-lg border border-primary ${theme === "darkmode" ? "bg-gray-700" : "bg-blue-100"} p-5`}
+      >
         <ul className="space-y-2">
           {Object.entries(groupedStatsAll).map(([key, value]) => (
             <li

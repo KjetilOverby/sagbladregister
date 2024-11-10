@@ -7,7 +7,7 @@
 import React from "react";
 import dateFormat from "dateformat";
 
-const SawbladeServiceTable = ({ sawbladesService, setIdValue }) => {
+const SawbladeServiceTable = ({ sawbladesService, setIdValue, theme }) => {
   return (
     <div>
       <table className="table table-xs whitespace-nowrap ">
@@ -21,14 +21,16 @@ const SawbladeServiceTable = ({ sawbladesService, setIdValue }) => {
           </tr>
         </thead>
         <tbody>
-          {sawbladesService?.map((blade, index) => {
+          {sawbladesService?.map((blade) => {
             return (
               <>
                 {blade && (
                   <tr
                     onClick={() => setIdValue(blade.IdNummer)}
                     className={`hover:cursor-pointer hover:bg-accent ${
-                      index % 2 === 0 ? "bg-primary" : "bg-base-100"
+                      theme === "darkmode"
+                        ? "odd:bg-gray-700"
+                        : "odd:bg-gray-100"
                     }`}
                   >
                     <td className="p-2 text-[0.6rem] font-bold text-neutral md:text-xs">

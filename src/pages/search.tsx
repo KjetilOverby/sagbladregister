@@ -166,6 +166,7 @@ const Search = ({ theme }) => {
                 sawbladesService={sawbladeslActive}
                 setIdValue={setIdValue}
                 showFlaws={showFlaws}
+                theme={theme}
               />
             </RoleAdmin>
 
@@ -179,6 +180,7 @@ const Search = ({ theme }) => {
                 dateValue={dateValue}
                 setDateValue={setDateValue}
                 setIdValue={setIdValue}
+                theme={theme}
               />
             </RoleAdminMV>
             <RoleAdminMT>
@@ -190,6 +192,7 @@ const Search = ({ theme }) => {
                 setCloseSearchComponent={setCloseSearchComponent}
                 dateValue={dateValue}
                 setDateValue={setDateValue}
+                theme={theme}
               />
             </RoleAdminMT>
           </div>
