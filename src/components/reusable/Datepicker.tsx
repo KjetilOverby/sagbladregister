@@ -41,7 +41,7 @@ const DatepickerComponent: React.FC<DateProps> = ({
           e.preventDefault();
         }}
       >
-        <p>Dato</p>
+        <p className="text-neutral">Dato</p>
         <Datepicker
           className="dark:bg-gray-800"
           placeholder={"Klikk her for å velge dato"}

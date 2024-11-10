@@ -58,7 +58,7 @@ const CreatePost = () => {
     }
   }, [bladeData]);
   return (
-    <div className="rounded-xl bg-base-100 p-5 shadow-xl shadow-primary">
+    <div className="w-96 rounded-xl border border-primary bg-base-100 p-5">
       <form
         onSubmit={async (e) => {
           e.preventDefault();
@@ -133,7 +133,7 @@ const CreatePost = () => {
           onChange={(e) =>
             setBladeData({ ...bladeData, produsent: e.currentTarget.value })
           }
-          className="select  select-xs border-accent bg-green-100 text-xs text-black"
+          className="select  select-sm border-accent  text-xs text-neutral"
         >
           <option disabled selected>
             Velg produsent
@@ -155,7 +155,7 @@ const CreatePost = () => {
             onChange={(e) =>
               setBladeData({ ...bladeData, side: e.currentTarget.value })
             }
-            className="select select-xs border-accent bg-green-100 text-xs text-black"
+            className="select select-sm border-accent text-xs text-neutral"
           >
             <option disabled selected>
               Velg side
@@ -171,7 +171,7 @@ const CreatePost = () => {
             onChange={(e) =>
               setBladeData({ ...bladeData, side: e.currentTarget.value })
             }
-            className="select select-xs border-accent bg-green-100 text-xs text-black"
+            className="select select-xs border-accent text-xs text-neutral"
           >
             <option disabled selected>
               Velg side
@@ -187,7 +187,7 @@ const CreatePost = () => {
             onChange={(e) =>
               setBladeData({ ...bladeData, side: e.currentTarget.value })
             }
-            className="select select-xs border-accent bg-green-100 text-xs text-black"
+            className="select select-xs border-accent text-xs text-neutral "
           >
             <option disabled selected>
               Velg side
@@ -205,11 +205,11 @@ const CreatePost = () => {
           onChange={(e) =>
             setBladeData({ ...bladeData, note: e.currentTarget.value })
           }
-          className="w-full rounded-sm bg-gray-200 px-4 py-2 text-xs text-neutral"
+          className="w-full  border border-primary bg-base-100 px-4 py-2 text-xs text-neutral outline-none"
           value={bladeData.note}
         />
-        <div className="flex">
-          <div className="flex items-center justify-center bg-blue-200 pl-2 text-xs text-blue-900">
+        <div className="flex border border-primary ">
+          <div className="flex items-center justify-center bg-base-100 pl-2 text-xs text-neutral outline-none">
             {kundeID}-
           </div>
 
@@ -218,12 +218,12 @@ const CreatePost = () => {
             placeholder={"ID nummer"}
             value={inputID}
             onChange={(e) => setInputID(e.currentTarget.value)}
-            className="w-full rounded-sm bg-blue-200 px-4  py-2 text-xs text-blue-900 outline-none"
+            className="w-full  bg-base-100  px-4 py-2 text-xs text-neutral outline-none"
           />
         </div>
         <button
           type="submit"
-          className="btn-xs rounded-sm bg-green-300 text-xs  font-semibold text-green-700 transition hover:bg-green-500"
+          className="btn-sm  bg-primary text-xs  font-semibold text-white transition hover:bg-neutral"
           disabled={createPost.isLoading}
         >
           {createPost.isLoading ? "Lagrer..." : "Lagre"}

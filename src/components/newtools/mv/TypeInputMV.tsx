@@ -47,7 +47,7 @@ export const TypeInputMV = ({
     <div>
       <select
         onChange={onChangeHandler}
-        className="select select-xs border-accent bg-blue-100 text-xs text-black"
+        className="select select-sm w-full  border-accent text-xs text-neutral"
       >
         <option disabled selected>
           Velg bladtype

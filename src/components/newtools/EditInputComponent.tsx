@@ -5,12 +5,14 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import React, { useState } from "react";
+import theme from "tailwindcss/defaultTheme";
 
 const EditInputComponent = ({
   editSawblade,
   blade,
   openEditHandler,
   title,
+  theme,
 }) => {
   const [editInputVal, setEditInputVal] = useState({
     IdNummer: blade.IdNummer,
@@ -26,7 +28,9 @@ const EditInputComponent = ({
   });
 
   return (
-    <div className="absolute z-50 mt-5 w-60 rounded-xl bg-white p-5 shadow-xl">
+    <div
+      className={`z-96 absolute right-10 top-6 mt-5 w-96 rounded-xl ${theme === "darkmode" ? "bg-primary" : "bg-neutral"} p-5 text-gray-200 shadow-xl`}
+    >
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -50,7 +54,7 @@ const EditInputComponent = ({
       >
         <div className="mb-5 flex flex-col">
           <h2 className="mb-5 font-bold">Rediger: {title}</h2>
-          <label className="text-xs font-bold text-gray-600">Id nummer: </label>
+          <label className="text-xs font-bold text-gray-200">Id nummer: </label>
           <input
             onChange={(e) =>
               setEditInputVal({
@@ -58,19 +62,19 @@ const EditInputComponent = ({
                 IdNummer: e.currentTarget.value,
               })
             }
-            type="text mb-5"
-            className="input input-bordered input-xs  max-w-xs bg-white"
+            type="text"
+            className={`input input-bordered input-sm  max-w-xs bg-white ${theme === "darkmode" ? "text-primary" : "text-neutral"} `}
             value={editInputVal.IdNummer}
           />
         </div>
         <div className="mb-5 flex flex-col">
-          <label className="text-xs font-bold text-gray-600">Notat: </label>
+          <label className="text-xs font-bold text-gray-200">Notat: </label>
           <input
             onChange={(e) =>
               setEditInputVal({ ...editInputVal, note: e.currentTarget.value })
             }
             type="text"
-            className="input input-bordered input-xs  max-w-xs bg-white"
+            className={`input input-bordered input-sm max-w-xs bg-white ${theme === "darkmode" ? "text-primary" : "text-neutral"} `}
             value={editInputVal.note}
           />
         </div>
@@ -83,7 +87,7 @@ const EditInputComponent = ({
                 produsent: e.currentTarget.value,
               })
             }
-            className="select select-bordered select-xs mb-5 w-full max-w-xs bg-white"
+            className={`select select-bordered select-sm mb-5 w-full max-w-xs bg-white ${theme === "darkmode" ? "text-primary" : "text-neutral"}`}
             value={editInputVal.produsent}
           >
             <option value="Kanefusa">Kanefusa</option>
@@ -106,7 +110,7 @@ const EditInputComponent = ({
                 kunde: e.currentTarget.value,
               })
             }
-            className="select select-bordered select-xs mb-5 w-full max-w-xs bg-white"
+            className={`select select-bordered select-sm mb-5 w-full max-w-xs bg-white ${theme === "darkmode" ? "text-primary" : "text-neutral"}`}
             value={editInputVal.kunde}
           >
             <option value="">Velg kunde</option>
@@ -123,7 +127,7 @@ const EditInputComponent = ({
                 active: e.currentTarget.value,
               })
             }
-            className="select select-bordered select-xs mb-5 w-full max-w-xs bg-white"
+            className={`select select-bordered select-sm mb-5 w-full max-w-xs bg-white ${theme === "darkmode" ? "text-primary" : "text-neutral"}`}
             value={Boolean(editInputVal.active)}
           >
             <option value="">Velg</option>
@@ -132,12 +136,16 @@ const EditInputComponent = ({
           </select>
         </div>
         <div className="mt-5">
-          <button className="btn btn-xs bg-success text-white" type="submit">
+          <button
+            className={`btn btn-sm ${theme === "darkmode" ? "bg-primary" : "bg-neutral"} mr-5 text-gray-200`}
+            text-white
+            type="submit"
+          >
             Oppdater
           </button>
           <button
             onClick={() => openEditHandler(null)}
-            className="btn btn-xs bg-info text-white"
+            className="btn btn-sm bg-info text-white"
           >
             Avbryt
           </button>
