@@ -401,11 +401,11 @@ const HeaderComponent = () => {
             </ul>*/}
           </div>
           <div className="flex flex-col md:items-center lg:order-2 lg:flex-row">
-            <div className="mb-5 mr-10 rounded-xl border border-green-500 bg-blue-400 p-1 md:mb-0">
+            {/* <div className="mb-5 mr-10 rounded-xl border border-green-500 bg-blue-400 p-1 md:mb-0">
               <p className=" text-end  text-sm font-bold text-green-200">
                 Sirkelsagblad
               </p>
-            </div>
+            </div> */}
             <Link href={sessionData ? "/api/auth/signout" : "/api/auth/signin"}>
               <div className="h-10 w-10">
                 <img

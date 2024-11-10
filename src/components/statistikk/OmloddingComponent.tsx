@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/prefer-optional-chain */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import React from "react";
@@ -19,18 +21,14 @@ const OmloddingComponent: React.FC<OmloddingComponentProps> = ({
   retipStats,
   theme,
 }) => {
-  // Funksjon for å gruppere etter antall omloddinger og bladtype
   const groupByOmloddinger = (blader: Blad[]) => {
     const groupedStats: Record<string, Record<string, number>> = {};
 
-    // Gå gjennom alle bladene
     blader?.forEach((blad) => {
-      // Tell antall omloddinger for hver bladtype
       const omloddingCount = blad.bandhistorikk.filter(
         (entry) => entry.service === "Omlodding",
       ).length;
 
-      // Hvis bladtypen ikke finnes i groupedStats, legg den til
       if (!groupedStats[blad.type]) {
         groupedStats[blad.type] = {
           "0 omlodding": 0,
@@ -42,7 +40,6 @@ const OmloddingComponent: React.FC<OmloddingComponentProps> = ({
         };
       }
 
-      // Oppdater tellingen for antall omloddinger
       if (omloddingCount === 0) {
         groupedStats[blad.type]["0 omlodding"] += 1;
       } else if (omloddingCount === 1) {
@@ -61,11 +58,11 @@ const OmloddingComponent: React.FC<OmloddingComponentProps> = ({
     return groupedStats;
   };
 
-  // Gruppere bladene ved hjelp av funksjonen
   const groupedStats = groupByOmloddinger(retipStats);
 
-  const groupByOmloddingerAll = (blader: Blad[]) => {
-    const groupedStats: Record<string, number> = {
+  // Funksjon for å samle totaler for alle bladtyper
+  const calculateTotalStats = () => {
+    const totalStats = {
       "0 omlodding": 0,
       "1 omlodding": 0,
       "2 omloddinger": 0,
@@ -74,87 +71,74 @@ const OmloddingComponent: React.FC<OmloddingComponentProps> = ({
       "5 eller fler omloddinger": 0,
     };
 
-    // Gå gjennom alle bladene
-    blader?.forEach((blad) => {
-      // Tell antall omloddinger for hvert blad
-      const omloddingCount = blad.bandhistorikk.filter(
-        (entry) => entry.service === "Omlodding",
-      ).length;
-
-      // Oppdater tellingen for antall omloddinger
-      if (omloddingCount === 0) {
-        groupedStats["0 omlodding"] += 1;
-      } else if (omloddingCount === 1) {
-        groupedStats["1 omlodding"] += 1;
-      } else if (omloddingCount === 2) {
-        groupedStats["2 omloddinger"] += 1;
-      } else if (omloddingCount === 3) {
-        groupedStats["3 omloddinger"] += 1;
-      } else if (omloddingCount === 4) {
-        groupedStats["4 omloddinger"] += 1;
-      } else {
-        groupedStats["5 eller fler omloddinger"] += 1;
-      }
+    Object.values(groupedStats).forEach((counts) => {
+      Object.entries(counts).forEach(([key, value]) => {
+        totalStats[key] += value;
+      });
     });
 
-    return groupedStats;
+    return totalStats;
   };
 
-  // Gruppere bladene ved hjelp av funksjonen
-  const groupedStatsAll = groupByOmloddingerAll(retipStats);
+  const totalStats = calculateTotalStats();
 
   return (
-    <div className="rounded-lg bg-base-100 p-6 ">
+    <div className="mb-10 rounded-lg bg-base-100 p-6">
       <h2 className="mb-6 text-xl font-semibold text-neutral">
         Omloddingstatistikk per type
       </h2>
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
-        {Object.keys(groupedStats).map((bladType) => (
-          <div
-            className={`mb-6 rounded-lg border border-primary ${theme === "darkmode" ? "bg-gray-700" : "bg-blue-100"}`}
-            key={bladType}
-          >
-            <div className="grid place-items-center bg-slate-600 p-5">
-              <h3 className="text-lg font-semibold text-gray-200">
-                {bladType}
-              </h3>
-            </div>
-            <ul className="space-y-2 p-5">
-              {Object.entries(groupedStats[bladType]).map(([key, value]) => (
-                <li
-                  key={key}
-                  className="flex justify-between rounded p-2 text-xs hover:bg-primary"
-                >
-                  <span className="text-neutral">{key}</span>
-                  <span className="text-xs font-semibold text-neutral">
-                    {value}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-      <h2 className="mb-6 mt-8 text-xl font-semibold text-neutral">
-        Samlet omloddingstatistikk
-      </h2>
-      <div
-        className={`rounded-lg border border-primary ${theme === "darkmode" ? "bg-gray-700" : "bg-blue-100"} p-5`}
-      >
-        <ul className="space-y-2">
-          {Object.entries(groupedStatsAll).map(([key, value]) => (
-            <li
-              key={key}
-              className="flex justify-between rounded p-2 text-xs hover:bg-primary"
-            >
-              <span className="text-neutral">{key}</span>
-              <span className="text-xs font-semibold text-neutral">
-                {value}
-              </span>
-            </li>
+      <table className="table-sm w-full border-collapse">
+        <thead>
+          <tr className={`bg-${theme === "darkmode" ? "gray-600" : "neutral"}`}>
+            <th className="p-2 text-left text-xs text-gray-200">Bladtype</th>
+            <th className="p-2 text-left text-xs text-gray-200">0 omlodding</th>
+            <th className="p-2 text-left text-xs text-gray-200">1 omlodding</th>
+            <th className="p-2 text-left text-xs text-gray-200">
+              2 omloddinger
+            </th>
+            <th className="p-2 text-left text-xs text-gray-200">
+              3 omloddinger
+            </th>
+            <th className="p-2 text-left text-xs text-gray-200">
+              4 omloddinger
+            </th>
+            <th className="p-2 text-left text-xs text-gray-200">
+              5 eller fler omloddinger
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {Object.keys(groupedStats).map((bladType) => (
+            <tr key={bladType} className="text-neutral hover:bg-accent">
+              <td className=" p-3">{bladType}</td>
+              <td className=" p-3">{groupedStats[bladType]["0 omlodding"]}</td>
+              <td className=" p-3">{groupedStats[bladType]["1 omlodding"]}</td>
+              <td className=" p-3">
+                {groupedStats[bladType]["2 omloddinger"]}
+              </td>
+              <td className=" p-3">
+                {groupedStats[bladType]["3 omloddinger"]}
+              </td>
+              <td className=" p-3">
+                {groupedStats[bladType]["4 omloddinger"]}
+              </td>
+              <td className=" p-3">
+                {groupedStats[bladType]["5 eller fler omloddinger"]}
+              </td>
+            </tr>
           ))}
-        </ul>
-      </div>
+          {/* Total-rad for alle blad */}
+          <tr className="font-semibold text-neutral">
+            <td className=" p-2">Total</td>
+            <td className=" p-2">{totalStats["0 omlodding"]}</td>
+            <td className=" p-2">{totalStats["1 omlodding"]}</td>
+            <td className=" p-2">{totalStats["2 omloddinger"]}</td>
+            <td className=" p-2">{totalStats["3 omloddinger"]}</td>
+            <td className=" p-2">{totalStats["4 omloddinger"]}</td>
+            <td className=" p-2">{totalStats["5 eller fler omloddinger"]}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 };

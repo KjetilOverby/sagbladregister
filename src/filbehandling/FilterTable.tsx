@@ -16,7 +16,7 @@ const FilterTable = ({ data, setSortByType }) => {
       <p>Selected Column: {setSortByType}</p>
       <table className="table table-xs">
         <thead>
-          <tr className="bg-blue-400 text-white">
+          <tr className="bg-neutral text-white">
             {data?.length > 0 ? (
               Object.keys(data[0]).map((key) => (
                 <th

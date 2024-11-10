@@ -72,7 +72,7 @@ const Brukere = ({ theme }) => {
           </div>
         )}
 
-        <div className="mx-5 mt-20 flex flex-col xl:mx-96">
+        <div className="mx-5 mt-20 flex flex-col 2xl:mx-96">
           <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
               <div className="overflow-hidden border-b border-primary shadow sm:rounded-lg">
@@ -108,7 +108,7 @@ const Brukere = ({ theme }) => {
                   </thead>
                   <tbody className="divide-y divide-primary bg-base-100">
                     {users?.map((user, personIdx) => (
-                      <tr className="hover:bg-primary" key={user.id}>
+                      <tr className="hover:bg-secondary" key={user.id}>
                         <td className="whitespace-nowrap px-6 py-4">
                           <div className="text-sm text-neutral">
                             {user.name}

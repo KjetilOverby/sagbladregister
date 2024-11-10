@@ -204,7 +204,7 @@ const BandDetails = ({
         </div>
       </div>
       <div className="max-xl:overflow-scroll">
-        <table className="table table-xs w-full bg-blue-600">
+        <table className="table table-xs w-full bg-primary">
           <thead>
             <tr>
               <th className="text-sm font-thin text-gray-100">Service</th>
@@ -264,7 +264,7 @@ const BandDetails = ({
 
               return (
                 <>
-                  <tr className="border border-base-100 bg-base-100 hover:bg-primary">
+                  <tr className="border border-base-100 bg-base-100 hover:bg-secondary">
                     <td className="py-5">
                       <div className="text-xs text-neutral">{post.service}</div>
                     </td>

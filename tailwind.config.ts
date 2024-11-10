@@ -36,12 +36,19 @@ export default {
           "base-100": "#292929",
         },
         lightmode: {
+          "primary": "#6fb3b8",
+          "secondary": "#badfe7",
+          "accent": "#badfe7",
+          "neutral": "#388087",
+          "base-100": "#f6f6f2",
+        },
+     /*    lightmode: {
           "primary": "#e3e3e3",
           "secondary": "#c2c0c0",
           "accent": "#c2c0c0",
           "neutral": "#5e5e5e",
           "base-100": "#ffffff",
-        },
+        }, */
         // futurisk: {
         //   "primary": "#7d7d7d",
         //   "secondary": "#474646",

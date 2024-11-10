@@ -83,7 +83,9 @@ const OverviewTable = ({ count, theme }) => {
       <h2 className="mb-2 mt-10 text-lg text-neutral ">Oversikt antall blad</h2>
       <table className="table-xs  md:table">
         <thead>
-          <tr className="md:text-md border border-b-accent border-l-base-100 border-r-base-100 border-t-accent bg-blue-600 text-[.7rem] text-white">
+          <tr
+            className={`md:text-md border border-b-accent border-l-base-100 border-r-base-100 border-t-accent  text-[.7rem] text-white ${theme === "darkmode" ? "bg-accent" : "bg-neutral"}`}
+          >
             <th>Type</th>
             <th>Blad i bruk: {nonDeletedSum}</th>
             <th>Slettet: {deletedSum}</th>

@@ -47,6 +47,7 @@ const Search = ({ theme }) => {
   const { data: sawblades } = api.sawblades.getAll.useQuery({
     IdNummer: idValue,
   });
+
   const { data: sawbladesService } = api.sawblades.getAllService.useQuery({});
 
   const { data: deletedSawblades } = api.sawblades.getAllDeleted.useQuery({
@@ -92,9 +93,9 @@ const Search = ({ theme }) => {
         <>
           <HeaderComponent />
 
-          <div className="mx-20 min-h-screen p-5 max-2xl:w-screen max-xl:m-0">
+          <div className=" min-h-screen p-5 max-2xl:w-screen max-xl:m-0 2xl:mx-20">
             <div
-              className={`my-5 rounded-xl ${theme === "darkmode" ? "bg-gray-700" : "bg-blue-100"} pl-5`}
+              className={`my-5 rounded-xl border border-primary ${theme === "darkmode" ? "bg-gray-700" : "bg-base-100"} pl-5`}
             >
               {!closeSearchComponent ? (
                 <div className="flex flex-col py-5">

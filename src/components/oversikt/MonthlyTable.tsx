@@ -76,7 +76,9 @@ const MonthlyTable = ({ monthlyCount, monthlyHistoryCount, theme }) => {
       <h2 className="mb-4 text-lg text-neutral ">Månedlig Oversikt</h2>
       <table className="table-xs w-full table-auto border-collapse text-left">
         <thead>
-          <tr className="bg-blue-600">
+          <tr
+            className={`${theme === "darkmode" ? "bg-accent" : "bg-neutral"}`}
+          >
             <th className="p-3 text-xs text-white">Måned</th>
             <th className="p-3 text-xs text-white">Nye Sagblad</th>
             <th className="p-3 text-xs text-white">Slettede Sagblad</th>
@@ -100,7 +102,9 @@ const MonthlyTable = ({ monthlyCount, monthlyHistoryCount, theme }) => {
             </tr>
           ))}
           {/* Totalrad */}
-          <tr className="bg-blue-400 font-bold text-white">
+          <tr
+            className={`font-bold text-white ${theme === "darkmode" ? "bg-accent" : "bg-neutral"}`}
+          >
             <td className="p-3">Totalt</td>
             <td className="p-3">{totals?.newCount}</td>
             <td className="p-3">{totals?.deletedCount}</td>
