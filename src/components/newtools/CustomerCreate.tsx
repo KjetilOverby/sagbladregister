@@ -13,6 +13,7 @@ import TypesArticle from "../reusable/TypesArticle";
 import dateFormat from "dateformat";
 import CreatePostCustomer from "./CreatePostCustomer";
 import Deleteblades from "./deleteblades";
+import EditInputComponent from "./EditInputComponent";
 
 const CustomerCreate = ({
   data,
@@ -23,13 +24,17 @@ const CustomerCreate = ({
   customerInit,
   setIdValue,
   setOpenDeleteID,
+  theme,
+  openEditID,
+  openEditHandler,
+  editSawblade,
 }) => {
   return (
     <div className="min-h-screen bg-base-100 p-5 max-lg:p-0 md:mx-48 ">
       <div className="overflow-x-auto px-5 pt-5">
         <div className="flex h-96 flex-row py-5 max-lg:grid max-lg:h-5/6">
           <CreatePostCustomer customerInit={customerInit} />
-          <div className="ml-5 rounded-xl bg-base-100 p-5 shadow-xl shadow-primary max-lg:ml-0">
+          <div className="ml-5 w-96 rounded-xl border  border-primary bg-base-100 p-5 max-lg:ml-0">
             <DatepickerComponent
               setDateValue={setDateValue}
               dateValue={dateValue}
@@ -40,7 +45,7 @@ const CustomerCreate = ({
                 onChange={(e) => setIdValue(e.currentTarget.value)}
                 type="text"
                 placeholder="Type here"
-                className="input input-bordered input-xs w-full max-w-xs bg-primary"
+                className="input input-bordered input-sm w-full max-w-xs bg-base-100 text-neutral outline-none"
               />
             </div>
           </div>
@@ -48,30 +53,35 @@ const CustomerCreate = ({
         <h1 className="mb-3 mt-5 text-neutral">
           Registrerte blad i perioden: {data?.length}
         </h1>
-        <div className="overflow-scroll">
-          <table className="table table-xs whitespace-nowrap border border-b-accent border-l-base-100 border-r-base-100 border-t-accent bg-base-100">
+        <div className="min-h-screen overflow-scroll">
+          <table className="table table-xs whitespace-nowrap border border-b-accent border-l-base-100 border-r-base-100 border-t-accent bg-base-100 ">
             <thead>
-              <tr className="border border-b-accent border-l-base-100 border-r-base-100 border-t-accent">
-                <th className="text-sm text-neutral">Serienummer</th>
-                <th className="text-sm text-neutral">Art.nummer</th>
-                <th className="text-sm text-neutral">Produsent</th>
-                <th className="text-sm text-neutral">Type</th>
-                <th className="text-sm text-neutral">Dato</th>
+              <tr
+                className={`border border-b-accent border-l-base-100 border-r-base-100 border-t-accent ${theme === "darkmode" ? "bg-primary" : "bg-neutral"}`}
+              >
+                <th className="text-sm text-gray-200">Serienummer</th>
+                <th className="text-sm text-gray-200">Art.nummer</th>
+                <th className="text-sm text-gray-200">Produsent</th>
+                <th className="text-sm text-gray-200">Type</th>
+                <th className="text-sm text-gray-200">Dato</th>
 
-                <th className="text-sm text-neutral">Opprettet av</th>
-                <th className="text-sm text-neutral"></th>
+                <th className="text-sm text-gray-200">Opprettet av</th>
+                <th className="text-sm text-gray-200"></th>
+                <th className="text-sm text-gray-200"></th>
               </tr>
             </thead>
             <tbody>
               {data?.map((blade) => {
                 return (
                   <>
-                    <tr className="border border-base-100 bg-base-100 hover:bg-primary">
+                    <tr
+                      className={`border border-base-100 bg-base-100 hover:cursor-pointer ${theme === "darkmode" ? "hover:bg-gray-700" : "hover:bg-accent"}`}
+                    >
                       <td className="py-5 font-bold text-neutral">
                         {blade.IdNummer}
 
-                        <span className="text-xs font-normal text-orange-500">
-                          {blade.note}
+                        <span className="ml-1 text-xs font-normal text-neutral">
+                          ({blade.note})
                         </span>
                       </td>
                       <td>
@@ -116,7 +126,7 @@ const CustomerCreate = ({
                           <div>
                             <div className="text-xs text-neutral">
                               {dateFormat(
-                                blade.updatedAt,
+                                blade.createdAt,
                                 "dd.mm.yyyy , HH:MM",
                               )}
                             </div>
@@ -137,9 +147,29 @@ const CustomerCreate = ({
                         </td>
                       </td>
 
+                      {/* <td>
+                        <button
+                          onClick={() => openEditHandler(blade.id)}
+                          className={`btn btn-sm mr-5 ${theme === "darkmode" ? "bg-primary" : "bg-neutral"} text-xs text-gray-200 hover:bg-primary`}
+                        >
+                          Rediger
+                        </button>
+                        {openEditID === blade.id && (
+                          <div className="z-50 rounded-xl  shadow-xl">
+                            <EditInputComponent
+                              editSawblade={editSawblade}
+                              blade={blade}
+                              openEditHandler={openEditHandler}
+                              title={blade.IdNummer}
+                              theme={theme}
+                            />
+                          </div>
+                        )}
+                      </td> */}
+
                       <td>
                         <button
-                          className="btn btn-xs bg-red-500 text-xs text-white hover:bg-red-600"
+                          className="btn btn-sm bg-red-500 text-xs text-white hover:bg-red-600"
                           onClick={() => deleteHandler(blade.id)}
                         >
                           SLETT

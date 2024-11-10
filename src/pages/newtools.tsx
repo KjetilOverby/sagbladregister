@@ -107,6 +107,10 @@ const Newtools = ({ theme, setTheme }) => {
             idValue={idValue}
             setIdValue={setIdValue}
             setOpenDeleteID={setOpenDeleteID}
+            theme={theme}
+            openEditID={openEditID}
+            openEditHandler={openEditHandler}
+            editSawblade={editSawblade}
           />
         </RoleAdminMV>
         <RoleAdminMT>
