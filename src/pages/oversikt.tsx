@@ -47,23 +47,27 @@ const Oversikt = ({ theme }: { theme: string }) => {
     <div className="min-h-screen" data-theme={theme}>
       <HeaderComponent />
       <div className="px-5 max-2xl:w-screen max-xl:m-0 xl:px-48">
-        {sessionData?.user.role === "ADMIN" && <OverviewTable count={count} />}
+        {sessionData?.user.role === "ADMIN" && (
+          <OverviewTable count={count} theme={theme} />
+        )}
         {sessionData?.user.role === "MT_ADMIN" && (
-          <OverviewTable count={countCustomer} />
+          <OverviewTable count={countCustomer} theme={theme} />
         )}
         {sessionData?.user.role === "MV_ADMIN" && (
-          <OverviewTable count={countCustomer} />
+          <OverviewTable count={countCustomer} theme={theme} />
         )}
         <RoleAdmin>
           <MonthlyTable
             monthlyCount={monthlyCount}
             monthlyHistoryCount={monthlyHistoryCount}
+            theme={theme}
           />
         </RoleAdmin>
         <RoleAdminMV>
           <MonthlyTable
             monthlyCount={monthlyCountCustomer}
             monthlyHistoryCount={monthlyHistoryCountCustomer}
+            theme={theme}
           />
         </RoleAdminMV>
       </div>

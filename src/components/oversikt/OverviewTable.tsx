@@ -11,7 +11,7 @@ import React from "react";
 import mvArticleTypes from "~/appdata/mvArticleTypes";
 import RoleAdminMV from "../roles/RoleAdminMV";
 
-const OverviewTable = ({ count }) => {
+const OverviewTable = ({ count, theme }) => {
   if (!count) {
     return null; // or return a loading indicator, or some other placeholder
   }
@@ -33,8 +33,6 @@ const OverviewTable = ({ count }) => {
     }
     return acc;
   }, {});
-
-  console.log(customCounts);
 
   // Group items by type and side
   const groupedItems = count.reduce((acc, item) => {
@@ -82,9 +80,10 @@ const OverviewTable = ({ count }) => {
 
   return (
     <div>
-      <table className="table-xs mt-10 md:table">
+      <h2 className="mb-2 mt-10 text-lg text-neutral ">Oversikt antall blad</h2>
+      <table className="table-xs  md:table">
         <thead>
-          <tr className="md:text-md border border-b-accent border-l-base-100 border-r-base-100 border-t-accent bg-purple-500 text-[.7rem] text-white">
+          <tr className="md:text-md border border-b-accent border-l-base-100 border-r-base-100 border-t-accent bg-blue-600 text-[.7rem] text-white">
             <th>Type</th>
             <th>Blad i bruk: {nonDeletedSum}</th>
             <th>Slettet: {deletedSum}</th>
@@ -101,7 +100,10 @@ const OverviewTable = ({ count }) => {
         </thead>
         <tbody>
           {itemsArray.map((item, index) => (
-            <tr key={index} className="border-none hover:bg-primary">
+            <tr
+              key={index}
+              className={`border-none  ${theme === "darkmode" ? "odd:bg-gray-700" : "odd:bg-gray-200"}`}
+            >
               <td className="md:text-md py-5 text-[.7rem]">
                 {item.type} {item.side}
               </td>

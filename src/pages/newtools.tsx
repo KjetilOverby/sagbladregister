@@ -104,7 +104,7 @@ const Newtools = ({ theme, setTheme }) => {
               <h1 className="mb-3 mt-5 text-neutral">
                 Registrerte blad i perioden: {data?.length}
               </h1>
-              <div className="overflow-scroll">
+              <div className="min-h-96 overflow-scroll">
                 <table className="table table-xs whitespace-nowrap border border-b-accent border-l-base-100 border-r-base-100 border-t-accent bg-base-100 ">
                   <thead>
                     <tr className="border border-b-accent border-l-base-100 border-r-base-100 border-t-accent">

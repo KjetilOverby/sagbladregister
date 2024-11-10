@@ -12,26 +12,26 @@ const SawbladeServiceTable = ({ sawbladesService, setIdValue }) => {
     <div>
       <table className="table table-xs whitespace-nowrap ">
         <thead>
-          <tr>
-            <th className="text-neutral md:text-sm">ID</th>
-            <th className="text-neutral md:text-sm">Type</th>
-            <th className="text-neutral md:text-sm">Til service</th>
-            <th className="text-neutral md:text-sm">Servicetype</th>
-            <th className="text-neutral md:text-sm">Reklamasjon</th>
-
-            {/* <th className="text-sm text-accent">Opprettet av</th> */}
+          <tr className="bg-blue-600">
+            <th className="py-3 text-gray-200 md:text-sm">ID</th>
+            <th className="py-3 text-gray-200 md:text-sm ">Type</th>
+            <th className="py-3 text-gray-200 md:text-sm ">Til service</th>
+            <th className="py-3 text-gray-200 md:text-sm ">Servicetype</th>
+            <th className="py-3 text-gray-200 md:text-sm ">Reklamasjon</th>
           </tr>
         </thead>
         <tbody>
-          {sawbladesService?.map((blade) => {
+          {sawbladesService?.map((blade, index) => {
             return (
               <>
                 {blade && (
                   <tr
                     onClick={() => setIdValue(blade.IdNummer)}
-                    className="hover:cursor-pointer hover:bg-primary"
+                    className={`hover:cursor-pointer hover:bg-accent ${
+                      index % 2 === 0 ? "bg-primary" : "bg-base-100"
+                    }`}
                   >
-                    <td className="text-[0.6rem] font-bold text-neutral md:text-xs">
+                    <td className="p-2 text-[0.6rem] font-bold text-neutral md:text-xs">
                       {blade.IdNummer}{" "}
                       {blade.note && (
                         <span className="text-[0.6rem] font-normal  text-gray-400 md:text-xs ">

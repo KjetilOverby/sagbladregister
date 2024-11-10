@@ -93,7 +93,9 @@ const Search = ({ theme }) => {
           <HeaderComponent />
 
           <div className="mx-20 min-h-screen p-5 max-2xl:w-screen max-xl:m-0">
-            <div className="my-5 rounded-xl bg-primary pl-5">
+            <div
+              className={`my-5 rounded-xl ${theme === "darkmode" ? "bg-gray-700" : "bg-blue-100"} pl-5`}
+            >
               {!closeSearchComponent ? (
                 <div className="flex flex-col py-5">
                   <div className="flex flex-col">
@@ -113,7 +115,7 @@ const Search = ({ theme }) => {
                       </button>
                     </Link>
                     <RoleAdmin>
-                      <div className="relative">
+                      <div className="relative mt-5">
                         <FaCircleInfo
                           onMouseOver={() => setOpenInfoModal(true)}
                           onMouseOut={() => setOpenInfoModal(false)}

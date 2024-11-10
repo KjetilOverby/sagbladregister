@@ -204,27 +204,27 @@ const BandDetails = ({
         </div>
       </div>
       <div className="max-xl:overflow-scroll">
-        <table className="table table-xs w-full bg-accent">
+        <table className="table table-xs w-full bg-blue-600">
           <thead>
             <tr>
-              <th className="text-sm font-thin text-neutral">Service</th>
-              <th className="text-sm font-thin text-neutral">
+              <th className="text-sm font-thin text-gray-100">Service</th>
+              <th className="text-sm font-thin text-gray-100">
                 Reklamasjonstype
               </th>
-              <th className="text-sm font-thin text-neutral">Til service</th>
-              <th className="text-sm font-thin text-neutral">Signatur</th>
+              <th className="text-sm font-thin text-gray-100">Til service</th>
+              <th className="text-sm font-thin text-gray-100">Signatur</th>
 
-              <th className="text-sm font-thin text-neutral">Anm</th>
-              <th className="text-sm font-bold text-neutral"></th>
-              <th className="text-sm font-bold text-neutral"></th>
-              <th className="text-sm font-bold text-neutral"></th>
-              <th className="text-sm font-bold text-neutral">Service</th>
-              <th className="text-sm font-bold text-neutral">Rep ant</th>
-              <th className="text-sm font-bold text-neutral">Ant tannslipp</th>
-              <th className="text-sm font-bold text-neutral">SK</th>
-              <th className="text-sm font-bold text-neutral">Anm KS</th>
-              <th className="text-sm font-bold text-neutral">Signatur</th>
-              <th className="text-sm font-bold text-neutral">Dato srv</th>
+              <th className="text-sm font-thin text-gray-100">Anm</th>
+              <th className="text-sm font-bold text-gray-100"></th>
+              <th className="text-sm font-bold text-gray-100"></th>
+              <th className="text-sm font-bold text-gray-100"></th>
+              <th className="text-sm font-bold text-gray-100">Service</th>
+              <th className="text-sm font-bold text-gray-100">Rep ant</th>
+              <th className="text-sm font-bold text-gray-100">Ant tannslipp</th>
+              <th className="text-sm font-bold text-gray-100">SK</th>
+              <th className="text-sm font-bold text-gray-100">Anm KS</th>
+              <th className="text-sm font-bold text-gray-100">Signatur</th>
+              <th className="text-sm font-bold text-gray-100">Dato srv</th>
             </tr>
           </thead>
           <tbody>
