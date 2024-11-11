@@ -2,7 +2,7 @@ import React from "react";
 
 const ServiceKodeTblAll = () => {
   return (
-    <table className="table table-xs w-80 bg-base-100 shadow-xl md:ml-5 md:w-full">
+    <table className="table table-xs w-80 bg-base-100 md:ml-5 md:w-full">
       <tr className="border-none">
         <th className="font-thin">SERV 402</th>
         <th className="font-thin">SLIP HM/STELLITBLAD Ø 0/610mm over 36t</th>
