@@ -17,6 +17,7 @@ const HistorikkComponent = ({
   updateStatusHandler,
   handleCloseModal,
   updatePostKS,
+  theme,
 }) => {
   return (
     <div>
@@ -99,6 +100,7 @@ const HistorikkComponent = ({
           updateStatusHandler={updateStatusHandler}
           handleCloseModal={handleCloseModal}
           updatePostKS={updatePostKS}
+          theme={theme}
         />
       </div>
     </div>

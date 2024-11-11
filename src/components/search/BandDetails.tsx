@@ -80,6 +80,7 @@ const BandDetails = ({
   deactivateStatusHandler,
   handleCloseModal,
   updatePostKS,
+  theme,
 }: bandProps) => {
   const [openInput, setOpenInput] = useState(false);
   const [openMessage, setOpenMessage] = useState<string | null>(null);
@@ -172,6 +173,7 @@ const BandDetails = ({
           postId={postId}
           historikkData={historikkData}
           setHistorikkData={setHistorikkData}
+          theme={theme}
         />
       )}
 
@@ -264,7 +266,7 @@ const BandDetails = ({
 
               return (
                 <>
-                  <tr className="border border-base-100 bg-base-100 hover:bg-secondary">
+                  <tr className="border border-base-100 bg-base-100 ">
                     <td className="py-5">
                       <div className="text-xs text-neutral">{post.service}</div>
                     </td>
@@ -331,7 +333,7 @@ const BandDetails = ({
                     <td className="text-neutral">
                       <button
                         onClick={editHistorikkPostHandler}
-                        className="btn btn-xs mr-5 bg-blue-500"
+                        className="btn btn-xs mr-5 bg-primary hover:bg-neutral "
                       >
                         <CiEdit
                           style={{ fontSize: ".8rem" }}
@@ -343,7 +345,7 @@ const BandDetails = ({
                       <RoleAdmin>
                         <button
                           onClick={openKSinput}
-                          className="btn btn-xs bg-yellow-500 text-base-100"
+                          className="btn btn-xs bg-neutral text-base-100 hover:bg-primary"
                         >
                           KS
                         </button>

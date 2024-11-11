@@ -13,7 +13,7 @@ const mvArticleTypes = [
     { blade: '475/120-5.0/3.6-z24 flens VS66', art: ['V-SH9625', 'V-SH9626'], side: ['Høyre', 'Venstre'] , minAnt: 25},
     { blade: '500/30-4.0/2.8-z96 JV Trimmer', art: 'V-SH0985' , minAnt: 60},
     { blade: '400/30-3.5/2.5-z80 JV Eksakt', art: 'V-SH0736' , minAnt: 5},
-    { blade: '400/30-4.4/3.3-z96 JV Endekapp', art: 'V-SH0675' , minAnt: 5},
+    { blade: '610/30-4.4/3.3-z96 JV Endekapp', art: 'V-SH0675' , minAnt: 5},
     { blade: '450/35-4.0/2.8-z72 RS Trimmer', art: 'V-SH1008' , minAnt: 10},
   ];
   

@@ -6,7 +6,7 @@
 // @ts-nocheck
 import React from "react";
 
-const ServiceInput = ({ setHistorikkData, historikkData }) => {
+const ServiceInput = ({ setHistorikkData, historikkData, theme }) => {
   return (
     <div>
       <p>service:</p>
@@ -18,7 +18,7 @@ const ServiceInput = ({ setHistorikkData, historikkData }) => {
           })
         }
         value={historikkData.service}
-        className="select select-bordered select-xs w-full max-w-xs bg-white text-neutral"
+        className={`select select-bordered select-xs w-full max-w-xs bg-white ${theme === "darkmode" ? "text-primary" : "text-neutral"}`}
       >
         <option value="">Velg service</option>
         <option value="Omlodding">Omlodding</option>

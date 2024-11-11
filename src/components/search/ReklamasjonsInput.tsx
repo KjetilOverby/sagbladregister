@@ -4,7 +4,7 @@
 // @ts-nocheck
 import React from "react";
 
-const ReklamasjonsInput = ({ setHistorikkData, historikkData }) => {
+const ReklamasjonsInput = ({ setHistorikkData, historikkData, theme }) => {
   return (
     <div>
       <p>Årsak:</p>
@@ -15,7 +15,7 @@ const ReklamasjonsInput = ({ setHistorikkData, historikkData }) => {
             feilkode: e.currentTarget.value,
           })
         }
-        className="select select-bordered select-xs w-full max-w-xs bg-white text-neutral"
+        className={`select select-bordered select-xs w-full max-w-xs bg-white ${theme === "darkmode" ? "text-neutral" : "text-neutral"}`}
       >
         <option value="">Velg årsak</option>
         <option value="Tannslipp">Tannslipp</option>

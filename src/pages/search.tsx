@@ -18,7 +18,11 @@ import { FaCircleInfo } from "react-icons/fa6";
 import InfoComponent from "~/components/reusable/InfoComponent";
 import Link from "next/link";
 
-const Search = ({ theme }) => {
+interface SearchProps {
+  theme: string;
+}
+
+const Search = ({ theme }: SearchProps) => {
   const [closeSearchComponent, setCloseSearchComponent] = useState(false);
   const { data: sessionData } = useSession();
   const [dateValue, setDateValue] = useState({
@@ -38,7 +42,7 @@ const Search = ({ theme }) => {
     }
   }, [sessionData]);
 
-  const { data: countAllBlades } = api.sawblades.countAllBlades.useQuery({});
+  const { data: countAllBlades } = api.sawblades.countAllBlades.useQuery();
   const { data: countAllBladesCustomers } =
     api.sawblades.countAllBladesCustomer.useQuery({
       init: customerInit,
@@ -48,14 +52,14 @@ const Search = ({ theme }) => {
     IdNummer: idValue,
   });
 
-  const { data: sawbladesService } = api.sawblades.getAllService.useQuery({});
+  const { data: sawbladesService } = api.sawblades.getAllService.useQuery();
 
   const { data: deletedSawblades } = api.sawblades.getAllDeleted.useQuery({
     date: `${dateValue.endDate}T23:59:59.000Z`,
     date2: `${dateValue.startDate}T00:00:00.000Z`,
   });
 
-  const { data: showFlaws } = api.bandhistorikk.getFlaws.useQuery({});
+  const { data: showFlaws } = api.bandhistorikk.getFlaws.useQuery();
 
   console.log("showFlaws", showFlaws);
 

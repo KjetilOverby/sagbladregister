@@ -426,6 +426,7 @@ const SearchMain = ({
               updateStatusHandler={updateStatusHandler}
               handleCloseModal={handleCloseModal}
               updatePostKS={updatePostKS}
+              theme={theme}
             />
           );
         })}

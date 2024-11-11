@@ -42,6 +42,8 @@ interface detailProps {
     }>
   >;
   postId: string;
+  theme: string;
+  setOpenEditBandDetails: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const EditBandDetails = ({
@@ -49,6 +51,7 @@ const EditBandDetails = ({
   postId,
   setHistorikkData,
   historikkData,
+  theme,
 }: detailProps) => {
   const ctx = api.useContext();
   const updateBandhistorikk = api.bandhistorikk.update.useMutation({
@@ -86,13 +89,14 @@ const EditBandDetails = ({
             creatorImg2: "",
           });
         }}
-        className="card w-96  border border-neutral bg-primary text-neutral"
+        className={`card w-96  border border-neutral ${theme === "darkmode" ? "bg-primary" : "bg-neutral"}`}
       >
         <div className="card-body">
           <h2 className="card-title">Rediger data</h2>
           <ServiceInput
             historikkData={historikkData}
             setHistorikkData={setHistorikkData}
+            theme={theme}
           />
           {/* <div>
             <p>Dato til service:</p>
@@ -134,7 +138,7 @@ const EditBandDetails = ({
                 })
               }
               type="text"
-              className="input input-bordered input-xs w-full max-w-xs bg-white"
+              className={`input input-bordered input-xs w-full max-w-xs bg-white ${theme === "darkmode" ? "text-primary" : "text-neutral"}`}
               value={historikkData.anmSag}
             />
           </div>
@@ -143,6 +147,7 @@ const EditBandDetails = ({
               <ReklamasjonsInput
                 historikkData={historikkData}
                 setHistorikkData={setHistorikkData}
+                theme={theme}
               />
             </div>
           )}
@@ -157,7 +162,7 @@ const EditBandDetails = ({
                 })
               }
               type="text"
-              className="input input-bordered input-xs w-full max-w-xs bg-white"
+              className={`input input-bordered input-xs w-full max-w-xs bg-white ${theme === "darkmode" ? "text-primary" : "text-neutral"}`}
             />
           </div>
 
