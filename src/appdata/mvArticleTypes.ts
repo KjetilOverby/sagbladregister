@@ -1,7 +1,7 @@
 
 
 const mvArticleTypes = [
-    { blade: '445/150-3.6/2.2-z36 MKV', art: 'V-SH9495', minAnt: 18 },
+    { blade: '445/150-3.6/2.2-z36 MKV', art: 'V-SH9495', minAnt: 0 },
     { blade: '445/150-3.8/2.4-z36 MKV', art: 'V-SH9502', minAnt: 30 },
     { blade: '445/150-4.0/2.6-z36 MKV', art: 'V-SH9505' , minAnt: 65},
     { blade: '445/150-4.2/2.8-z36 MKV', art: 'V-SH9496' , minAnt: 65},
