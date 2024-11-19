@@ -128,11 +128,11 @@ const EditInputComponent = ({
               })
             }
             className={`select select-bordered select-sm mb-5 w-full max-w-xs bg-white ${theme === "darkmode" ? "text-primary" : "text-neutral"}`}
-            value={Boolean(editInputVal.active)}
+            // value={Boolean(editInputVal.active)}
           >
             <option value="">Velg</option>
             <option value={true}>Aktiver service</option>
-            <option value={false}>Deaktiver service</option>
+            <option value="">Deaktiver service</option>
           </select>
         </div>
         <div className="mt-5">

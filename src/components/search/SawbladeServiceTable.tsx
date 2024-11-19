@@ -69,7 +69,7 @@ const SawbladeServiceTable = ({ sawbladesService, setIdValue, theme }) => {
                                 ? blade.bandhistorikk[
                                     blade.bandhistorikk.length - 1
                                   ].service
-                                : "Default Value" // Replace with a suitable default value
+                                : "Deaktiver Service" // Replace with a suitable default value
                             }
                           </div>
                         </div>
