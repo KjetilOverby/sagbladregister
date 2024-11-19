@@ -51,6 +51,7 @@ const StatistikkMain = ({
     "Omlodding",
     "Sliping",
     "Reparasjon",
+    "Retting",
     "Reklamasjon",
   ];
 
@@ -135,6 +136,8 @@ const StatistikkMain = ({
 
     setTableData(updatedServiceTableData);
   }, [historikkData]);
+
+  console.log(serviceTypes);
 
   return (
     <div className="md:pb-45 mx-0 pb-0 md:mx-20 2xl:mx-96">

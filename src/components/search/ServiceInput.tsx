@@ -24,6 +24,7 @@ const ServiceInput = ({ setHistorikkData, historikkData, theme }) => {
         <option value="Omlodding">Omlodding</option>
         <option value="Sliping">Sliping</option>
         <option value="Reparasjon">Reparasjon</option>
+        <option value="Retting">Retting</option>
         <option value="Reklamasjon">Reklamasjon</option>
       </select>
     </div>
