@@ -9,6 +9,7 @@ import dateFormat from "dateformat";
 import TypesArticle from "../reusable/TypesArticle";
 import mvArticleTypes from "~/appdata/mvArticleTypes";
 import mtArticleTypes from "~/appdata/mtArticleTypes";
+import TimeCalc from "../reusable/TimeCalc";
 
 const HistorikkComponent = ({
   blade,
@@ -23,18 +24,18 @@ const HistorikkComponent = ({
     <div>
       <div className="mb-5  max-lg:relative">
         <div className="mr-5 flex flex-col md:flex-row">
-          <div className="mb-3 rounded-xl border border-primary p-5">
+          <div className="mb-3">
             <h1 className="text-2xl">
-              ID: <span className="text-blue-500">{blade.IdNummer}</span>{" "}
+              <span className="text-neutral">{blade.IdNummer}</span>{" "}
               <span className="text-gray-400">{blade.note}</span>
               {blade.deleted === true && (
                 <span className="text-red-500">VRAKET</span>
               )}
             </h1>
-            <p className="text-xs">
+            <p className="text-xs text-neutral">
               Type: {blade.type} {blade.side}
             </p>
-            <p className="mb-3 text-xs">
+            <p className="text-xs text-neutral">
               Art nr:{" "}
               <span>
                 <TypesArticle blade={blade} articleTypes={mvArticleTypes} />
@@ -44,32 +45,35 @@ const HistorikkComponent = ({
               </span>
             </p>
 
-            <div className="mb-5 rounded-xl bg-primary p-2 text-xs text-neutral ">
+            <div className="mb-3 text-xs text-neutral ">
               <p className="">Registrert av: {blade.creator}</p>
-              <p className="mb-3">
+              <p className="">
                 Dato:
                 {dateFormat(blade.createdAt as Date, "dd.mm.yyyy")}
               </p>
-              <div className="w-10">
+              <TimeCalc fromDate={blade.createdAt} toTitle="siden" />
+              {/* <div className="w-10">
                 <img
                   className="w-full rounded-full"
                   src={blade.creatorImg}
                   alt=""
                 />
-              </div>
+              </div> */}
             </div>
             {blade.deleted && (
-              <div className="mb-5 rounded-xl bg-red-400 p-2 text-xs text-white">
+              <div className="mb-5 rounded-xl  text-xs text-neutral">
                 <p>Slettet av: {blade.deleter}</p>
                 <p>Dato: {dateFormat(blade.updatedAt as Date, "dd.mm.yyyy")}</p>
+                <p>Tid i bruk:</p>
+                <TimeCalc fromDate={blade.createdAt} toDate={blade.updatedAt} />
                 <p className="mb-3">Vrakårsak: {blade.deleteReason}</p>
-                <div className="w-10">
+                {/* <div className="w-10">
                   <img
                     className="w-full rounded-full"
                     src={blade.deleterImg}
                     alt=""
                   />
-                </div>
+                </div> */}
               </div>
             )}
           </div>
