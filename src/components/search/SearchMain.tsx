@@ -349,7 +349,7 @@ const SearchMain = ({
                     {blade.deleted && (
                       <button
                         onClick={() => gjenopprettHandler(blade.id)}
-                        className="btn btn-sm bg-green-500 text-white hover:bg-green-600"
+                        className={`btn btn-sm ${theme === "darkmode" ? "bg-primary" : "bg-neutral"} text-white hover:bg-primary`}
                       >
                         Gjenopprett
                       </button>
@@ -368,7 +368,7 @@ const SearchMain = ({
                         </div>
 
                         <div className="mt-5">
-                          <button className="btn btn-sm mr-2 bg-green-300 hover:bg-green-500">
+                          <button className="btn btn-sm mr-2 bg-neutral hover:bg-primary">
                             {" "}
                             <RestoreComponent
                               setOpenGjenopprettID={setOpenGjenopprettID}
@@ -389,9 +389,9 @@ const SearchMain = ({
                   <div>
                     <button
                       onClick={() => setOpenEdit(true)}
-                      className="btn  btn-sm ml-5 flex  cursor-pointer place-content-center bg-green-200 text-green-600 transition hover:bg-green-300"
+                      className={`btn  btn-sm ml-5 flex  cursor-pointer place-content-center ${theme === "darkmode" ? "bg-primary" : "bg-neutral"} text-white transition `}
                     >
-                      <CiEdit className="text-green-600" />
+                      <CiEdit className="text-white" />
                       Rediger
                     </button>
                     {openEdit && (

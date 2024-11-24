@@ -32,10 +32,10 @@ const HistorikkComponent = ({
                 <span className="text-red-500">VRAKET</span>
               )}
             </h1>
-            <p className="text-xs text-neutral">
+            <p className="text-sm font-semibold text-neutral">
               Type: {blade.type} {blade.side}
             </p>
-            <p className="text-xs text-neutral">
+            <p className="text-sm text-neutral">
               Art nr:{" "}
               <span>
                 <TypesArticle blade={blade} articleTypes={mvArticleTypes} />
@@ -51,6 +51,7 @@ const HistorikkComponent = ({
                 Dato:
                 {dateFormat(blade.createdAt as Date, "dd.mm.yyyy")}
               </p>
+
               <TimeCalc fromDate={blade.createdAt} toTitle="siden" />
               {/* <div className="w-10">
                 <img
@@ -63,9 +64,19 @@ const HistorikkComponent = ({
             {blade.deleted && (
               <div className="mb-5 rounded-xl  text-xs text-neutral">
                 <p>Slettet av: {blade.deleter}</p>
-                <p>Dato: {dateFormat(blade.updatedAt as Date, "dd.mm.yyyy")}</p>
-                <p>Tid i bruk:</p>
-                <TimeCalc fromDate={blade.createdAt} toDate={blade.updatedAt} />
+                <div className="flex">
+                  <p>
+                    Dato: {dateFormat(blade.updatedAt as Date, "dd.mm.yyyy")},{" "}
+                  </p>
+                  <TimeCalc fromDate={blade.updatedAt} toTitle="siden" />
+                </div>
+                <div className="flex">
+                  <p className="mr-1">Tid i bruk: </p>
+                  <TimeCalc
+                    fromDate={blade.createdAt}
+                    toDate={blade.updatedAt}
+                  />
+                </div>
                 <p className="mb-3">Vrakårsak: {blade.deleteReason}</p>
                 {/* <div className="w-10">
                   <img

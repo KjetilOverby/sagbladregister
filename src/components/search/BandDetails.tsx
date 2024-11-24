@@ -144,7 +144,7 @@ const BandDetails = ({
   }, {});
 
   return (
-    <div className="">
+    <div>
       {openInput && (
         <HistorikkInput
           setOpenInput={setOpenInput}
@@ -178,7 +178,7 @@ const BandDetails = ({
       )}
 
       <div className="">
-        <div className="mb-5 p-3">
+        <div className="mb-5">
           {/*      {!blade.active && (
             <button
               onClick={() => setOpenInput(true)}
@@ -188,8 +188,10 @@ const BandDetails = ({
             </button>
           )} */}
 
-          <p>Serviceposter: {bandhistorikkData?.bandhistorikk.length}</p>
-          <ul>
+          <p className="text-sm text-neutral">
+            Serviceposter: {bandhistorikkData?.bandhistorikk.length}
+          </p>
+          <ul className="text-sm text-neutral">
             {Object.entries(serviceCounts).map(([service, count]) => (
               <li key={service}>
                 {service}:{" "}
@@ -206,27 +208,28 @@ const BandDetails = ({
         </div>
       </div>
       <div className="max-xl:overflow-scroll">
-        <table className="table table-xs w-full bg-primary">
+        <table className="table table-xs w-full border border-primary border-l-base-100 border-r-base-100 bg-base-100">
           <thead>
-            <tr>
-              <th className="text-sm font-thin text-gray-100">Service</th>
-              <th className="text-sm font-thin text-gray-100">
+            <tr className="border-b-primary border-r-base-100">
+              <th className="text-sm font-thin text-neutral">Service</th>
+              <th className="text-sm font-thin text-neutral">
                 Reklamasjonstype
               </th>
-              <th className="text-sm font-thin text-gray-100">Til service</th>
-              <th className="text-sm font-thin text-gray-100">Signatur</th>
+              <th className="text-sm font-thin text-neutral">Til service</th>
+              <th className="text-sm font-thin text-neutral">Signatur</th>
 
-              <th className="text-sm font-thin text-gray-100">Anm</th>
-              <th className="text-sm font-bold text-gray-100"></th>
-              <th className="text-sm font-bold text-gray-100"></th>
-              <th className="text-sm font-bold text-gray-100"></th>
-              <th className="text-sm font-bold text-gray-100">Service</th>
-              <th className="text-sm font-bold text-gray-100">Rep ant</th>
-              <th className="text-sm font-bold text-gray-100">Ant tannslipp</th>
-              <th className="text-sm font-bold text-gray-100">SK</th>
-              <th className="text-sm font-bold text-gray-100">Anm KS</th>
-              <th className="text-sm font-bold text-gray-100">Signatur</th>
-              <th className="text-sm font-bold text-gray-100">Dato srv</th>
+              <th className="text-sm font-thin text-neutral">Anm</th>
+              <th className="text-sm font-bold text-neutral"></th>
+              <th className="text-sm font-bold text-neutral"></th>
+              <th className="text-sm font-bold text-neutral"></th>
+              <th className="text-sm font-bold text-neutral">Service</th>
+              <th className="text-sm font-bold text-neutral">Rep ant</th>
+              <th className="text-sm font-bold text-neutral">Ant tannslipp</th>
+              <th className="text-sm font-bold text-neutral">SK</th>
+              <th className="text-sm font-bold text-neutral">Anm KS</th>
+              <th className="text-sm font-bold text-neutral">Signatur</th>
+              <th className="text-sm font-bold text-neutral">Dato srv</th>
+              <th className="text-sm font-bold text-neutral"></th>
             </tr>
           </thead>
           <tbody>
@@ -295,7 +298,7 @@ const BandDetails = ({
                       {post.anmSag && (
                         <button
                           onClick={() => messageHander(post.id)}
-                          className="btn btn-xs bg-green-500"
+                          className="btn btn-xs bg-primary text-white"
                         >
                           Vis
                         </button>
@@ -360,7 +363,7 @@ const BandDetails = ({
                         <>
                           <button
                             onClick={() => messageKShandler(post.id)}
-                            className="btn btn-xs bg-yellow-500 text-base-100"
+                            className="btn btn-xs bg-primary text-white"
                           >
                             Vis
                           </button>

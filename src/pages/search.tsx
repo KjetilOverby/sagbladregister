@@ -124,14 +124,14 @@ const Search = ({ theme }: SearchProps) => {
                         <FaCircleInfo
                           onMouseOver={() => setOpenInfoModal(true)}
                           onMouseOut={() => setOpenInfoModal(false)}
-                          className="ml-5 text-lg text-info"
+                          className=" text-lg text-primary"
                         />
                         {openInfoModal && (
                           <InfoComponent
                             title="Id nummer"
                             text="Id nummer for Kunder skrives kundebokstavene først. For Moelven Våler er det MV- foran id nummeret, se liste over kunder lenger ned. For Kanefusa blader for Moelven Våler, etter MV- skrives de to første som er et tall og en bokstav. Deretter brukes de 6 siste sifrene eks: "
                             span="MV-8D410120"
-                            bg="bg-info"
+                            bg="bg-primary"
                             listTitle="Start betegnelse for kunder:"
                             list={["Moelven Våler: MV-", "Moelven Trysil: MT-"]}
                           />
