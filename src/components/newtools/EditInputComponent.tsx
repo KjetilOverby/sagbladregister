@@ -26,10 +26,11 @@ const EditInputComponent = ({
     produsent: blade.produsent,
     artikkel: blade.artikkel,
   });
+  console.log(blade);
 
   return (
     <div
-      className={`absolute   z-[100] mt-5 w-96 rounded-xl ${theme === "darkmode" ? "bg-primary" : "bg-neutral"} p-5 text-gray-200 shadow-xl`}
+      className={`absolute left-5   z-[100] mt-5 w-96 rounded-xl ${theme === "darkmode" ? "bg-primary" : "bg-neutral"} p-5 text-gray-200 shadow-xl`}
     >
       <form
         onSubmit={(e) => {
@@ -54,7 +55,9 @@ const EditInputComponent = ({
       >
         <div className="mb-5 flex flex-col">
           <h2 className="mb-5 font-bold">Rediger: {title}</h2>
+
           <label className="text-xs font-bold text-gray-200">Id nummer: </label>
+
           <input
             onChange={(e) =>
               setEditInputVal({
@@ -63,6 +66,12 @@ const EditInputComponent = ({
               })
             }
             type="text"
+            title={
+              blade?.bandhistorikk?.length > 0
+                ? "Kan ikke endre id nummer når det er serviceposter på bladet."
+                : ""
+            }
+            disabled={blade?.bandhistorikk?.length > 0}
             className={`input input-bordered input-sm  max-w-xs bg-white ${theme === "darkmode" ? "text-primary" : "text-neutral"} `}
             value={editInputVal.IdNummer}
           />

@@ -104,7 +104,7 @@ const NewBladesComponent: React.FC<NewBladesComponentProps> = ({
                         {blade.IdNummer}
 
                         <span className="ml-1 text-xs font-normal text-neutral">
-                          ({blade.note})
+                          {blade.note && `(${blade.note})`}
                         </span>
                       </td>
                       <td>

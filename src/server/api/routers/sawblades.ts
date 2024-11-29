@@ -360,6 +360,9 @@ columnsCustomer: protectedProcedure
             IdNummer: {contains: input.IdNummer ? input.IdNummer : undefined},
           }]
         },
+        include: {
+          bandhistorikk: true,
+        },
         orderBy: {
           createdAt: 'desc'
                         },
