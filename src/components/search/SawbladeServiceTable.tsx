@@ -79,19 +79,29 @@ const SawbladeServiceTable = ({ sawbladesService, setIdValue, theme }) => {
                       <div className="flex items-center space-x-3">
                         <div>
                           <div className="text-[0.6rem] text-neutral md:text-xs">
-                            {blade?.bandhistorikk.filter(
-                              (item) => item.feilkode !== "Ingen reklamasjon",
-                            ).length > 0
-                              ? blade.bandhistorikk.filter(
-                                  (item) =>
-                                    item.feilkode !== "Ingen reklamasjon",
-                                )[
-                                  blade.bandhistorikk.filter(
-                                    (item) =>
-                                      item.feilkode !== "Ingen reklamasjon",
-                                  ).length - 1
-                                ].feilkode
-                              : ""}
+                            {(() => {
+                              // Sjekk om `bandhistorikk` finnes og har elementer
+                              if (
+                                !blade?.bandhistorikk ||
+                                blade.bandhistorikk.length === 0
+                              ) {
+                                return ""; // Hvis ingen data finnes, vis tom streng
+                              }
+
+                              // Hent siste post i bandhistorikk
+                              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                              const lastPost =
+                                blade.bandhistorikk[
+                                  blade.bandhistorikk.length - 1
+                                ];
+
+                              // Hvis siste post har service "Reklamasjon", vis feilkode
+                              if (lastPost.service === "Reklamasjon") {
+                                return lastPost.feilkode || ""; // Vis feilkode, eller tom streng hvis feilkode ikke finnes
+                              }
+
+                              return ""; // Hvis service ikke er "Reklamasjon", vis ingenting
+                            })()}
                           </div>
                         </div>
                       </div>
