@@ -87,6 +87,7 @@ const OverviewTable = ({ count, theme }) => {
             className={`md:text-md border border-b-accent border-l-base-100 border-r-base-100 border-t-accent  text-[.7rem] text-white ${theme === "darkmode" ? "bg-primary" : "bg-neutral"}`}
           >
             <th>Type</th>
+            <th>Artikkel nummer</th>
             <th>Blad i bruk: {nonDeletedSum}</th>
             <th>Slettet: {deletedSum}</th>
             <th>Totalt Antall {totalSum}</th>
@@ -101,36 +102,61 @@ const OverviewTable = ({ count, theme }) => {
           </tr>
         </thead>
         <tbody>
-          {itemsArray.map((item, index) => (
-            <tr
-              key={index}
-              className={`border-none  ${theme === "darkmode" ? "odd:bg-gray-700" : "odd:bg-gray-200"}`}
-            >
-              <td className="md:text-md py-5 text-[.7rem] text-neutral">
-                {item.type} {item.side}
-              </td>
-              <td className="md:text-md py-5 text-[.7rem] text-neutral">
-                {item.nonDeletedCount}
-              </td>
-              <td className="md:text-md py-5 text-[.7rem] text-neutral">
-                {item.deletedCount}
-              </td>
-              <td className="md:text-md py-5 text-[.7rem] text-neutral">
-                {item.totalCount}
-              </td>
+          {itemsArray.map((item, index) => {
+            const matchingArtItem = mvArticleTypes.find((artItem) => {
+              if (Array.isArray(artItem.side)) {
+                const sideIndex = artItem.side.indexOf(item.side);
+                return artItem.blade === item.type && sideIndex !== -1;
+              } else {
+                return (
+                  artItem.blade === item.type &&
+                  (artItem.side === item.side || artItem.side === undefined)
+                );
+              }
+            });
 
-              <td className="md:text-md py-5 text-[.7rem] text-neutral">
-                <RoleAdminMV>{item.customCount}</RoleAdminMV>
-              </td>
-              <td
-                className={`md:text-md py-5 text-[.7rem] ${item.nonDeletedCount - item.customCount < 0 ? "text-red-500" : ""}`}
+            return (
+              <tr
+                key={index}
+                className={`border-none ${
+                  theme === "darkmode" ? "odd:bg-gray-700" : "odd:bg-gray-200"
+                }`}
               >
-                <RoleAdminMV>
-                  {item.nonDeletedCount - item.customCount}
-                </RoleAdminMV>
-              </td>
-            </tr>
-          ))}
+                <td className="md:text-md py-5 text-[.7rem] text-neutral">
+                  {item.type} {item.side}{" "}
+                </td>
+                <td className="md:text-md py-5 text-[.7rem] text-neutral">
+                  {" "}
+                  {matchingArtItem
+                    ? Array.isArray(matchingArtItem.art)
+                      ? matchingArtItem.art[
+                          matchingArtItem.side.indexOf(item.side)
+                        ]
+                      : matchingArtItem.art
+                    : "N/A"}
+                </td>
+                <td className="md:text-md py-5 text-[.7rem] text-neutral">
+                  {item.nonDeletedCount}
+                </td>
+                <td className="md:text-md py-5 text-[.7rem] text-neutral">
+                  {item.deletedCount}
+                </td>
+                <td className="md:text-md py-5 text-[.7rem] text-neutral">
+                  {item.totalCount}
+                </td>
+                <td className="md:text-md py-5 text-[.7rem] text-neutral">
+                  <RoleAdminMV>{item.customCount}</RoleAdminMV>
+                </td>
+                <td
+                  className={`md:text-md py-5 text-[.7rem] ${
+                    item.difference < 0 ? "text-red-500" : "text-neutral"
+                  }`}
+                >
+                  <RoleAdminMV>{item.difference}</RoleAdminMV>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
       {
