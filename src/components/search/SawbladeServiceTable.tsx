@@ -30,7 +30,7 @@ const SawbladeServiceTable = ({ sawbladesService, setIdValue, theme }) => {
                     className={`hover:cursor-pointer ${theme === "darkmode" ? "hover:bg-gray-600" : "hover:bg-gray-300"} ${
                       theme === "darkmode"
                         ? "odd:bg-gray-700"
-                        : "odd:bg-gray-100"
+                        : "odd:bg-gray-200"
                     }`}
                   >
                     <td className="p-2 text-[0.6rem] font-bold text-neutral md:text-xs">

@@ -167,6 +167,19 @@ const SearchMain = ({
     setNewBladesCount(sawblades?.length);
   }, [sawblades]);
 
+  const countTypes = (data: Blade[]): Record<string, number> => {
+    return data?.reduce(
+      (acc, item) => {
+        const key = `${item.type} ${item.side || ""}`;
+        acc[key] = (acc[key] ?? 0) + 1;
+        return acc;
+      },
+      {} as Record<string, number>,
+    );
+  };
+
+  const countTypesList = countTypes(sawbladesService as Blade[]);
+
   return (
     <div className="max-lg:overflow-scroll">
       {/* {showFlaws?.map((flaw) => {
@@ -439,6 +452,35 @@ const SearchMain = ({
             <h1 className="text-xl text-neutral">
               Blad service ({sawbladesService?.length})
             </h1>
+            <div className="mb-5">
+              <table className="table table-xs whitespace-nowrap">
+                <thead>
+                  <tr className="bg-primary">
+                    <th className="text-gray-200 md:text-sm">Type</th>
+                    <th className="text-gray-200 md:text-sm">Antall</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {Object.entries(countTypesList).map(([type, count]) => (
+                    <tr
+                      key={type}
+                      className={`hover:cursor-pointer ${theme === "darkmode" ? "hover:bg-gray-600" : "hover:bg-gray-300"} ${
+                        theme === "darkmode"
+                          ? "odd:bg-gray-700"
+                          : "odd:bg-gray-200"
+                      }`}
+                    >
+                      <td className="py-2 text-[0.6rem] font-bold text-neutral md:text-xs">
+                        {type}
+                      </td>
+                      <td className="py-2 text-[0.6rem] font-bold text-neutral md:text-xs">
+                        {count}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
             <SawbladeServiceTable
               sawbladesService={sawbladesService}
               setIdValue={setIdValue}
