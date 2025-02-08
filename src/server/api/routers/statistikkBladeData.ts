@@ -1,63 +1,64 @@
-
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { z } from "zod";
 
-import {
-  createTRPCRouter,
-  protectedProcedure
-} from "~/server/api/trpc";
+import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 export const statistikkBladeDataRouter = createTRPCRouter({
- 
-
-  getMonthlyHistoryStats: protectedProcedure
-  .query(async ({ ctx }) => {
+  getMonthlyHistoryStats: protectedProcedure.query(async ({ ctx }) => {
     try {
       // Hent alle historikkposter (inkludert slettede og aktive)
       const history = await ctx.db.bandhistorikk.findMany({
         select: {
           createdAt: true,
-          service: true,  // Hent service for å gruppere etter
+          service: true, // Hent service for å gruppere etter
         },
       });
 
       // Funksjon for å gruppere data etter år og måned
-      const groupByMonthAndService = (history: { createdAt: Date; service: string }[]) => {
-        return history.reduce((acc, entry) => {
-          const yearMonth = `${entry.createdAt.getFullYear()}-${entry.createdAt.getMonth() + 1}`;
-          
-          // Initialiser månedlig objekt hvis det ikke eksisterer
-          if (!acc[yearMonth]) {
-            acc[yearMonth] = { reparasjon: 0, omlodding: 0, reklamasjon: 0 };
-          }
+      const groupByMonthAndService = (
+        history: { createdAt: Date; service: string }[],
+      ) => {
+        return history.reduce(
+          (acc, entry) => {
+            const yearMonth = `${entry.createdAt.getFullYear()}-${entry.createdAt.getMonth() + 1}`;
 
-          // Legg til debugging log for å sjekke hva 'service' inneholder
-        
+            // Initialiser månedlig objekt hvis det ikke eksisterer
+            if (!acc[yearMonth]) {
+              acc[yearMonth] = { reparasjon: 0, omlodding: 0, reklamasjon: 0 };
+            }
 
-          // Øk telleren for servicekategori
-          if (entry.service === "Reparasjon") {
-            acc[yearMonth].reparasjon += 1;
-          } else if (entry.service === "Omlodding") {
-            acc[yearMonth].omlodding += 1;
-          } else if (entry.service === "Reklamasjon") {
-            acc[yearMonth].reklamasjon += 1;
-          } else {
-            // Hvis service ikke matcher, kan du logge uventede verdier
-            
-          }
+            // Legg til debugging log for å sjekke hva 'service' inneholder
 
-          return acc;
-        }, {} as Record<string, { reparasjon: number; omlodding: number; reklamasjon: number }>);
+            // Øk telleren for servicekategori
+            if (entry.service === "Reparasjon") {
+              acc[yearMonth].reparasjon += 1;
+            } else if (entry.service === "Omlodding") {
+              acc[yearMonth].omlodding += 1;
+            } else if (entry.service === "Reklamasjon") {
+              acc[yearMonth].reklamasjon += 1;
+            } else {
+              // Hvis service ikke matcher, kan du logge uventede verdier
+            }
+
+            return acc;
+          },
+          {} as Record<
+            string,
+            { reparasjon: number; omlodding: number; reklamasjon: number }
+          >,
+        );
       };
 
       // Gruppér og tell månedlige service-statistikker
       const monthlyHistoryStats = groupByMonthAndService(history);
 
       // Omformater til en liste for enklere håndtering i frontend
-      const monthlyStats = Object.keys(monthlyHistoryStats).map((yearMonth) => ({
-        yearMonth,
-        ...monthlyHistoryStats[yearMonth],
-      }));
+      const monthlyStats = Object.keys(monthlyHistoryStats).map(
+        (yearMonth) => ({
+          yearMonth,
+          ...monthlyHistoryStats[yearMonth],
+        }),
+      );
 
       return monthlyStats;
     } catch (error) {
@@ -65,200 +66,208 @@ export const statistikkBladeDataRouter = createTRPCRouter({
       throw new Error("Kunne ikke hente historikk-statistikk");
     }
   }),
-
 
   getMonthlyHistoryStatsCustomer: protectedProcedure
-  .input(z.object({init: z.string(),}))
-  .query(async ({ input, ctx }) => {
-    try {
-      // Hent alle historikkposter (inkludert slettede og aktive)
-      const history = await ctx.db.bandhistorikk.findMany({
+    .input(z.object({ init: z.string() }))
+    .query(async ({ input, ctx }) => {
+      try {
+        // Hent alle historikkposter (inkludert slettede og aktive)
+        const history = await ctx.db.bandhistorikk.findMany({
+          where: {
+            bladeRelationId: { startsWith: input.init },
+          },
+          select: {
+            createdAt: true,
+            service: true, // Hent service for å gruppere etter
+          },
+        });
+
+        // Funksjon for å gruppere data etter år og måned
+        const groupByMonthAndService = (
+          history: { createdAt: Date; service: string }[],
+        ) => {
+          return history.reduce(
+            (acc, entry) => {
+              const yearMonth = `${entry.createdAt.getFullYear()}-${entry.createdAt.getMonth() + 1}`;
+
+              // Initialiser månedlig objekt hvis det ikke eksisterer
+              if (!acc[yearMonth]) {
+                acc[yearMonth] = {
+                  reparasjon: 0,
+                  omlodding: 0,
+                  reklamasjon: 0,
+                };
+              }
+
+              // Legg til debugging log for å sjekke hva 'service' inneholder
+
+              // Øk telleren for servicekategori
+              if (entry.service === "Reparasjon") {
+                acc[yearMonth].reparasjon += 1;
+              } else if (entry.service === "Omlodding") {
+                acc[yearMonth].omlodding += 1;
+              } else if (entry.service === "Reklamasjon") {
+                acc[yearMonth].reklamasjon += 1;
+              } else {
+                // Hvis service ikke matcher, kan du logge uventede verdier
+              }
+
+              return acc;
+            },
+            {} as Record<
+              string,
+              { reparasjon: number; omlodding: number; reklamasjon: number }
+            >,
+          );
+        };
+
+        // Gruppér og tell månedlige service-statistikker
+        const monthlyHistoryStats = groupByMonthAndService(history);
+
+        // Omformater til en liste for enklere håndtering i frontend
+        const monthlyStats = Object.keys(monthlyHistoryStats).map(
+          (yearMonth) => ({
+            yearMonth,
+            ...monthlyHistoryStats[yearMonth],
+          }),
+        );
+
+        return monthlyStats;
+      } catch (error) {
+        console.error("Feil ved henting av historikk-statistikk:", error);
+        throw new Error("Kunne ikke hente historikk-statistikk");
+      }
+    }),
+
+  getAllHistorikk: protectedProcedure
+    .input(z.object({ date: z.string(), date2: z.string() }))
+    .query(({ ctx, input }) => {
+      return ctx.db.bandhistorikk.findMany({
         where: {
-          bladeRelationId: { startsWith: input.init},
+          createdAt: {
+            lte: new Date(input.date),
+            gte: new Date(input.date2),
+          },
         },
-        select: {
-          createdAt: true,
-          service: true,  // Hent service for å gruppere etter
+        orderBy: {
+          createdAt: "desc",
         },
       });
+    }),
 
-      // Funksjon for å gruppere data etter år og måned
-      const groupByMonthAndService = (history: { createdAt: Date; service: string }[]) => {
-        return history.reduce((acc, entry) => {
-          const yearMonth = `${entry.createdAt.getFullYear()}-${entry.createdAt.getMonth() + 1}`;
-          
-          // Initialiser månedlig objekt hvis det ikke eksisterer
-          if (!acc[yearMonth]) {
-            acc[yearMonth] = { reparasjon: 0, omlodding: 0, reklamasjon: 0 };
-          }
-
-          // Legg til debugging log for å sjekke hva 'service' inneholder
-        
-
-          // Øk telleren for servicekategori
-          if (entry.service === "Reparasjon") {
-            acc[yearMonth].reparasjon += 1;
-          } else if (entry.service === "Omlodding") {
-            acc[yearMonth].omlodding += 1;
-          } else if (entry.service === "Reklamasjon") {
-            acc[yearMonth].reklamasjon += 1;
-          } else {
-            // Hvis service ikke matcher, kan du logge uventede verdier
-            
-          }
-
-          return acc;
-        }, {} as Record<string, { reparasjon: number; omlodding: number; reklamasjon: number }>);
-      };
-
-      // Gruppér og tell månedlige service-statistikker
-      const monthlyHistoryStats = groupByMonthAndService(history);
-
-      // Omformater til en liste for enklere håndtering i frontend
-      const monthlyStats = Object.keys(monthlyHistoryStats).map((yearMonth) => ({
-        yearMonth,
-        ...monthlyHistoryStats[yearMonth],
-      }));
-
-      return monthlyStats;
-    } catch (error) {
-      console.error("Feil ved henting av historikk-statistikk:", error);
-      throw new Error("Kunne ikke hente historikk-statistikk");
-    }
-  }),
-
-
-
-    getAllHistorikk: protectedProcedure
-    .input(z.object({date: z.string(), date2: z.string()}))
-        .query(({ ctx, input }) => {
-         return ctx.db.bandhistorikk.findMany({
-          where: {
-              createdAt: {
-               lte: new Date(input.date),
-               gte: new Date(input.date2),
-              },
-             
+  getAllHistorikkUpdate: protectedProcedure
+    .input(z.object({ date: z.string(), date2: z.string() }))
+    .query(({ ctx, input }) => {
+      return ctx.db.bandhistorikk.findMany({
+        where: {
+          updatedAt: {
+            lte: new Date(input.date),
+            gte: new Date(input.date2),
           },
-          orderBy: {
-            createdAt: 'desc'
-                          }
-         })
-      }),
-   
-    getAllHistorikkUpdate: protectedProcedure
-    .input(z.object({date: z.string(), date2: z.string()}))
-        .query(({ ctx, input }) => {
-         return ctx.db.bandhistorikk.findMany({
-          where: {
+        },
+        orderBy: {
+          updatedAt: "desc",
+        },
+      });
+    }),
+  getAllHistorikkKS: protectedProcedure
+    .input(z.object({ date: z.string(), date2: z.string() }))
+    .query(({ ctx, input }) => {
+      return ctx.db.bandhistorikk.findMany({
+        where: {
+          datoSrv: {
+            lte: new Date(input.date),
+            gte: new Date(input.date2),
+          },
+        },
+        orderBy: {
+          datoSrv: "desc",
+        },
+      });
+    }),
+
+  getAllToothCount: protectedProcedure
+    .input(z.object({ date: z.string(), date2: z.string() }))
+    .query(({ ctx, input }) => {
+      return ctx.db.bandhistorikk.aggregate({
+        where: {
+          updatedAt: {
+            lte: new Date(input.date),
+            gte: new Date(input.date2),
+          },
+        },
+        _sum: {
+          antRep: true,
+          antTannslipp: true,
+        },
+      });
+    }),
+
+  reklamasjonTypes: protectedProcedure
+    .input(z.object({ date: z.string(), date2: z.string() }))
+    .query(({ ctx, input }) => {
+      return ctx.db.bandhistorikk.groupBy({
+        by: ["feilkode"],
+        where: {
+          AND: [
+            {
               updatedAt: {
-               lte: new Date(input.date),
-               gte: new Date(input.date2),
+                lte: new Date(input.date),
+                gte: new Date(input.date2),
               },
-              
-          },
-          orderBy: {
-            updatedAt: 'desc'
-                          }
-         })
-      }),
-    getAllHistorikkKS: protectedProcedure
-    .input(z.object({date: z.string(), date2: z.string()}))
-        .query(({ ctx, input }) => {
-         return ctx.db.bandhistorikk.findMany({
-          where: {
-              datoSrv: {
-               lte: new Date(input.date),
-               gte: new Date(input.date2),
-              },
-          },
-          orderBy: {
-            datoSrv: 'desc'
-                          }
-         })
-      }),
-
-
-      getAllToothCount: protectedProcedure
-      .input(z.object({date: z.string(), date2: z.string()}))
-          .query(({ ctx, input }) => {
-           return ctx.db.bandhistorikk.aggregate({
-            where: {
-            
-                updatedAt: {
-                 lte: new Date(input.date),
-                 gte: new Date(input.date2),
-                },
-               
-           
             },
-            _sum: {
-              antRep: true,
-              antTannslipp: true
-            }
-           })
-        }),
+          ],
+        },
+        _count: {
+          feilkode: true,
+        },
+      });
+    }),
 
-        reklamasjonTypes: protectedProcedure
-        .input(z.object({date: z.string(), date2: z.string()}))
-            .query(({ ctx, input }) => {
-             return ctx.db.bandhistorikk.groupBy({
-              by: ['feilkode'],
-              where: {
-                AND: [{
-                  updatedAt: {
-                   lte: new Date(input.date),
-                   gte: new Date(input.date2),
-                  },
-               
-                }]
+  serviceTypesCount: protectedProcedure
+    .input(z.object({ date: z.string(), date2: z.string() }))
+    .query(({ ctx, input }) => {
+      return ctx.db.bandhistorikk.groupBy({
+        by: ["service"],
+        where: {
+          AND: [
+            {
+              updatedAt: {
+                lte: new Date(input.date),
+                gte: new Date(input.date2),
               },
-              _count: {
-                feilkode: true,
-              }
-             })
-          }),
+            },
+          ],
+        },
+        _count: {
+          service: true,
+        },
+      });
+    }),
+  serviceTypesCountCustomer: protectedProcedure
+    .input(z.object({ date: z.string(), date2: z.string(), init: z.string() }))
+    .query(({ ctx, input }) => {
+      return ctx.db.bandhistorikk.groupBy({
+        by: ["service"],
+        where: {
+          AND: [
+            {
+              updatedAt: {
+                lte: new Date(input.date),
+                gte: new Date(input.date2),
+              },
+              bladeRelationId: { startsWith: input.init },
+            },
+          ],
+        },
+        _count: {
+          service: true,
+        },
+      });
+    }),
 
-          serviceTypesCount: protectedProcedure
-  .input(z.object({date: z.string(), date2: z.string()}))
-  .query(({ ctx, input }) => {
-    return ctx.db.bandhistorikk.groupBy({
-      by: ['service'],
-      where: {
-        AND: [{
-          updatedAt: {
-            lte: new Date(input.date),
-            gte: new Date(input.date2),
-          },
-        }]
-      },
-      _count: {
-        service: true,
-      }
-    })
-  }),
-          serviceTypesCountCustomer: protectedProcedure
-  .input(z.object({date: z.string(), date2: z.string(), init: z.string()}))
-  .query(({ ctx, input }) => {
-    return ctx.db.bandhistorikk.groupBy({
-      by: ['service'],
-      where: {
-        AND: [{
-          updatedAt: {
-            lte: new Date(input.date),
-            gte: new Date(input.date2),
-          },
-          bladeRelationId: { startsWith: input.init},
-        }]
-      },
-      _count: {
-        service: true,
-      }
-    })
-  }),
-
-          handlingServiceData: protectedProcedure
-    .input(z.object({date: z.string(), date2: z.string()}))
+  handlingServiceData: protectedProcedure
+    .input(z.object({ date: z.string(), date2: z.string() }))
     .query(async ({ ctx, input }) => {
       const handlingData = await ctx.db.bandhistorikk.findMany({
         select: {
@@ -269,14 +278,14 @@ export const statistikkBladeDataRouter = createTRPCRouter({
             lte: new Date(input.date),
             gte: new Date(input.date2),
           },
-        }
+        },
       });
-  
+
       const handlingCounts = {};
-  
-      handlingData.forEach(data => {
-        const handlings = data.handling.split(', ');
-        handlings.forEach(handling => {
+
+      handlingData.forEach((data) => {
+        const handlings = data.handling.split(", ");
+        handlings.forEach((handling) => {
           if (handling in handlingCounts) {
             handlingCounts[handling]++;
           } else {
@@ -284,159 +293,310 @@ export const statistikkBladeDataRouter = createTRPCRouter({
           }
         });
       });
-  
+
       return handlingCounts;
     }),
 
-          
+  historyCountYearly: protectedProcedure.query(async ({ ctx }) => {
+    const history = await ctx.db.bandhistorikk.findMany({
+      select: {
+        createdAt: true,
+        service: true,
+        bladType: true, // Viktig! Det heter bladType
+      },
+    });
 
-    
-// ****************** CUSTOMERS ****************** //
-      
-    getAllCustomerHistorikk: protectedProcedure
-    .input(z.object({date: z.string(), date2: z.string(), bladeRelationId: z.string(), init: z.string()}))
-        .query(({ ctx, input }) => {
-         return ctx.db.bandhistorikk.findMany({
-          where: {
-            AND: [{
-              createdAt: {
-               lte: new Date(input.date),
-               gte: new Date(input.date2),
-              },
-              bladeRelationId: { startsWith: input.init},
-            }]
-          },
-          orderBy: {
-            createdAt: 'desc'
-                          }
-         })
-      }),
+    // Sjekk om vi faktisk fikk data
+    if (!history || history.length === 0) {
+      console.log("Ingen data funnet i bandhistorikk-tabellen.");
+      return {};
+    }
 
-      getAllHistorikkUpdateCustomer: protectedProcedure
-      .input(z.object({date: z.string(), date2: z.string(), init: z.string()}))
-          .query(({ ctx, input }) => {
-           return ctx.db.bandhistorikk.findMany({
-            where: {
-              AND: [{
-                updatedAt: {
-                 lte: new Date(input.date),
-                 gte: new Date(input.date2),
-                },
-                bladeRelationId: { startsWith: input.init},
-               
-              }],
-              
-            },
-            orderBy: {
-              updatedAt: 'desc'
-                            }
-            
-           })
-        }),
+    // Gruppering av tellinger
+    const yearlyCount = history.reduce(
+      (acc, entry) => {
+        const year = entry.createdAt
+          ? new Date(entry.createdAt).getFullYear()
+          : "Ukjent";
+        const serviceType = entry.service || "Ukjent"; // Håndterer null-verdier
+        const bladType = entry.bladType || "Ukjent"; // Håndterer null-verdier
 
-        getAllHistorikkKSCustomer: protectedProcedure
-        .input(z.object({date: z.string(), date2: z.string(), init: z.string()}))
-            .query(({ ctx, input }) => {
-             return ctx.db.bandhistorikk.findMany({
-              where: {
-                AND: [{
-                  datoSrv: {
-                   lte: new Date(input.date),
-                   gte: new Date(input.date2),
-                  },
-                  bladeRelationId: { startsWith: input.init},
-                }]
-              },
-              orderBy: {
-                datoSrv: 'desc'
-                              }
-             })
-          }),
+        // Initialiser året hvis det ikke finnes
+        if (!acc[year]) {
+          acc[year] = {
+            total: 0,
+            reparasjon: 0,
+            omlodding: 0,
+            reklamasjon: 0,
+            bladeTypesOmlodding: {}, // Telling av bladType for omlodding
+            bladeTypesReparasjon: {}, // Telling av bladType for reparasjon
+            bladeTypesReklamasjon: {}, // Telling av bladType for reklamasjon
+          };
+        }
 
-     reklamasjonTypesCustomer: protectedProcedure
-    .input(z.object({date: z.string(), date2: z.string(), init: z.string()}))
-        .query(({ ctx, input }) => {
-         return ctx.db.bandhistorikk.groupBy({
-          by: ['feilkode'],
-          where: {
-            AND: [{
-              updatedAt: {
-               lte: new Date(input.date),
-               gte: new Date(input.date2),
-              },
-              bladeRelationId: { startsWith: input.init},
-            }]
-          },
-          _count: {
-            feilkode: true,
+        // Øk total teller
+        acc[year].total += 1;
+
+        // Øk teller basert på service-type og tell bladTyper
+        if (serviceType === "Reparasjon") {
+          acc[year].reparasjon += 1;
+
+          // Tell bladType for Reparasjon
+          if (!acc[year].bladeTypesReparasjon[bladType]) {
+            acc[year].bladeTypesReparasjon[bladType] = 0;
           }
-         })
-      }),
-   
-   
+          acc[year].bladeTypesReparasjon[bladType] += 1;
+        } else if (serviceType === "Omlodding") {
+          acc[year].omlodding += 1;
 
- 
+          // Tell bladType for Omlodding
+          if (!acc[year].bladeTypesOmlodding[bladType]) {
+            acc[year].bladeTypesOmlodding[bladType] = 0;
+          }
+          acc[year].bladeTypesOmlodding[bladType] += 1;
+        } else if (serviceType === "Reklamasjon") {
+          acc[year].reklamasjon += 1;
 
+          // Tell bladType for Reklamasjon
+          if (!acc[year].bladeTypesReklamasjon[bladType]) {
+            acc[year].bladeTypesReklamasjon[bladType] = 0;
+          }
+          acc[year].bladeTypesReklamasjon[bladType] += 1;
+        }
 
-      getAllCustomerToothCount: protectedProcedure
-      .input(z.object({date: z.string(), date2: z.string(), init: z.string()}))
-          .query(({ ctx, input }) => {
-           return ctx.db.bandhistorikk.aggregate({
-            where: {
-              AND: [{
-                updatedAt: {
-                 lte: new Date(input.date),
-                 gte: new Date(input.date2),
-                },
-                bladeRelationId: { startsWith: input.init},
-              }]
-            },
-            _sum: {
-              antRep: true,
-              antTannslipp: true
+        return acc;
+      },
+      {} as Record<
+        number | string,
+        {
+          total: number;
+          reparasjon: number;
+          omlodding: number;
+          reklamasjon: number;
+          bladeTypesOmlodding: Record<string, number>;
+          bladeTypesReparasjon: Record<string, number>;
+          bladeTypesReklamasjon: Record<string, number>;
+        }
+      >,
+    );
+
+    return yearlyCount;
+  }),
+
+  // ****************** CUSTOMERS ****************** //
+
+  historyCountYearlyCustomer: protectedProcedure
+    .input(z.object({ init: z.string() })) // Legger til input for init
+    .query(async ({ ctx, input }) => {
+      const history = await ctx.db.bandhistorikk.findMany({
+        where: {
+          bladeRelationId: {
+            startsWith: input.init, // Filter for bladeRelationId som starter med input.init
+          },
+        },
+        select: {
+          createdAt: true,
+          service: true,
+          bladType: true,
+        },
+      });
+
+      // Sjekk om vi faktisk fikk data
+      if (!history || history.length === 0) {
+        console.log("Ingen data funnet i bandhistorikk-tabellen.");
+        return {};
+      }
+
+      // Gruppering av tellinger
+      const yearlyCount = history.reduce(
+        (acc, entry) => {
+          const year = entry.createdAt
+            ? new Date(entry.createdAt).getFullYear()
+            : "Ukjent";
+          const serviceType = entry.service || "Ukjent"; // Håndterer null-verdier
+          const bladType = entry.bladType || "Ukjent"; // Håndterer null-verdier
+
+          // Initialiser året hvis det ikke finnes
+          if (!acc[year]) {
+            acc[year] = {
+              total: 0,
+              reparasjon: 0,
+              omlodding: 0,
+              reklamasjon: 0,
+              bladeTypesOmlodding: {}, // Telling av bladType for omlodding
+              bladeTypesReparasjon: {}, // Telling av bladType for reparasjon
+              bladeTypesReklamasjon: {}, // Telling av bladType for reklamasjon
+            };
+          }
+
+          // Øk total teller
+          acc[year].total += 1;
+
+          // Øk teller basert på service-type og tell bladTyper
+          if (serviceType === "Reparasjon") {
+            acc[year].reparasjon += 1;
+
+            // Tell bladType for Reparasjon
+            if (!acc[year].bladeTypesReparasjon[bladType]) {
+              acc[year].bladeTypesReparasjon[bladType] = 0;
             }
-           })
-        }),
+            acc[year].bladeTypesReparasjon[bladType] += 1;
+          } else if (serviceType === "Omlodding") {
+            acc[year].omlodding += 1;
 
-        handlingServiceDataCustomer: protectedProcedure
-        .input(z.object({date: z.string(), date2: z.string(), init: z.string()}))
-        .query(async ({ ctx, input }) => {
-          const handlingData = await ctx.db.bandhistorikk.findMany({
-            select: {
-              handling: true,
-            },
-            where: {
-              AND: [{
-                updatedAt: {
-                 lte: new Date(input.date),
-                 gte: new Date(input.date2),
-                },
-                bladeRelationId: { startsWith: input.init},
-              }]
+            // Tell bladType for Omlodding
+            if (!acc[year].bladeTypesOmlodding[bladType]) {
+              acc[year].bladeTypesOmlodding[bladType] = 0;
             }
-          });
-      
-          const handlingCounts = {};
-      
-          handlingData.forEach(data => {
-            const handlings = data.handling.split(', ');
-            handlings.forEach(handling => {
-              if (handling in handlingCounts) {
-                handlingCounts[handling]++;
-              } else {
-                handlingCounts[handling] = 1;
-              }
-            });
-          });
-      
-          return handlingCounts;
-        }),
-    
-    
- 
+            acc[year].bladeTypesOmlodding[bladType] += 1;
+          } else if (serviceType === "Reklamasjon") {
+            acc[year].reklamasjon += 1;
 
+            // Tell bladType for Reklamasjon
+            if (!acc[year].bladeTypesReklamasjon[bladType]) {
+              acc[year].bladeTypesReklamasjon[bladType] = 0;
+            }
+            acc[year].bladeTypesReklamasjon[bladType] += 1;
+          }
 
-})
+          return acc;
+        },
+        {} as Record<
+          number | string,
+          {
+            total: number;
+            reparasjon: number;
+            omlodding: number;
+            reklamasjon: number;
+            bladeTypesOmlodding: Record<string, number>;
+            bladeTypesReparasjon: Record<string, number>;
+            bladeTypesReklamasjon: Record<string, number>;
+          }
+        >,
+      );
 
+      return yearlyCount;
+    }),
 
- 
+  getAllHistorikkUpdateCustomer: protectedProcedure
+    .input(z.object({ date: z.string(), date2: z.string(), init: z.string() }))
+    .query(({ ctx, input }) => {
+      return ctx.db.bandhistorikk.findMany({
+        where: {
+          AND: [
+            {
+              updatedAt: {
+                lte: new Date(input.date),
+                gte: new Date(input.date2),
+              },
+              bladeRelationId: { startsWith: input.init },
+            },
+          ],
+        },
+        orderBy: {
+          updatedAt: "desc",
+        },
+      });
+    }),
+
+  getAllHistorikkKSCustomer: protectedProcedure
+    .input(z.object({ date: z.string(), date2: z.string(), init: z.string() }))
+    .query(({ ctx, input }) => {
+      return ctx.db.bandhistorikk.findMany({
+        where: {
+          AND: [
+            {
+              datoSrv: {
+                lte: new Date(input.date),
+                gte: new Date(input.date2),
+              },
+              bladeRelationId: { startsWith: input.init },
+            },
+          ],
+        },
+        orderBy: {
+          datoSrv: "desc",
+        },
+      });
+    }),
+
+  reklamasjonTypesCustomer: protectedProcedure
+    .input(z.object({ date: z.string(), date2: z.string(), init: z.string() }))
+    .query(({ ctx, input }) => {
+      return ctx.db.bandhistorikk.groupBy({
+        by: ["feilkode"],
+        where: {
+          AND: [
+            {
+              updatedAt: {
+                lte: new Date(input.date),
+                gte: new Date(input.date2),
+              },
+              bladeRelationId: { startsWith: input.init },
+            },
+          ],
+        },
+        _count: {
+          feilkode: true,
+        },
+      });
+    }),
+
+  getAllCustomerToothCount: protectedProcedure
+    .input(z.object({ date: z.string(), date2: z.string(), init: z.string() }))
+    .query(({ ctx, input }) => {
+      return ctx.db.bandhistorikk.aggregate({
+        where: {
+          AND: [
+            {
+              updatedAt: {
+                lte: new Date(input.date),
+                gte: new Date(input.date2),
+              },
+              bladeRelationId: { startsWith: input.init },
+            },
+          ],
+        },
+        _sum: {
+          antRep: true,
+          antTannslipp: true,
+        },
+      });
+    }),
+
+  handlingServiceDataCustomer: protectedProcedure
+    .input(z.object({ date: z.string(), date2: z.string(), init: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const handlingData = await ctx.db.bandhistorikk.findMany({
+        select: {
+          handling: true,
+        },
+        where: {
+          AND: [
+            {
+              updatedAt: {
+                lte: new Date(input.date),
+                gte: new Date(input.date2),
+              },
+              bladeRelationId: { startsWith: input.init },
+            },
+          ],
+        },
+      });
+
+      const handlingCounts = {};
+
+      handlingData.forEach((data) => {
+        const handlings = data.handling.split(", ");
+        handlings.forEach((handling) => {
+          if (handling in handlingCounts) {
+            handlingCounts[handling]++;
+          } else {
+            handlingCounts[handling] = 1;
+          }
+        });
+      });
+
+      return handlingCounts;
+    }),
+});

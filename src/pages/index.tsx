@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { signIn, signOut, useSession } from "next-auth/react";
@@ -13,6 +14,15 @@ import RoleAdminMV from "~/components/roles/RoleAdminMV";
 
 interface adminProps {
   theme: string;
+  newblades?: Array<{ id: number; name: string; createdAt: string }>; // Add the newblades property
+  deletedblades?: Array<{ id: number; name: string; deletedAt: string }>;
+  servicepost?: Array<{ id: number; name: string; date: string }>;
+  servicepostKS?: Array<{ id: number; name: string; date: string }>;
+  dateValue?: { startDate: string; endDate: string };
+  setDateValue?: React.Dispatch<
+    React.SetStateAction<{ startDate: string; endDate: string }>
+  >;
+  servicepostUpdate?: Array<{ id: number; name: string; date: string }>;
 }
 
 export default function Home({ theme }: adminProps) {
@@ -77,11 +87,10 @@ export default function Home({ theme }: adminProps) {
     });
 
   const { data: servicepostCustomer } =
-    api.statistikkBladeData.getAllCustomerHistorikk.useQuery({
+    api.statistikkBladeData.getAllHistorikkKSCustomer.useQuery({
       date: `${dateValue.endDate}T23:59:59.000Z`,
       date2: `${dateValue.startDate}T00:00:00.000Z`,
       init: customerInit,
-      bladeRelationId: "",
     });
 
   const { data: servicepostUpdateCustomer } =
@@ -96,7 +105,6 @@ export default function Home({ theme }: adminProps) {
       date: `${dateValue.endDate}T23:59:59.000Z`,
       date2: `${dateValue.startDate}T00:00:00.000Z`,
       init: customerInit,
-      bladeRelationId: "",
     });
 
   return (
@@ -132,7 +140,17 @@ export default function Home({ theme }: adminProps) {
       </RoleAdminMV>
 
       {sessionData && sessionData.user.role === "MT_ADMIN" && (
-        <CustomerStartpage />
+        <CustomerStartpage
+          dateValue={dateValue}
+          setDateValue={setDateValue}
+          theme={theme}
+          newblades={newbladesCustomer}
+          deletedblades={deletedbladesCustomer}
+          servicepost={servicepostCustomer}
+          servicepostUpdate={servicepostUpdateCustomer}
+          servicepostKS={servicepostKSCustomer}
+          oppstartsDato={new Date("03/19/2024")}
+        />
       )}
     </div>
   );

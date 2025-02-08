@@ -6,6 +6,8 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import MonthlyTable from "~/components/oversikt/MonthlyTable";
 import RoleAdmin from "~/components/roles/RoleAdmin";
 import RoleAdminMV from "~/components/roles/RoleAdminMV";
+import YearlyRetipOverview from "~/components/oversikt/YearlyRetipOverview";
+import NewDeletedYearTable from "~/components/oversikt/NewDeletedYearTable";
 
 const Oversikt = ({ theme }: { theme: string }) => {
   const { data: sessionData } = useSession();
@@ -29,6 +31,21 @@ const Oversikt = ({ theme }: { theme: string }) => {
 
   const { data: monthlyHistoryCount } =
     api.statistikkBladeData.getMonthlyHistoryStats.useQuery();
+
+  const { data: historyCountYearly } =
+    api.statistikkBladeData.historyCountYearly.useQuery();
+
+  const { data: newDeletedYearly } = api.sawblades.newDeletedYearly.useQuery();
+
+  const { data: newDeletedYearlyCustomer } =
+    api.sawblades.newDeletedYearlyCustomer.useQuery({
+      init: customerInit,
+    });
+
+  const { data: historyCountYearlyCustomer } =
+    api.statistikkBladeData.historyCountYearlyCustomer.useQuery({
+      init: customerInit,
+    });
 
   const { data: monthlyHistoryCountCustomer } =
     api.statistikkBladeData.getMonthlyHistoryStatsCustomer.useQuery({
@@ -62,6 +79,12 @@ const Oversikt = ({ theme }: { theme: string }) => {
             monthlyHistoryCount={monthlyHistoryCount}
             theme={theme}
           />
+          {historyCountYearly && (
+            <YearlyRetipOverview data={historyCountYearly} theme={theme} />
+          )}
+          {newDeletedYearly && (
+            <NewDeletedYearTable data={newDeletedYearly} theme={theme} />
+          )}
         </RoleAdmin>
         <RoleAdminMV>
           <MonthlyTable
@@ -69,6 +92,18 @@ const Oversikt = ({ theme }: { theme: string }) => {
             monthlyHistoryCount={monthlyHistoryCountCustomer}
             theme={theme}
           />
+          {historyCountYearlyCustomer && (
+            <YearlyRetipOverview
+              data={historyCountYearlyCustomer}
+              theme={theme}
+            />
+          )}
+          {newDeletedYearlyCustomer && (
+            <NewDeletedYearTable
+              data={newDeletedYearlyCustomer}
+              theme={theme}
+            />
+          )}
         </RoleAdminMV>
       </div>
     </div>

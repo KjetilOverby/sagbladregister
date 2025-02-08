@@ -461,23 +461,35 @@ const SearchMain = ({
                   </tr>
                 </thead>
                 <tbody>
-                  {Object.entries(countTypesList).map(([type, count]) => (
-                    <tr
-                      key={type}
-                      className={`hover:cursor-pointer ${theme === "darkmode" ? "hover:bg-gray-600" : "hover:bg-gray-300"} ${
-                        theme === "darkmode"
-                          ? "odd:bg-gray-700"
-                          : "odd:bg-gray-200"
-                      }`}
-                    >
-                      <td className="py-2 text-[0.6rem] font-bold text-neutral md:text-xs">
-                        {type}
-                      </td>
-                      <td className="py-2 text-[0.6rem] font-bold text-neutral md:text-xs">
-                        {count}
+                  {countTypesList &&
+                  Object.entries(countTypesList).length > 0 ? (
+                    Object.entries(countTypesList).map(([type, count]) => (
+                      <tr
+                        key={type}
+                        className={`hover:cursor-pointer ${theme === "darkmode" ? "hover:bg-gray-600" : "hover:bg-gray-300"} ${
+                          theme === "darkmode"
+                            ? "odd:bg-gray-700"
+                            : "odd:bg-gray-200"
+                        }`}
+                      >
+                        <td className="py-2 text-[0.6rem] font-bold text-neutral md:text-xs">
+                          {type}
+                        </td>
+                        <td className="py-2 text-[0.6rem] font-bold text-neutral md:text-xs">
+                          {count}
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td
+                        colSpan={2}
+                        className="py-2 text-center text-[0.6rem] text-gray-500 md:text-xs"
+                      >
+                        Ingen data tilgjengelig
                       </td>
                     </tr>
-                  ))}
+                  )}
                 </tbody>
               </table>
             </div>

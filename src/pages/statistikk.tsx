@@ -1,16 +1,17 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable react-hooks/rules-of-hooks */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import React, { useState, useEffect } from "react";
-import { api } from "~/utils/api";
+import { api, ApiType } from "~/utils/api";
 import { getServerAuthSession } from "~/server/auth";
 import { signIn, signOut, useSession } from "next-auth/react";
 import StatistikkMain from "~/components/statistikk/StatistikkMain";
 import HeaderComponent from "~/components/reusable/HeaderComponent";
 import dateFormat from "dateformat";
 
-const statistikk = ({ theme }) => {
+const statistikk = ({ theme }: { theme: string }) => {
   const { data: sessionData } = useSession();
   const [dateValue, setDateValue] = useState({
     endDate: dateFormat(new Date(), "yyyy-mm-dd"),
@@ -27,7 +28,12 @@ const statistikk = ({ theme }) => {
     }
   }, [sessionData]);
 
-  const { data: retipStats } = api.sawblades.getRetipStats.useQuery({});
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  const { data: retipStats } = (
+    api as ApiType
+  )// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  .sawblades.getRetipStats
+    .useQuery({});
 
   const { data: retipStatsCustomer } =
     api.sawblades.getRetipStatsCustomer.useQuery({
@@ -47,6 +53,7 @@ const statistikk = ({ theme }) => {
     });
 
   const { data: statistikkDataCustomer } =
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     api.statistikkBladeData.getAllCustomerHistorikk.useQuery({
       date: `${dateValue.endDate}T23:59:59.000Z`,
       date2: `${dateValue.startDate}T00:00:00.000Z`,
