@@ -498,15 +498,17 @@ export const sawbladesRouter = createTRPCRouter({
     const sawblades = await ctx.db.sawblades.findMany({
       select: {
         type: true,
+        side: true, // Legg til side hvis den finnes
         createdAt: true,
         updatedAt: true,
         deleted: true,
       },
     });
 
-    // Funksjon for å gruppere etter år og samle typer med antall
+    // Funksjon for å gruppere etter år, type og side
     type Blade = {
       type: string;
+      side?: string; // Side kan være valgfritt
       createdAt?: Date;
       updatedAt?: Date;
       deleted?: boolean;
@@ -520,9 +522,12 @@ export const sawbladesRouter = createTRPCRouter({
 
           const year = date.getFullYear();
           const type = blade.type || "Ukjent";
+          const side = blade.side ? `${blade.side}` : ""; // Håndter side, hvis den finnes
+
+          const typeKey = `${type}  ${side}`; // Kombiner type og side til en unik nøkkel
 
           if (!acc[year]) acc[year] = {}; // Initierer året hvis det ikke finnes
-          acc[year][type] = (acc[year][type] ?? 0) + 1; // Teller opp for riktig type
+          acc[year][typeKey] = (acc[year][typeKey] ?? 0) + 1; // Teller opp for riktig type og side
 
           return acc;
         },
@@ -534,7 +539,7 @@ export const sawbladesRouter = createTRPCRouter({
     const activeBlades = sawblades.filter((blade) => !blade.deleted);
     const deletedBlades = sawblades.filter((blade) => blade.deleted);
 
-    // Gruppér etter år
+    // Gruppér etter år og kombiner type og side
     const createdByYear = groupByYear(activeBlades, "createdAt");
     const deletedByYear = groupByYear(deletedBlades, "updatedAt");
 
@@ -559,15 +564,17 @@ export const sawbladesRouter = createTRPCRouter({
           },
           select: {
             type: true,
+            side: true, // Legg til side hvis den finnes
             createdAt: true,
             updatedAt: true,
             deleted: true,
           },
         });
 
-        // Funksjon for å gruppere etter år og samle typer med antall
+        // Funksjon for å gruppere etter år, type og side
         type Blade = {
           type: string;
+          side?: string; // Side kan være valgfritt
           createdAt?: Date;
           updatedAt?: Date;
           deleted?: boolean;
@@ -581,9 +588,12 @@ export const sawbladesRouter = createTRPCRouter({
 
               const year = date.getFullYear();
               const type = blade.type || "Ukjent";
+              const side = blade.side ? `${blade.side}` : ""; // Håndter side, hvis den finnes
+
+              const typeKey = `${type}  ${side}`; // Kombiner type og side til en unik nøkkel
 
               if (!acc[year]) acc[year] = {}; // Initierer året hvis det ikke finnes
-              acc[year][type] = (acc[year][type] ?? 0) + 1; // Teller opp for riktig type
+              acc[year][typeKey] = (acc[year][typeKey] ?? 0) + 1; // Teller opp for riktig type og side
 
               return acc;
             },
@@ -595,7 +605,7 @@ export const sawbladesRouter = createTRPCRouter({
         const activeBlades = sawblades.filter((blade) => !blade.deleted);
         const deletedBlades = sawblades.filter((blade) => blade.deleted);
 
-        // Gruppér etter år
+        // Gruppér etter år og kombiner type og side
         const createdByYear = groupByYear(activeBlades, "createdAt");
         const deletedByYear = groupByYear(deletedBlades, "updatedAt");
 

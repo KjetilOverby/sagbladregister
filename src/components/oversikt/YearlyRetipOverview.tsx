@@ -34,7 +34,7 @@ const ServiceTypeTable: React.FC<ServiceTypeTableProps> = ({
 
   return (
     <div className="py-10">
-      <h3>{serviceType}</h3>
+      <h3 className="text-neutral">{serviceType}</h3>
       <table className="table table-xs w-full overflow-x-auto">
         <thead>
           <tr
@@ -159,7 +159,7 @@ const YearlyRetipOverview: React.FC<YearlyRetipOverviewProps> = ({
 
   return (
     <div>
-      <h2>Årlig oversikt</h2>
+      <h2 className="text-neutral">Årlig oversikt</h2>
 
       {/* Tabell for Omlodding */}
       <ServiceTypeTable

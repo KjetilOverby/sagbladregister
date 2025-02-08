@@ -303,6 +303,7 @@ export const statistikkBladeDataRouter = createTRPCRouter({
         createdAt: true,
         service: true,
         bladType: true, // Viktig! Det heter bladType
+        side: true, // Legger til side hvis den finnes
       },
     });
 
@@ -320,6 +321,9 @@ export const statistikkBladeDataRouter = createTRPCRouter({
           : "Ukjent";
         const serviceType = entry.service || "Ukjent"; // Håndterer null-verdier
         const bladType = entry.bladType || "Ukjent"; // Håndterer null-verdier
+        const side = entry.side ? `${entry.side}` : ""; // Håndterer side
+
+        const bladeKey = `${bladType}  ${side}`; // Kombiner bladType og side til en unik nøkkel
 
         // Initialiser året hvis det ikke finnes
         if (!acc[year]) {
@@ -337,31 +341,31 @@ export const statistikkBladeDataRouter = createTRPCRouter({
         // Øk total teller
         acc[year].total += 1;
 
-        // Øk teller basert på service-type og tell bladTyper
+        // Øk teller basert på service-type og tell bladTyper med side
         if (serviceType === "Reparasjon") {
           acc[year].reparasjon += 1;
 
-          // Tell bladType for Reparasjon
-          if (!acc[year].bladeTypesReparasjon[bladType]) {
-            acc[year].bladeTypesReparasjon[bladType] = 0;
+          // Tell bladType for Reparasjon med side
+          if (!acc[year].bladeTypesReparasjon[bladeKey]) {
+            acc[year].bladeTypesReparasjon[bladeKey] = 0;
           }
-          acc[year].bladeTypesReparasjon[bladType] += 1;
+          acc[year].bladeTypesReparasjon[bladeKey] += 1;
         } else if (serviceType === "Omlodding") {
           acc[year].omlodding += 1;
 
-          // Tell bladType for Omlodding
-          if (!acc[year].bladeTypesOmlodding[bladType]) {
-            acc[year].bladeTypesOmlodding[bladType] = 0;
+          // Tell bladType for Omlodding med side
+          if (!acc[year].bladeTypesOmlodding[bladeKey]) {
+            acc[year].bladeTypesOmlodding[bladeKey] = 0;
           }
-          acc[year].bladeTypesOmlodding[bladType] += 1;
+          acc[year].bladeTypesOmlodding[bladeKey] += 1;
         } else if (serviceType === "Reklamasjon") {
           acc[year].reklamasjon += 1;
 
-          // Tell bladType for Reklamasjon
-          if (!acc[year].bladeTypesReklamasjon[bladType]) {
-            acc[year].bladeTypesReklamasjon[bladType] = 0;
+          // Tell bladType for Reklamasjon med side
+          if (!acc[year].bladeTypesReklamasjon[bladeKey]) {
+            acc[year].bladeTypesReklamasjon[bladeKey] = 0;
           }
-          acc[year].bladeTypesReklamasjon[bladType] += 1;
+          acc[year].bladeTypesReklamasjon[bladeKey] += 1;
         }
 
         return acc;
@@ -398,6 +402,7 @@ export const statistikkBladeDataRouter = createTRPCRouter({
           createdAt: true,
           service: true,
           bladType: true,
+          side: true, // Legger til side hvis den finnes
         },
       });
 
@@ -415,6 +420,9 @@ export const statistikkBladeDataRouter = createTRPCRouter({
             : "Ukjent";
           const serviceType = entry.service || "Ukjent"; // Håndterer null-verdier
           const bladType = entry.bladType || "Ukjent"; // Håndterer null-verdier
+          const side = entry.side ? `${entry.side}` : ""; // Håndterer side
+
+          const bladeKey = `${bladType}  ${side}`; // Kombiner bladType og side til en unik nøkkel
 
           // Initialiser året hvis det ikke finnes
           if (!acc[year]) {
@@ -432,31 +440,31 @@ export const statistikkBladeDataRouter = createTRPCRouter({
           // Øk total teller
           acc[year].total += 1;
 
-          // Øk teller basert på service-type og tell bladTyper
+          // Øk teller basert på service-type og tell bladTyper med side
           if (serviceType === "Reparasjon") {
             acc[year].reparasjon += 1;
 
-            // Tell bladType for Reparasjon
-            if (!acc[year].bladeTypesReparasjon[bladType]) {
-              acc[year].bladeTypesReparasjon[bladType] = 0;
+            // Tell bladType for Reparasjon med side
+            if (!acc[year].bladeTypesReparasjon[bladeKey]) {
+              acc[year].bladeTypesReparasjon[bladeKey] = 0;
             }
-            acc[year].bladeTypesReparasjon[bladType] += 1;
+            acc[year].bladeTypesReparasjon[bladeKey] += 1;
           } else if (serviceType === "Omlodding") {
             acc[year].omlodding += 1;
 
-            // Tell bladType for Omlodding
-            if (!acc[year].bladeTypesOmlodding[bladType]) {
-              acc[year].bladeTypesOmlodding[bladType] = 0;
+            // Tell bladType for Omlodding med side
+            if (!acc[year].bladeTypesOmlodding[bladeKey]) {
+              acc[year].bladeTypesOmlodding[bladeKey] = 0;
             }
-            acc[year].bladeTypesOmlodding[bladType] += 1;
+            acc[year].bladeTypesOmlodding[bladeKey] += 1;
           } else if (serviceType === "Reklamasjon") {
             acc[year].reklamasjon += 1;
 
-            // Tell bladType for Reklamasjon
-            if (!acc[year].bladeTypesReklamasjon[bladType]) {
-              acc[year].bladeTypesReklamasjon[bladType] = 0;
+            // Tell bladType for Reklamasjon med side
+            if (!acc[year].bladeTypesReklamasjon[bladeKey]) {
+              acc[year].bladeTypesReklamasjon[bladeKey] = 0;
             }
-            acc[year].bladeTypesReklamasjon[bladType] += 1;
+            acc[year].bladeTypesReklamasjon[bladeKey] += 1;
           }
 
           return acc;
