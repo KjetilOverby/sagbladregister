@@ -536,7 +536,7 @@ export const sawbladesRouter = createTRPCRouter({
     };
 
     // Filtrer aktive og slettede sagblad
-    const activeBlades = sawblades.filter((blade) => !blade.deleted);
+    const activeBlades = sawblades;
     const deletedBlades = sawblades.filter((blade) => blade.deleted);
 
     // Gruppér etter år og kombiner type og side
@@ -602,7 +602,7 @@ export const sawbladesRouter = createTRPCRouter({
         };
 
         // Filtrer aktive og slettede sagblad
-        const activeBlades = sawblades.filter((blade) => !blade.deleted);
+        const activeBlades = sawblades;
         const deletedBlades = sawblades.filter((blade) => blade.deleted);
 
         // Gruppér etter år og kombiner type og side
