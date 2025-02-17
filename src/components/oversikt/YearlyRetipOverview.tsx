@@ -27,10 +27,11 @@ const ServiceTypeTable: React.FC<ServiceTypeTableProps> = ({
   }
 
   // Hent årstallene
-  const years =
-    bladeTypes.length > 0 && bladeTypes[0] && data[bladeTypes[0]]
-      ? Object.keys(data[bladeTypes[0]] as Record<string, number>)
-      : [];
+  const years = Array.from(
+    new Set(
+      bladeTypes.flatMap((bladType) => Object.keys(data[bladType] ?? {})),
+    ),
+  ).sort();
 
   return (
     <div className="py-10">
@@ -156,6 +157,10 @@ const YearlyRetipOverview: React.FC<YearlyRetipOverviewProps> = ({
       },
     );
   });
+
+  console.log("Omlodding Data:", omloddingData);
+  console.log("Reparasjon Data:", reparasjonData);
+  console.log("Reklamasjon Data:", reklamasjonData);
 
   return (
     <div>
