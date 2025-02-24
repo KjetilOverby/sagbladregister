@@ -10,6 +10,8 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import StatistikkMain from "~/components/statistikk/StatistikkMain";
 import HeaderComponent from "~/components/reusable/HeaderComponent";
 import dateFormat from "dateformat";
+import { getKundeID } from "~/utils/roleMapping";
+import GeneralAdmin from "~/components/roles/GeneralAdmin";
 
 const statistikk = ({ theme }: { theme: string }) => {
   const { data: sessionData } = useSession();
@@ -21,18 +23,17 @@ const statistikk = ({ theme }: { theme: string }) => {
   const [customerInit, setCustomerInit] = useState("");
 
   useEffect(() => {
-    if (sessionData?.user.role === "MV_ADMIN") {
-      setCustomerInit("MV-");
-    } else if (sessionData?.user.role === "MT_ADMIN") {
-      setCustomerInit("MT-");
+    if (sessionData?.user.role) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      const kundeID = getKundeID(sessionData.user.role);
+      if (kundeID) {
+        setCustomerInit(kundeID + "-");
+      }
     }
   }, [sessionData]);
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  const { data: retipStats } = (
-    api as ApiType
-  )// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  .sawblades.getRetipStats
+  const { data: retipStats } = (api as ApiType).sawblades.getRetipStats // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     .useQuery({});
 
   const { data: retipStatsCustomer } =
@@ -136,7 +137,7 @@ const statistikk = ({ theme }: { theme: string }) => {
           theme={theme}
         />
       )}
-      {sessionData?.user.role === "MV_ADMIN" && (
+      <GeneralAdmin>
         <StatistikkMain
           historikkData={statistikkDataCustomer}
           setDateValue={setDateValue}
@@ -149,8 +150,9 @@ const statistikk = ({ theme }: { theme: string }) => {
           retipStats={retipStatsCustomer}
           theme={theme}
         />
-      )}
-      {sessionData?.user.role === "MT_ADMIN" && (
+      </GeneralAdmin>
+
+      {/* {sessionData?.user.role === "MT_ADMIN" && (
         <StatistikkMain
           historikkData={statistikkDataCustomer}
           setDateValue={setDateValue}
@@ -162,7 +164,7 @@ const statistikk = ({ theme }: { theme: string }) => {
           retipStats={retipStatsCustomer}
           theme={theme}
         />
-      )}
+      )} */}
     </div>
   );
 };

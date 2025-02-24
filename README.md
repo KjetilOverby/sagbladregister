@@ -26,3 +26,13 @@ You can check out the [create-t3-app GitHub repository](https://github.com/t3-os
 ## How do I deploy this?
 
 Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+
+## Legg til ny bruker
+
+Legg role i Prisma Schema
+Legg til Role i utils/roleMapping
+kjør:
+npx prisma db push
+mpx prisma generate
+
+Lag ny article type og legg til i newtools/createpost

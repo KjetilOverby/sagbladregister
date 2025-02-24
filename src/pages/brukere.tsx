@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import React, { useState } from "react";
@@ -6,10 +7,15 @@ import HeaderComponent from "~/components/reusable/HeaderComponent";
 import { api } from "~/utils/api";
 import { useRouter } from "next/navigation";
 import RoleSuperAdmin from "~/components/roles/RoleSuperAdmin";
+import { roleToKundeID } from "~/utils/roleMapping"; // Hent roller automatisk
 
-const Brukere = ({ theme }) => {
+interface BrukereProps {
+  theme: string;
+}
+
+const Brukere = ({ theme }: BrukereProps) => {
   const router = useRouter();
-  const { data: users } = api.users.getUsers.useQuery({});
+  const { data: users } = api.users.getUsers.useQuery();
 
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [newRole, setNewRole] = useState(null);
@@ -47,11 +53,11 @@ const Brukere = ({ theme }) => {
                   className="bg-primary"
                 >
                   <option value="">Choose role</option>
-                  <option value="LOGIN">LOGIN</option>
-                  <option value="USER">USER</option>
-                  <option value="ADMIN">ADMIN</option>
-                  <option value="MV_ADMIN">MV_ADMIN</option>
-                  <option value="MT_ADMIN">MT_ADMIN</option>
+                  {Object.keys(roleToKundeID).map((role) => (
+                    <option key={role} value={role}>
+                      {role}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div className="flex flex-col">
@@ -80,34 +86,22 @@ const Brukere = ({ theme }) => {
                 <table className="min-w-full divide-y divide-primary">
                   <thead className="bg-accent">
                     <tr>
-                      <th
-                        scope="col"
-                        className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
-                      >
+                      <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
                         Name
                       </th>
-                      <th
-                        scope="col"
-                        className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
-                      >
+                      <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
                         Email
                       </th>
-                      <th
-                        scope="col"
-                        className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
-                      >
+                      <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
                         Image
                       </th>
-                      <th
-                        scope="col"
-                        className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
-                      >
+                      <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
                         Role
                       </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-primary bg-base-100">
-                    {users?.map((user, personIdx) => (
+                    {users?.map((user) => (
                       <tr className="hover:bg-secondary" key={user.id}>
                         <td className="whitespace-nowrap px-6 py-4">
                           <div className="text-sm text-neutral">
@@ -131,7 +125,11 @@ const Brukere = ({ theme }) => {
 
                         <td className="whitespace-nowrap px-6 py-4">
                           <div
-                            className={`text-sm  ${user.role === "LOGIN" ? "text-red-500" : "text-gray-400"}`}
+                            className={`text-sm ${
+                              user.role === "LOGIN"
+                                ? "text-red-500"
+                                : "text-gray-400"
+                            }`}
                           >
                             {user.role}
                           </div>

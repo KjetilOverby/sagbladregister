@@ -10,8 +10,13 @@ interface RoleAccessProps {
   children: React.ReactNode;
 }
 
+// Roller som skal ekskluderes
+const excludedRoles = ["USER", "LOGIN", "ADMIN"];
+
 const RoleAccess = ({
-  allowedRoles = Object.keys(roleToKundeID),
+  allowedRoles = Object.keys(roleToKundeID).filter(
+    (role) => !excludedRoles.includes(role),
+  ),
   children,
 }: RoleAccessProps) => {
   const { data: sessionData } = useSession();

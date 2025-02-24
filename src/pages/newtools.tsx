@@ -20,6 +20,8 @@ import CustomerCreate from "~/components/newtools/CustomerCreate";
 import RoleAdminMT from "~/components/roles/RoleAdminMT";
 import EditInputComponent from "~/components/newtools/EditInputComponent";
 import NewBladesComponent from "~/components/newtools/NewBladesComponent";
+import { getKundeID } from "~/utils/roleMapping";
+import GeneralAdmin from "~/components/roles/GeneralAdmin";
 const Newtools = ({ theme, setTheme }) => {
   const { data: sessionData } = useSession();
   // eslint-disable-next-line @typescript-eslint/unbound-method
@@ -36,12 +38,22 @@ const Newtools = ({ theme, setTheme }) => {
   const [customerInit, setCustomerInit] = useState("");
 
   useEffect(() => {
-    if (sessionData?.user.role === "MV_ADMIN") {
-      setCustomerInit("MV-");
-    } else if (sessionData?.user.role === "MT_ADMIN") {
-      setCustomerInit("MT-");
+    if (sessionData?.user.role) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      const kundeID = getKundeID(sessionData.user.role);
+      if (kundeID) {
+        setCustomerInit(kundeID + "-");
+      }
     }
   }, [sessionData]);
+
+  // useEffect(() => {
+  //   if (sessionData?.user.role === "MV_ADMIN") {
+  //     setCustomerInit("MV-");
+  //   } else if (sessionData?.user.role === "MT_ADMIN") {
+  //     setCustomerInit("MT-");
+  //   }
+  // }, [sessionData]);
 
   const [idValue, setIdValue] = useState("");
   const [openDeleteID, setOpenDeleteID] = useState<string | null>(null);
@@ -95,7 +107,7 @@ const Newtools = ({ theme, setTheme }) => {
             deleteHandler={deleteHandler}
           />
         </RoleAdmin>
-        <RoleAdminMV>
+        <GeneralAdmin>
           <HeaderComponent setTheme={setTheme} />
           <CustomerCreate
             data={createCustomer}
@@ -112,8 +124,8 @@ const Newtools = ({ theme, setTheme }) => {
             openEditHandler={openEditHandler}
             editSawblade={editSawblade}
           />
-        </RoleAdminMV>
-        <RoleAdminMT>
+        </GeneralAdmin>
+        {/* <RoleAdminMT>
           <HeaderComponent setTheme={setTheme} />
           <CustomerCreate
             data={createCustomer}
@@ -126,7 +138,7 @@ const Newtools = ({ theme, setTheme }) => {
             setIdValue={setIdValue}
             setOpenDeleteID={setOpenDeleteID}
           />
-        </RoleAdminMT>
+        </RoleAdminMT> */}
       </>
     </div>
   );
