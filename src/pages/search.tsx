@@ -17,6 +17,8 @@ import RoleAdminMT from "~/components/roles/RoleAdminMT";
 import { FaCircleInfo } from "react-icons/fa6";
 import InfoComponent from "~/components/reusable/InfoComponent";
 import Link from "next/link";
+import { getKundeID } from "~/utils/roleMapping";
+import GeneralAdmin from "~/components/roles/GeneralAdmin";
 
 interface SearchProps {
   theme: string;
@@ -35,12 +37,22 @@ const Search = ({ theme }: SearchProps) => {
   const [customerInit, setCustomerInit] = useState("");
 
   useEffect(() => {
-    if (sessionData?.user.role === "MV_ADMIN") {
-      setCustomerInit("MV-");
-    } else if (sessionData?.user.role === "MT_ADMIN") {
-      setCustomerInit("MT-");
+    if (sessionData?.user.role) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      const kundeID = getKundeID(sessionData.user.role);
+      if (kundeID) {
+        setCustomerInit(kundeID + "-");
+      }
     }
   }, [sessionData]);
+
+  // useEffect(() => {
+  //   if (sessionData?.user.role === "MV_ADMIN") {
+  //     setCustomerInit("MV-");
+  //   } else if (sessionData?.user.role === "MT_ADMIN") {
+  //     setCustomerInit("MT-");
+  //   }
+  // }, [sessionData]);
 
   const { data: countAllBlades } = api.sawblades.countAllBlades.useQuery();
   const { data: countAllBladesCustomers } =
@@ -173,7 +185,7 @@ const Search = ({ theme }: SearchProps) => {
               />
             </RoleAdmin>
 
-            <RoleAdminMV>
+            <GeneralAdmin>
               <SearchMain
                 sawblades={sawbladesCustomer}
                 deletedSawblades={sawbladesCustomerDeleted}
@@ -185,8 +197,8 @@ const Search = ({ theme }: SearchProps) => {
                 setIdValue={setIdValue}
                 theme={theme}
               />
-            </RoleAdminMV>
-            <RoleAdminMT>
+            </GeneralAdmin>
+            {/* <RoleAdminMT>
               <SearchMain
                 sawblades={sawbladesCustomer}
                 deletedSawblades={sawbladesCustomerDeleted}
@@ -197,7 +209,7 @@ const Search = ({ theme }: SearchProps) => {
                 setDateValue={setDateValue}
                 theme={theme}
               />
-            </RoleAdminMT>
+            </RoleAdminMT> */}
           </div>
         </>
       ) : (

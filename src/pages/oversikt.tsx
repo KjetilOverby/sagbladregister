@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import React, { useState, useEffect } from "react";
 import OverviewTable from "~/components/oversikt/OverviewTable";
 import HeaderComponent from "~/components/reusable/HeaderComponent";
@@ -8,6 +9,8 @@ import RoleAdmin from "~/components/roles/RoleAdmin";
 import RoleAdminMV from "~/components/roles/RoleAdminMV";
 import YearlyRetipOverview from "~/components/oversikt/YearlyRetipOverview";
 import NewDeletedYearTable from "~/components/oversikt/NewDeletedYearTable";
+import { getKundeID } from "~/utils/roleMapping";
+import GeneralAdmin from "~/components/roles/GeneralAdmin";
 
 const Oversikt = ({ theme }: { theme: string }) => {
   const { data: sessionData } = useSession();
@@ -15,12 +18,21 @@ const Oversikt = ({ theme }: { theme: string }) => {
   const [customerInit, setCustomerInit] = useState("");
 
   useEffect(() => {
-    if (sessionData?.user.role === "MV_ADMIN") {
-      setCustomerInit("MV-");
-    } else if (sessionData?.user.role === "MT_ADMIN") {
-      setCustomerInit("MT-");
+    if (sessionData?.user.role) {
+      const kundeID = getKundeID(sessionData.user.role);
+      if (kundeID) {
+        setCustomerInit(kundeID + "-");
+      }
     }
   }, [sessionData]);
+
+  // useEffect(() => {
+  //   if (sessionData?.user.role === "MV_ADMIN") {
+  //     setCustomerInit("MV-");
+  //   } else if (sessionData?.user.role === "MT_ADMIN") {
+  //     setCustomerInit("MT-");
+  //   }
+  // }, [sessionData]);
 
   const { data: monthlyCount } = api.sawblades.getMonthlyCount.useQuery();
 
@@ -88,7 +100,7 @@ const Oversikt = ({ theme }: { theme: string }) => {
             <NewDeletedYearTable data={newDeletedYearly} theme={theme} />
           )}
         </RoleAdmin>
-        <RoleAdminMV>
+        <GeneralAdmin>
           <MonthlyTable
             monthlyCount={monthlyCountCustomer}
             monthlyHistoryCount={monthlyHistoryCountCustomer}
@@ -106,7 +118,7 @@ const Oversikt = ({ theme }: { theme: string }) => {
               theme={theme}
             />
           )}
-        </RoleAdminMV>
+        </GeneralAdmin>
       </div>
     </div>
   );

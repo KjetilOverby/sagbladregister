@@ -11,6 +11,8 @@ import { useEffect, useState } from "react";
 import dateFormat from "dateformat";
 import { api } from "~/utils/api";
 import RoleAdminMV from "~/components/roles/RoleAdminMV";
+import { getKundeID } from "~/utils/roleMapping";
+import GeneralAdmin from "~/components/roles/GeneralAdmin";
 
 interface adminProps {
   theme: string;
@@ -31,12 +33,22 @@ export default function Home({ theme }: adminProps) {
   const [customerInit, setCustomerInit] = useState("");
 
   useEffect(() => {
-    if (sessionData?.user.role === "MV_ADMIN") {
-      setCustomerInit("MV-");
-    } else if (sessionData?.user.role === "MT_ADMIN") {
-      setCustomerInit("MT-");
+    if (sessionData?.user.role) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      const kundeID = getKundeID(sessionData.user.role);
+      if (kundeID) {
+        setCustomerInit(kundeID + "-");
+      }
     }
   }, [sessionData]);
+
+  // useEffect(() => {
+  //   if (sessionData?.user.role === "MV_ADMIN") {
+  //     setCustomerInit("MV-");
+  //   } else if (sessionData?.user.role === "MT_ADMIN") {
+  //     setCustomerInit("MT-");
+  //   }
+  // }, [sessionData]);
 
   const [dateValue, setDateValue] = useState({
     endDate: dateFormat(new Date(), "yyyy-mm-dd"),
@@ -125,7 +137,7 @@ export default function Home({ theme }: adminProps) {
           servicepostUpdate={servicepostUpdate}
         />
       )}
-      <RoleAdminMV>
+      <GeneralAdmin>
         <CustomerStartpage
           dateValue={dateValue}
           setDateValue={setDateValue}
@@ -137,9 +149,9 @@ export default function Home({ theme }: adminProps) {
           servicepostKS={servicepostKSCustomer}
           oppstartsDato={new Date("03/19/2024")}
         />
-      </RoleAdminMV>
+      </GeneralAdmin>
 
-      {sessionData && sessionData.user.role === "MT_ADMIN" && (
+      {/* {sessionData && sessionData.user.role === "MT_ADMIN" && (
         <CustomerStartpage
           dateValue={dateValue}
           setDateValue={setDateValue}
@@ -151,7 +163,7 @@ export default function Home({ theme }: adminProps) {
           servicepostKS={servicepostKSCustomer}
           oppstartsDato={new Date("03/19/2024")}
         />
-      )}
+      )} */}
     </div>
   );
 }

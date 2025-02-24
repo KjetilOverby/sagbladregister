@@ -1,6 +1,3 @@
 
-Ved sletting så slås aktiv blad av men ikke aktiv post
-legg til statistikk for nye blad
-
 
 
