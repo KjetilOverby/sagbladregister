@@ -8,13 +8,8 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import React from "react";
-import dateFormat from "dateformat";
 import DatepickerComponent from "../reusable/Datepicker";
-import ActivityNewblades from "./activity/ActivityNewblades";
-import ActivityDelete from "./activity/ActivityDelete";
-import ActivityServiceCreate from "./activity/ActivityServiceCreate";
-import ActivityServiceEdit from "./ActivityServiceEdit";
-import ActivityHandling from "./activity/ActivityHandling";
+import ActivityDisplayComponent from "./activity/ActivityDisplayComponent";
 
 const AdminContent = ({
   newblades,
@@ -25,6 +20,8 @@ const AdminContent = ({
   setDateValue,
   servicepostUpdate,
 }) => {
+  const handlingType = servicepostKS?.filter((item) => item.handling !== "");
+
   return (
     <>
       <div className="min-h-screen bg-base-100 pb-10 pt-24 md:px-20 2xl:px-96">
@@ -44,11 +41,27 @@ const AdminContent = ({
             />
           </div>
           <p className="text-xs text-neutral">Aktivitet i gitt periode</p>
-          <ActivityNewblades newblades={newblades} />
-          <ActivityDelete deletedblades={deletedblades} />
-          <ActivityServiceCreate servicepost={servicepost} />
-          <ActivityServiceEdit servicepostUpdate={servicepostUpdate} />
-          <ActivityHandling servicepostKS={servicepostKS} />
+          <ActivityDisplayComponent
+            title="Blad lagt til"
+            displaydata={newblades}
+            type="Nye"
+          />
+          <ActivityDisplayComponent
+            title="Blad slettet"
+            displaydata={deletedblades}
+            type="Slettet"
+          />
+          <ActivityDisplayComponent
+            title="Serviceposter"
+            displaydata={servicepost}
+            type="Service"
+          />
+
+          <ActivityDisplayComponent
+            title="Handling"
+            displaydata={handlingType}
+            type="Handling"
+          />
         </div>
       </div>
     </>

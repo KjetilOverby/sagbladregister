@@ -328,8 +328,11 @@ const BandDetails = ({
 
                     <td className="text-primary">
                       {post.activePost && (
-                        <div className="grid h-6 w-6 place-content-center rounded-full bg-orange-500">
-                          <FiRefreshCw className="text-xs text-white" />
+                        <div
+                          title="Bladet er til service, ny post kan ikke legges til før service er deaktivert"
+                          className="grid place-content-center rounded-md border border-primary p-1"
+                        >
+                          Service
                         </div>
                       )}
                     </td>
