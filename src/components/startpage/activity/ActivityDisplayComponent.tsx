@@ -95,13 +95,13 @@ const ActivityDisplayComponent: React.FC<ActivityDisplayProps> = ({
               )}
             </div>
             <div className="flex-col">
-              <div className="text-xs text-neutral">
+              <div className="text-xs font-semibold text-neutral">
                 <p>
                   {type === "Slettet" && blade.deleter}
                   {type === "Service" && blade.creator}
                   {type === "Nye" && blade.creator}
                   {type === "Handling" && blade.creator3} {"•"}{" "}
-                  <span className="text-primary">
+                  <span className="font-thin text-primary">
                     {type === "Slettet" && (
                       <TimeCalc fromDate={blade.updatedAt} toTitle="siden" />
                     )}
@@ -123,65 +123,77 @@ const ActivityDisplayComponent: React.FC<ActivityDisplayProps> = ({
                   {type === "Slettet" && (
                     <>
                       {dateFormat(blade.updatedAt, "dd.mm.yyyy, HH:MM")} •{" "}
-                      {blade.type} {blade.side}• Sletteårsak:{" "}
-                      {blade.deleteReason}
+                      {blade.type} {blade.side}• {blade.produsent}
+                      <p className="text-purple-500">
+                        Sletteårsak: {blade.deleteReason}
+                      </p>
                     </>
                   )}
                   {type === "Service" && (
                     <>
                       {dateFormat(blade.createdAt, "dd.mm.yyyy, HH:MM")} •{" "}
                       <span className="text-blue-500"></span>
-                      {blade.bladType} {blade.side}• Service: {blade.service}.{" "}
-                      {blade.anmSag && `Kommentar: ${blade.anmSag}`}
+                      {blade.bladType} {blade.side}
+                      <p className="text-blue-500">
+                        Service: {blade.service}.{" "}
+                        {blade.anmSag && `Kommentar: ${blade.anmSag}`}
+                      </p>
                     </>
                   )}
                   {type === "Nye" && (
                     <>
                       {dateFormat(blade.updatedAt, "dd.mm.yyyy, HH:MM")} •{" "}
                       <span className="text-blue-500"></span>
-                      {blade.type} {blade.side}• Produsent: {blade.produsent}
+                      {blade.type} {blade.side}• {blade.produsent}
                     </>
                   )}
                   {type === "Handling" && (
                     <>
                       {dateFormat(blade.datoSrv, "dd.mm.yyyy, HH:MM")} •{" "}
                       <span className="text-blue-500"></span>
-                      {blade.bladType} {blade.side}• Handling: {blade.handling}{" "}
-                      {blade.anmKS && `Kommentar: ${blade.anmKS}`}
+                      {blade.bladType} {blade.side}
+                      <p className="text-blue-500">
+                        Handling: {blade.handling} •{" "}
+                        {blade.anmKS && `Kommentar: ${blade.anmKS}`}
+                      </p>
                     </>
                   )}
                 </p>
               </div>
               <div>
                 {type === "Slettet" && (
-                  <p className="text-xs text-blue-500">
+                  <p className="text-xs font-semibold text-blue-500">
                     {blade.kunde} •{" "}
-                    <span className="text-red-600">{blade.IdNummer}</span>
+                    <span className="font-semibold text-red-600">
+                      {blade.IdNummer}
+                    </span>
                   </p>
                 )}
                 {type === "Nye" && (
                   <p className="text-xs text-blue-500">
                     {blade.kunde} •{" "}
-                    <span className="text-red-600">{blade.IdNummer}</span>
+                    <span className="font-semibold text-red-600">
+                      {blade.IdNummer}
+                    </span>
                   </p>
                 )}
                 {type === "Service" && (
                   <p className="text-xs text-blue-500">
-                    <span className="text-red-600">
+                    <span className="font-semibold text-red-600">
                       {blade.bladeRelationId}
                     </span>
                   </p>
                 )}
                 {type === "Handling" && (
                   <p className="text-xs text-blue-500">
-                    <span className="text-red-600">
+                    <span className="font-semibold text-red-600">
                       {blade.bladeRelationId}
                     </span>
                   </p>
                 )}
               </div>
             </div>
-            <div className="ml-5 flex  h-5 min-w-10 items-center justify-center rounded-xl border border-primary bg-base-100 p-1 px-5 text-xs text-primary">
+            <div className="ml-5 mt-4  flex h-5 min-w-10 items-center justify-center rounded-xl border border-primary bg-base-100 p-1 px-5 text-xs text-primary">
               <p>{type}</p>
             </div>
           </div>
