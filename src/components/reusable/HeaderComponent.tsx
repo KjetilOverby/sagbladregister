@@ -416,16 +416,16 @@ const HeaderComponent = () => {
               </div>
             </Link>
             <div className="ml-5 mt-5 md:mt-0">
-              <p className="text-neutral">{sessionData?.user.name}</p>
+              <p className="text-sm text-neutral">{sessionData?.user.name}</p>
               <div>
                 {sessionData?.user.role === "MV_ADMIN" && (
-                  <p className="text-neutral">Moelven Våler</p>
+                  <p className="text-xs text-neutral">Moelven Våler</p>
                 )}
                 {sessionData?.user.role === "MT_ADMIN" && (
-                  <p className="text-neutral">Moelven Trysil</p>
+                  <p className="text-xs text-neutral">Moelven Trysil</p>
                 )}
                 {sessionData?.user.role === "ADMIN" && (
-                  <p className="text-neutral">Alle kunder</p>
+                  <p className="text-xs text-neutral">Alle kunder</p>
                 )}
               </div>
             </div>
