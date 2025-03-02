@@ -137,8 +137,6 @@ const StatistikkMain = ({
     setTableData(updatedServiceTableData);
   }, [historikkData]);
 
-  console.log(serviceTypes);
-
   return (
     <div className="md:pb-45 mx-0 pb-0 md:mx-20 2xl:mx-96">
       <div className=" mx-5 mt-5 max-lg:mx-0">
@@ -295,7 +293,7 @@ const StatistikkMain = ({
             </div>
             <div className="flex rounded-xl border border-primary max-lg:grid md:m-5 md:mt-20 md:w-1/2 md:p-10">
               <div>
-                <h1>Servicekoder</h1>
+                <h1 className="text-neutral">Servicekoder</h1>
                 <RoleAdmin>
                   <ServiceKodeTblAll />
                 </RoleAdmin>
