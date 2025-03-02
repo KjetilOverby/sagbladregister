@@ -70,6 +70,7 @@ const CustomerContent = ({
             title="Slettede blad"
             type="Slettet"
             setIdValue={setIdValue}
+            customer={true}
           />
           <ActivityDisplayComponent
             displaydata={handlingType}
