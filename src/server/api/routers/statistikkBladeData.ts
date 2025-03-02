@@ -394,15 +394,11 @@ export const statistikkBladeDataRouter = createTRPCRouter({
     .query(({ ctx, input }) => {
       return ctx.db.bandhistorikk.findMany({
         where: {
-          AND: [
-            {
-              updatedAt: {
-                lte: new Date(input.date),
-                gte: new Date(input.date2),
-              },
-              bladeRelationId: { startsWith: input.init },
-            },
-          ],
+          createdAt: {
+            lte: new Date(input.date),
+            gte: new Date(input.date2),
+          },
+          bladeRelationId: { startsWith: input.init },
         },
         orderBy: {
           updatedAt: "desc",

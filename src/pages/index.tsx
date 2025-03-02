@@ -100,7 +100,7 @@ export default function Home({
     });
 
   const { data: servicepostCustomer } =
-    api.statistikkBladeData.getAllHistorikkKSCustomer.useQuery({
+    api.statistikkBladeData.getAllCustomerHistorikk.useQuery({
       date: `${dateValue.endDate}T23:59:59.000Z`,
       date2: `${dateValue.startDate}T00:00:00.000Z`,
       init: customerInit,
