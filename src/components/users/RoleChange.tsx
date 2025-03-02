@@ -44,35 +44,52 @@ const RoleChange = () => {
           onMouseLeave={() => setIsOpen(false)}
         >
           <div
-            className="py-1"
+            className="px-1 py-1"
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="options-menu"
           >
-            <a
-              href="#"
-              className="block px-4 py-2 text-sm text-neutral hover:bg-accent"
-              role="menuitem"
+            <div
               onClick={() => handleRoleChange("ADMIN")}
+              className="py-3 hover:bg-accent"
             >
-              Alle kunder
-            </a>
-            <a
-              href="#"
-              className="hover:primary block px-4 py-2 text-sm text-neutral hover:bg-accent"
-              role="menuitem"
+              <a
+                href="#"
+                className="block px-4 py-1 text-sm text-neutral "
+                role="menuitem"
+              >
+                Alle kunder
+              </a>
+              <p className="block px-4  text-xs text-primary">ADMIN</p>
+            </div>
+            <hr className=" border-accent" />
+            <div
               onClick={() => handleRoleChange("MV_ADMIN")}
+              className="py-3 hover:bg-accent"
             >
-              Moelven Våler
-            </a>
-            <a
-              href="#"
-              className="block px-4 py-2 text-sm text-neutral hover:bg-accent"
-              role="menuitem"
+              <a
+                href="#"
+                className="hover:primary block px-4 py-1 text-sm text-neutral hover:bg-accent"
+                role="menuitem"
+              >
+                Moelven Våler
+              </a>
+              <p className="block px-4  text-xs text-primary">MV_ADMIN</p>
+            </div>
+            <hr className=" border-accent" />
+            <div
               onClick={() => handleRoleChange("MT_ADMIN")}
+              className="py-3 hover:bg-accent"
             >
-              Moelven Trysil
-            </a>
+              <a
+                href="#"
+                className="block px-4 py-1 text-sm text-neutral hover:bg-accent"
+                role="menuitem"
+              >
+                Moelven Trysil
+              </a>
+              <p className="block px-4  text-xs text-primary">MT_ADMIN</p>
+            </div>
           </div>
         </div>
       )}
