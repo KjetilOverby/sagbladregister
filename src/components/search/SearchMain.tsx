@@ -497,6 +497,7 @@ const SearchMain = ({
               sawbladesService={sawbladesService}
               setIdValue={setIdValue}
               theme={theme}
+              sessionData={sessionData}
             />
           </div>
         )}

@@ -7,7 +7,12 @@
 import React from "react";
 import dateFormat from "dateformat";
 
-const SawbladeServiceTable = ({ sawbladesService, setIdValue, theme }) => {
+const SawbladeServiceTable = ({
+  sawbladesService,
+  setIdValue,
+  theme,
+  sessionData,
+}) => {
   return (
     <div>
       <table className="table table-xs whitespace-nowrap ">
@@ -26,7 +31,13 @@ const SawbladeServiceTable = ({ sawbladesService, setIdValue, theme }) => {
               <>
                 {blade && (
                   <tr
-                    onClick={() => setIdValue(blade.IdNummer.slice(3))}
+                    onClick={() =>
+                      setIdValue(
+                        sessionData?.user.role === "ADMIN"
+                          ? blade.IdNummer
+                          : blade.IdNummer.slice(3),
+                      )
+                    }
                     className={`hover:cursor-pointer ${theme === "darkmode" ? "hover:bg-gray-600" : "hover:bg-gray-300"} ${
                       theme === "darkmode"
                         ? "odd:bg-gray-700"
