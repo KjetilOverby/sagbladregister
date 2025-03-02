@@ -41,10 +41,22 @@ const Brukere = ({ theme }: BrukereProps) => {
     <div data-theme={theme as string} className="min-h-screen">
       <RoleSuperAdmin>
         <HeaderComponent />
+        <div className="relative h-64 w-full">
+          <div className="bg-image absolute inset-0 bg-cover bg-center bg-no-repeat"></div>
+          <div className="relative z-10 flex h-full w-full items-center justify-center">
+            <h1 className="text-4xl text-white">Brukere</h1>
+          </div>
+          <style>
+            {`
+           .bg-image {
+             background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url('https://images.unsplash.com/photo-1633596683562-4a47eb4983c5?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');}
+          `}
+          </style>
+        </div>
 
         {selectedUserId && (
-          <div className="absolute p-5 shadow-xl">
-            <p className="my-5">Change role for {selectedUserId}</p>
+          <div className="absolute bg-base-100 p-5 shadow-xl">
+            <p className="my-5">Bytt rolle for {selectedUserId}</p>
             <div>
               <div className="py-5">
                 <select
@@ -78,52 +90,54 @@ const Brukere = ({ theme }: BrukereProps) => {
           </div>
         )}
 
-        <div className="mx-5 mt-20 flex flex-col 2xl:mx-96">
+        <div className="mx-5 mt-20 flex flex-col 2xl:mx-40">
           <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
               <div className="overflow-hidden border-b border-primary shadow sm:rounded-lg">
-                <h1 className="mb-10 text-center text-xl">Brukere</h1>
-                <table className="min-w-full divide-y divide-primary">
-                  <thead className="bg-accent">
+                <table className="table-xs min-w-full divide-y divide-primary">
+                  <thead className="bg-primary">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                        Name
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                        Email
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                      <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-base-100">
                         Image
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                      <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-base-100">
+                        Name
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-base-100">
+                        Email
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-base-100">
                         Role
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-base-100">
+                        Bytt rolle
                       </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-primary bg-base-100">
                     {users?.map((user) => (
                       <tr className="hover:bg-secondary" key={user.id}>
-                        <td className="whitespace-nowrap px-6 py-4">
-                          <div className="text-sm text-neutral">
-                            {user.name}
-                          </div>
-                        </td>
-                        <td className="whitespace-nowrap px-6 py-4">
-                          <div className="text-sm text-neutral">
-                            {user.email}
-                          </div>
-                        </td>
-                        <td className="whitespace-nowrap px-6 py-4">
+                        <td className="whitespace-nowrap px-6 py-1">
                           <div className="text-sm text-gray-500">
                             <img
                               src={user.image}
                               alt={user.name}
-                              className="h-10 w-10 rounded-full"
+                              className="h-8 w-8 rounded-full"
                             />
                           </div>
                         </td>
+                        <td className="whitespace-nowrap px-6 py-1">
+                          <div className="text-sm text-neutral">
+                            {user.name}
+                          </div>
+                        </td>
+                        <td className="whitespace-nowrap px-6 py-1">
+                          <div className="text-sm text-neutral">
+                            {user.email}
+                          </div>
+                        </td>
 
-                        <td className="whitespace-nowrap px-6 py-4">
+                        <td className="whitespace-nowrap px-6 py-1">
                           <div
                             className={`text-sm ${
                               user.role === "LOGIN"
@@ -133,8 +147,10 @@ const Brukere = ({ theme }: BrukereProps) => {
                           >
                             {user.role}
                           </div>
+                        </td>
+                        <td className="whitespace-nowrap px-6 py-1 text-neutral">
                           <button onClick={() => setSelectedUserId(user.email)}>
-                            Change role
+                            Bytt rolle
                           </button>
                         </td>
                       </tr>

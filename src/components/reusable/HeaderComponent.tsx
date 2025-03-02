@@ -81,7 +81,7 @@ const HeaderComponent = () => {
   const { data: sessionData } = useSession();
   return (
     <header>
-      <nav className="border border-x-0 border-t-0 border-gray-200 border-b-primary bg-base-100 px-4  py-2.5 lg:px-6">
+      <nav className="border border-x-0 border-t-0 border-gray-200 border-b-base-100 bg-base-100 px-4  py-2.5 lg:px-6">
         <button
           data-collapse-toggle="mobile-menu-2"
           type="button"

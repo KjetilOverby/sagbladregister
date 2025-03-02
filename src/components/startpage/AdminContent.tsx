@@ -8,13 +8,8 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import React from "react";
-import dateFormat from "dateformat";
 import DatepickerComponent from "../reusable/Datepicker";
-import ActivityNewblades from "./activity/ActivityNewblades";
-import ActivityDelete from "./activity/ActivityDelete";
-import ActivityServiceCreate from "./activity/ActivityServiceCreate";
-import ActivityServiceEdit from "./ActivityServiceEdit";
-import ActivityHandling from "./activity/ActivityHandling";
+import ActivityDisplayComponent from "./ActivityDisplayComponent";
 
 const AdminContent = ({
   newblades,
@@ -24,19 +19,25 @@ const AdminContent = ({
   dateValue,
   setDateValue,
   servicepostUpdate,
+  setIdValue,
 }) => {
+  const handlingType = servicepostKS?.filter((item) => item.handling !== "");
   return (
     <>
-      <div className="min-h-screen bg-base-100 pb-10 pt-24 md:px-20 2xl:px-96">
-        <div className="md:w-[30rem]">
-          <img
-            className="w-full"
-            src="https://lh3.googleusercontent.com/pw/AP1GczMl2BWtf6-zh2g4uWGl4naDJ87x01pfcRvMNy21LlElrQVqWdSt9MtQAUfa-6nfeexrJGbcSln4ULat4QzkDp1rPGTJJkVy2MBHsUaqhCInScxCnhVUA4ZvR7wl-YlfpmviKWTvLPdU61V2Gx8Tz9sD=w1920-h196-s-no?authuser=0"
-            alt=""
-          />
+      <div className="relative h-64 w-full">
+        <div className="bg-image absolute inset-0 bg-cover bg-center bg-no-repeat"></div>
+        <div className="relative z-10 flex h-full w-full items-center justify-center">
+          <h1 className="text-4xl text-white">Aktivitetslogg</h1>
         </div>
-
-        <div className="mt-10 p-1">
+        <style>
+          {`
+           .bg-image {
+             background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1)),url('https://images.unsplash.com/photo-1510784722466-f2aa9c52fff6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');}
+          `}
+        </style>
+      </div>
+      <div className="min-h-screen bg-base-100 pb-10 pt-5 md:px-20 2xl:px-96">
+        <div className="">
           <div className="w-96">
             <DatepickerComponent
               setDateValue={setDateValue}
@@ -44,11 +45,30 @@ const AdminContent = ({
             />
           </div>
           <p className="text-xs text-neutral">Aktivitet i gitt periode</p>
-          <ActivityNewblades newblades={newblades} />
-          <ActivityDelete deletedblades={deletedblades} />
-          <ActivityServiceCreate servicepost={servicepost} />
-          <ActivityServiceEdit servicepostUpdate={servicepostUpdate} />
-          <ActivityHandling servicepostKS={servicepostKS} />
+          <ActivityDisplayComponent
+            displaydata={servicepost}
+            title="Serviceposter"
+            type="Service"
+            setIdValue={setIdValue}
+          />
+          <ActivityDisplayComponent
+            displaydata={newblades}
+            title="Nye blad"
+            type="Nye"
+            setIdValue={setIdValue}
+          />
+          <ActivityDisplayComponent
+            displaydata={deletedblades}
+            title="Slettede blad"
+            type="Slettet"
+            setIdValue={setIdValue}
+          />
+          <ActivityDisplayComponent
+            displaydata={handlingType}
+            title="Handling"
+            type="Handling"
+            setIdValue={setIdValue}
+          />
         </div>
       </div>
     </>

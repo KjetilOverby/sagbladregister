@@ -27,7 +27,12 @@ interface adminProps {
   servicepostUpdate?: Array<{ id: number; name: string; date: string }>;
 }
 
-export default function Home({ theme }: adminProps) {
+export default function Home({
+  theme,
+  setIdValue,
+  dateValue,
+  setDateValue,
+}: adminProps) {
   const { data: sessionData } = useSession();
 
   const [customerInit, setCustomerInit] = useState("");
@@ -49,11 +54,6 @@ export default function Home({ theme }: adminProps) {
   //     setCustomerInit("MT-");
   //   }
   // }, [sessionData]);
-
-  const [dateValue, setDateValue] = useState({
-    endDate: dateFormat(new Date(), "yyyy-mm-dd"),
-    startDate: dateFormat(new Date(), "yyyy-mm-dd"),
-  });
 
   const { data: newblades } = api.sawblades.getAllCreate.useQuery({
     date: `${dateValue.endDate}T23:59:59.000Z`,
@@ -135,6 +135,7 @@ export default function Home({ theme }: adminProps) {
           dateValue={dateValue}
           setDateValue={setDateValue}
           servicepostUpdate={servicepostUpdate}
+          setIdValue={setIdValue}
         />
       )}
       <GeneralAdmin>
@@ -148,6 +149,7 @@ export default function Home({ theme }: adminProps) {
           servicepostUpdate={servicepostUpdateCustomer}
           servicepostKS={servicepostKSCustomer}
           oppstartsDato={new Date("03/19/2024")}
+          setIdValue={setIdValue}
         />
       </GeneralAdmin>
 

@@ -10,7 +10,7 @@ import { api } from "~/utils/api";
 import "~/styles/globals.css";
 import { useEffect, useState, useRef } from "react";
 import { AppDataContext } from "~/context";
-import { set } from "zod";
+import dateFormat from "dateformat";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -21,6 +21,11 @@ const MyApp: AppType<{ session: Session | null }> = ({
   const [datetheme, setDatetheme] = useState("dark");
   const [darkMode, setDarkMode] = useState("");
   const [dateThemeUse, setDateThemeUse] = useState("");
+  const [idValue, setIdValue] = useState("");
+  const [dateValue, setDateValue] = useState({
+    endDate: dateFormat(new Date(), "yyyy-mm-dd"),
+    startDate: dateFormat(new Date(), "yyyy-mm-dd"),
+  });
 
   const UseComponentDidMount = () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -65,6 +70,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
           theme={themeUse}
           darkMode={datetheme}
           setTheme={setTheme}
+          setIdValue={setIdValue}
+          dateValue={dateValue}
+          setDateValue={setDateValue}
         />
         <Analytics />
       </AppDataContext.Provider>

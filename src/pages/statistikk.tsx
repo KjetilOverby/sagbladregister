@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable react-hooks/rules-of-hooks */
@@ -13,12 +14,8 @@ import dateFormat from "dateformat";
 import { getKundeID } from "~/utils/roleMapping";
 import GeneralAdmin from "~/components/roles/GeneralAdmin";
 
-const statistikk = ({ theme }: { theme: string }) => {
+const statistikk = ({ theme, dateValue, setDateValue }: { theme: string }) => {
   const { data: sessionData } = useSession();
-  const [dateValue, setDateValue] = useState({
-    endDate: dateFormat(new Date(), "yyyy-mm-dd"),
-    startDate: dateFormat(new Date(), "yyyy-mm-dd"),
-  });
 
   const [customerInit, setCustomerInit] = useState("");
 
