@@ -50,24 +50,28 @@ const AdminContent = ({
             title="Serviceposter"
             type="Service"
             setIdValue={setIdValue}
+            customer={false}
           />
           <ActivityDisplayComponent
             displaydata={newblades}
             title="Nye blad"
             type="Nye"
             setIdValue={setIdValue}
+            customer={false}
           />
           <ActivityDisplayComponent
             displaydata={deletedblades}
             title="Slettede blad"
             type="Slettet"
             setIdValue={setIdValue}
+            customer={false}
           />
           <ActivityDisplayComponent
             displaydata={handlingType}
             title="Handling"
             type="Handling"
             setIdValue={setIdValue}
+            customer={false}
           />
         </div>
       </div>

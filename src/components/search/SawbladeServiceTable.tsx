@@ -26,7 +26,7 @@ const SawbladeServiceTable = ({ sawbladesService, setIdValue, theme }) => {
               <>
                 {blade && (
                   <tr
-                    onClick={() => setIdValue(blade.IdNummer)}
+                    onClick={() => setIdValue(blade.IdNummer.slice(3))}
                     className={`hover:cursor-pointer ${theme === "darkmode" ? "hover:bg-gray-600" : "hover:bg-gray-300"} ${
                       theme === "darkmode"
                         ? "odd:bg-gray-700"

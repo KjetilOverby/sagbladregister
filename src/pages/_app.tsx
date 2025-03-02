@@ -73,6 +73,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
           setIdValue={setIdValue}
           dateValue={dateValue}
           setDateValue={setDateValue}
+          idValue={idValue}
         />
         <Analytics />
       </AppDataContext.Provider>

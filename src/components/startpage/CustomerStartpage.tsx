@@ -16,6 +16,7 @@ const CustomerStartpage = ({
   oppstartsDato,
   theme,
   setIdValue,
+  idValue,
 }) => {
   return (
     <div data-theme={theme} className="min-h-screen bg-base-100">
@@ -31,6 +32,7 @@ const CustomerStartpage = ({
         servicepostKS={servicepostKS}
         oppstartsDato={oppstartsDato}
         setIdValue={setIdValue}
+        idValue={idValue}
       />
     </div>
   );

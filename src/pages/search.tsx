@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -19,19 +20,20 @@ import InfoComponent from "~/components/reusable/InfoComponent";
 import Link from "next/link";
 import { getKundeID } from "~/utils/roleMapping";
 import GeneralAdmin from "~/components/roles/GeneralAdmin";
+import { id } from "date-fns/locale";
 
 interface SearchProps {
   theme: string;
 }
 
-const Search = ({ theme }: SearchProps) => {
+const Search = ({ theme, idValue, setIdValue }: SearchProps) => {
   const [closeSearchComponent, setCloseSearchComponent] = useState(false);
   const { data: sessionData } = useSession();
   const [dateValue, setDateValue] = useState({
     endDate: dateFormat(new Date(), "yyyy-mm-dd"),
     startDate: dateFormat(new Date(), "yyyy-mm-dd"),
   });
-  const [idValue, setIdValue] = useState("");
+
   const [openInfoModal, setOpenInfoModal] = useState(false);
 
   const [customerInit, setCustomerInit] = useState("");

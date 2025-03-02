@@ -17,6 +17,7 @@ const ActivityDisplayComponent: React.FC<ActivityDisplayProps> = ({
   displaydata,
   type,
   setIdValue,
+  customer,
 }) => {
   return (
     <div className="mb-40">
@@ -170,7 +171,13 @@ const ActivityDisplayComponent: React.FC<ActivityDisplayProps> = ({
             {type === "Service" && (
               <Link href="/search">
                 <div
-                  onClick={() => setIdValue(blade.bladeRelationId)}
+                  onClick={() =>
+                    setIdValue(
+                      customer
+                        ? blade.bladeRelationId.slice(3)
+                        : blade.bladeRelationId,
+                    )
+                  }
                   className="ml-5 mt-3 flex h-5 min-w-10  items-center justify-center rounded-xl border border-primary bg-base-100 p-1 px-5 text-xs text-primary hover:bg-primary hover:text-base-100 hover:transition-all"
                 >
                   <p>{type}</p>
@@ -180,7 +187,13 @@ const ActivityDisplayComponent: React.FC<ActivityDisplayProps> = ({
             {type === "Handling" && (
               <Link href="/search">
                 <div
-                  onClick={() => setIdValue(blade.bladeRelationId)}
+                  onClick={() =>
+                    setIdValue(
+                      customer
+                        ? blade.bladeRelationId.slice(3)
+                        : blade.bladeRelationId,
+                    )
+                  }
                   className="ml-5 mt-3 flex h-5 min-w-10  items-center justify-center rounded-xl border border-primary bg-base-100 p-1 px-5 text-xs text-primary hover:bg-primary hover:text-base-100 hover:transition-all"
                 >
                   <p>{type}</p>
@@ -190,7 +203,11 @@ const ActivityDisplayComponent: React.FC<ActivityDisplayProps> = ({
             {type === "Slettet" && (
               <Link href="/search">
                 <div
-                  onClick={() => setIdValue(blade.IdNummer)}
+                  onClick={() =>
+                    setIdValue(
+                      customer ? blade.IdNummer.slice(3) : blade.IdNummer,
+                    )
+                  }
                   className="ml-5 mt-3 flex h-5 min-w-10  items-center justify-center rounded-xl border border-primary bg-base-100 p-1 px-5 text-xs text-primary hover:bg-primary hover:text-base-100 hover:transition-all"
                 >
                   <p>{type}</p>
@@ -200,7 +217,11 @@ const ActivityDisplayComponent: React.FC<ActivityDisplayProps> = ({
             {type === "Nye" && (
               <Link href="/search">
                 <div
-                  onClick={() => setIdValue(blade.IdNummer)}
+                  onClick={() =>
+                    setIdValue(
+                      customer ? blade.IdNummer.slice(3) : blade.IdNummer,
+                    )
+                  }
                   className="ml-5 mt-3 flex h-5 min-w-10  items-center justify-center rounded-xl border border-primary bg-base-100 p-1 px-5 text-xs text-primary hover:bg-primary hover:text-base-100 hover:transition-all"
                 >
                   <p>{type}</p>

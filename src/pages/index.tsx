@@ -32,6 +32,7 @@ export default function Home({
   setIdValue,
   dateValue,
   setDateValue,
+  idValue,
 }: adminProps) {
   const { data: sessionData } = useSession();
 
@@ -136,6 +137,7 @@ export default function Home({
           setDateValue={setDateValue}
           servicepostUpdate={servicepostUpdate}
           setIdValue={setIdValue}
+          idValue={idValue}
         />
       )}
       <GeneralAdmin>
@@ -150,6 +152,7 @@ export default function Home({
           servicepostKS={servicepostKSCustomer}
           oppstartsDato={new Date("03/19/2024")}
           setIdValue={setIdValue}
+          idValue={idValue}
         />
       </GeneralAdmin>
 

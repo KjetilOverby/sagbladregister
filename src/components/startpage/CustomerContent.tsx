@@ -56,12 +56,14 @@ const CustomerContent = ({
             title="Serviceposter"
             type="Service"
             setIdValue={setIdValue}
+            customer={true}
           />
           <ActivityDisplayComponent
             displaydata={newblades}
             title="Nye blad"
             type="Nye"
             setIdValue={setIdValue}
+            customer={true}
           />
           <ActivityDisplayComponent
             displaydata={deletedblades}
@@ -74,6 +76,7 @@ const CustomerContent = ({
             title="Handling"
             type="Handling"
             setIdValue={setIdValue}
+            customer={true}
           />
         </div>
       </div>
