@@ -22,8 +22,6 @@ const AdminContent = ({
   setDateValue,
   servicepostUpdate,
   setIdValue,
-  tables,
-  queryStats,
 }) => {
   const handlingType = servicepostKS?.filter((item) => item.handling !== "");
   return (
@@ -41,8 +39,6 @@ const AdminContent = ({
         </style>
       </div>
       <div className="min-h-screen bg-base-100 pb-10 pt-5 md:px-20 2xl:px-96">
-        <StorageUsage tables={tables} />
-        <MemoryUsage tables={queryStats} />
         <div className="">
           <div className="w-96">
             <DatepickerComponent
