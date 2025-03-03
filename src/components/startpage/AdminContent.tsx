@@ -10,6 +10,7 @@
 import React from "react";
 import DatepickerComponent from "../reusable/Datepicker";
 import ActivityDisplayComponent from "./ActivityDisplayComponent";
+import StorageUsage from "./StorageUsage";
 
 const AdminContent = ({
   newblades,
@@ -20,6 +21,7 @@ const AdminContent = ({
   setDateValue,
   servicepostUpdate,
   setIdValue,
+  tables,
 }) => {
   const handlingType = servicepostKS?.filter((item) => item.handling !== "");
   return (
@@ -37,6 +39,7 @@ const AdminContent = ({
         </style>
       </div>
       <div className="min-h-screen bg-base-100 pb-10 pt-5 md:px-20 2xl:px-96">
+        <StorageUsage tables={tables} />
         <div className="">
           <div className="w-96">
             <DatepickerComponent
