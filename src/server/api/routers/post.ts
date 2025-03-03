@@ -44,15 +44,32 @@ export const postRouter = createTRPCRouter({
 
   getTableSizes: protectedProcedure.query(async ({ ctx }) => {
     return ctx.db.$queryRaw`
+        SELECT 
+            table_schema AS database_name,
+            table_name,
+            ROUND(data_length / 1024 / 1024, 2) AS data_size_mb,
+            ROUND(index_length / 1024 / 1024, 2) AS index_size_mb,
+            ROUND((data_length + index_length) / 1024 / 1024, 2) AS total_size_mb
+        FROM information_schema.tables
+        WHERE table_schema = DATABASE()
+        ORDER BY total_size_mb DESC;
+      `;
+  }),
+  // getQueryStats: protectedProcedure.query(async ({ ctx }) => {
+  //   return ctx.db.$queryRaw`
+  //     SELECT
+  //       SUM(count_star) AS total_queries,
+  //       SUM(sum_timer_wait) / 1000000000000 AS total_execution_time_sec
+  //     FROM performance_schema.events_statements_summary_global_by_event_name;
+  //   `;
+  // }),
+
+  getQueryStats: protectedProcedure.query(async ({ ctx }) => {
+    return ctx.db.$queryRaw`
       SELECT 
-          table_schema AS database_name,
-          table_name,
-          ROUND(data_length / 1024 / 1024, 2) AS data_size_mb,
-          ROUND(index_length / 1024 / 1024, 2) AS index_size_mb,
-          ROUND((data_length + index_length) / 1024 / 1024, 2) AS total_size_mb
-      FROM information_schema.tables
-      WHERE table_schema = DATABASE()
-      ORDER BY total_size_mb DESC;
+        SUM(count_star) AS total_queries, 
+        SUM(sum_timer_wait) / 1000000000000 AS total_execution_time_sec
+      FROM performance_schema.events_statements_summary_global_by_event_name;
     `;
   }),
 });

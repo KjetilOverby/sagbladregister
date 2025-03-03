@@ -121,6 +121,9 @@ export default function Home({
     });
 
   const { data: tables } = api.post.getTableSizes.useQuery({});
+  const { data: queryStats } = api.post.getQueryStats.useQuery({});
+
+  console.log("queryStats", queryStats);
 
   return (
     <div className="min-h-screen">
@@ -141,6 +144,7 @@ export default function Home({
           setIdValue={setIdValue}
           idValue={idValue}
           tables={tables}
+          queryStats={queryStats}
         />
       )}
       <GeneralAdmin>

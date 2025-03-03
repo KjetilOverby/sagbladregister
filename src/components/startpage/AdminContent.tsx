@@ -11,6 +11,7 @@ import React from "react";
 import DatepickerComponent from "../reusable/Datepicker";
 import ActivityDisplayComponent from "./ActivityDisplayComponent";
 import StorageUsage from "./StorageUsage";
+import MemoryUsage from "./MemoryUsage";
 
 const AdminContent = ({
   newblades,
@@ -22,6 +23,7 @@ const AdminContent = ({
   servicepostUpdate,
   setIdValue,
   tables,
+  queryStats,
 }) => {
   const handlingType = servicepostKS?.filter((item) => item.handling !== "");
   return (
@@ -40,6 +42,7 @@ const AdminContent = ({
       </div>
       <div className="min-h-screen bg-base-100 pb-10 pt-5 md:px-20 2xl:px-96">
         <StorageUsage tables={tables} />
+        <MemoryUsage tables={queryStats} />
         <div className="">
           <div className="w-96">
             <DatepickerComponent

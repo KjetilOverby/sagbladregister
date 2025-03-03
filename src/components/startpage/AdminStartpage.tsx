@@ -20,6 +20,7 @@ const AdminStartpage = ({
   servicepostUpdate,
   setIdValue,
   tables,
+  queryStats,
 }: adminProps) => {
   return (
     <div data-theme={theme} className="min-h-screen bg-base-100">
@@ -34,6 +35,7 @@ const AdminStartpage = ({
         servicepostUpdate={servicepostUpdate}
         setIdValue={setIdValue}
         tables={tables}
+        queryStats={queryStats}
       />
     </div>
   );

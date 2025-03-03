@@ -22,8 +22,9 @@ const DatabaseUsageBar: React.FC<Props> = ({ tables }) => {
 
   return (
     <div className="w-full rounded-lg bg-base-100 p-4">
-      <p className="mb-2 text-center text-sm text-neutral">PlanetScale </p>
-      <div className="relative h-6 w-full overflow-hidden rounded-lg border bg-base-100">
+      <p className="mb-2 text-center text-lg text-neutral">PlanetScale </p>
+      <p className="text-center text-sm text-neutral">Lagring</p>
+      <div className="relative h-6 w-full overflow-hidden rounded-lg border border-accent bg-base-100">
         <div
           className="h-full bg-primary transition-all duration-500"
           style={{ width: `${Math.max(usagePercentage, 0.5)}%`, minWidth }}
