@@ -23,7 +23,7 @@ interface adminProps {
   servicepostUpdate?: Array<{ id: number; name: string; date: string }>;
 }
 
-export default function Usage({ theme }: adminProps) {
+export default function Database({ theme }: adminProps) {
   const { data: sessionData } = useSession();
 
   const { data: tables } = api.post.getTableSizes.useQuery({});
@@ -33,12 +33,18 @@ export default function Usage({ theme }: adminProps) {
 
   return (
     <div data-theme={theme} className="min-h-screen bg-base-100">
-      <HeaderComponent />
-
       {sessionData && sessionData.user.role === "ADMIN" && (
         <>
-          <StorageUsage tables={tables} />
-          <MemoryUsage tables={queryStats} />
+          <HeaderComponent />
+          <div>
+            <p className="mb-2 py-10 text-center text-3xl text-neutral">
+              PlanetScale{" "}
+            </p>
+          </div>
+          <div className="px-1 xl:px-96">
+            <StorageUsage tables={tables} />
+            <MemoryUsage tables={queryStats} />
+          </div>
         </>
       )}
     </div>
