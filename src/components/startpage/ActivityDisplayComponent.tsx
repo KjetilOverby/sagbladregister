@@ -105,9 +105,7 @@ const ActivityDisplayComponent: React.FC<ActivityDisplayProps> = ({
                     <>
                       {dateFormat(blade.createdAt, "dd.mm.yyyy, HH:MM")} •{" "}
                       {blade.bladType} {blade.side}
-                      <p className="text-blue-500">
-                        Service: {blade.feilkode} • {`${blade.temperatur}°C`}
-                      </p>
+                      <p className="text-blue-500">Service: {blade.service}</p>
                       <span className="text-purple-500">
                         {" "}
                         {blade.anmSag && `Kommentar: ${blade.anmSag}`}
