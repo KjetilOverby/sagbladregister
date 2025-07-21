@@ -27,9 +27,6 @@ export default function Database({ theme }: adminProps) {
   const { data: sessionData } = useSession();
 
   const { data: tables } = api.post.getTableSizes.useQuery({});
-  const { data: queryStats } = api.post.getQueryStats.useQuery({});
-
-  console.log("queryStats", queryStats);
 
   return (
     <div data-theme={theme} className="min-h-screen bg-base-100">
@@ -43,7 +40,6 @@ export default function Database({ theme }: adminProps) {
           </div>
           <div className="px-1 xl:px-96">
             <StorageUsage tables={tables} />
-            <MemoryUsage tables={queryStats} />
           </div>
         </>
       )}
