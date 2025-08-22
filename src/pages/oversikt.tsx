@@ -72,8 +72,6 @@ const Oversikt = ({ theme }: { theme: string }) => {
     },
   );
 
-  console.log(historyCountYearly);
-
   return (
     <div className="min-h-screen" data-theme={theme}>
       <HeaderComponent />

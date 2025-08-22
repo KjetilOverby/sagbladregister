@@ -926,6 +926,156 @@ export const sawbladesRouter = createTRPCRouter({
         },
       });
     }),
+
+
+// ***************** dateSearchCount ***********************//
+
+dateSearchCount: protectedProcedure
+  .input(
+    z.object({
+      init: z.string(),
+      from: z.coerce.date(),
+      to: z.coerce.date(),
+    }),
+  )
+  .query(async ({ input, ctx }) => {
+    try {
+      // 1) Normaliser periode (inkluder hele sluttdøgn)
+      let { from, to, init } = input;
+      if (from > to) [from, to] = [to, from];
+      to = new Date(to);
+      to.setHours(23, 59, 59, 999);
+
+      // Små utiler
+      const norm = (v?: string | null) =>
+        (v ?? "").replace(/\s+/g, " ").trim() || null;
+      const keyOf = (bladType?: string | null, side?: string | null) => {
+        const bt = norm(bladType) ?? "Ukjent";
+        const sd = norm(side) ?? "";
+        return sd ? `${bt}  ${sd}` : bt; // to mellomrom mellom bladType og side (matcher service)
+      };
+
+      // 2) Hent nye/slettede ID-er i perioden
+      const [newBlades, deletedBlades] = await Promise.all([
+        ctx.db.sawblades.findMany({
+          where: {
+            IdNummer: { startsWith: init },
+            createdAt: { gte: from, lte: to },
+          },
+          select: { IdNummer: true },
+        }),
+        ctx.db.sawblades.findMany({
+          where: {
+            IdNummer: { startsWith: init },
+            deleted: true,
+            updatedAt: { gte: from, lte: to },
+          },
+          select: { IdNummer: true },
+        }),
+      ]);
+
+      const newCount = newBlades.length;
+      const deletedCount = deletedBlades.length;
+
+      // 3) Samle unike ID-er (trimma) for oppslag
+      const ids = Array.from(
+        new Set(
+          [...newBlades, ...deletedBlades]
+            .map((b) => (b.IdNummer ?? "").trim())
+            .filter(Boolean),
+        ),
+      );
+
+      // 4) Fallback fra sawblades (artikkel/type) hvis historikk mangler
+      const fallbackById = new Map<string, { bladType: string | null }>();
+      if (ids.length) {
+        const meta = await ctx.db.sawblades.findMany({
+          where: { IdNummer: { in: ids } },
+          select: { IdNummer: true, artikkel: true, type: true },
+        });
+        for (const m of meta) {
+          const id = (m.IdNummer ?? "").trim();
+          const bt = norm(m.artikkel) ?? norm(m.type);
+          if (id) fallbackById.set(id, { bladType: bt });
+        }
+      }
+
+      // 5) Siste kjente historikk <= periodens slutt
+      const latestInfoByBladeId = new Map<
+        string,
+        { bladType: string | null; side: string | null }
+      >();
+
+      if (ids.length) {
+        const hist = await ctx.db.bandhistorikk.findMany({
+          where: {
+            bladeRelationId: { in: ids },
+            createdAt: { lte: to }, // ankre til periode-slutt
+          },
+          orderBy: [{ bladeRelationId: "asc" }, { createdAt: "desc" }],
+          select: { bladeRelationId: true, bladType: true, side: true, createdAt: true },
+        });
+
+        for (const h of hist) {
+          const id = (h.bladeRelationId ?? "").trim();
+          if (!id) continue;
+          if (!latestInfoByBladeId.has(id)) {
+            latestInfoByBladeId.set(id, {
+              bladType: norm(h.bladType),
+              side: h.side != null ? norm(String(h.side)) : null,
+            });
+          }
+        }
+      }
+
+      // 6) Telling per bladType/side (med fallback)
+      const newByBladeType: Record<string, number> = {};
+      const deletedByBladeType: Record<string, number> = {};
+      const unknownIdsNew: string[] = [];
+      const unknownIdsDeleted: string[] = [];
+
+      for (const b of newBlades) {
+        const id = (b.IdNummer ?? "").trim();
+        const info = latestInfoByBladeId.get(id);
+        const bt = info?.bladType ?? fallbackById.get(id)?.bladType ?? null;
+        const sd = info?.side ?? null;
+        const key = keyOf(bt, sd);
+        if (key.startsWith("Ukjent")) unknownIdsNew.push(id);
+        newByBladeType[key] = (newByBladeType[key] ?? 0) + 1;
+      }
+
+      for (const b of deletedBlades) {
+        const id = (b.IdNummer ?? "").trim();
+        const info = latestInfoByBladeId.get(id);
+        const bt = info?.bladType ?? fallbackById.get(id)?.bladType ?? null;
+        const sd = info?.side ?? null;
+        const key = keyOf(bt, sd);
+        if (key.startsWith("Ukjent")) unknownIdsDeleted.push(id);
+        deletedByBladeType[key] = (deletedByBladeType[key] ?? 0) + 1;
+      }
+
+      // (valgfritt) Logg for å finne igjen avvik i dev
+      if (unknownIdsNew.length || unknownIdsDeleted.length) {
+        console.log("[dateSearchCount] Ukjent (nye):", unknownIdsNew.slice(0, 20));
+        console.log("[dateSearchCount] Ukjent (slettede):", unknownIdsDeleted.slice(0, 20));
+      }
+
+      return {
+        from,
+        to,
+        newCount,
+        deletedCount,
+        newByBladeType,
+        deletedByBladeType,
+      };
+    } catch (error) {
+      console.error("Feil ved telling i periode:", error);
+      throw new Error("Kunne ikke hente antall nye/slettede (m/ bladtype)");
+    }
+  })
+
+
+
 });
 
 // export const postRouter = createTRPCRouter({

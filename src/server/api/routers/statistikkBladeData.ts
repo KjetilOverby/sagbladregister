@@ -624,4 +624,90 @@ export const statistikkBladeDataRouter = createTRPCRouter({
 
       return handlingCounts;
     }),
+
+
+
+
+
+//********************** DATE SEARCH STATS *****************************/
+
+dateSearchHistoryCountCustomer: protectedProcedure
+  .input(
+    z.object({
+      init: z.string(),
+      from: z.coerce.date(), // aksepterer ISO-string/number/Date
+      to: z.coerce.date(),
+    }),
+  )
+  .query(async ({ ctx, input }) => {
+    try {
+      // 1) Riktig rekkefølge + inklusiv sluttdøgn
+      let { from, to, init } = input;
+      if (from > to) [from, to] = [to, from];
+      to = new Date(to);
+      to.setHours(23, 59, 59, 999);
+
+      // 2) Hent historikk i perioden
+      const history = await ctx.db.bandhistorikk.findMany({
+        where: {
+          bladeRelationId: { startsWith: init },
+          createdAt: { gte: from, lte: to },
+        },
+        select: {
+          createdAt: true,
+          service: true,
+          bladType: true,
+          side: true,
+        },
+      });
+
+      // 3) Aggreger for valgt periode (ikke per år)
+      const acc = {
+        total: 0,
+        reparasjon: 0,
+        omlodding: 0,
+        reklamasjon: 0,
+        bladeTypesOmlodding: {} as Record<string, number>,
+        bladeTypesReparasjon: {} as Record<string, number>,
+        bladeTypesReklamasjon: {} as Record<string, number>,
+      };
+
+      for (const entry of history) {
+        acc.total += 1;
+
+        const serviceType = entry.service ?? "Ukjent";
+        const bladType = entry.bladType ?? "Ukjent";
+        const side = entry.side ? String(entry.side) : "";
+        const bladeKey = `${bladType}  ${side}`.trimEnd(); // bladType + side
+
+        if (serviceType === "Reparasjon") {
+          acc.reparasjon += 1;
+          acc.bladeTypesReparasjon[bladeKey] =
+            (acc.bladeTypesReparasjon[bladeKey] ?? 0) + 1;
+        } else if (serviceType === "Omlodding") {
+          acc.omlodding += 1;
+          acc.bladeTypesOmlodding[bladeKey] =
+            (acc.bladeTypesOmlodding[bladeKey] ?? 0) + 1;
+        } else if (serviceType === "Reklamasjon") {
+          acc.reklamasjon += 1;
+          acc.bladeTypesReklamasjon[bladeKey] =
+            (acc.bladeTypesReklamasjon[bladeKey] ?? 0) + 1;
+        }
+        // Hvis du vil telle andre/ukjente service-typer, kan du legge til en egen bucket her.
+      }
+
+      // 4) Returnér én blokk for perioden
+      return {
+        from,
+        to,
+        ...acc,
+      };
+    } catch (error) {
+      console.error("Feil ved henting av historikk-telling i periode:", error);
+      throw new Error("Kunne ikke hente historikk-telling for perioden");
+    }
+  })
+
+
+
 });

@@ -13,6 +13,9 @@ import HeaderComponent from "~/components/reusable/HeaderComponent";
 import dateFormat from "dateformat";
 import { getKundeID } from "~/utils/roleMapping";
 import GeneralAdmin from "~/components/roles/GeneralAdmin";
+import DateSearchStats from "~/components/statistikk/DateSearchStats";
+import { date } from "zod";
+import { DateSearchCustomerTables } from "~/components/statistikk/dateSearchStatsTable";
 
 const statistikk = ({ theme, dateValue, setDateValue }: { theme: string }) => {
   const { data: sessionData } = useSession();
@@ -117,6 +120,24 @@ const statistikk = ({ theme, dateValue, setDateValue }: { theme: string }) => {
       init: customerInit,
     });
 
+  //*************** DATE SEARCH STATS ****************/
+  const { data: dateSearchNewDeletedCustomer } =
+    api.sawblades.dateSearchCount.useQuery({
+      from: `${dateValue.endDate}T23:59:59.000Z`,
+      to: `${dateValue.startDate}T00:00:00.000Z`,
+      init: customerInit,
+    });
+
+  const { data: dateSearchServiceCustomer } =
+    api.statistikkBladeData.dateSearchHistoryCountCustomer.useQuery({
+      from: `${dateValue.endDate}T23:59:59.000Z`,
+      to: `${dateValue.startDate}T00:00:00.000Z`,
+      init: customerInit,
+    });
+
+  console.log(dateSearchServiceCustomer);
+  console.log(dateSearchNewDeletedCustomer);
+
   return (
     <div data-theme={theme} className="min-h-screen">
       <HeaderComponent />
@@ -148,7 +169,6 @@ const statistikk = ({ theme, dateValue, setDateValue }: { theme: string }) => {
           theme={theme}
         />
       </GeneralAdmin>
-
       {/* {sessionData?.user.role === "MT_ADMIN" && (
         <StatistikkMain
           historikkData={statistikkDataCustomer}
@@ -162,6 +182,11 @@ const statistikk = ({ theme, dateValue, setDateValue }: { theme: string }) => {
           theme={theme}
         />
       )} */}
+      <DateSearchCustomerTables
+        theme={theme}
+        dateSearchNewDeletedCustomer={dateSearchNewDeletedCustomer}
+        dateSearchServiceCustomer={dateSearchServiceCustomer}
+      />
     </div>
   );
 };
