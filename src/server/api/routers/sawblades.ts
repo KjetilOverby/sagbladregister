@@ -941,7 +941,9 @@ dateSearchCount: protectedProcedure
   .query(async ({ input, ctx }) => {
     try {
       // 1) Normaliser periode (inkluder hele sluttdøgn)
-      let { from, to, init } = input;
+      const { init } = input;
+      let { from, to } = input;
+      
       if (from > to) [from, to] = [to, from];
       to = new Date(to);
       to.setHours(23, 59, 59, 999);

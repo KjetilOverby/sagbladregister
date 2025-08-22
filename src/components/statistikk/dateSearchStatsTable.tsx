@@ -56,7 +56,7 @@ export function DateSearchCustomerTables({
   const periodTo =
     dateSearchNewDeletedCustomer?.to ?? dateSearchServiceCustomer?.to;
 
-  const anyLoading = isLoadingNewDeleted || isLoadingService;
+  const anyLoading = isLoadingNewDeleted ?? isLoadingService;
 
   const totalRow = {
     label: "Totalt",
@@ -123,34 +123,37 @@ export function DateSearchCustomerTables({
     totalRow.reklamasjon === 0;
 
   return (
-    <section className={`mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-24 `}>
+    <section
+      className={`mx-auto max-w-7xl px-4 py-6 pb-[10rem] sm:px-6 lg:px-24 xl:px-10`}
+    >
       <div className="space-y-6">
         {/* Periode */}
         <div
-          className={`rounded-2xl border ${theme === "darkmode" ? "primary" : "neutral"} p-5 shadow-sm`}
+          className={`rounded-2xl border border-primary ${theme === "darkmode" ? "primary" : "neutral"} p-5 shadow-sm`}
         >
-          <h2 className="mb-1 text-lg font-semibold sm:text-xl">Periode</h2>
-          <p className="text-sm text-gray-600">
+          <h2 className="mb-1 text-lg font-semibold text-neutral sm:text-xl">
+            Periode
+          </h2>
+          <p className="text-sm text-neutral">
             {fmtDate(periodFrom)} – {fmtDate(periodTo)}
           </p>
         </div>
 
         {/* Én samlet tabell */}
         <div
-          className={`rounded-2xl border  shadow-sm ${theme === "darkmode" ? "primary" : "neutral"}`}
+          className={`rounded-2xl border border-primary  shadow-sm ${theme === "darkmode" ? "primary" : "neutral"}`}
         >
           <div className="flex flex-col gap-1 border-b p-4 sm:p-5">
             <div className="flex items-baseline justify-between">
-              <h2 className="text-lg font-semibold sm:text-xl">Oppsummering</h2>
+              <h2 className="text-lg font-semibold text-neutral sm:text-xl">
+                Oppsummering
+              </h2>
               {typeof dateSearchServiceCustomer?.total === "number" && (
-                <span className="text-xs text-gray-500 sm:text-sm">
+                <span className="text-xs  text-neutral sm:text-sm">
                   Totalt (service): {dateSearchServiceCustomer.total}
                 </span>
               )}
             </div>
-            <p className="text-xs text-gray-500">
-              Tall per kategori og per bladtype/side. Rull horisontalt på mobil.
-            </p>
           </div>
 
           {anyLoading ? (
@@ -162,24 +165,24 @@ export function DateSearchCustomerTables({
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full min-w-[720px] border-collapse text-xs sm:text-sm">
-                <thead className="sticky top-0 z-10 bg-white">
+                <thead className="sticky top-0 z-10 bg-base-100">
                   <tr className="border-b">
-                    <th className="p-3 text-left font-medium text-gray-600">
+                    <th className="p-3 text-left font-medium text-neutral">
                       Kategori
                     </th>
-                    <th className="p-3 text-left font-medium text-gray-600">
+                    <th className="p-3 text-left font-medium text-neutral">
                       Nye
                     </th>
-                    <th className="p-3 text-left font-medium text-gray-600">
+                    <th className="p-3 text-left font-medium text-neutral">
                       Slettede
                     </th>
-                    <th className="p-3 text-left font-medium text-gray-600">
+                    <th className="p-3 text-left font-medium text-neutral">
                       Omlodding
                     </th>
-                    <th className="p-3 text-left font-medium text-gray-600">
+                    <th className="p-3 text-left font-medium text-neutral">
                       Reparasjon
                     </th>
-                    <th className="p-3 text-left font-medium text-gray-600">
+                    <th className="p-3 text-left font-medium text-neutral">
                       Reklamasjon
                     </th>
                   </tr>
@@ -187,23 +190,35 @@ export function DateSearchCustomerTables({
                 <tbody className="divide-y">
                   {/* Totalt-rad */}
                   <tr className="bg-gray-50/60">
-                    <td className="p-3 font-medium">Totalt</td>
-                    <td className="p-3">{totalRow.nye}</td>
-                    <td className="p-3">{totalRow.slettede}</td>
-                    <td className="p-3">{totalRow.omlodding}</td>
-                    <td className="p-3">{totalRow.reparasjon}</td>
-                    <td className="p-3">{totalRow.reklamasjon}</td>
+                    <td className="bg-base-100 p-3 font-bold font-medium text-neutral">
+                      Totalt
+                    </td>
+                    <td className="bg-base-100 p-3 font-bold text-neutral">
+                      {totalRow.nye}
+                    </td>
+                    <td className="bg-base-100 p-3 font-bold text-neutral">
+                      {totalRow.slettede}
+                    </td>
+                    <td className="bg-base-100 p-3 font-bold text-neutral">
+                      {totalRow.omlodding}
+                    </td>
+                    <td className="bg-base-100 p-3 font-bold text-neutral">
+                      {totalRow.reparasjon}
+                    </td>
+                    <td className="bg-base-100 p-3 font-bold text-neutral">
+                      {totalRow.reklamasjon}
+                    </td>
                   </tr>
 
                   {/* Rader per bladtype/side */}
                   {bladeRows.map((r) => (
                     <tr key={r.label} className="hover:bg-gray-50">
-                      <td className="p-3">{r.label}</td>
-                      <td className="p-3">{r.nye}</td>
-                      <td className="p-3">{r.slettede}</td>
-                      <td className="p-3">{r.omlodding}</td>
-                      <td className="p-3">{r.reparasjon}</td>
-                      <td className="p-3">{r.reklamasjon}</td>
+                      <td className="p-3 text-neutral">{r.label}</td>
+                      <td className="p-3 text-neutral">{r.nye}</td>
+                      <td className="p-3 text-neutral">{r.slettede}</td>
+                      <td className="p-3 text-neutral">{r.omlodding}</td>
+                      <td className="p-3 text-neutral">{r.reparasjon}</td>
+                      <td className="p-3 text-neutral">{r.reklamasjon}</td>
                     </tr>
                   ))}
                 </tbody>

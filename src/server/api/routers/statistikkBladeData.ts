@@ -232,7 +232,7 @@ export const statistikkBladeDataRouter = createTRPCRouter({
         where: {
           AND: [
             {
-              updatedAt: {
+              createdAt: {
                 lte: new Date(input.date),
                 gte: new Date(input.date2),
               },
@@ -252,7 +252,7 @@ export const statistikkBladeDataRouter = createTRPCRouter({
         where: {
           AND: [
             {
-              updatedAt: {
+              createdAt: {
                 lte: new Date(input.date),
                 gte: new Date(input.date2),
               },
@@ -642,7 +642,9 @@ dateSearchHistoryCountCustomer: protectedProcedure
   .query(async ({ ctx, input }) => {
     try {
       // 1) Riktig rekkefølge + inklusiv sluttdøgn
-      let { from, to, init } = input;
+      const { init } = input;
+      let { from, to } = input;
+      
       if (from > to) [from, to] = [to, from];
       to = new Date(to);
       to.setHours(23, 59, 59, 999);
