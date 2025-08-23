@@ -122,11 +122,49 @@ export function DateSearchCustomerTables({
     totalRow.reparasjon === 0 &&
     totalRow.reklamasjon === 0;
 
+  function formatDiff(from?: string | Date, to?: string | Date) {
+    if (!from || !to) return "";
+    const start = new Date(from);
+    const end = new Date(to);
+    if (isNaN(start.getTime()) || isNaN(end.getTime())) return "";
+
+    let years = end.getFullYear() - start.getFullYear();
+    let months = end.getMonth() - start.getMonth();
+    let days = end.getDate() - start.getDate();
+
+    if (days < 0) {
+      months -= 1;
+      const prevMonth = new Date(
+        end.getFullYear(),
+        end.getMonth(),
+        0,
+      ).getDate();
+      days += prevMonth;
+    }
+
+    if (months < 0) {
+      years -= 1;
+      months += 12;
+    }
+
+    const parts = [];
+    if (years) parts.push(`${years} år`);
+    if (months) parts.push(`${months} mnd`);
+    if (days) parts.push(`${days} dager`);
+
+    return parts.join(" ");
+  }
+
   return (
     <section
-      className={`mx-auto max-w-7xl px-4 py-6 pb-[10rem] sm:px-6 lg:px-24 xl:px-10`}
+      className="mx-auto  px-[14vw] 
+  py-6 pb-[10rem] [@media(min-width:1800px)]:max-w-[1600px] [@media(min-width:2560px)]:max-w-[2400px]"
     >
       <div className="space-y-6">
+        <p className="text-neutral">
+          Oversikt over nye og slettede sagblad, samt service-aktivitet for
+          valgt periode.
+        </p>
         {/* Periode */}
         <div
           className={`rounded-2xl border border-primary ${theme === "darkmode" ? "primary" : "neutral"} p-5 shadow-sm`}
@@ -137,8 +175,10 @@ export function DateSearchCustomerTables({
           <p className="text-sm text-neutral">
             {fmtDate(periodFrom)} – {fmtDate(periodTo)}
           </p>
+          <p className="text-xs text-neutral">
+            ({formatDiff(periodFrom, periodTo)})
+          </p>
         </div>
-
         {/* Én samlet tabell */}
         <div
           className={`rounded-2xl border border-primary  shadow-sm ${theme === "darkmode" ? "primary" : "neutral"}`}
@@ -163,63 +203,89 @@ export function DateSearchCustomerTables({
               Ingen data i valgt periode.
             </div>
           ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[720px] border-collapse text-xs sm:text-sm">
-                <thead className="sticky top-0 z-10 bg-base-100">
-                  <tr className="border-b">
+            <div className="overflow-x-auto p-5">
+              <table className="w-full min-w-[720px] table-auto text-xs sm:text-sm">
+                <thead className="sticky top-0 z-10 bg-base-100/95 backdrop-blur">
+                  <tr>
                     <th className="p-3 text-left font-medium text-neutral">
                       Kategori
                     </th>
-                    <th className="p-3 text-left font-medium text-neutral">
+                    <th className="p-3 text-right font-medium text-neutral">
                       Nye
                     </th>
-                    <th className="p-3 text-left font-medium text-neutral">
+                    <th className="p-3 text-right font-medium text-neutral">
                       Slettede
                     </th>
-                    <th className="p-3 text-left font-medium text-neutral">
+                    <th className="p-3 text-right font-medium text-neutral">
                       Omlodding
                     </th>
-                    <th className="p-3 text-left font-medium text-neutral">
+                    <th className="p-3 text-right font-medium text-neutral">
                       Reparasjon
                     </th>
-                    <th className="p-3 text-left font-medium text-neutral">
+                    <th className="p-3 text-right font-medium text-neutral">
                       Reklamasjon
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y">
+
+                <tbody className="align-middle">
                   {/* Totalt-rad */}
-                  <tr className="bg-gray-50/60">
-                    <td className="bg-base-100 p-3 font-bold font-medium text-neutral">
+                  <tr className="bg-base-100/80">
+                    <td className="p-2 text-xs font-bold text-neutral">
                       Totalt
                     </td>
-                    <td className="bg-base-100 p-3 font-bold text-neutral">
+                    <td className="p-2 text-right text-xs font-bold tabular-nums text-neutral">
                       {totalRow.nye}
                     </td>
-                    <td className="bg-base-100 p-3 font-bold text-neutral">
+                    <td className="p-2 text-right text-xs font-bold tabular-nums text-neutral">
                       {totalRow.slettede}
                     </td>
-                    <td className="bg-base-100 p-3 font-bold text-neutral">
+                    <td className="p-2 text-right text-xs font-bold tabular-nums text-neutral">
                       {totalRow.omlodding}
                     </td>
-                    <td className="bg-base-100 p-3 font-bold text-neutral">
+                    <td className="p-2 text-right text-xs font-bold tabular-nums text-neutral">
                       {totalRow.reparasjon}
                     </td>
-                    <td className="bg-base-100 p-3 font-bold text-neutral">
+                    <td className="p-2 text-right text-xs font-bold tabular-nums text-neutral">
                       {totalRow.reklamasjon}
                     </td>
                   </tr>
+                  {/* Inset-divider etter totalt-rad */}
+                  <tr aria-hidden className="h-[1px]">
+                    <td colSpan={6}>
+                      <div className="mx-3 h-px bg-neutral/20" />
+                    </td>
+                  </tr>
 
-                  {/* Rader per bladtype/side */}
-                  {bladeRows.map((r) => (
-                    <tr key={r.label} className="hover:bg-gray-50">
-                      <td className="p-3 text-neutral">{r.label}</td>
-                      <td className="p-3 text-neutral">{r.nye}</td>
-                      <td className="p-3 text-neutral">{r.slettede}</td>
-                      <td className="p-3 text-neutral">{r.omlodding}</td>
-                      <td className="p-3 text-neutral">{r.reparasjon}</td>
-                      <td className="p-3 text-neutral">{r.reklamasjon}</td>
-                    </tr>
+                  {/* Rader per bladtype/side m/ innrykket skillelinje */}
+                  {bladeRows.map((r, i) => (
+                    <React.Fragment key={r.label}>
+                      <tr className="transition-colors hover:bg-primary/50">
+                        <td className="p-2 text-xs text-neutral">{r.label}</td>
+                        <td className="p-2 text-right text-xs tabular-nums text-neutral">
+                          {r.nye}
+                        </td>
+                        <td className="p-2 text-right text-xs tabular-nums text-neutral">
+                          {r.slettede}
+                        </td>
+                        <td className="p-2 text-right text-xs tabular-nums text-neutral">
+                          {r.omlodding}
+                        </td>
+                        <td className="p-2 text-right text-xs tabular-nums text-neutral">
+                          {r.reparasjon}
+                        </td>
+                        <td className="p-2 text-right text-xs tabular-nums text-neutral">
+                          {r.reklamasjon}
+                        </td>
+                      </tr>
+                      {i < bladeRows.length - 1 && (
+                        <tr aria-hidden className="h-[1px]">
+                          <td colSpan={6}>
+                            <div className="mx-3 h-px bg-neutral/20" />
+                          </td>
+                        </tr>
+                      )}
+                    </React.Fragment>
                   ))}
                 </tbody>
               </table>
