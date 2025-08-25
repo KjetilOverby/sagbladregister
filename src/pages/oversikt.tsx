@@ -41,6 +41,8 @@ const Oversikt = ({ theme }: { theme: string }) => {
       init: customerInit,
     });
 
+  console.log(monthlyCountCustomer);
+
   const { data: monthlyHistoryCount } =
     api.statistikkBladeData.getMonthlyHistoryStats.useQuery();
 

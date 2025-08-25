@@ -518,10 +518,10 @@ export const sawbladesRouter = createTRPCRouter({
       return blades.reduce<Record<number, Record<string, number>>>(
         (acc, blade) => {
           const date = blade[key];
-          if (!date || !(date instanceof Date)) return acc; // Sikre at nøkkelen finnes og er en dato
+          if (!date ?? !(date instanceof Date)) return acc; // Sikre at nøkkelen finnes og er en dato
 
           const year = date.getFullYear();
-          const type = blade.type || "Ukjent";
+          const type = blade.type ?? "Ukjent";
           const side = blade.side ? `${blade.side}` : ""; // Håndter side, hvis den finnes
 
           const typeKey = `${type}  ${side}`; // Kombiner type og side til en unik nøkkel
@@ -584,10 +584,10 @@ export const sawbladesRouter = createTRPCRouter({
           return blades.reduce<Record<number, Record<string, number>>>(
             (acc, blade) => {
               const date = blade[key];
-              if (!date || !(date instanceof Date)) return acc; // Sikre at nøkkelen finnes og er en dato
+              if (!date ?? !(date instanceof Date)) return acc; // Sikre at nøkkelen finnes og er en dato
 
               const year = date.getFullYear();
-              const type = blade.type || "Ukjent";
+              const type = blade.type ?? "Ukjent";
               const side = blade.side ? `${blade.side}` : ""; // Håndter side, hvis den finnes
 
               const typeKey = `${type}  ${side}`; // Kombiner type og side til en unik nøkkel
@@ -943,18 +943,50 @@ dateSearchCount: protectedProcedure
       // 1) Normaliser periode (inkluder hele sluttdøgn)
       const { init } = input;
       let { from, to } = input;
-      
+
       if (from > to) [from, to] = [to, from];
       to = new Date(to);
       to.setHours(23, 59, 59, 999);
 
-      // Små utiler
-      const norm = (v?: string | null) =>
+      // ---- Hjelpefunksjoner (tydelig typet) ----
+      const norm = (v?: string | null): string | null =>
         (v ?? "").replace(/\s+/g, " ").trim() || null;
-      const keyOf = (bladType?: string | null, side?: string | null) => {
-        const bt = norm(bladType) ?? "Ukjent";
-        const sd = norm(side) ?? "";
-        return sd ? `${bt}  ${sd}` : bt; // to mellomrom mellom bladType og side (matcher service)
+
+      const normalizeType = (s?: string | null): string | null => {
+        const n = norm(s);
+        return n ?? null;
+      };
+
+      const normalizeSide = (
+        s?: string | null,
+      ): "høyre" | "venstre" | null => {
+        if (!s) return null;
+        const t = s
+          .toString()
+          .normalize("NFKD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase()
+          .trim();
+
+        if (t.includes("høyre") || t.includes("hoyre") || t.includes("right") || t === "rh") {
+          return "høyre";
+        }
+        if (t.includes("venstre") || t.includes("left") || t === "lh") {
+          return "venstre";
+        }
+        return null;
+      };
+
+      const requiresSide = (bladType?: string | null): boolean => {
+        const bt = (bladType ?? "").toLowerCase();
+        return bt.includes("vs66") || bt.includes("vs 66");
+      };
+
+      const keyOf = (bladType?: string | null, side?: string | null): string => {
+        const bt = normalizeType(bladType) ?? "Ukjent";
+        const sd = normalizeSide(side);
+        if (sd) return `${bt}  ${sd}`; // alltid 2 mellomrom når side finnes
+        return bt;
       };
 
       // 2) Hent nye/slettede ID-er i perioden
@@ -979,7 +1011,7 @@ dateSearchCount: protectedProcedure
       const newCount = newBlades.length;
       const deletedCount = deletedBlades.length;
 
-      // 3) Samle unike ID-er (trimma) for oppslag
+      // 3) Unike, trimmede id-er
       const ids = Array.from(
         new Set(
           [...newBlades, ...deletedBlades]
@@ -988,17 +1020,31 @@ dateSearchCount: protectedProcedure
         ),
       );
 
-      // 4) Fallback fra sawblades (artikkel/type) hvis historikk mangler
-      const fallbackById = new Map<string, { bladType: string | null }>();
+      // 4) Fallback fra sawblades (artikkel/type + ev. side) hvis historikk mangler
+      const fallbackById = new Map<
+        string,
+        { bladType: string | null; side: string | null }
+      >();
+
       if (ids.length) {
         const meta = await ctx.db.sawblades.findMany({
           where: { IdNummer: { in: ids } },
-          select: { IdNummer: true, artikkel: true, type: true },
+          select: { IdNummer: true, artikkel: true, type: true, side: true },
         });
+
         for (const m of meta) {
           const id = (m.IdNummer ?? "").trim();
-          const bt = norm(m.artikkel) ?? norm(m.type);
-          if (id) fallbackById.set(id, { bladType: bt });
+          if (!id) continue;
+
+          const bt = normalizeType(m.artikkel) ?? normalizeType(m.type);
+          // bruk ?? (ikke ||) for å unngå å “falle gjennom” på tom streng
+          const parsedSide =
+            normalizeSide(m.side) ??
+            normalizeSide(m.artikkel) ??
+            normalizeSide(m.type) ??
+            null;
+
+          fallbackById.set(id, { bladType: bt, side: parsedSide });
         }
       }
 
@@ -1012,51 +1058,74 @@ dateSearchCount: protectedProcedure
         const hist = await ctx.db.bandhistorikk.findMany({
           where: {
             bladeRelationId: { in: ids },
-            createdAt: { lte: to }, // ankre til periode-slutt
+            createdAt: { lte: to },
           },
           orderBy: [{ bladeRelationId: "asc" }, { createdAt: "desc" }],
-          select: { bladeRelationId: true, bladType: true, side: true, createdAt: true },
+          select: {
+            bladeRelationId: true,
+            bladType: true,
+            side: true,
+            createdAt: true,
+          },
         });
 
         for (const h of hist) {
           const id = (h.bladeRelationId ?? "").trim();
-          if (!id) continue;
-          if (!latestInfoByBladeId.has(id)) {
-            latestInfoByBladeId.set(id, {
-              bladType: norm(h.bladType),
-              side: h.side != null ? norm(String(h.side)) : null,
-            });
-          }
+          if (!id || latestInfoByBladeId.has(id)) continue;
+
+          latestInfoByBladeId.set(id, {
+            bladType: normalizeType(h.bladType),
+            side: normalizeSide(h.side != null ? String(h.side) : null),
+          });
         }
       }
 
-      // 6) Telling per bladType/side (med fallback)
+      // 6) Telling per bladType/side (med robuste fallbacks)
       const newByBladeType: Record<string, number> = {};
       const deletedByBladeType: Record<string, number> = {};
       const unknownIdsNew: string[] = [];
       const unknownIdsDeleted: string[] = [];
 
+      const resolveInfo = (id: string): {
+        bladType: string | null;
+        side: "høyre" | "venstre" | null;
+      } => {
+        const histInfo = latestInfoByBladeId.get(id);
+        const fbInfo = fallbackById.get(id);
+
+        const bladType =
+          histInfo?.bladType ?? fbInfo?.bladType ?? null;
+
+        const side =
+          normalizeSide(histInfo?.side ?? null) ??
+          normalizeSide(fbInfo?.side ?? null) ??
+          null;
+
+        return { bladType, side };
+      };
+
       for (const b of newBlades) {
         const id = (b.IdNummer ?? "").trim();
-        const info = latestInfoByBladeId.get(id);
-        const bt = info?.bladType ?? fallbackById.get(id)?.bladType ?? null;
-        const sd = info?.side ?? null;
-        const key = keyOf(bt, sd);
-        if (key.startsWith("Ukjent")) unknownIdsNew.push(id);
+        const info = resolveInfo(id);
+        const key = keyOf(info.bladType, info.side);
+
+        if ((info.bladType == null || key.startsWith("Ukjent")) && !info.side) {
+          unknownIdsNew.push(id);
+        }
         newByBladeType[key] = (newByBladeType[key] ?? 0) + 1;
       }
 
       for (const b of deletedBlades) {
         const id = (b.IdNummer ?? "").trim();
-        const info = latestInfoByBladeId.get(id);
-        const bt = info?.bladType ?? fallbackById.get(id)?.bladType ?? null;
-        const sd = info?.side ?? null;
-        const key = keyOf(bt, sd);
-        if (key.startsWith("Ukjent")) unknownIdsDeleted.push(id);
+        const info = resolveInfo(id);
+        const key = keyOf(info.bladType, info.side);
+
+        if ((info.bladType == null || key.startsWith("Ukjent")) && !info.side) {
+          unknownIdsDeleted.push(id);
+        }
         deletedByBladeType[key] = (deletedByBladeType[key] ?? 0) + 1;
       }
 
-      // (valgfritt) Logg for å finne igjen avvik i dev
       if (unknownIdsNew.length || unknownIdsDeleted.length) {
         console.log("[dateSearchCount] Ukjent (nye):", unknownIdsNew.slice(0, 20));
         console.log("[dateSearchCount] Ukjent (slettede):", unknownIdsDeleted.slice(0, 20));
@@ -1075,6 +1144,7 @@ dateSearchCount: protectedProcedure
       throw new Error("Kunne ikke hente antall nye/slettede (m/ bladtype)");
     }
   })
+
 
 
 
