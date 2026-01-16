@@ -175,6 +175,7 @@ model bandhistorikk {
     creatorImg2     String
     creator3        String
     creatorImg3     String
+    sawType         String?
 
     bladedata sawblades @relation(fields: [historikkId], references: [id])
 
