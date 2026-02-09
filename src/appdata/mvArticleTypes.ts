@@ -10,7 +10,7 @@ const mvArticleTypes = [
     blade: "475/120-5.0/3.6-z27 VS66",
     art: ["V-SH9621, Q7-71475/50120L2", "V-SH9619, Q7-71475/50120R2"],
     side: ["Høyre", "Venstre"],
-    minAnt: 50,
+    minAnt: 40,
   },
   {
     blade: "475/120-5.0/3.6-z27 (N) VS66",
